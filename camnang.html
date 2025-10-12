@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang Du Lịch - Chân Mây Lăng Cô</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-box button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .search-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .filter-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .filter-tab:hover {
+            background: #e0e0e0;
+        }
+
+        .filter-tab.active:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .weather-events {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .weather-card, .event-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .weather-card h3, .event-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .weather-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .weather-item i {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .event-item {
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+
+        .event-item:hover {
+            background: #eef0ff;
+            transform: translateX(5px);
+        }
+
+        .event-date {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-image i {
+            font-size: 60px;
+            color: white;
+            z-index: 1;
+        }
+
+        .article-image::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .article-content {
+            padding: 25px;
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #eef0ff;
+            color: #667eea;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .article-title {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .article-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #999;
+            font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .article-meta i {
+            margin-right: 5px;
+        }
+
+        .tips-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .tips-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .tip-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .tip-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .tip-card i {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .tip-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .ai-assistant:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+        }
+
+        .ai-chat {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+            animation: slideInUp 0.3s ease;
+        }
+
+        .ai-chat.active {
+            display: flex;
+        }
+
+        .ai-chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .ai-message {
+            background: #f0f2ff;
+            padding: 12px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .ai-chat-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .ai-chat-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .ai-chat-input button {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .ai-chat {
+                width: calc(100% - 40px);
+                right: 20px;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> Cẩm Nang Du Lịch</h1>
+            <p>Kho Kiến Thức - Khám Phá Chân Mây Lăng Cô</p>
+        </header>
+
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm bài viết, địa điểm, món ăn...">
+                <button onclick="searchArticles()"><i class="fas fa-search"></i> Tìm kiếm</button>
+            </div>
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterContent('all')">Tất cả</button>
+                <button class="filter-tab" onclick="filterContent('food')">Ẩm thực</button>
+                <button class="filter-tab" onclick="filterContent('guide')">Hướng dẫn</button>
+                <button class="filter-tab" onclick="filterContent('tips')">Mẹo vặt</button>
+                <button class="filter-tab" onclick="filterContent('video')">Video</button>
+                <button class="filter-tab" onclick="filterContent('infographic')">Infographic</button>
+            </div>
+        </div>
+
+        <div class="weather-events">
+            <div class="weather-card">
+                <h3><i class="fas fa-cloud-sun"></i> Thời Tiết Hôm Nay</h3>
+                <div class="weather-info">
+                    <div class="weather-item">
+                        <i class="fas fa-temperature-high"></i>
+                        <div>
+                            <strong>28°C</strong><br>
+                            <small>Nhiệt độ</small>
+                        </div>
+                    </div>
+                    <div class="weather-item">
+                        <i class="fas fa-tint"></i>
+                        <div>
+                            <strong>75%</strong><br>
+                            <small>Độ ẩm</small>
+                        </div>
+                    </div>
+                    <div class="weather-item">
+                        <i class="fas fa-wind"></i>
+                        <div>
+                            <strong>15 km/h</strong><br>
+                            <small>Gió</small>
+                        </div>
+                    </div>
+                    <div class="weather-item">
+                        <i class="fas fa-sun"></i>
+                        <div>
+                            <strong>Nắng đẹp</strong><br>
+                            <small>Thời tiết</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <h3><i class="fas fa-calendar-star"></i> Sự Kiện Sắp Tới</h3>
+                <div class="event-item">
+                    <div class="event-date"><i class="far fa-calendar"></i> 15-17/10/2025</div>
+                    <strong>Lễ hội Hải sản Lăng Cô 2025</strong>
+                    <p style="color: #666; margin-top: 5px;">Trải nghiệm ẩm thực biển độc đáo</p>
+                </div>
+                <div class="event-item">
+                    <div class="event-date"><i class="far fa-calendar"></i> 20/10/2025</div>
+                    <strong>Tour Đạp xe Hải Vân Quan</strong>
+                    <p style="color: #666; margin-top: 5px;">Chinh phục đèo Hải Vân hùng vĩ</p>
+                </div>
+                <div class="event-item">
+                    <div class="event-date"><i class="far fa-calendar"></i> 25/10/2025</div>
+                    <strong>Workshop Nhiếp ảnh Phong cảnh</strong>
+                    <p style="color: #666; margin-top: 5px;">Chụp ảnh cùng nhiếp ảnh gia chuyên nghiệp</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-grid" id="contentGrid">
+            <div class="article-card" data-category="food">
+                <div class="article-image">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Ẩm thực</span>
+                    <h3 class="article-title">Top 5 Món Ăn Không Thể Bỏ Lỡ</h3>
+                    <p class="article-description">Khám phá những món ăn đặc sản độc đáo của vùng đất Lăng Cô, từ hải sản tươi sống đến các món ăn truyền thống.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 5 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,234 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="guide">
+                <div class="article-image">
+                    <i class="fas fa-route"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Hướng dẫn</span>
+                    <h3 class="article-title">Di Chuyển Từ Đà Nẵng Đến Lăng Cô</h3>
+                    <p class="article-description">Hướng dẫn chi tiết các phương tiện di chuyển, thời gian và chi phí ước tính cho hành trình của bạn.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 7 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 2,456 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="video">
+                <div class="article-image">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Video</span>
+                    <h3 class="article-title">Khám Phá Vịnh Lăng Cô Từ Trên Cao</h3>
+                    <p class="article-description">Video 4K tuyệt đẹp chụp từ flycam, mang đến góc nhìn toàn cảnh về vịnh biển đẹp nhất Việt Nam.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 12:30 phút</span>
+                        <span><i class="far fa-eye"></i> 5,678 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="infographic">
+                <div class="article-image">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Infographic</span>
+                    <h3 class="article-title">Bản Đồ Ẩm Thực Lăng Cô</h3>
+                    <p class="article-description">Infographic chi tiết về các quán ăn nổi tiếng, món ăn đặc trưng và mức giá tham khảo.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 3 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 987 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="tips">
+                <div class="article-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Mẹo vặt</span>
+                    <h3 class="article-title">10 Mẹo Tiết Kiệm Khi Du Lịch Lăng Cô</h3>
+                    <p class="article-description">Những mẹo hay giúp bạn có chuyến đi trọn vẹn mà vẫn tiết kiệm chi phí một cách thông minh.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 6 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,845 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="guide">
+                <div class="article-image">
+                    <i class="fas fa-hiking"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Hướng dẫn</span>
+                    <h3 class="article-title">Chinh Phục Đèo Hải Vân An Toàn</h3>
+                    <p class="article-description">Cẩm nang chi tiết cho người muốn khám phá đèo Hải Vân huyền thoại bằng xe máy hoặc đi bộ.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 8 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 3,210 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="food">
+                <div class="article-image">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Ẩm thực</span>
+                    <h3 class="article-title">Hải Sản Tươi Sống Ở Chợ Lăng Cô</h3>
+                    <p class="article-description">Hướng dẫn chọn mua hải sản tươi ngon và các quán chế biến uy tín quanh khu vực chợ.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 4 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,567 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="video">
+                <div class="article-image">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Video</span>
+                    <h3 class="article-title">Một Ngày Trải Nghiệm Làm Ngư Dân</h3>
+                    <p class="article-description">Tham gia cùng ngư dân địa phương ra khơi đánh bắt hải sản và trải nghiệm cuộc sống biển cả.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 15:45 phút</span>
+                        <span><i class="far fa-eye"></i> 4,321 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="infographic">
+                <div class="article-image">
+                    <i class="fas fa-map-signs"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Infographic</span>
+                    <h3 class="article-title">Lịch Trình 3 Ngày 2 Đêm Hoàn Hảo</h3>
+                    <p class="article-description">Infographic về lịch trình chi tiết cho chuyến du lịch 3 ngày khám phá mọi ngóc ngách Lăng Cô.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 5 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 2,134 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h2><i class="fas fa-compass"></i> Mẹo Du Lịch Hữu Ích</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-sun"></i>
+                    <h4>Thời điểm tốt nhất</h4>
+                    <p>Tháng 3-8 là thời gian đẹp nhất để ghé thăm Lăng Cô với thời tiết nắng đẹp, biển lặng.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-wallet"></i>
+                    <h4>Ngân sách dự kiến</h4>
+                    <p>Chi phí trung bình 1-2 triệu/người cho 2 ngày 1 đêm, bao gồm ăn uống và lưu trú.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-camera"></i>
+                    <h4>Điểm chụp ảnh đẹp</h4>
+                    <p>Đỉnh Hải Vân, bãi biển Lăng Cô, cầu Lăng Cô là những điểm check-in không thể bỏ lỡ.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>An toàn khi tắm biển</h4>
+                    <p>Chỉ tắm ở khu vực có cứu hộ, tránh ra xa bờ và chú ý thời tiết.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-utensils"></i>
+                    <h4>Ẩm thực địa phương</h4>
+                    <p>Nhất định phải thử bánh ướt tôm nhảy, hải sản nướng và cháo hàu Lăng Cô.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-shopping-bag"></i>
+                    <h4>Quà lưu niệm</h4>
+                    <p>Mua khô hải sản, nước mắm và các sản phẩm thủ công từ vỏ ốc làm quà.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ai-assistant" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-chat" id="aiChat">
+        <div class="ai-chat-header">
+            <div>
+                <strong><i class="fas fa-robot"></i> AI Trợ Lý Du Lịch</strong>
+                <div style="font-size: 12px; opacity: 0.9;">Hỏi t

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chân Mây - Lăng Cô: Viên Ngọc Thơ Mộng</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.75);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(219, 39, 119, 0.15) 50%, rgba(59, 130, 246, 0.2) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding: 1.5rem 3rem;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav.scrolled a {
+            color: #1f2937;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.02);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .feature-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Smooth animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-medium text-white">Chân Mây - Lăng Cô</h1>
+            <ul class="hidden md:flex space-x-8 text-sm font-light text-white">
+                <li><a href="#home" class="hover:opacity-70 transition">Trang Chủ</a></li>
+                <li><a href="#explore" class="hover:opacity-70 transition">Khám Phá</a></li>
+                <li><a href="#experience" class="hover:opacity-70 transition">Trải Nghiệm</a></li>
+                <li><a href="#contact" class="hover:opacity-70 transition">Liên Hệ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1920&q=80" alt="Chân Mây Lăng Cô" class="hero-image">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h2 class="text-5xl md:text-7xl font-medium text-white mb-6 fade-in" style="animation-delay: 0.2s;">
+                Viên Ngọc Thơ Mộng
+            </h2>
+            <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl font-light fade-in" style="animation-delay: 0.4s;">
+                Nơi sóng biển hôn bờ cát, mây vờn núi ngàn và con người hòa cùng thiên nhiên
+            </p>
+            <a href="#features" class="btn-primary fade-in" style="animation-delay: 0.6s;">
+                Khám Phá Ngay
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section - 4 Main Functions -->
+    <section id="features" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-medium text-center mb-4 text-gray-900" data-aos="fade-up">
+                Chức Năng Của Website
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Bốn công cụ hữu ích giúp bạn khám phá trọn vẹn vẻ đẹp của Chân Mây - Lăng Cô
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1: Giới thiệu -->
+                <a href="#intro" class="group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 h-full">
+                        <h3 class="text-2xl font-medium mb-3 text-purple-700">Giới Thiệu</h3>
+                        <p class="text-gray-600 leading-relaxed">Tìm hiểu lịch sử, văn hóa và vẻ đẹp độc đáo của Chân Mây - Lăng Cô</p>
+                    </div>
+                </a>
+
+                <!-- Feature 2: AI Lịch trình -->
+                <a href="#ai-planner" class="group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gradient-to-br from-pink-50 to-white p-8 rounded-2xl border border-pink-100 hover:shadow-2xl hover:border-pink-300 transition-all duration-500 h-full">
+                        <h3 class="text-2xl font-medium mb-3 text-pink-700">Chức năng 2</h3>
+                        <p class="text-gray-600 leading-relaxed">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita molestias impedit placeat.</p>
+                    </div>
+                </a>
+
+                <!-- Feature 3: Bản đồ -->
+                <a href="/map.html" class="group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 hover:shadow-2xl hover:border-blue-300 transition-all duration-500 h-full">
+                        <h3 class="text-2xl font-medium mb-3 text-blue-700">Bản Đồ</h3>
+                        <p class="text-gray-600 leading-relaxed">Khám phá các địa điểm du lịch với bản đồ tương tác chi tiết</p>
+                    </div>
+                </a>
+
+                <!-- Feature 4: Cẩm nang -->
+                <a href="#guide" class="group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-gradient-to-br from-indigo-50 to-white p-8 rounded-2xl border border-indigo-100 hover:shadow-2xl hover:border-indigo-300 transition-all duration-500 h-full">
+                        <h3 class="text-2xl font-medium mb-3 text-indigo-700">Cẩm Nang</h3>
+                        <p class="text-gray-600 leading-relaxed">Thông tin hữu ích về ẩm thực, lưu trú và di chuyển</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="py-24 px-6 bg-gradient-to-br from-purple-50/50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl md:text-5xl font-medium mb-6 text-gray-900">
+                        Chân Mây - Lăng Cô
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Nằm giữa Đà Nẵng và Huế, Chân Mây - Lăng Cô là viên ngọc quý của Thừa Thiên Huế với bãi biển xanh trong, núi non hùng vĩ và văn hóa đậm đà bản sắc miền Trung.
+                    </p>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                        Vịnh Lăng Cô được CNN bình chọn là một trong những vịnh biển đẹp nhất thế giới, với dải cát trắng mịn trải dài bên cạnh làn nước trong xanh ngắt.
+                    </p>
+                    <a href="#explore" class="inline-block text-purple-600 font-medium hover:text-purple-700 transition">
+                        Tìm hiểu thêm →
+                    </a>
+                </div>
+                <div data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80" alt="Lăng Cô" class="rounded-2xl shadow-2xl w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Travel Guide Section -->
+    <section id="guide" class="py-24 px-6 bg-gradient-to-br from-indigo-50/50 to-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-medium text-center mb-6 text-gray-900" data-aos="fade-up">
+                Cẩm Nang Du Lịch
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Mọi thông tin bạn cần biết trước khi đến Chân Mây - Lăng Cô
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Guide 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-indigo-100" data-aos="fade-up" data-aos-delay="100">
+                    <span class="text-4xl mb-4 block">🍜</span>
+                    <h3 class="text-2xl font-medium mb-3 text-gray-900">Ẩm Thực</h3>
+                    <p class="text-gray-600 mb-4">Hải sản tươi ngon, bún hến Huế, nem lụi và các đặc sản vùng đầm phá</p>
+                    <a href="#" class="text-indigo-600 font-medium hover:text-indigo-700">Xem thêm →</a>
+                </div>
+
+                <!-- Guide 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-indigo-100" data-aos="fade-up" data-aos-delay="200">
+                    <span class="text-4xl mb-4 block">🏨</span>
+                    <h3 class="text-2xl font-medium mb-3 text-gray-900">Lưu Trú</h3>
+                    <p class="text-gray-600 mb-4">Từ resort sang trọng đến homestay ấm cúng, phù hợp mọi ngân sách</p>
+                    <a href="#" class="text-indigo-600 font-medium hover:text-indigo-700">Xem thêm →</a>
+                </div>
+
+                <!-- Guide 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-indigo-100" data-aos="fade-up" data-aos-delay="300">
+                    <span class="text-4xl mb-4 block">🚗</span>
+                    <h3 class="text-2xl font-medium mb-3 text-gray-900">Di Chuyển</h3>
+                    <p class="text-gray-600 mb-4">Hướng dẫn di chuyển từ Đà Nẵng, Huế và phương tiện tham quan</p>
+                    <a href="#" class="text-indigo-600 font-medium hover:text-indigo-700">Xem thêm →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Section -->
+    <section id="explore" class="py-24 px-6 bg-gradient-to-b from-purple-50/30 to-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-5xl font-medium text-center mb-4 text-gray-900" data-aos="fade-up">
+                Điểm Đến Nổi Bật
+            </h2>
+            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Từ những bãi biển tuyệt đẹp đến núi non hùng vĩ, mỗi góc nhỏ đều chứa đựng câu chuyện riêng
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                <!-- Card 1 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80" alt="Biển Lăng Cô">
+                    <div class="feature-overlay">
+                        <h3 class="text-3xl font-medium mb-2">Vịnh Lăng Cô</h3>
+                        <p class="text-white/80">Một trong những vịnh biển đẹp nhất thế giới</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Đèo Hải Vân">
+                    <div class="feature-overlay">
+                        <h3 class="text-3xl font-medium mb-2">Đèo Hải Vân</h3>
+                        <p class="text-white/80">Con đường ven biển hùng vĩ nhất Việt Nam</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 3 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Ẩm thực">
+                    <div class="feature-overlay">
+                        <h3 class="text-2xl font-medium mb-2">Ẩm Thực</h3>
+                        <p class="text-white/80 text-sm">Hải sản tươi ngon từ biển</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80" alt="Văn hóa">
+                    <div class="feature-overlay">
+                        <h3 class="text-2xl font-medium mb-2">Văn Hóa</h3>
+                        <p class="text-white/80 text-sm">Bản sắc miền Trung đậm đà</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&q=80" alt="Thiên nhiên">
+                    <div class="feature-overlay">
+                        <h3 class="text-2xl font-medium mb-2">Thiên Nhiên</h3>
+                        <p class="text-white/80 text-sm">Núi non hùng vĩ, biển xanh trong</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24 px-6 bg-gradient-to-br from-white via-pink-50/20 to-purple-50/20">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-medium mb-6 text-gray-900" data-aos="fade-up">
+                Trải Nghiệm Độc Đáo
+            </h2>
+            <p class="text-gray-600 text-lg mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                Hãy để AI giúp bạn khám phá những điều tuyệt vời về Chân Mây - Lăng Cô
+            </p>
+
+            <div class="bg-white rounded-2xl p-12 shadow-lg border border-purple-100" data-aos="fade-up" data-aos-delay="200">
+                <div class="flex items-start space-x-4 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xl">
+                        🤖
+                    </div>
+                    <div class="text-left flex-1">
+                        <p class="text-gray-700 leading-relaxed">
+                            Xin chào! Tôi là trợ lý ảo của Chân Mây - Lăng Cô. Bạn muốn khám phá điều gì hôm nay? 
+                        </p>
+                        <p class="text-gray-500 text-sm mt-2">Tôi có thể giúp bạn tìm hiểu về địa điểm du lịch, ẩm thực, lịch sử và văn hóa...</p>
+                    </div>
+                </div>
+                <p class="text-sm text-purple-600 italic">Tính năng đang được phát triển ✨</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Section -->
+    <section class="py-24 px-6 bg-gradient-to-r from-purple-600 to-pink-600">
+        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+            <blockquote class="text-3xl md:text-4xl font-light text-white italic leading-relaxed">
+                "Chân Mây - Lăng Cô, nơi mỗi hơi thở là một khúc nhạc của biển và núi"
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-16 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-2xl font-medium mb-4">Chân Mây - Lăng Cô</h3>
+                <p class="text-gray-400 leading-relaxed">
+                    Viên ngọc thơ mộng của miền Trung Việt Nam, nơi thiên nhiên và con người hòa quyện.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-lg font-medium mb-4">Khám Phá</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-white transition">Vịnh Lăng Cô</a></li>
+                    <li><a href="#" class="hover:text-white transition">Đèo Hải Vân</a></li>
+                    <li><a href="#" class="hover:text-white transition">Ẩm Thực</a></li>
+                    <li><a href="#" class="hover:text-white transition">Văn Hóa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-medium mb-4">Liên Hệ</h4>
+                <p class="text-gray-400 mb-4">Theo dõi chúng tôi để cập nhật thông tin mới nhất</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">📘</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">📷</a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">▶️</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+            © 2025 Chân Mây - Lăng Cô. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

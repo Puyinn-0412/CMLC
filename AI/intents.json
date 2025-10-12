@@ -1,0 +1,104 @@
+{
+  "intents": [
+    {
+      "tag": "chao_hoi",
+      "patterns": ["Xin chào", "Chào bạn", "Hello", "Hi", "Có ai ở đây không?"],
+      "responses": ["Xin chào! Mình là chatbot du lịch Chân Mây – Lăng Cô 🌊", "Chào bạn, mình có thể giúp bạn khám phá Chân Mây – Lăng Cô nhé!"]
+    },
+    {
+      "tag": "gioi_thieu_chung",
+      "patterns": ["Giới thiệu về Chân Mây Lăng Cô", "Chân Mây Lăng Cô ở đâu", "Tổng quan về Lăng Cô"],
+      "responses": [
+        "Chân Mây – Lăng Cô là xã có tên dài nhất TP Huế, được thành lập ngày 1/7/2025 sau khi sáp nhập Lộc Tiến, Lộc Vĩnh, Lộc Thủy và thị trấn Lăng Cô. Với diện tích 261 km², đây là vùng đất hội tụ vẻ đẹp thiên nhiên, văn hóa và tiềm năng phát triển du lịch hàng đầu miền Trung.",
+        "Chân Mây – Lăng Cô nằm ở phía Nam tỉnh Thừa Thiên Huế, nổi tiếng với vịnh Lăng Cô – một trong những vịnh đẹp nhất thế giới."
+      ]
+    },
+    {
+      "tag": "vinh_lang_co",
+      "patterns": ["Vịnh Lăng Cô có gì", "Vịnh Lăng Cô ở đâu", "Giới thiệu về vịnh Lăng Cô", "Đi Lăng Cô có gì hay"],
+      "responses": [
+        "Vịnh Lăng Cô nằm dưới chân đèo Hải Vân, được mệnh danh là một trong những vịnh biển đẹp nhất thế giới, gia nhập Câu lạc bộ Worldbays vào năm 2009. Nơi đây có bãi cát trắng dài hơn 10 km, nước trong xanh và khung cảnh non nước hữu tình.",
+        "Đến vịnh Lăng Cô, bạn có thể tắm biển, chụp ảnh, chèo kayak, lặn ngắm san hô và tham quan làng chài ven biển."
+      ]
+    },
+    {
+      "tag": "gioi_thieu_chan_may_lang_co",
+      "patterns": [
+        "Giới thiệu về Chân Mây Lăng Cô",
+        "Địa điểm ở Chân Mây Lăng Cô",
+        "Du lịch ở Chân Mây Lăng Cô có gì",
+        "Nói về Chân Mây Lăng Cô"
+      ],
+      "responses": [
+        "Chân Mây – Lăng Cô là khu vực ven biển tuyệt đẹp ở phía Nam tỉnh Thừa Thiên Huế 🌊. Nơi đây nổi tiếng với bãi biển Lăng Cô, Đầm Lập An thơ mộng, vịnh Chân Mây và suối Voi hoang sơ. Đây là điểm đến lý tưởng cho du khách yêu thiên nhiên và muốn khám phá văn hóa địa phương 💙."
+      ]
+    },
+    {
+      "tag": "dia_diem_noi_bat",
+      "patterns": [
+        "Địa điểm nổi bật ở Chân Mây Lăng Cô",
+        "Có gì đẹp ở Lăng Cô",
+        "Nên đi đâu ở Chân Mây Lăng Cô"
+      ],
+      "responses": [
+        "Một số điểm nổi bật gồm có: 🏖️ Bãi biển Lăng Cô, 🐘 Suối Voi, 🌅 Đầm Lập An, 🌲 Đèo Hải Vân, và cả khu công nghiệp – cảng Chân Mây đang phát triển mạnh mẽ."
+      ]
+    },
+    {
+      "tag": "dam_lap_an",
+      "patterns": ["Đầm Lập An ở đâu", "Giới thiệu đầm Lập An", "Có gì ở đầm Lập An"],
+      "responses": [
+        "Đầm Lập An, còn gọi là đầm An Cư, rộng 800 ha, nằm giữa dãy Bạch Mã và vịnh Lăng Cô. Nơi đây nổi tiếng với cảnh hoàng hôn huyền ảo và nghề nuôi hàu truyền thống.",
+        "Du khách có thể thưởng thức hải sản tươi ngon tại các quán ven đầm – đặc biệt là món hàu nướng và hàu sống."
+      ]
+    },
+    {
+      "tag": "laguna_lang_co",
+      "patterns": ["Laguna Lăng Cô", "Khu nghỉ dưỡng Lăng Cô", "Resort nổi tiếng ở Lăng Cô"],
+      "responses": [
+        "Laguna Lăng Cô là khu nghỉ dưỡng phức hợp quốc tế do Tập đoàn Banyan Tree đầu tư với hơn 876 triệu USD. Gồm các khách sạn như Banyan Tree, Angsana và Laguna Parkside.",
+        "Tại đây có sân golf 18 lỗ do huyền thoại Nick Faldo thiết kế, cùng dịch vụ spa và hoạt động thể thao dưới nước đẳng cấp."
+      ]
+    },
+    {
+      "tag": "cang_chan_may",
+      "patterns": ["Cảng Chân Mây", "Thông tin về cảng Chân Mây", "Tại sao cảng Chân Mây quan trọng"],
+      "responses": [
+        "Cảng Chân Mây là cửa ngõ ra biển Đông, kết nối hành lang kinh tế Đông – Tây. Đây là một trong 46 cảng biển được Hiệp hội Du thuyền châu Á lựa chọn làm điểm dừng chân.",
+        "Cảng có thể tiếp nhận tàu du lịch cỡ lớn, là nơi đón các du thuyền quốc tế cập bến Huế và miền Trung."
+      ]
+    },
+    {
+      "tag": "dia_diem_khac",
+      "patterns": ["Đi đâu chơi ở Chân Mây Lăng Cô", "Những điểm du lịch khác ở Lăng Cô", "Các điểm tham quan ở Chân Mây"],
+      "responses": [
+        "Ngoài vịnh Lăng Cô và đầm Lập An, bạn có thể khám phá Suối Voi, Thác Bồ Ghè, Biển Tân Cảnh Dương, Biển Bình An và Suối Mơ.",
+        "Những điểm đến này mang vẻ đẹp hoang sơ, thích hợp cho dã ngoại, picnic và trải nghiệm thiên nhiên."
+      ]
+    },
+    {
+      "tag": "am_thuc",
+      "patterns": ["Đặc sản Lăng Cô", "Ăn gì ở Chân Mây Lăng Cô", "Ẩm thực Lăng Cô có gì ngon"],
+      "responses": [
+        "Lăng Cô nổi tiếng với hải sản tươi sống như hàu, tôm hùm, mực, cua, cá. Đặc biệt, món hàu nướng mỡ hành và bánh canh cá lóc được du khách rất yêu thích.",
+        "Bạn có thể thưởng thức hải sản dọc đầm Lập An hoặc các quán ven biển với giá rất hợp lý."
+      ]
+    },
+    {
+      "tag": "phat_trien_kinh_te",
+      "patterns": ["Khu kinh tế Chân Mây Lăng Cô", "Phát triển kinh tế ở Lăng Cô", "Tương lai Chân Mây Lăng Cô"],
+      "responses": [
+        "Khu kinh tế Chân Mây – Lăng Cô được thành lập từ năm 2006, là một trong những khu kinh tế trọng điểm miền Trung, với hơn 55 dự án đầu tư và vốn hơn 97.000 tỷ đồng.",
+        "Đến năm 2045, Chân Mây – Lăng Cô được định hướng trở thành trung tâm kinh tế, logistics và du lịch tầm cỡ khu vực."
+      ]
+    },
+    {
+      "tag": "tam_biet",
+      "patterns": ["Tạm biệt", "Bye", "Hẹn gặp lại", "Cảm ơn nhé"],
+      "responses": [
+        "Cảm ơn bạn đã ghé thăm! Hẹn gặp lại bạn ở Chân Mây – Lăng Cô 💙",
+        "Tạm biệt nhé! Chúc bạn có một chuyến đi tuyệt vời!"
+      ]
+    }
+  ]
+}

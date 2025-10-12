@@ -1,0 +1,506 @@
+     html, body {
+      height: 100%;
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #1a365d;
+      overflow: hidden;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 380px;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transform: translateX(0);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar.collapsed {
+      transform: translateX(-350px);
+    }
+    
+    .sidebar-toggle {
+      position: absolute;
+      top: 20px;
+      right: -44px;
+      width: 44px;
+      height: 44px;
+      background: white;
+      border: none;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #5f6368;
+      z-index: 1001;
+    }
+    
+    .sidebar-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    
+    .sidebar-header {
+      margin-bottom: 20px;
+    }
+    
+    .sidebar-header h1 {
+      font-size: 1.5rem;
+      color: #2d3748;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    
+    .sidebar-header p {
+      font-size: 0.9rem;
+      color: #718096;
+    }
+    
+    .search-box {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .search-box input {
+      width: 100%;
+      padding: 12px 45px 12px 15px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+      background: #f7fafc;
+    }
+    
+    .search-box input:focus {
+      border-color: #4285f4;
+      background: white;
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+    }
+    
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #5f6368;
+    }
+    
+    .location-list {
+      list-style: none;
+    }
+    
+    .location-item {
+      padding: 16px;
+      margin-bottom: 8px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-left: 4px solid #4285f4;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .location-item:hover {
+      background: #e8f0fe;
+      transform: translateX(2px);
+    }
+    
+    .location-item.active {
+      background: #e8f0fe;
+      border-left-color: #1a73e8;
+      box-shadow: 0 2px 6px rgba(66, 133, 244, 0.2);
+    }
+    
+    .location-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: #4285f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    
+    .location-content {
+      flex: 1;
+    }
+    
+    .location-title {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #2d3748;
+      font-size: 1rem;
+    }
+    
+    .location-desc {
+      font-size: 0.85rem;
+      color: #5f6368;
+      line-height: 1.4;
+    }
+    
+    /* Info Panel */
+    .info-panel {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 380px;
+      height: 100vh;
+      background: white;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+      z-index: 999;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+    }
+    
+    .info-panel.active {
+      right: 0;
+    }
+    
+    .info-header {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .info-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .info-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 36px;
+      height: 36px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      backdrop-filter: blur(5px);
+    }
+    
+    .info-content {
+      padding: 20px;
+    }
+    
+    .info-title {
+      font-size: 1.4rem;
+      color: #2d3748;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    
+    .info-description {
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color: #5f6368;
+      font-size: 0.95rem;
+    }
+    
+    .info-details {
+      margin-bottom: 20px;
+    }
+    
+    .info-detail {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+    
+    .info-detail i {
+      width: 20px;
+      color: #4285f4;
+      margin-right: 10px;
+      margin-top: 2px;
+    }
+    
+    .info-detail strong {
+      color: #2d3748;
+      min-width: 80px;
+      display: inline-block;
+    }
+    
+    .info-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .info-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .info-btn.primary {
+      background: #4285f4;
+      color: white;
+    }
+    
+    .info-btn.primary:hover {
+      background: #3367d6;
+    }
+    
+    .info-btn.secondary {
+      background: #f1f3f4;
+      color: #5f6368;
+    }
+    
+    .info-btn.secondary:hover {
+      background: #e8eaed;
+    }
+    
+    /* Map Controls */
+    .map-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 800;
+    }
+    
+    .map-control {
+      width: 44px;
+      height: 44px;
+      background: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #5f6368;
+      transition: all 0.3s ease;
+    }
+    
+    .map-control:hover {
+      background: #f8f9fa;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Legend */
+    .legend {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: white;
+      border-radius: 8px;
+      padding: 12px 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      z-index: 800;
+      font-size: 0.85rem;
+    }
+    
+    .legend h4 {
+      margin-bottom: 8px;
+      color: #2d3748;
+      font-weight: 600;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      border-radius: 4px;
+      border: 2px solid;
+    }
+    
+    .boundary-color {
+      background: rgba(52, 152, 219, 0.2);
+      border-color: #3498db;
+    }
+    
+    .location-color {
+      background: #4285f4;
+      border-color: #3367d6;
+    }
+
+    /* Popup styles */
+    .popup-title {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    .popup-description {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .popup-details {
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+    }
+    .detail-label {
+      font-weight: 600;
+    }
+
+    /* Tối ưu hóa cho di động */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+      }
+      
+      .sidebar.collapsed {
+        transform: translateX(-100%);
+      }
+      
+      .sidebar-toggle {
+        right: 20px;
+        top: 20px;
+        border-radius: 8px;
+      }
+      
+      .info-panel {
+        width: 100%;
+        right: -100%;
+      }
+      
+      /* Tối ưu hóa cho màn hình nhỏ hơn 480px */
+      @media (max-width: 480px) {
+        .sidebar {
+          width: 100%;
+          max-width: 100%;
+        }
+        
+        .sidebar-content {
+          padding: 15px;
+        }
+        
+        .location-item {
+          padding: 14px 12px;
+          margin-bottom: 6px;
+          min-height: 60px;
+        }
+        
+        .location-title {
+          font-size: 1.1rem;
+        }
+        
+        .location-desc {
+          font-size: 0.9rem;
+        }
+        
+        .map-controls {
+          top: 10px;
+          right: 10px;
+        }
+        
+        .map-control {
+          width: 40px;
+          height: 40px;
+          min-width: 44px;
+          min-height: 44px;
+        }
+        
+        .legend {
+          bottom: 10px;
+          left: 10px;
+          padding: 10px 12px;
+          font-size: 0.8rem;
+        }
+        
+        .info-panel {
+          width: 100%;
+        }
+        
+        .info-content {
+          padding: 15px;
+        }
+        
+        .info-title {
+          font-size: 1.3rem;
+        }
+        
+        .info-actions {
+          flex-direction: column;
+          gap: 8px;
+        }
+        
+        .info-btn {
+          padding: 14px 16px;
+        }
+        
+        .sidebar-toggle {
+          min-width: 44px;
+          min-height: 44px;
+        }
+        
+        .info-close {
+          min-width: 44px;
+          min-height: 44px;
+        }
+      }
+      
+      /* Cải thiện hiệu suất */
+      .location-list {
+        max-height: 60vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
+      }
+      
+      /* Tối ưu cho thiết bị cảm ứng */
+      @media (hover: none) and (pointer: coarse) {
+        .location-item:hover {
+          /* Vô hiệu hóa hover effect trên thiết bị cảm ứng */
+          background: #f8f9fa;
+          transform: none;
+        }
+        
+        .map-control:hover {
+          background: white;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }       
+      }
+      
+    }

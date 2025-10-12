@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bản đồ Chân Mây - Lăng Cô</title>
+
+  <!-- Leaflet -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Turf.js để tính diện tích polygon -->
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+/* Override Leaflet popup styles */
+.leaflet-popup-content-wrapper {
+    padding: 0 !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    background: white !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    width: 360px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.leaflet-popup-close-btn {
+    display: none !important;
+}
+
+.leaflet-popup-tip {
+    display: none !important;
+}
+
+.popup-container-custom {
+    width: 100%;
+    background: white;
+}
+
+.popup-header {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    padding: 18px 20px;
+    position: relative;
+    color: white;
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+.location-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.icon {
+    font-size: 18px;
+}
+
+.city-badge {
+    display: inline-block;
+    background: rgba(14, 165, 233, 0.95);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.tags-section {
+    margin: 16px 18px;
+    padding: 14px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    border-radius: 12px;
+}
+
+.tags-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #0369a1;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    background: white;
+    border: 2px solid transparent;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    color: #4a5568;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tag.highlight {
+    background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    color: white;
+    font-weight: 600;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 18px 16px 18px;
+}
+
+.info-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 14px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-color);
+}
+
+.info-card.green { --accent-color: linear-gradient(90deg, #0891b2, #06b6d4); }
+.info-card.purple { --accent-color: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.info-card.pink { --accent-color: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.info-card.orange { --accent-color: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+
+.info-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.info-card.green .info-value { color: #0891b2; }
+.info-card.purple .info-value { color: #3b82f6; }
+.info-card.pink .info-value { color: #0ea5e9; }
+.info-card.orange .info-value { color: #14b8a6; }
+
+.admin-section {
+    padding: 16px 18px;
+    background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    margin: 0 18px 16px 18px;
+    border-radius: 12px;
+}
+
+.admin-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #0369a1;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.admin-value {
+    font-size: 13px;
+    color: #334155;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.footer-section {
+    padding: 14px 18px 16px 18px;
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #f8fafc;
+}
+
+.footer-location {
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 4px;
+}
+
+.osm-id {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+}
+</style>
+</head>
+<body>
+  <div id="map"></div>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-toggle" id="sidebar-toggle">
+      <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="sidebar-content">
+      <div class="sidebar-header">
+        <h1>🌊 Chân Mây - Lăng Cô</h1>
+        <p>Khám phá các điểm du lịch tuyệt vời</p>
+      </div>
+      
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Tìm kiếm địa điểm...">
+        <i class="fas fa-search"></i>
+      </div>
+      
+      <h3 style="margin-bottom: 15px; color: #2d3748;">Địa điểm nổi bật</h3>
+      <ul class="location-list" id="location-list">
+        <!-- Danh sách địa điểm sẽ được thêm bằng JavaScript -->
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Info Panel -->
+  <div class="info-panel" id="info-panel">
+    <div class="info-header">
+      <img id="info-image" src="" alt="" class="info-image">
+      <button class="info-close" id="info-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="info-content">
+      <h2 class="info-title" id="info-title"></h2>
+      <p class="info-description" id="info-description"></p>
+      
+      <div class="info-details">
+        <div class="info-detail">
+          <i class="fas fa-map-marker-alt"></i>
+          <strong>Địa chỉ:</strong> <span id="info-address"></span>
+        </div>
+        <div class="info-detail">
+          <i class="fas fa-phone"></i>
+          <strong>Điện thoại:</strong> <span id="info-phone"></span>
+        </div>
+        <div class="info-detail">
+          <i class="fas fa-clock"></i>
+          <strong>Giờ mở cửa:</strong> <span id="info-hours"></span>
+        </div>
+        <div class="info-detail">
+          <i class="fas fa-tag"></i>
+          <strong>Giá vé:</strong> <span id="info-price"></span>
+        </div>
+      </div>
+      
+      <div class="info-actions">
+        <button class="info-btn secondary" id="info-direction">
+          <i class="fas fa-route"></i> Chỉ đường
+        </button>
+        <button class="info-btn primary" id="info-website">
+          <i class="fas fa-external-link-alt"></i> Website
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Map Controls -->
+  <div class="map-controls">
+    <button class="map-control" id="locate-me" title="Vị trí của tôi">
+      <i class="fas fa-location-arrow"></i>
+    </button>
+    <button class="map-control" id="toggle-boundary" title="Ranh giới">
+      <i class="fas fa-draw-polygon"></i>
+    </button>
+    <button class="map-control" id="toggle-satellite" title="Chế độ vệ tinh">
+      <i class="fas fa-satellite"></i>
+    </button>
+    <button class="map-control" id="fullscreen" title="Toàn màn hình">
+      <i class="fas fa-expand"></i>
+    </button>
+  </div>
+  
+  <!-- Legend -->
+  <div class="legend">
+    <h4>Chú thích</h4>
+    <div class="legend-item">
+      <div class="legend-color boundary-color"></div>
+      <span>Ranh giới khu vực</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #e74c3c; border-color: #c0392b;"></div>
+      <span>Di tích lịch sử</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #3498db; border-color: #2980b9;"></div>
+      <span>Bãi biển & Đầm nước</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #27ae60; border-color: #219a52;"></div>
+      <span>Suối & Thác nước</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #f39c12; border-color: #e67e22;"></div>
+      <span>Khu nghỉ dưỡng</span>
+    </div>
+  </div>
+
+  <script>
+    const map = L.map("map").setView([16.27, 108.06], 12);
+
+    // Thêm lớp bản đồ
+    const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 18,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    // Thêm lớp bản đồ vệ tinh
+    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+      maxZoom: 18
+    });
+
+    let boundaryLayer;
+    let boundaryVisible = true;
+    let isSatellite = false;
+
+    // 🔹 Hàm fallback nếu không lấy được dữ liệu chính xác
+    function createEstimatedBoundary() {
+      const coords = [
+        [16.26, 108.00],
+        [16.25, 108.10],
+        [16.20, 108.12],
+        [16.18, 108.06],
+        [16.21, 108.00],
+      ];
+      boundaryLayer = L.polygon(coords, {
+        color: "#3498db",
+        weight: 3,
+        fillColor: "#3498db",
+        fillOpacity: 0.15,
+      }).addTo(map);
+
+      boundaryLayer.bindPopup(`
+        <div class="popup-title">Chân Mây - Lăng Cô</div>
+        <div class="popup-description">Vùng du lịch ven biển</div>
+      `);
+    }
+
+    // ✅ Hàm tạo ranh giới từ dữ liệu OSM (đã fix lỗi)
+    function createBoundaryFromOSMData(data) {
+      const relation = data.elements.find((el) => el.type === "relation");
+      if (!relation) return;
+
+      const nodes = new Map();
+      data.elements
+        .filter((el) => el.type === "node")
+        .forEach((node) => nodes.set(node.id, [node.lat, node.lon]));
+
+      const memberWays = relation.members
+        .filter((m) => m.type === "way")
+        .map((m) =>
+          data.elements.find((el) => el.type === "way" && el.id === m.ref)
+        )
+        .filter(Boolean);
+
+      const wayChains = memberWays.map((way) =>
+        way.nodes.map((id) => nodes.get(id)).filter(Boolean)
+      );
+
+      const polygons = [];
+      while (wayChains.length > 0) {
+        let chain = wayChains.shift();
+        let extended = true;
+
+        while (extended) {
+          extended = false;
+          for (let i = 0; i < wayChains.length; i++) {
+            const next = wayChains[i];
+            const start1 = chain[0],
+              end1 = chain[chain.length - 1];
+            const start2 = next[0],
+              end2 = next[next.length - 1];
+
+            const same = (a, b) =>
+              Math.abs(a[0] - b[0]) < 0.0001 &&
+              Math.abs(a[1] - b[1]) < 0.0001;
+
+            if (same(end1, start2)) {
+              chain = [...chain, ...next.slice(1)];
+              wayChains.splice(i, 1);
+              extended = true;
+              break;
+            } else if (same(end1, end2)) {
+              chain = [...chain, ...next.slice(0, -1).reverse()];
+              wayChains.splice(i, 1);
+              extended = true;
+              break;
+            } else if (same(start1, end2)) {
+              chain = [...next.slice(0, -1), ...chain];
+              wayChains.splice(i, 1);
+              extended = true;
+              break;
+            } else if (same(start1, start2)) {
+              chain = [...next.slice(1).reverse(), ...chain];
+              wayChains.splice(i, 1);
+              extended = true;
+              break;
+            }
+          }
+        }
+
+        const first = chain[0];
+        const last = chain[chain.length - 1];
+        if (
+          !(
+            Math.abs(first[0] - last[0]) < 0.0001 &&
+            Math.abs(first[1] - last[1]) < 0.0001
+          )
+        ) {
+          chain.push(first);
+        }
+
+        polygons.push(chain);
+      }
+
+      const areas = polygons.map((poly) =>
+        turf.area(turf.polygon([poly.map((p) => [p[1], p[0]])]))
+      );
+      const maxIndex = areas.indexOf(Math.max(...areas));
+      const mainPolygon = polygons[maxIndex];
+
+      if (!mainPolygon || mainPolygon.length < 3) {
+        console.warn("Không thể tái tạo ranh giới chính xác, dùng fallback.");
+        createEstimatedBoundary();
+        return;
+      }
+
+      boundaryLayer = L.polygon(mainPolygon, {
+        color: "#3498db",
+        weight: 3,
+        fillColor: "#3498db",
+        fillOpacity: 0.15,
+      }).addTo(map);
+
+      boundaryLayer.bindPopup(`
+    <div class="popup-container-custom">
+        <div class="popup-header">
+            <button class="close-btn" onclick="this.closest('.leaflet-popup').querySelector('.leaflet-popup-close-btn').click()">×</button>
+            <div class="location-title">
+                <span class="icon">📍</span>
+                <span>Xã Chân Mây - Lăng Cô</span>
+            </div>
+            <div class="city-badge">🏙️ TP. Huế</div>
+        </div>
+
+        <div class="tags-section">
+            <div class="tags-title">
+                <span class="icon">🔄</span>
+                <span>Sắp nhập từ</span>
+            </div>
+            <div class="tags-container">
+                <span class="tag highlight">Thị trấn Lăng Cô</span>
+                <span class="tag">Xã Lộc Tiến</span>
+                <span class="tag">Xã Lộc Vĩnh</span>
+                <span class="tag">Xã Lộc Thủy</span>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card green">
+                <div class="info-label">
+                    <span class="icon">📐</span>
+                    <span>Diện tích</span>
+                </div>
+                <div class="info-value">261.38 km²</div>
+            </div>
+
+            <div class="info-card purple">
+                <div class="info-label">
+                    <span class="icon">📊</span>
+                    <span>Mật độ</span>
+                </div>
+                <div class="info-value">195/km²</div>
+            </div>
+
+            <div class="info-card pink">
+                <div class="info-label">
+                    <span class="icon">👥</span>
+                    <span>Dân số</span>
+                </div>
+                <div class="info-value">50,831</div>
+            </div>
+
+            <div class="info-card orange">
+                <div class="info-label">
+                    <span class="icon">🏷️</span>
+                    <span>Mã xã</span>
+                </div>
+                <div class="info-value">20137</div>
+            </div>
+        </div>
+
+        <div class="admin-section">
+            <div class="admin-title">
+                <span class="icon">🏛️</span>
+                <span>Trung tâm hành chính</span>
+            </div>
+            <div class="admin-value">Thôn Bình An, xã Chân Mây - Lăng Cô</div>
+        </div>
+
+        <div class="footer-section">
+            <div class="footer-location">Chân Mây - Lăng Cô Commune, Huế, Vietnam</div>
+            <div class="osm-id">OSM ID: 19325212</div>
+        </div>
+    </div>
+`, {
+    maxWidth: 380,
+    className: 'custom-popup'
+});
+
+      map.fitBounds(boundaryLayer.getBounds());
+    }
+
+    // 🔹 Gọi dữ liệu OSM để tạo ranh giới
+    fetch("https://overpass-api.de/api/interpreter?data=[out:json];relation(19325212);(._;>;);out;")
+      .then((res) => res.json())
+      .then(createBoundaryFromOSMData)
+      .catch((err) => {
+        console.error(err);
+        createEstimatedBoundary();
+      });
+
+    // ========== CÁC CHỨC NĂNG CŨ ĐÃ ĐƯỢC THÊM VÀO ==========
+
+    // Hàm tạo icon marker đơn giản (mũi tên bản đồ)
+    function createSimpleIcon(color) {
+      return L.divIcon({
+        className: 'simple-marker',
+        html: `<div style="background-color: ${color}; width: 24px; height: 24px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.5);"></div>`,
+        iconSize: [24, 24],
+        iconAnchor: [12, 24]
+      });
+    }
+
+    // Danh sách các điểm đánh dấu với nhiều màu sắc
+    const markers = [
+      {
+        coords: [16.187768367009422, 108.13129996298079],
+        title: "Hải Vân Quan",
+        description: "Di tích lịch sử nổi tiếng nằm trên đỉnh đèo Hải Vân, từng là cửa ngõ quan trọng giữa Thừa Thiên Huế và Đà Nẵng.",
+        image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "ditich",
+        color: "#e74c3c",
+        link: "https://www.google.com/maps/place/H%E1%BA%A3i+V%C3%A2n+Quan/@16.1877377,108.1287193,836m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3142219e02bc568b:0xb04a3eba486386b5!8m2!3d16.1877377!4d108.1312942!16s%2Fg%2F11p5lgqrq9?hl=vi&entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+        address: "Đèo Hải Vân, giáp ranh Thừa Thiên Huế và Đà Nẵng",
+        phone: "0234 123 456",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.227258827040963, 108.07544107963488],
+        title: "Đầm Lập An",
+        description: "Đầm nước mặn rộng lớn với hệ sinh thái đa dạng, nổi tiếng với nghề nuôi hàu và cảnh quan thiên nhiên tuyệt đẹp.",
+        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "damnuoc",
+        color: "#3498db",
+        link: "https://example.com/dam-lap-an",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 457",
+        hours: "6:00 - 18:00 hàng ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.31724163145726, 107.97717739551304],
+        title: "Bãi biển Tân Cảnh Dương",
+        description: "Bãi biển hoang sơ với cát trắng và nước trong xanh, lý tưởng cho những ai yêu thích sự yên tĩnh và thiên nhiên.",
+        image: "https://images.unsplash.com/photo-1534430480872-3498386e7856?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/tan-canh-duong",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 458",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.31296999941014, 108.00091933765658],
+        title: "Bãi biển Bình An",
+        description: "Bãi biển đẹp với bãi cát trắng trải dài, nước biển trong xanh, thích hợp cho các hoạt động tắm biển và thể thao dưới nước.",
+        image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/binh-an",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 459",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.265680775230162, 108.06610813578524],
+        title: "Bãi biển Lăng Cô",
+        description: "Một trong những bãi biển đẹp nhất Việt Nam, được công nhận là vịnh đẹp thế giới với cảnh quan thiên nhiên hùng vĩ.",
+        image: "https://images.unsplash.com/photo-1597075882936-27bfa7357b3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/lang-co",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 460",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.24402108899415, 107.98933957990741],
+        title: "Suối Voi",
+        description: "Dòng suối trong lành chảy qua những tảng đá lớn hình voi, tạo nên khung cảnh thiên nhiên độc đáo và thơ mộng.",
+        image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/suoi-voi",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 461",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.253183945484594, 107.99086924102949],
+        title: "Suối Bầu Ghè",
+        description: "Dòng suối mát lành với nhiều thác nước nhỏ, là điểm đến lý tưởng cho những chuyến picnic và khám phá thiên nhiên.",
+        image: "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/suoi-bau-ghe",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 462",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.24465135364992, 107.9320540367809],
+        title: "Suối Tiên",
+        description: "Dòng suối với vẻ đẹp như chốn thần tiên, nước trong vắt chảy qua những phiến đá tự nhiên tạo thành các bậc thang độc đáo.",
+        image: "https://images.unsplash.com/photo-1439066615861-d1af74d74000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/suoi-tien",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 463",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.200864938077345, 108.13337584408814],
+        title: "Đèo Hải Vân",
+        description: "Đèo Hải Vân nằm giữa Thừa Thiên Huế và Đà Nẵng, được mệnh danh là 'Thiên hạ đệ nhất hùng quan' với cảnh quan thiên nhiên hùng vĩ.",
+        image: "https://images.unsplash.com/photo-1597075882936-27bfa7357b3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "ditich",
+        color: "#e74c3c",
+        link: "https://www.google.com/maps/place/%C4%90%C3%A8o+H%E1%BA%A3i+V%C3%A2n/@16.1999995,108.1230332,3345m/data=!3m2!1e3!4b1!4m6!3m5!1s0x31422151a4984555:0x9a66217b26b3f759!8m2!3d16.2!4d108.133333!16s%2Fm%2F02rnk9y?hl=vi&entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 464",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      },
+      {
+        coords: [16.32695564023601, 107.95730352364052],
+        title: "Laguna Lăng Cô",
+        description: "Khu nghỉ dưỡng cao cấp với đầy đủ tiện nghi, nằm bên bờ biển Lăng Cô thơ mộng, lý tưởng cho kỳ nghỉ sang trọng.",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://example.com/laguna-lang-co",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 465",
+        hours: "24/7",
+        price: "Từ 2.000.000 VNĐ/đêm"
+      },
+      {
+        coords: [16.216834383654582, 108.02855192753158],
+        title: "Suối Mơ",
+        description: "Dòng suối thơ mộng với cảnh quan thiên nhiên tươi đẹp, là điểm đến lý tưởng cho những ai yêu thích sự yên bình.",
+        image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/suoi-mo",
+        address: "Xã Lộc Vĩnh, huyện Phú Lộc, tỉnh Thừa Thiên Huế",
+        phone: "0234 123 466",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí"
+      }
+    ];
+
+    // Tạo mảng lưu trữ các marker
+    const markerObjects = [];
+
+    // Thêm các điểm đánh dấu với icon đơn giản
+    markers.forEach(function(marker, index) {
+      const simpleIcon = createSimpleIcon(marker.color);
+      
+      const markerObj = L.marker(marker.coords, { icon: simpleIcon })
+        .addTo(map)
+        .on('click', function() {
+          showLocationDetails(index);
+          map.setView(marker.coords, 14);
+          highlightLocationItem(index);
+        });
+        
+      markerObjects.push(markerObj);
+    });
+
+    // Tạo danh sách địa điểm trong sidebar
+    const locationList = document.getElementById('location-list');
+    
+    markers.forEach(function(marker, index) {
+      const listItem = document.createElement('li');
+      listItem.className = 'location-item';
+      listItem.innerHTML = `
+        <div class="location-icon" style="background-color: ${marker.color}">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="location-content">
+          <div class="location-title">${marker.title}</div>
+          <div class="location-desc">${marker.description.substring(0, 80)}...</div>
+        </div>
+      `;
+      
+      listItem.addEventListener('click', function() {
+        // Di chuyển bản đồ đến vị trí marker
+        map.setView(marker.coords, 14);
+        // Hiển thị thông tin chi tiết
+        showLocationDetails(index);
+        // Đánh dấu item được chọn
+        highlightLocationItem(index);
+        
+        // Tự động đóng sidebar trên di động
+        if (window.innerWidth <= 768) {
+          sidebar.classList.add('collapsed');
+          sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
+      
+      locationList.appendChild(listItem);
+    });
+
+    // Hàm đánh dấu item trong danh sách
+    function highlightLocationItem(index) {
+      const items = document.querySelectorAll('.location-item');
+      items.forEach(function(item, i) {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    }
+
+    // Hàm hiển thị chi tiết địa điểm
+    function showLocationDetails(index) {
+      const marker = markers[index];
+      const infoPanel = document.getElementById('info-panel');
+      
+      // Cập nhật thông tin
+      document.getElementById('info-image').src = marker.image;
+      document.getElementById('info-title').textContent = marker.title;
+      document.getElementById('info-description').textContent = marker.description;
+      document.getElementById('info-address').textContent = marker.address;
+      document.getElementById('info-phone').textContent = marker.phone;
+      document.getElementById('info-hours').textContent = marker.hours;
+      document.getElementById('info-price').textContent = marker.price;
+      
+      // Cập nhật sự kiện cho các nút
+      document.getElementById('info-website').onclick = function() {
+        window.open(marker.link, '_blank');
+      };
+      
+      document.getElementById('info-direction').onclick = function() {
+        const url = `https://www.google.com/maps/dir/?api=1&destination=${marker.coords[0]},${marker.coords[1]}`;
+        window.open(url, '_blank');
+      };
+      
+      // Hiển thị panel
+      infoPanel.classList.add('active');
+    }
+
+    // Xử lý sự kiện tìm kiếm
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const items = document.querySelectorAll('.location-item');
+      
+      items.forEach(function(item, index) {
+        const title = markers[index].title.toLowerCase();
+        const desc = markers[index].description.toLowerCase();
+        
+        if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+          item.style.display = 'flex';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+
+    // Xử lý sự kiện sidebar toggle
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    
+    sidebarToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('collapsed');
+      if (sidebar.classList.contains('collapsed')) {
+        sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      } else {
+        sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+      }
+    });
+
+    // Xử lý sự kiện đóng info panel
+    document.getElementById('info-close').addEventListener('click', function() {
+      document.getElementById('info-panel').classList.remove('active');
+    });
+
+    // Xử lý sự kiện nút locate me
+    document.getElementById('locate-me').addEventListener('click', function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          const latlng = L.latLng(position.coords.latitude, position.coords.longitude);
+          map.setView(latlng, 14);
+          L.marker(latlng)
+            .addTo(map)
+            .bindPopup("Vị trí của bạn")
+            .openPopup();
+        });
+      } else {
+        alert("Trình duyệt không hỗ trợ định vị");
+      }
+    });
+
+    // Xử lý sự kiện nút toggle boundary
+    document.getElementById('toggle-boundary').addEventListener('click', function() {
+      if (boundaryLayer) {
+        if (boundaryVisible) {
+          map.removeLayer(boundaryLayer);
+        } else {
+          map.addLayer(boundaryLayer);
+        }
+        boundaryVisible = !boundaryVisible;
+      }
+    });
+
+    // Xử lý sự kiện nút toggle satellite
+    document.getElementById('toggle-satellite').addEventListener('click', function() {
+      if (isSatellite) {
+        map.removeLayer(satelliteLayer);
+        map.addLayer(osmLayer);
+      } else {
+        map.removeLayer(osmLayer);
+        map.addLayer(satelliteLayer);
+      }
+      isSatellite = !isSatellite;
+    });
+
+    // Xử lý sự kiện nút fullscreen
+    document.getElementById('fullscreen').addEventListener('click', function() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+        this.innerHTML = '<i class="fas fa-compress"></i>';
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+          this.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+      }
+    });
+
+    // Tự động đóng sidebar khi chọn một địa điểm trên di động
+    function setupMobileUX() {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Đóng sidebar khi chọn địa điểm
+        const locationItems = document.querySelectorAll('.location-item');
+        locationItems.forEach(item => {
+          item.addEventListener('click', () => {
+            sidebar.classList.add('collapsed');
+            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          });
+        });
+        
+        // Đóng info panel khi nhấn ra ngoài (trên di động)
+        document.addEventListener('click', (e) => {
+          const infoPanel = document.getElementById('info-panel');
+          if (infoPanel.classList.contains('active') && 
+              !e.target.closest('.info-panel') && 
+              !e.target.closest('.location-item') &&
+              !e.target.closest('.marker')) {
+            infoPanel.classList.remove('active');
+          }
+        });
+      }
+    }
+
+    // Gọi hàm khi tải trang và khi thay đổi kích thước cửa sổ
+    document.addEventListener('DOMContentLoaded', setupMobileUX);
+    window.addEventListener('resize', setupMobileUX);
+  </script>
+</body>
+</html>
