@@ -17,7 +17,9 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            line-height: 1.6;
         }
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -28,23 +30,26 @@
             color: white;
             margin-bottom: 40px;
             animation: fadeInDown 0.8s ease;
+            padding: 20px 0;
         }
 
         header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
+            font-size: 2.8em;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         header p {
             font-size: 1.2em;
             opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .search-section {
             background: white;
             border-radius: 15px;
-            padding: 30px;
+            padding: 25px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             animation: fadeInUp 0.8s ease;
@@ -81,6 +86,7 @@
             font-size: 16px;
             font-weight: bold;
             transition: all 0.3s;
+            white-space: nowrap;
         }
 
         .search-box button:hover {
@@ -92,6 +98,7 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .filter-tab {
@@ -131,6 +138,297 @@
             animation: fadeIn 0.3s ease;
         }
 
+        .weather-events-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .weather-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .weather-widget {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weather-widget:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Animation layers */
+        .animation-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .widget-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Rain animation */
+        .rain-drop {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(300px); }
+        }
+        
+        /* Snow animation */
+        .snow-flake {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: snowfall linear infinite;
+        }
+        
+        @keyframes snowfall {
+            to { 
+                transform: translateY(300px) translateX(20px);
+                opacity: 0;
+            }
+        }
+        
+        /* Cloud animation */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            to { transform: translateX(350px); }
+        }
+        
+        /* Thunderstorm flash */
+        .lightning {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            animation: flash 4s infinite;
+        }
+        
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            10%, 12% { opacity: 1; }
+            11% { opacity: 0; }
+        }
+        
+        /* Sun rays */
+        .sun-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .sun-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3));
+            transform-origin: left center;
+        }
+        
+        @keyframes rotate {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        /* Màu nền widget theo thời tiết */
+        .weather-widget.clear { 
+            background: linear-gradient(135deg, #56CCF2 0%, #2F80ED 100%); 
+            color: white;
+        }
+        .weather-widget.clouds { 
+            background: linear-gradient(135deg, #BDC3C7 0%, #7F8C8D 100%); 
+            color: white;
+        }
+        .weather-widget.rain { 
+            background: linear-gradient(135deg, #5A6D7E 0%, #3B4856 100%); 
+            color: white;
+        }
+        .weather-widget.drizzle { 
+            background: linear-gradient(135deg, #74B9CB 0%, #5A8599 100%); 
+            color: white;
+        }
+        .weather-widget.thunderstorm { 
+            background: linear-gradient(135deg, #434343 0%, #1a1a1a 100%); 
+            color: white;
+        }
+        .weather-widget.snow { 
+            background: linear-gradient(135deg, #E0EAFC 0%, #CFDEF3 100%); 
+            color: #2d3748;
+        }
+        .weather-widget.mist { 
+            background: linear-gradient(135deg, #D7DDE8 0%, #A4B0BE 100%); 
+            color: #2d3748;
+        }
+        
+        .location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .location-icon {
+            font-size: 16px;
+        }
+        
+        .weather-main {
+            text-align: center;
+            margin: 15px 0;
+        }
+        
+        .weather-icon {
+            font-size: 60px;
+            margin-bottom: 5px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+        }
+        
+        .temperature {
+            font-size: 48px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+        
+        .description {
+            font-size: 15px;
+            text-transform: capitalize;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .weather-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .detail-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .detail-icon {
+            font-size: 20px;
+        }
+        
+        .detail-label {
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        .detail-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #4a5568;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #e53e3e;
+            font-weight: 500;
+        }
+        
+        .spinner {
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .last-update {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .event-card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .event-item {
             padding: 15px;
             background: #f8f9ff;
@@ -153,6 +451,26 @@
             color: #764ba2;
             font-weight: bold;
             margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            display: none;
+        }
+
+        .no-results.active {
+            display: block;
+        }
+
+        .no-results i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #ddd;
         }
 
         .content-grid {
@@ -170,6 +488,9 @@
             transition: all 0.3s;
             cursor: pointer;
             animation: fadeInUp 0.8s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .article-card:hover {
@@ -211,6 +532,9 @@
 
         .article-content {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .article-category {
@@ -222,6 +546,7 @@
             font-size: 12px;
             font-weight: bold;
             margin-bottom: 10px;
+            align-self: flex-start;
         }
 
         .article-title {
@@ -229,12 +554,14 @@
             color: #333;
             margin-bottom: 10px;
             font-weight: bold;
+            line-height: 1.3;
         }
 
         .article-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 15px;
+            flex-grow: 1;
         }
 
         .article-meta {
@@ -265,6 +592,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.6em;
         }
 
         .tips-grid {
@@ -294,6 +622,7 @@
 
         .tip-card h4 {
             margin-bottom: 10px;
+            font-size: 1.2em;
         }
 
         .ai-assistant {
@@ -374,12 +703,13 @@
             margin-bottom: 10px;
             animation: fadeIn 0.3s ease;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            max-width: 85%;
         }
 
         .user-message {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-left: 40px;
+            margin-left: auto;
         }
 
         .ai-chat-input {
@@ -416,23 +746,6 @@
 
         .ai-chat-input button:hover {
             transform: scale(1.05);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-            display: none;
-        }
-
-        .no-results.active {
-            display: block;
-        }
-
-        .no-results i {
-            font-size: 60px;
-            margin-bottom: 20px;
-            color: #ddd;
         }
 
         @keyframes fadeInDown {
@@ -488,8 +801,17 @@
         }
 
         @media (max-width: 1024px) {
-            .weather-events {
+            .weather-events-container {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .weather-container {
+                justify-content: center;
+            }
+            
+            .weather-widget {
+                max-width: 400px;
             }
             
             .tips-grid {
@@ -528,8 +850,47 @@
                 grid-template-columns: 1fr;
             }
 
-            .weather-events {
+            .weather-events-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .weather-widget {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .search-section {
+                padding: 20px;
+            }
+            
+            .filter-tabs {
+                gap: 8px;
+            }
+            
+            .filter-tab {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .article-card {
+                margin-bottom: 15px;
+            }
+            
+            .article-content {
+                padding: 20px;
+            }
+            
+            .tips-section {
+                padding: 20px;
+            }
+            
+            .tip-card {
+                padding: 15px;
+            }
+            
+            .weather-widget {
+                padding: 15px;
             }
         }
     </style>
@@ -556,18 +917,20 @@
                 <button class="filter-tab" onclick="filterContent('infographic')">Infographic</button>
             </div>
         </div>
-        <div class="weather-container">
-        <div class="weather-widget">
-            <iframe 
-             src="weather.html" 
-             width="100%" 
-             height="500" 
-             style="border:none; background: transparent;">
-        </iframe>
-        </div>
-        </div>
 
-        
+        <div class="weather-events-container">
+            <div class="weather-container">
+                <div class="weather-widget" id="weatherWidget">
+                    <div class="animation-layer" id="animationLayer"></div>
+                    <div class="widget-content">
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <div>Đang tải dữ liệu thời tiết...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="event-card">
                 <h3><i class="fas fa-calendar-star"></i> Sự Kiện Sắp Tới</h3>
                 <div class="event-item">
@@ -587,13 +950,15 @@
                 </div>
             </div>
         </div>
-                <div class="no-results" id="noResults">
+
+        <div class="no-results" id="noResults">
             <i class="fas fa-search"></i>
             <h3>Không tìm thấy kết quả</h3>
             <p>Vui lòng thử lại với từ khóa khác</p>
         </div>
 
         <div class="content-grid" id="contentGrid">
+            <!-- Các article-card giữ nguyên như cũ -->
             <div class="article-card" data-category="food" data-keywords="món ăn ẩm thực đặc sản hải sản">
                 <div class="article-image">
                     <i class="fas fa-utensils"></i>
@@ -605,6 +970,126 @@
                     <div class="article-meta">
                         <span><i class="far fa-clock"></i> 5 phút đọc</span>
                         <span><i class="far fa-eye"></i> 2,134 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="guide" data-keywords="di chuyển hướng dẫn đà nẵng phương tiện">
+                <div class="article-image">
+                    <i class="fas fa-route"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Hướng dẫn</span>
+                    <h3 class="article-title">Di Chuyển Từ Đà Nẵng Đến Lăng Cô</h3>
+                    <p class="article-description">Hướng dẫn chi tiết các phương tiện di chuyển, thời gian và chi phí ước tính cho hành trình của bạn.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 7 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 2,456 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="video" data-keywords="video vịnh flycam cảnh đẹp">
+                <div class="article-image">
+                    <i class="fas fa-video"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Video</span>
+                    <h3 class="article-title">Khám Phá Vịnh Lăng Cô Từ Trên Cao</h3>
+                    <p class="article-description">Video 4K tuyệt đẹp chụp từ flycam, mang đến góc nhìn toàn cảnh về vịnh biển đẹp nhất Việt Nam.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 12:30 phút</span>
+                        <span><i class="far fa-eye"></i> 5,678 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="infographic" data-keywords="bản đồ ẩm thực quán ăn địa điểm">
+                <div class="article-image">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Infographic</span>
+                    <h3 class="article-title">Bản Đồ Ẩm Thực Lăng Cô</h3>
+                    <p class="article-description">Infographic chi tiết về các quán ăn nổi tiếng, món ăn đặc trưng và mức giá tham khảo.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 3 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 987 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="tips" data-keywords="mẹo tiết kiệm chi phí du lịch">
+                <div class="article-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Mẹo vặt</span>
+                    <h3 class="article-title">10 Mẹo Tiết Kiệm Khi Du Lịch Lăng Cô</h3>
+                    <p class="article-description">Những mẹo hay giúp bạn có chuyến đi trọn vẹn mà vẫn tiết kiệm chi phí một cách thông minh.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 6 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,845 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="guide" data-keywords="đèo hải vân chinh phục xe máy">
+                <div class="article-image">
+                    <i class="fas fa-hiking"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Hướng dẫn</span>
+                    <h3 class="article-title">Chinh Phục Đèo Hải Vân An Toàn</h3>
+                    <p class="article-description">Cẩm nang chi tiết cho người muốn khám phá đèo Hải Vân huyền thoại bằng xe máy hoặc đi bộ.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 8 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 3,210 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="food" data-keywords="hải sản chợ tươi sống">
+                <div class="article-image">
+                    <i class="fas fa-fish"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Ẩm thực</span>
+                    <h3 class="article-title">Hải Sản Tươi Sống Ở Chợ Lăng Cô</h3>
+                    <p class="article-description">Hướng dẫn chọn mua hải sản tươi ngon và các quán chế biến uy tín quanh khu vực chợ.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 4 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,567 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="video" data-keywords="video ngư dân trải nghiệm đánh bắt">
+                <div class="article-image">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Video</span>
+                    <h3 class="article-title">Một Ngày Trải Nghiệm Làm Ngư Dân</h3>
+                    <p class="article-description">Tham gia cùng ngư dân địa phương ra khơi đánh bắt hải sản và trải nghiệm cuộc sống biển cả.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 15:45 phút</span>
+                        <span><i class="far fa-eye"></i> 4,321 lượt xem</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="article-card" data-category="infographic" data-keywords="lịch trình 3 ngày kế hoạch">
+                <div class="article-image">
+                    <i class="fas fa-map-signs"></i>
+                </div>
+                <div class="article-content">
+                    <span class="article-category">Infographic</span>
+                    <h3 class="article-title">Lịch Trình 3 Ngày 2 Đêm Hoàn Hảo</h3>
+                    <p class="article-description">Infographic về lịch trình chi tiết cho chuyến du lịch 3 ngày khám phá mọi ngóc ngách Lăng Cô.</p>
+                    <div class="article-meta">
+                        <span><i class="far fa-clock"></i> 5 phút đọc</span>
+                        <span><i class="far fa-eye"></i> 1,234 lượt xem</span>
                     </div>
                 </div>
             </div>
@@ -673,6 +1158,7 @@
     </div>
 
     <script>
+        // JavaScript code giữ nguyên như cũ
         let currentFilter = 'all';
 
         function filterContent(category) {
@@ -820,127 +1306,192 @@
                 }
             });
         });
+
+        // Weather Widget Code
+        const apiKey = "341ef82998b57b3239a9ab9c1f418d91";
+        const lat = 16.2460;
+        const lon = 108.014;
+
+        const weatherIcons = {
+            '01d': '☀️', '01n': '🌙',
+            '02d': '⛅', '02n': '☁️',
+            '03d': '☁️', '03n': '☁️',
+            '04d': '☁️', '04n': '☁️',
+            '09d': '🌧️', '09n': '🌧️',
+            '10d': '🌦️', '10n': '🌧️',
+            '11d': '⛈️', '11n': '⛈️',
+            '13d': '❄️', '13n': '❄️',
+            '50d': '🌫️', '50n': '🌫️'
+        };
+
+        async function getWeather() {
+            try {
+                const response = await fetch(
+                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=vi`
+                );
+                const data = await response.json();
+
+                if (data.cod !== 200) {
+                    showError("Không thể lấy dữ liệu thời tiết. Vui lòng kiểm tra API key.");
+                    return;
+                }
+
+                displayWeather(data);
+            } catch (error) {
+                showError("Lỗi kết nối. Vui lòng thử lại sau.");
+                console.error(error);
+            }
+        }
+
+        function createRainAnimation() {
+            const layer = document.getElementById('animationLayer');
+            layer.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'rain-drop';
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+                drop.style.animationDelay = Math.random() * 2 + 's';
+                layer.appendChild(drop);
+            }
+        }
+
+        function createSnowAnimation() {
+            const layer = document.getElementById('animationLayer');
+            layer.innerHTML = '';
+            for (let i = 0; i < 30; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snow-flake';
+                flake.style.left = Math.random() * 100 + '%';
+                flake.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                flake.style.animationDelay = Math.random() * 3 + 's';
+                layer.appendChild(flake);
+            }
+        }
+
+        function createCloudAnimation() {
+            const layer = document.getElementById('animationLayer');
+            layer.innerHTML = '';
+            for (let i = 0; i < 3; i++) {
+                const cloud = document.createElement('div');
+                cloud.className = 'cloud';
+                cloud.style.width = (Math.random() * 60 + 40) + 'px';
+                cloud.style.height = (Math.random() * 30 + 20) + 'px';
+                cloud.style.top = (Math.random() * 60 + 10) + '%';
+                cloud.style.left = '-100px';
+                cloud.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                cloud.style.animationDelay = i * 3 + 's';
+                layer.appendChild(cloud);
+            }
+        }
+
+        function createThunderstormAnimation() {
+            const layer = document.getElementById('animationLayer');
+            layer.innerHTML = '';
+            const lightning = document.createElement('div');
+            lightning.className = 'lightning';
+            layer.appendChild(lightning);
+            createRainAnimation();
+        }
+
+        function createSunAnimation() {
+            const layer = document.getElementById('animationLayer');
+            layer.innerHTML = '';
+            const sunRays = document.createElement('div');
+            sunRays.className = 'sun-rays';
+            for (let i = 0; i < 12; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'sun-ray';
+                ray.style.transform = `rotate(${i * 30}deg)`;
+                sunRays.appendChild(ray);
+            }
+            layer.appendChild(sunRays);
+        }
+
+        function createWeatherAnimation(weatherMain) {
+            const animations = {
+                'clear': createSunAnimation,
+                'clouds': createCloudAnimation,
+                'rain': createRainAnimation,
+                'drizzle': createRainAnimation,
+                'thunderstorm': createThunderstormAnimation,
+                'snow': createSnowAnimation,
+                'mist': createCloudAnimation
+            };
+            
+            const animationFunc = animations[weatherMain.toLowerCase()];
+            if (animationFunc) {
+                animationFunc();
+            }
+        }
+
+        function displayWeather(data) {
+            const iconCode = data.weather[0].icon;
+            const icon = weatherIcons[iconCode] || '🌤️';
+            const now = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            
+            // Thay đổi màu nền widget theo thời tiết
+            const weatherMain = data.weather[0].main.toLowerCase();
+            const widget = document.getElementById('weatherWidget');
+            widget.className = 'weather-widget ' + weatherMain;
+            
+            // Tạo animation theo thời tiết
+            createWeatherAnimation(weatherMain);
+
+            const content = widget.querySelector('.widget-content') || widget;
+            content.innerHTML = `
+                <div class="location">
+                    <span class="location-icon">📍</span>
+                    <span>Chân Mây - Lăng Cô</span>
+                </div>
+                
+                <div class="weather-main">
+                    <div class="weather-icon">${icon}</div>
+                    <div class="temperature">${Math.round(data.main.temp)}°C</div>
+                    <div class="description">${data.weather[0].description}</div>
+                </div>
+                
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <span class="detail-icon">💧</span>
+                        <span class="detail-label">Độ ẩm</span>
+                        <span class="detail-value">${data.main.humidity}%</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-icon">🌬️</span>
+                        <span class="detail-label">Gió</span>
+                        <span class="detail-value">${data.wind.speed} m/s</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-icon">🌡️</span>
+                        <span class="detail-label">Cảm giác</span>
+                        <span class="detail-value">${Math.round(data.main.feels_like)}°C</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-icon">👁️</span>
+                        <span class="detail-label">Tầm nhìn</span>
+                        <span class="detail-value">${(data.visibility / 1000).toFixed(1)} km</span>
+                    </div>
+                </div>
+                
+                <div class="last-update">Cập nhật lúc ${now}</div>
+            `;
+        }
+
+        function showError(message) {
+            document.getElementById('weatherWidget').innerHTML = `
+                <div class="error">
+                ⚠️<br><br>${message}
+                </div>
+            `;
+        }
+
+        // Initialize weather widget
+        getWeather();
+        setInterval(getWeather, 600000); // Cập nhật mỗi 10 phút
     </script>
 </body>
 </html>
-                        <span><i class="far fa-clock"></i> 5 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 1,234 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="guide" data-keywords="di chuyển hướng dẫn đà nẵng phương tiện">
-                <div class="article-image">
-                    <i class="fas fa-route"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Hướng dẫn</span>
-                    <h3 class="article-title">Di Chuyển Từ Đà Nẵng Đến Lăng Cô</h3>
-                    <p class="article-description">Hướng dẫn chi tiết các phương tiện di chuyển, thời gian và chi phí ước tính cho hành trình của bạn.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 7 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 2,456 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="video" data-keywords="video vịnh flycam cảnh đẹp">
-                <div class="article-image">
-                    <i class="fas fa-video"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Video</span>
-                    <h3 class="article-title">Khám Phá Vịnh Lăng Cô Từ Trên Cao</h3>
-                    <p class="article-description">Video 4K tuyệt đẹp chụp từ flycam, mang đến góc nhìn toàn cảnh về vịnh biển đẹp nhất Việt Nam.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 12:30 phút</span>
-                        <span><i class="far fa-eye"></i> 5,678 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="infographic" data-keywords="bản đồ ẩm thực quán ăn địa điểm">
-                <div class="article-image">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Infographic</span>
-                    <h3 class="article-title">Bản Đồ Ẩm Thực Lăng Cô</h3>
-                    <p class="article-description">Infographic chi tiết về các quán ăn nổi tiếng, món ăn đặc trưng và mức giá tham khảo.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 3 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 987 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="tips" data-keywords="mẹo tiết kiệm chi phí du lịch">
-                <div class="article-image">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Mẹo vặt</span>
-                    <h3 class="article-title">10 Mẹo Tiết Kiệm Khi Du Lịch Lăng Cô</h3>
-                    <p class="article-description">Những mẹo hay giúp bạn có chuyến đi trọn vẹn mà vẫn tiết kiệm chi phí một cách thông minh.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 6 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 1,845 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="guide" data-keywords="đèo hải vân chinh phục xe máy">
-                <div class="article-image">
-                    <i class="fas fa-hiking"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Hướng dẫn</span>
-                    <h3 class="article-title">Chinh Phục Đèo Hải Vân An Toàn</h3>
-                    <p class="article-description">Cẩm nang chi tiết cho người muốn khám phá đèo Hải Vân huyền thoại bằng xe máy hoặc đi bộ.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 8 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 3,210 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="food" data-keywords="hải sản chợ tươi sống">
-                <div class="article-image">
-                    <i class="fas fa-fish"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Ẩm thực</span>
-                    <h3 class="article-title">Hải Sản Tươi Sống Ở Chợ Lăng Cô</h3>
-                    <p class="article-description">Hướng dẫn chọn mua hải sản tươi ngon và các quán chế biến uy tín quanh khu vực chợ.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 4 phút đọc</span>
-                        <span><i class="far fa-eye"></i> 1,567 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="video" data-keywords="video ngư dân trải nghiệm đánh bắt">
-                <div class="article-image">
-                    <i class="fas fa-play-circle"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Video</span>
-                    <h3 class="article-title">Một Ngày Trải Nghiệm Làm Ngư Dân</h3>
-                    <p class="article-description">Tham gia cùng ngư dân địa phương ra khơi đánh bắt hải sản và trải nghiệm cuộc sống biển cả.</p>
-                    <div class="article-meta">
-                        <span><i class="far fa-clock"></i> 15:45 phút</span>
-                        <span><i class="far fa-eye"></i> 4,321 lượt xem</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="article-card" data-category="infographic" data-keywords="lịch trình 3 ngày kế hoạch">
-                <div class="article-image">
-                    <i class="fas fa-map-signs"></i>
-                </div>
-                <div class="article-content">
-                    <span class="article-category">Infographic</span>
-                    <h3 class="article-title">Lịch Trình 3 Ngày 2 Đêm Hoàn Hảo</h3>
-                    <p class="article-description">Infographic về lịch trình chi tiết cho chuyến du lịch 3 ngày khám phá mọi ngóc ngách Lăng Cô.</p>
-                    <div class="article-meta">
-

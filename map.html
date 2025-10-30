@@ -29,6 +29,13 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: hidden;
+      background: #f5f7fa;
+      transition: background-color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: #1a202c;
+      color: #e2e8f0;
     }
 
     #map {
@@ -48,10 +55,16 @@
       width: 420px;
       height: 100%;
       background: white;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
       z-index: 10;
       transition: transform 0.3s ease;
       overflow-y: auto;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .dark-mode .sidebar {
+      background: #2d3748;
+      color: #e2e8f0;
     }
 
     .sidebar.collapsed {
@@ -67,31 +80,127 @@
       background: white;
       border: none;
       border-radius: 50%;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 11;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .sidebar-toggle {
+      background: #4a5568;
+      color: #e2e8f0;
+    }
+
+    /* Nút mở sidebar khi đã đóng */
+    .sidebar-open {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-open:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .sidebar-open {
+      background: #4a5568;
+      color: #e2e8f0;
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    .dark-mode .sidebar-header {
+      border-bottom-color: #4a5568;
+    }
+
+    .sidebar-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 32px;
+      height: 32px;
+      background: #f8fafc;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #718096;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-close:hover {
+      background: #e53e3e;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .dark-mode .sidebar-close {
+      background: #4a5568;
+      color: #a0aec0;
+    }
+
+    .dark-mode .sidebar-close:hover {
+      background: #c53030;
     }
 
     .sidebar-content {
       padding: 20px;
     }
 
-    .sidebar-header {
-      margin-bottom: 20px;
-    }
-
-    .sidebar-header h1 {
+    .sidebar-title h1 {
       font-size: 24px;
       color: #2d3748;
       margin-bottom: 5px;
+      background: linear-gradient(135deg, #3498db, #2c3e50);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-right: 40px;
     }
 
-    .sidebar-header p {
+    .dark-mode .sidebar-title h1 {
+      background: linear-gradient(135deg, #63b3ed, #90cdf4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .sidebar-title p {
       color: #718096;
       font-size: 14px;
+    }
+
+    .dark-mode .sidebar-title p {
+      color: #a0aec0;
     }
 
     .search-box {
@@ -103,9 +212,16 @@
       width: 100%;
       padding: 12px 15px 12px 40px;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      border-radius: 12px;
       font-size: 14px;
       transition: all 0.3s;
+      background: #f8fafc;
+    }
+
+    .dark-mode .search-box input {
+      background: #4a5568;
+      border-color: #718096;
+      color: #e2e8f0;
     }
 
     .search-box input:focus {
@@ -128,6 +244,11 @@
       background: #f8fafc;
       border-radius: 12px;
       padding: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .dark-mode .filter-section {
+      background: #4a5568;
     }
 
     .filter-header {
@@ -145,6 +266,10 @@
       font-weight: 600;
       color: #2d3748;
       font-size: 15px;
+    }
+
+    .dark-mode .filter-title {
+      color: #e2e8f0;
     }
 
     .filter-toggle {
@@ -187,8 +312,20 @@
       gap: 6px;
     }
 
+    .dark-mode .filter-tag {
+      background: #2d3748;
+      border-color: #4a5568;
+      color: #e2e8f0;
+    }
+
     .filter-tag:hover {
       background: #edf2f7;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .filter-tag:hover {
+      background: #4a5568;
     }
 
     .filter-tag.active {
@@ -197,12 +334,32 @@
       border-color: #4299e1;
     }
 
-    .budget-slider {
+    .budget-slider, .time-slider {
       width: 100%;
       margin: 10px 0;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      outline: none;
     }
 
-    .budget-labels {
+    .dark-mode .budget-slider, .dark-mode .time-slider {
+      background: #4a5568;
+    }
+
+    .budget-slider::-webkit-slider-thumb, .time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #4299e1;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .budget-labels, .time-labels {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
@@ -210,17 +367,8 @@
       margin-top: 5px;
     }
 
-    .time-slider {
-      width: 100%;
-      margin: 10px 0;
-    }
-
-    .time-labels {
-      display: flex;
-      justify-content: space-between;
-      font-size: 12px;
-      color: #718096;
-      margin-top: 5px;
+    .dark-mode .budget-labels, .dark-mode .time-labels {
+      color: #a0aec0;
     }
 
     .age-buttons {
@@ -240,8 +388,19 @@
       text-align: center;
     }
 
+    .dark-mode .age-btn {
+      background: #2d3748;
+      border-color: #4a5568;
+      color: #e2e8f0;
+    }
+
     .age-btn:hover {
       background: #edf2f7;
+      transform: translateY(-2px);
+    }
+
+    .dark-mode .age-btn:hover {
+      background: #4a5568;
     }
 
     .age-btn.active {
@@ -259,12 +418,18 @@
       border-radius: 8px;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s;
       margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .clear-filters:hover {
       background: #c53030;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(229, 62, 62, 0.3);
     }
 
     .location-list {
@@ -279,16 +444,35 @@
       cursor: pointer;
       transition: all 0.3s;
       border: 1px solid transparent;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .dark-mode .location-item {
+      background: #2d3748;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .location-item:hover {
       background: #f7fafc;
       border-color: #e2e8f0;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .location-item:hover {
+      background: #4a5568;
+      border-color: #718096;
     }
 
     .location-item.active {
       background: #ebf8ff;
       border-color: #4299e1;
+      box-shadow: 0 5px 15px rgba(66, 153, 225, 0.2);
+    }
+
+    .dark-mode .location-item.active {
+      background: #2c5282;
+      border-color: #63b3ed;
     }
 
     .location-icon {
@@ -301,6 +485,7 @@
       color: white;
       margin-right: 15px;
       flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
     .location-content {
@@ -313,10 +498,18 @@
       margin-bottom: 5px;
     }
 
+    .dark-mode .location-content .location-title {
+      color: #e2e8f0;
+    }
+
     .location-content .location-desc {
       font-size: 13px;
       color: #718096;
       line-height: 1.4;
+    }
+
+    .dark-mode .location-content .location-desc {
+      color: #a0aec0;
     }
 
     .location-tags {
@@ -334,6 +527,11 @@
       color: #4a5568;
     }
 
+    .dark-mode .location-tag {
+      background: #4a5568;
+      color: #e2e8f0;
+    }
+
     /* Info Panel styles */
     .info-panel {
       position: absolute;
@@ -342,10 +540,16 @@
       width: 400px;
       height: 100%;
       background: white;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
       z-index: 10;
       transition: right 0.3s ease;
       overflow-y: auto;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .dark-mode .info-panel {
+      background: #2d3748;
+      color: #e2e8f0;
     }
 
     .info-panel.active {
@@ -362,6 +566,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .info-header:hover .info-image {
+      transform: scale(1.05);
     }
 
     .info-close {
@@ -378,6 +587,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .info-close:hover {
+      background: rgba(0, 0, 0, 0.7);
+      transform: scale(1.1);
     }
 
     .info-content {
@@ -390,10 +605,18 @@
       margin-bottom: 10px;
     }
 
+    .dark-mode .info-title {
+      color: #e2e8f0;
+    }
+
     .info-description {
       color: #718096;
       line-height: 1.6;
       margin-bottom: 20px;
+    }
+
+    .dark-mode .info-description {
+      color: #a0aec0;
     }
 
     .info-details {
@@ -418,8 +641,16 @@
       margin-right: 5px;
     }
 
+    .dark-mode .info-detail strong {
+      color: #e2e8f0;
+    }
+
     .info-detail span {
       color: #718096;
+    }
+
+    .dark-mode .info-detail span {
+      color: #a0aec0;
     }
 
     .info-tags {
@@ -438,6 +669,11 @@
       display: flex;
       align-items: center;
       gap: 5px;
+    }
+
+    .dark-mode .info-tag {
+      background: #2c5282;
+      color: #bee3f8;
     }
 
     .info-actions {
@@ -466,6 +702,8 @@
 
     .info-btn.primary:hover {
       background: #3182ce;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(66, 153, 225, 0.3);
     }
 
     .info-btn.secondary {
@@ -475,6 +713,17 @@
 
     .info-btn.secondary:hover {
       background: #cbd5e0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .info-btn.secondary {
+      background: #4a5568;
+      color: #e2e8f0;
+    }
+
+    .dark-mode .info-btn.secondary:hover {
+      background: #718096;
     }
 
     /* Map Controls */
@@ -494,18 +743,65 @@
       background: white;
       border: none;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #4a5568;
-      transition: all 0.3s;
+      transition: all 0.3s ease;
     }
 
     .map-control:hover {
       background: #f7fafc;
       color: #4299e1;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .map-control {
+      background: #2d3748;
+      color: #e2e8f0;
+    }
+
+    .dark-mode .map-control:hover {
+      background: #4a5568;
+    }
+
+    /* Zoom Controls */
+    .leaflet-control-zoom {
+      position: absolute;
+      top: 80px;
+      right: 20px;
+      border: none !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .leaflet-control-zoom a {
+      background: white !important;
+      color: #4a5568 !important;
+      border: none !important;
+      width: 40px !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      font-size: 18px !important;
+      transition: all 0.3s ease;
+    }
+
+    .leaflet-control-zoom a:hover {
+      background: #f7fafc !important;
+      color: #4299e1 !important;
+    }
+
+    .dark-mode .leaflet-control-zoom a {
+      background: #2d3748 !important;
+      color: #e2e8f0 !important;
+    }
+
+    .dark-mode .leaflet-control-zoom a:hover {
+      background: #4a5568 !important;
     }
 
     /* Legend */
@@ -516,15 +812,55 @@
       background: white;
       padding: 15px;
       border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       z-index: 5;
       max-width: 250px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .dark-mode .legend {
+      background: rgba(45, 55, 72, 0.9);
+      color: #e2e8f0;
+    }
+
+    .legend.hidden {
+      transform: translateX(-100%);
+      opacity: 0;
     }
 
     .legend h4 {
       margin-bottom: 10px;
       color: #2d3748;
       font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dark-mode .legend h4 {
+      color: #e2e8f0;
+    }
+
+    .legend-toggle {
+      background: none;
+      border: none;
+      color: #718096;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .legend-toggle:hover {
+      color: #4299e1;
+    }
+
+    .dark-mode .legend-toggle {
+      color: #a0aec0;
+    }
+
+    .dark-mode .legend-toggle:hover {
+      color: #63b3ed;
     }
 
     .legend-item {
@@ -546,6 +882,47 @@
       border-color: #3498db;
     }
 
+    /* Nút hiện chú thích khi đã ẩn */
+    .legend-show {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4a5568;
+      transition: all 0.3s ease;
+      z-index: 5;
+      display: none;
+    }
+
+    .legend-show:hover {
+      background: #f7fafc;
+      color: #4299e1;
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .legend-show {
+      background: #2d3748;
+      color: #e2e8f0;
+    }
+
+    .dark-mode .legend-show:hover {
+      background: #4a5568;
+    }
+
+    .legend-show.visible {
+      display: flex;
+    }
+
     /* Loading indicator */
     .loading {
       position: absolute;
@@ -555,11 +932,16 @@
       background: white;
       padding: 20px 30px;
       border-radius: 10px;
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       z-index: 100;
       display: flex;
       align-items: center;
       gap: 15px;
+    }
+
+    .dark-mode .loading {
+      background: #2d3748;
+      color: #e2e8f0;
     }
 
     .loading-spinner {
@@ -574,6 +956,35 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: absolute;
+      top: 15px;
+      right: 70px;
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dark-mode .theme-toggle {
+      background: #4a5568;
+      color: #e2e8f0;
     }
 
     /* Responsive styles */
@@ -592,11 +1003,32 @@
       .legend {
         max-width: 200px;
         bottom: 80px;
+        font-size: 12px;
       }
       
       .map-controls {
         bottom: 20px;
         right: 10px;
+      }
+      
+      .theme-toggle {
+        right: 60px;
+      }
+      
+      .sidebar-open {
+        top: 10px;
+        left: 10px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .leaflet-control-zoom {
+        top: 70px;
+        right: 10px;
+      }
+      
+      .legend-show {
+        bottom: 80px;
       }
     }
 
@@ -607,6 +1039,11 @@
       overflow: hidden !important;
       background: white !important;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+    }
+
+    .dark-mode .leaflet-popup-content-wrapper {
+      background: #2d3748 !important;
+      color: #e2e8f0 !important;
     }
 
     .leaflet-popup-content {
@@ -626,6 +1063,11 @@
     .popup-container-custom {
       width: 100%;
       background: white;
+    }
+
+    .dark-mode .popup-container-custom {
+      background: #2d3748;
+      color: #e2e8f0;
     }
 
     .popup-header {
@@ -651,6 +1093,12 @@
       justify-content: center;
       border-radius: 50%;
       line-height: 1;
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
     }
 
     .location-title {
@@ -683,6 +1131,10 @@
       border-radius: 12px;
     }
 
+    .dark-mode .tags-section {
+      background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+    }
+
     .tags-title {
       display: flex;
       align-items: center;
@@ -691,6 +1143,10 @@
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 10px;
+    }
+
+    .dark-mode .tags-title {
+      color: #bee3f8;
     }
 
     .tags-container {
@@ -708,6 +1164,11 @@
       color: #4a5568;
       font-weight: 500;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .dark-mode .tag {
+      background: #4a5568;
+      color: #e2e8f0;
     }
 
     .tag.highlight {
@@ -730,6 +1191,10 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       position: relative;
       overflow: hidden;
+    }
+
+    .dark-mode .info-card {
+      background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
     }
 
     .info-card::before {
@@ -758,6 +1223,10 @@
       text-transform: uppercase;
     }
 
+    .dark-mode .info-label {
+      color: #a0aec0;
+    }
+
     .info-value {
       font-size: 16px;
       font-weight: 700;
@@ -775,6 +1244,10 @@
       border-radius: 12px;
     }
 
+    .dark-mode .admin-section {
+      background: linear-gradient(135deg, #2c5282 0%, #3182ce 100%);
+    }
+
     .admin-title {
       display: flex;
       align-items: center;
@@ -786,11 +1259,19 @@
       text-transform: uppercase;
     }
 
+    .dark-mode .admin-title {
+      color: #bee3f8;
+    }
+
     .admin-value {
       font-size: 13px;
       color: #334155;
       font-weight: 500;
       line-height: 1.6;
+    }
+
+    .dark-mode .admin-value {
+      color: #e2e8f0;
     }
 
     .footer-section {
@@ -802,16 +1283,70 @@
       background: #f8fafc;
     }
 
+    .dark-mode .footer-section {
+      background: #4a5568;
+      color: #a0aec0;
+    }
+
     .footer-location {
       font-weight: 500;
       color: #475569;
       margin-bottom: 4px;
     }
 
+    .dark-mode .footer-location {
+      color: #e2e8f0;
+    }
+
     .osm-id {
       color: #94a3b8;
       font-size: 12px;
       font-weight: 600;
+    }
+
+    .dark-mode .osm-id {
+      color: #a0aec0;
+    }
+
+    /* Animation for elements */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .dark-mode ::-webkit-scrollbar-track {
+      background: #4a5568;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 10px;
+    }
+
+    .dark-mode ::-webkit-scrollbar-thumb {
+      background: #718096;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+
+    .dark-mode ::-webkit-scrollbar-thumb:hover {
+      background: #90cdf4;
     }
   </style>
 </head>
@@ -824,16 +1359,30 @@
     <span>Đang tải bản đồ...</span>
   </div>
   
+  <!-- Nút mở sidebar (luôn hiển thị) -->
+  <button class="sidebar-open" id="sidebar-open" title="Mở sidebar">
+    <i class="fas fa-bars"></i>
+  </button>
+  
   <!-- Sidebar -->
   <div class="sidebar" id="sidebar">
     <button class="sidebar-toggle" id="sidebar-toggle">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    
+    <button class="theme-toggle" id="theme-toggle" title="Chế độ tối/sáng">
+      <i class="fas fa-moon"></i>
     </button>
     
     <div class="sidebar-content">
       <div class="sidebar-header">
-        <h1>🌊 Chân Mây - Lăng Cô</h1>
-        <p>Khám phá các điểm du lịch tuyệt vời</p>
+        <div class="sidebar-title">
+          <h1>🌊 Chân Mây - Lăng Cô</h1>
+          <p>Khám phá các điểm du lịch tuyệt vời</p>
+        </div>
+        <button class="sidebar-close" id="sidebar-close" title="Đóng sidebar">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
       
       <div class="search-box">
@@ -878,6 +1427,10 @@
               <i class="fas fa-shopping-bag"></i>
               <span>Mua sắm</span>
             </div>
+            <div class="filter-tag" data-type="chua">
+              <i class="fas fa-place-of-worship"></i>
+              <span>Chùa chiền</span>
+            </div>
           </div>
         </div>
       </div>
@@ -896,7 +1449,7 @@
         <div class="filter-content" id="criteria-filter-content">
           <!-- Phù hợp gia đình -->
           <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;">Phù hợp</div>
+            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Phù hợp</div>
             <div class="filter-tags">
               <div class="filter-tag" data-criteria="family">
                 <i class="fas fa-users"></i>
@@ -915,7 +1468,7 @@
           
           <!-- Ngân sách -->
           <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;">Ngân sách</div>
+            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Ngân sách</div>
             <input type="range" min="0" max="4" value="4" class="budget-slider" id="budget-slider">
             <div class="budget-labels">
               <span>Miễn phí</span>
@@ -928,9 +1481,9 @@
           
           <!-- Độ tuổi -->
           <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;">Độ tuổi</div>
+            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Độ tuổi</div>
             <div class="age-buttons">
-              <button class="age-btn" data-age="all">Tất cả</button>
+              <button class="age-btn active" data-age="all">Tất cả</button>
               <button class="age-btn" data-age="child">Trẻ em</button>
               <button class="age-btn" data-age="teen">Thanh thiếu niên</button>
               <button class="age-btn" data-age="adult">Người lớn</button>
@@ -940,7 +1493,7 @@
           
           <!-- Thời gian tham quan -->
           <div>
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;">Thời gian tham quan</div>
+            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Thời gian tham quan</div>
             <input type="range" min="0" max="4" value="4" class="time-slider" id="time-slider">
             <div class="time-labels">
               <span>Dưới 1h</span>
@@ -959,7 +1512,7 @@
         Xóa tất cả bộ lọc
       </button>
       
-      <h3 style="margin: 20px 0 15px; color: #2d3748;">Địa điểm nổi bật</h3>
+      <h3 style="margin: 20px 0 15px; color: #2d3748;" class="section-title">Địa điểm nổi bật</h3>
       <ul class="location-list" id="location-list">
         <!-- Danh sách địa điểm sẽ được thêm bằng JavaScript -->
       </ul>
@@ -1031,8 +1584,13 @@
   </div>
   
   <!-- Legend -->
-  <div class="legend">
-    <h4>Chú thích</h4>
+  <div class="legend" id="legend">
+    <h4>
+      <span>Chú thích</span>
+      <button class="legend-toggle" id="legend-toggle" title="Ẩn/hiện chú thích">
+        <i class="fas fa-eye-slash"></i>
+      </button>
+    </h4>
     <div class="legend-item">
       <div class="legend-color boundary-color"></div>
       <span>Ranh giới khu vực</span>
@@ -1053,7 +1611,24 @@
       <div class="legend-color" style="background: #f39c12; border-color: #e67e22;"></div>
       <span>Khu nghỉ dưỡng</span>
     </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #9b59b6; border-color: #8e44ad;"></div>
+      <span>Chùa chiền</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #e67e22; border-color: #d35400;"></div>
+      <span>Khu mua sắm</span>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background: #1abc9c; border-color: #16a085;"></div>
+      <span>Nhà hàng & Ẩm thực</span>
+    </div>
   </div>
+
+  <!-- Nút hiện chú thích khi đã ẩn -->
+  <button class="legend-show" id="legend-show" title="Hiện chú thích">
+    <i class="fas fa-map"></i>
+  </button>
 
   <script>
     // ========== CẤU TRÚC DỮ LIỆU VÀ CẤU HÌNH ==========
@@ -1309,7 +1884,7 @@
         description: "Nhà hàng chuyên phục vụ hải sản tươi sống với view biển tuyệt đẹp.",
         image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
         category: "nhahang",
-        color: "#9b59b6",
+        color: "#1abc9c",
         link: "https://example.com/nha-hang-hai-san",
         address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
         phone: "0234 123 465",
@@ -1343,6 +1918,111 @@
           age: ["child", "teen", "adult", "senior"],
           time: 1
         }
+      },
+      {
+        id: 14,
+        coords: [16.290, 108.090],
+        title: "Chợ Hải Sản Lăng Cô",
+        description: "Chợ hải sản tươi sống với đa dạng các loại hải sản đánh bắt tại địa phương.",
+        image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/cho-hai-san",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:00 - 18:00",
+        price: "Miễn phí vào cửa",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+          time: 1
+        }
+      },
+      {
+        id: 15,
+        coords: [16.280, 108.080],
+        title: "Trung Tâm Thương Mại Lăng Cô",
+        description: "Trung tâm thương mại hiện đại với đa dạng các cửa hàng, siêu thị và khu ẩm thực.",
+        image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/tttm-lang-co",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234 123 466",
+        hours: "08:00 - 22:00",
+        price: "Miễn phí vào cửa",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+          time: 2
+        }
+      },
+      {
+        id: 16,
+        coords: [16.295, 108.085],
+        title: "Chùa Linh Ứng Lăng Cô",
+        description: "Ngôi chùa cổ kính nằm trên đồi cao với kiến trúc độc đáo và view toàn cảnh vịnh Lăng Cô tuyệt đẹp.",
+        image: "https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234 123 467",
+        hours: "06:00 - 18:00",
+        price: "Miễn phí",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+          time: 1
+        }
+      },
+      {
+        id: 17,
+        coords: [16.300, 108.075],
+        title: "Thiền Viện Trúc Lâm Bạch Mã",
+        description: "Thiền viện yên tĩnh nằm trên núi Bạch Mã, là nơi lý tưởng để tĩnh tâm và tìm hiểu về Phật giáo.",
+        image: "https://images.unsplash.com/photo-1547981609-4b6bf67b3ac3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/thien-vien-truc-lam",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234 123 468",
+        hours: "06:00 - 18:00",
+        price: "Miễn phí",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+          time: 2
+        }
+      },
+      {
+        id: 18,
+        coords: [16.305, 108.070],
+        title: "Chùa Từ Hiếu Lăng Cô",
+        description: "Ngôi chùa có kiến trúc truyền thống Việt Nam, nổi tiếng với không gian thanh tịnh và vườn cây cảnh đẹp.",
+        image: "https://images.unsplash.com/photo-1592478411213-6153e4ebc696?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/chua-tu-hieu",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234 123 469",
+        hours: "06:00 - 18:00",
+        price: "Miễn phí",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+          time: 1
+        }
       }
     ];
 
@@ -1369,6 +2049,8 @@
     let isSatellite = false;
     let markerObjects = [];
     let currentMarkerIndex = -1;
+    let isDarkMode = false;
+    let legendVisible = true;
     
     // Biến lưu trạng thái bộ lọc
     let activeFilters = {
@@ -1688,7 +2370,7 @@
         if (index === -1) return;
         
         const listItem = document.createElement('li');
-        listItem.className = 'location-item';
+        listItem.className = 'location-item fade-in';
         listItem.setAttribute('data-id', markerData.id);
         
         // Tạo tags hiển thị
@@ -1718,7 +2400,7 @@
           // Tự động đóng sidebar trên di động
           if (window.innerWidth <= 768) {
             sidebar.classList.add('collapsed');
-            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
           }
         });
         
@@ -1749,7 +2431,8 @@
         'nhahang': '🍽️ Ẩm thực',
         'ditich': '🏛️ Di tích',
         'giaitri': '🎯 Giải trí',
-        'muasam': '🛍️ Mua sắm'
+        'muasam': '🛍️ Mua sắm',
+        'chua': '🛕 Chùa chiền'
       };
       
       if (typeLabels[filters.type]) {
@@ -1967,11 +2650,14 @@
       });
     }
 
-    // Xử lý sự kiện sidebar toggle
+    // Xử lý sự kiện sidebar
     function setupSidebar() {
       const sidebar = document.getElementById('sidebar');
       const sidebarToggle = document.getElementById('sidebar-toggle');
+      const sidebarClose = document.getElementById('sidebar-close');
+      const sidebarOpen = document.getElementById('sidebar-open');
       
+      // Nút toggle bên ngoài sidebar
       sidebarToggle.addEventListener('click', function() {
         sidebar.classList.toggle('collapsed');
         if (sidebar.classList.contains('collapsed')) {
@@ -1979,6 +2665,18 @@
         } else {
           sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
         }
+      });
+      
+      // Nút đóng bên trong sidebar
+      sidebarClose.addEventListener('click', function() {
+        sidebar.classList.add('collapsed');
+        sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+      
+      // Nút mở sidebar (luôn hiển thị)
+      sidebarOpen.addEventListener('click', function() {
+        sidebar.classList.remove('collapsed');
+        sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
       });
     }
 
@@ -2047,6 +2745,42 @@
       });
     }
 
+    // Thiết lập chế độ tối/sáng
+    function setupThemeToggle() {
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      // Kiểm tra xem người dùng có sở thích chế độ tối không
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        isDarkMode = true;
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+      
+      themeToggle.addEventListener('click', function() {
+        isDarkMode = !isDarkMode;
+        document.body.classList.toggle('dark-mode');
+        
+        if (isDarkMode) {
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        // Lưu tùy chọn vào localStorage
+        localStorage.setItem('darkMode', isDarkMode);
+      });
+      
+      // Kiểm tra localStorage
+      const savedDarkMode = localStorage.getItem('darkMode');
+      if (savedDarkMode !== null) {
+        isDarkMode = savedDarkMode === 'true';
+        if (isDarkMode) {
+          document.body.classList.add('dark-mode');
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+      }
+    }
+
     // Thiết lập UX cho thiết bị di động
     function setupMobileUX() {
       const isMobile = window.innerWidth <= 768;
@@ -2071,6 +2805,52 @@
             infoPanel.classList.remove('active');
           }
         });
+      }
+    }
+
+    // Thiết lập nút ẩn/hiện chú thích
+    function setupLegendToggle() {
+      const legendToggle = document.getElementById('legend-toggle');
+      const legendShow = document.getElementById('legend-show');
+      const legend = document.getElementById('legend');
+      
+      legendToggle.addEventListener('click', function() {
+        legendVisible = !legendVisible;
+        
+        if (legendVisible) {
+          legend.classList.remove('hidden');
+          legendShow.classList.remove('visible');
+          legendToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        } else {
+          legend.classList.add('hidden');
+          legendShow.classList.add('visible');
+          legendToggle.innerHTML = '<i class="fas fa-eye"></i>';
+        }
+        
+        // Lưu tùy chọn vào localStorage
+        localStorage.setItem('legendVisible', legendVisible);
+      });
+      
+      // Nút hiện chú thích
+      legendShow.addEventListener('click', function() {
+        legendVisible = true;
+        legend.classList.remove('hidden');
+        legendShow.classList.remove('visible');
+        legendToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
+        
+        // Lưu tùy chọn vào localStorage
+        localStorage.setItem('legendVisible', legendVisible);
+      });
+      
+      // Kiểm tra localStorage
+      const savedLegendVisible = localStorage.getItem('legendVisible');
+      if (savedLegendVisible !== null) {
+        legendVisible = savedLegendVisible === 'true';
+        if (!legendVisible) {
+          legend.classList.add('hidden');
+          legendShow.classList.add('visible');
+          legendToggle.innerHTML = '<i class="fas fa-eye"></i>';
+        }
       }
     }
 
@@ -2100,6 +2880,8 @@
       setupSidebar();
       setupInfoPanel();
       setupMapControls();
+      setupThemeToggle();
+      setupLegendToggle();
       setupMobileUX();
       
       // Ẩn loading sau khi tải xong
