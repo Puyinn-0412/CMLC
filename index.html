@@ -1,235 +1,373 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chân Mây - Lăng Cô: Viên Ngọc Thơ Mộng</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="nav" id="navbar">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-medium text-white">Chân Mây - Lăng Cô</h1>
-            <ul class="hidden md:flex space-x-8 text-sm font-light text-white">
-                <li><a href="#home" class="hover:opacity-70 transition">Trang Chủ</a></li>
-                <li><a href="#explore" class="hover:opacity-70 transition">Khám Phá</a></li>
-                <li><a href="#experience" class="hover:opacity-70 transition">Trải Nghiệm</a></li>
-                <li><a href="#contact" class="hover:opacity-70 transition">Liên Hệ</a></li>
-            </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Chân Mây - Lăng Cô</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">Lang<span>Trek</span></a>
         </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#">TRANG CHỦ</a></li>
+        <li><a href="#about">GIỚI THIỆU</a></li>
+        <li><a href="#contact">LIÊN HỆ</a></li>
+      </ul>
+      <div class="nav__btns">
+        <button class="btn"><i class="ri-search-line"></i></button>
+        <button class="btn"><i class="ri-map-pin-line"></i></button>
+      </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <img src="./img/lang-co-4768125.jpg" alt="Chân Mây Lăng Cô" class="hero-image">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h2 class="text-5xl md:text-7xl font-medium text-white mb-6 fade-in" style="animation-delay: 0.2s;">
-                Viên Ngọc Thơ Mộng
-            </h2>
-            <p class="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl font-light fade-in" style="animation-delay: 0.4s;">
-                Nơi sóng biển hôn bờ cát, mây vờn núi ngàn và con người hòa cùng thiên nhiên
+    <!-- GIỮ NGUYÊN HERO SECTION -->
+    <div class="container">
+      <div class="container__left">
+        <h1>Hành Trình Bắt Đầu</h1>
+        <div class="container__btn">
+          <button class="btn">KHÁM PHÁ</button>
+        </div>
+      </div>
+      <div class="container__right">
+        <div class="images">
+          <img src="img/bg1.png" alt="tent-1" class="tent-1" />
+          <img src="img/bg2.png" alt="tent-2" class="tent-2" />
+        </div>
+        <div class="content">
+          <h4>Thành Phố Huế</h4>
+          <h2>CHÂN MÂY - LĂNG CÔ</h2>
+          <p>
+            Nơi biển xanh ôm trọn núi non, từng con sóng vỗ về bờ cát trắng mịn, gió mang theo mùi muối và hương rừng. Ở đây, bình minh và hoàng hôn đều rực rỡ một cách dịu dàng, còn mỗi khoảnh khắc đều khiến tâm hồn muốn lặng nhìn và ghi nhớ mãi.
+          </p>
+        </div>
+      </div>
+      <div class="location">
+        <span><i class="ri-map-pin-2-fill"></i></span>
+        VỊ TRÍ
+      </div>
+      <div class="socials">
+        <span><a href="#"><i class="ri-facebook-fill"></i></a></span>
+        <span><a href="#"><i class="ri-instagram-line"></i></a></span>
+        <span><a href="#"><i class="ri-youtube-fill"></i></a></span>
+      </div>
+    </div>
+        <!-- DỊCH VỤ DU LỊCH -->
+    <section class="service">
+      <div class="section__container service__container">
+        <h2 class="section__header">
+          Tiện Ích Du Lịch Chân Mây – Lăng Cô
+        </h2>
+
+        <div class="service__grid">
+          <a href="./itinerary.html" class="service__card">
+            <div><i class="ri-route-line"></i></div>
+            <h4>AI Lập Lịch Trình</h4>
+            <p class="section__description">
+              Mang đến gợi ý hành trình, địa điểm, đặc sản chuẩn gu.
             </p>
-            <a href="#features" class="btn-primary fade-in" style="animation-delay: 0.6s;">
-                Khám Phá Ngay
-            </a>
-        </div>
-    </section>
+          </a>
 
-    <!-- Features Section - 4 Main Functions -->
-    <section id="features" class="py-24 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-medium text-center mb-4 text-gray-900" data-aos="fade-up">
-                Chức Năng Của Website
-            </h2>
-            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                Bốn công cụ hữu ích giúp bạn khám phá trọn vẹn vẻ đẹp của Chân Mây - Lăng Cô
+          <a href="./Chatbot.html" class="service__card">
+            <div><i class="ri-chat-4-line"></i></div>
+            <h4>Chatbot Du Lịch</h4>
+            <p class="section__description">
+              Hỗ trợ du khách du lịch tự túc dễ dàng, khám phá trọn vẹn vẻ đẹp Chân Mây – Lăng Cô.
             </p>
+          </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature 1: Giới thiệu -->
-                <a href="./itinerary.html" class="group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-2xl border border-purple-100 hover:shadow-2xl hover:border-purple-300 transition-all duration-500 h-full">
-                        <h3 class="text-2xl font-medium mb-3 text-purple-700">AI lập lịch trình</h3>
-                        <p class="text-gray-600 leading-relaxed"> Mang đến gợi ý hành trình, địa điểm, đặc sản chuẩn gu.</p>
-                    </div>
-                </a>
-
-                <!-- Feature 2: AI Lịch trình -->
-                <a href="./Chatbot.html" class="group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-gradient-to-br from-pink-50 to-white p-8 rounded-2xl border border-pink-100 hover:shadow-2xl hover:border-pink-300 transition-all duration-500 h-full">
-                        <h3 class="text-2xl font-medium mb-3 text-pink-700">Chatbot AI du lịch</h3>
-                        <p class="text-gray-600 leading-relaxed"> Hỗ trợ du khách du lịch tự túc dễ dàng, khám phá trọn vẹn vẻ đẹp Chân Mây – Lăng Cô.</p>
-                    </div>
-                </a>
-
-                <!-- Feature 3: Bản đồ -->
-                <a href="./map.html" class="group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-100 hover:shadow-2xl hover:border-blue-300 transition-all duration-500 h-full">
-                        <h3 class="text-2xl font-medium mb-3 text-blue-700">Bản Đồ</h3>
-                        <p class="text-gray-600 leading-relaxed">Khám phá các địa điểm du lịch với bản đồ tương tác chi tiết</p>
-                    </div>
-                </a>
-
-                <!-- Feature 4: Cẩm nang -->
-                <a href="./camnang.html" class="group" data-aos="fade-up" data-aos-delay="400">
-                    <div class="bg-gradient-to-br from-indigo-50 to-white p-8 rounded-2xl border border-indigo-100 hover:shadow-2xl hover:border-indigo-300 transition-all duration-500 h-full">
-                        <h3 class="text-2xl font-medium mb-3 text-indigo-700">Cẩm Nang</h3>
-                        <p class="text-gray-600 leading-relaxed">Thông tin hữu ích về ẩm thực, lưu trú và di chuyển</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Introduction Section -->
-    <section id="intro" class="py-24 px-6 bg-gradient-to-br from-purple-50/50 to-white">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <h2 class="text-4xl md:text-5xl font-medium mb-6 text-gray-900">
-                        Chân Mây - Lăng Cô
-                    </h2>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Nằm giữa Đà Nẵng và Huế, Chân Mây - Lăng Cô là viên ngọc quý của Thừa Thiên Huế với bãi biển xanh trong, núi non hùng vĩ và văn hóa đậm đà bản sắc miền Trung.
-                    </p>
-                    <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Vịnh Lăng Cô được CNN bình chọn là một trong những vịnh biển đẹp nhất thế giới, với dải cát trắng mịn trải dài bên cạnh làn nước trong xanh ngắt.
-                    </p>
-                    <a href="#explore" class="inline-block text-purple-600 font-medium hover:text-purple-700 transition">
-                        Tìm hiểu thêm →
-                    </a>
-                </div>
-                <div data-aos="fade-left">
-                    <img src="./img/lang-co-4768124.jpg" alt="Lăng Cô" class="rounded-2xl shadow-2xl w-full">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Explore Section -->
-    <section id="explore" class="py-24 px-6 bg-gradient-to-b from-purple-50/30 to-white">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-medium text-center mb-4 text-gray-900" data-aos="fade-up">
-                Điểm Đến Nổi Bật
-            </h2>
-            <p class="text-center text-gray-600 text-lg mb-16 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                Từ những bãi biển tuyệt đẹp đến núi non hùng vĩ, mỗi góc nhỏ đều chứa đựng câu chuyện riêng
+          <a href="/trien-lam-3d" class="service__card">
+            <div><i class="ri-shape-line"></i></div>
+            <h4>Triển Lãm 3D</h4>
+            <p class="section__description">
+              Khám phá đầm các địa điểm du lịch qua bảo tàng 3D đẹp và sống động.
             </p>
+          </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-                <!-- Card 1 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=800&q=80" alt="Biển Lăng Cô">
-                    <div class="feature-overlay">
-                        <h3 class="text-3xl font-medium mb-2">Vịnh Lăng Cô</h3>
-                        <p class="text-white/80">Một trong những vịnh biển đẹp nhất thế giới</p>
-                    </div>
-                </div>
+          <a href="./camnang.html" class="service__card">
+            <div><i class="ri-book-open-line"></i></div>
+            <h4>Cẩm Nang Du Lịch</h4>
+            <p class="section__description">
+              Gợi ý địa điểm tham quan, món ăn, chỗ ở, chi phí, thời điểm du lịch lý tưởng.
+            </p>
+          </a>
 
-                <!-- Card 2 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Đèo Hải Vân">
-                    <div class="feature-overlay">
-                        <h3 class="text-3xl font-medium mb-2">Đèo Hải Vân</h3>
-                        <p class="text-white/80">Con đường ven biển hùng vĩ nhất Việt Nam</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 3 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80" alt="Ẩm thực">
-                    <div class="feature-overlay">
-                        <h3 class="text-2xl font-medium mb-2">Ẩm Thực</h3>
-                        <p class="text-white/80 text-sm">Hải sản tươi ngon từ biển</p>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=600&q=80" alt="Văn hóa">
-                    <div class="feature-overlay">
-                        <h3 class="text-2xl font-medium mb-2">Văn Hóa</h3>
-                        <p class="text-white/80 text-sm">Bản sắc miền Trung đậm đà</p>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
-                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&q=80" alt="Thiên nhiên">
-                    <div class="feature-overlay">
-                        <h3 class="text-2xl font-medium mb-2">Thiên Nhiên</h3>
-                        <p class="text-white/80 text-sm">Núi non hùng vĩ, biển xanh trong</p>
-                    </div>
-                </div>
-            </div>
+          <a href="./map.html" class="service__card">
+            <div><i class="ri-map-2-line"></i></div>
+            <h4>Bản Đồ Tương Tác</h4>
+            <p class="section__description">
+              Khám phá các địa điểm du lịch với bản đồ tương tác chi tiết.
+            </p>
+          </a>
         </div>
+
+        <div class="service__btn">
+          <button class="btn">Xem Tất Cả</button>
+        </div>
+      </div>
     </section>
 
-    <!-- Quote Section -->
-    <section class="py-24 px-6 bg-gradient-to-r from-purple-600 to-pink-600">
-        <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
-            <blockquote class="text-3xl md:text-4xl font-light text-white italic leading-relaxed">
-                "Chân Mây - Lăng Cô, nơi mỗi hơi thở là một khúc nhạc của biển và núi"
-            </blockquote>
-        </div>
-    </section>
 
-    <!-- Footer -->
-    <footer id="contact" class="bg-gray-900 text-white py-16 px-6">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+
+    <!-- GIỚI THIỆU -->
+    <section class="section__container about__container" id="about">
+      <div class="about__image">
+        <img src="img/hai-van-pass-2476008.jpg" alt="about" />
+      </div>
+
+      <div class="about__content">
+        <h2 class="section__header">
+          Chân Mây Lăng Cô – Viên Ngọc Xanh Của Xứ Huế
+        </h2>
+
+        <ul class="about__list">
+          <li>
+            <span><i class="ri-landscape-line"></i></span>
             <div>
-                <h3 class="text-2xl font-medium mb-4">Chân Mây - Lăng Cô</h3>
-                <p class="text-gray-400 leading-relaxed">
-                    Viên ngọc thơ mộng của miền Trung Việt Nam, nơi thiên nhiên và con người hòa quyện.
+              <h4>Vẻ Đẹp Thiên Nhiên</h4>
+              <p class="section__description">
+                Biển xanh trong vắt, đầm Lập An yên bình, đèo Hải Vân hùng vĩ tạo nên bức tranh thiên nhiên hoàn mỹ.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <span><i class="ri-restaurant-line"></i></span>
+            <div>
+              <h4>Ẩm Thực Đặc Sắc</h4>
+              <p class="section__description">
+                Hải sản tươi ngon, món địa phương như hàu Lăng Cô, bún hến, cơm niêu… nổi tiếng gần xa.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <span><i class="ri-footprint-line"></i></span>
+            <div>
+              <h4>Hoạt Động Trải Nghiệm</h4>
+              <p class="section__description">
+                Kayak, chèo SUP, tham quan làng chài, ngắm bình minh trên biển.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ĐIỂM ĐẾN NỔI BẬT -->
+    <section class="portfolio" id="portfolio">
+      <div class="section__container portfolio__container">
+        <div class="portfolio__header">
+          <h2 class="section__header">
+            Vì Sao Chọn Website Du Lịch Chân Mây – Lăng Cô ?
+          </h2>
+          <p class="section__description">
+            Website được xây dựng với nền tảng công nghệ hiện đại, cung cấp thông tin đầy đủ,
+            dễ tiếp cận và tối ưu cho du khách trong quá trình tìm hiểu và lên kế hoạch trải nghiệm tại Chân Mây – Lăng Cô.
+          </p>
+        </div>
+
+        <div class="portfolio__content">
+          <div class="portfolio__image">
+            <div class="portfolio__image__content">
+              <div>
+                <h4>24/7</h4>
+                <p>Hỗ trợ liên tục<br />Thông tin và công cụ tra cứu luôn sẵn sàng</p>
+              </div>
+              <div>
+                <h4>100+</h4>
+                <p>Nội dung chất lượng<br />Bài viết, hình ảnh và gợi ý trải nghiệm phong phú</p>
+              </div>
+            </div>
+          </div>
+
+          <ul class="portfolio__list">
+            <li>
+              <span>01</span>
+              <div>
+                <h4>Giao Diện Trực Quan & Thân Thiện</h4>
+                <p class="section__description">
+                  Bố cục rõ ràng, hiện đại và tối ưu đa thiết bị giúp người dùng dễ dàng tìm kiếm,
+                  tiếp cận và theo dõi thông tin một cách mạch lạc.
                 </p>
-            </div>
-            <div>
-                <h4 class="text-lg font-medium mb-4">Khám Phá</h4>
-                <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-white transition">Vịnh Lăng Cô</a></li>
-                    <li><a href="#" class="hover:text-white transition">Đèo Hải Vân</a></li>
-                    <li><a href="#" class="hover:text-white transition">Ẩm Thực</a></li>
-                    <li><a href="#" class="hover:text-white transition">Văn Hóa</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-lg font-medium mb-4">Liên Hệ</h4>
-                <p class="text-gray-400 mb-4">Theo dõi chúng tôi để cập nhật thông tin mới nhất</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">📘</a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">📷</a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition">▶️</a>
+              </div>
+            </li>
+
+            <li>
+              <span>02</span>
+              <div>
+                <h4>Nội Dung Chuẩn Xác & Chọn Lọc</h4>
+                <p class="section__description">
+                  Thông tin về điểm đến, hoạt động, ẩm thực và dịch vụ được thu thập và biên soạn cẩn thận,
+                  đảm bảo độ tin cậy và tính cập nhật cao.
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <span>03</span>
+              <div>
+                <h4>Tích Hợp Công Nghệ Hỗ Trợ Hiện Đại</h4>
+                <p class="section__description">
+                  Trang web ứng dụng các tính năng như bản đồ tương tác, chatbot tư vấn và gợi ý lịch trình thông minh,
+                  nâng cao chất lượng trải nghiệm của người dùng.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEW DU KHÁCH -->
+    <section class="section__container feedback__container" id="client">
+      <h2 class="section__header">Cảm Nhận Từ Du Khách</h2>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="feedback__card">
+              <p class="section__description">
+                “Biển đẹp ngoài sức tưởng tượng. Đầm Lập An chiều xuống nhìn mê luôn!”
+              </p>
+              <div class="feedback__details">
+                <div class="feedback__user">
+                  <img src="img/bc439871417621836a0eeea768d60944.jpg" alt="feedback" />
+                  <div>
+                    <h4>Minh Anh</h4>
+                    <h5>Du khách Hà Nội</h5>
+                  </div>
                 </div>
+                <div class="feedback__rating">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
             </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="feedback__card">
+              <p class="section__description">
+                “Hải sản ở đây tươi cực! Đặc biệt là hàu, ăn một lần nhớ cả đời.”
+              </p>
+              <div class="feedback__details">
+                <div class="feedback__user">
+                  <img src="img/bc439871417621836a0eeea768d60944.jpg" alt="feedback" />
+                  <div>
+                    <h4>Khánh Vy</h4>
+                    <h5>Food Blogger</h5>
+                  </div>
+                </div>
+                <div class="feedback__rating">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="feedback__card">
+              <p class="section__description">
+                “Trekking Bạch Mã xong về Lăng Cô tắm biển đúng combo hoàn hảo!”
+              </p>
+              <div class="feedback__details">
+                <div class="feedback__user">
+                  <img src="img/bc439871417621836a0eeea768d60944.jpg" alt="feedback" />
+                  <div>
+                    <h4>Long Vũ</h4>
+                    <h5>Traveler</h5>
+                  </div>
+                </div>
+                <div class="feedback__rating">
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="max-w-6xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
-            © 2025 Chân Mây - Lăng Cô. All rights reserved.
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="footer__logo">
+            <a href="#">Lang<span>Trek</span></a>
+          </div>
+          <p class="section__description">
+            Cổng thông tin du lịch Chân Mây – Lăng Cô. Đồng hành cùng bạn trong mọi hành trình khám phá.
+          </p>
+          <h3>Theo dõi chúng tôi</h3>
+          <ul class="footer__socials">
+            <li><a href="#"><i class="ri-facebook-fill"></i></a></li>
+            <li><a href="#"><i class="ri-instagram-line"></i></a></li>
+            <li><a href="#"><i class="ri-youtube-fill"></i></a></li>
+          </ul>
         </div>
+
+        <div class="footer__col">
+          <h4>Liên kết nhanh</h4>
+          <ul class="footer__links">
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#portfolio">Điểm đến</a></li>
+            <li><a href="#client">Review du khách</a></li>
+            <li><a href="#">Ẩm thực</a></li>
+            <li><a href="#">Khách sạn</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Hỗ trợ</h4>
+          <ul class="footer__links">
+            <li><a href="#">Câu hỏi thường gặp</a></li>
+            <li><a href="#">Chính sách</a></li>
+            <li><a href="#">Báo lỗi</a></li>
+            <li><a href="#">Liên hệ hỗ trợ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Liên hệ</h4>
+          <ul class="footer__links">
+            <li>
+              <a href="#"><span><i class="ri-phone-fill"></i></span> 0123 456 789</a>
+            </li>
+            <li>
+              <a href="#"><span><i class="ri-mail-fill"></i></span> info@langcotravel.vn</a>
+            </li>
+            <li>
+              <a href="#">
+                <span><i class="ri-map-pin-2-fill"></i></span> Chân Mây Lăng Cô - Thành Phố Huế
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-    </script>
-</body>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
