@@ -164,19 +164,6 @@
               <button class="age-btn" data-age="senior">Người cao tuổi</button>
             </div>
           </div>
-          
-          <!-- Thời gian tham quan -->
-          <div>
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Thời gian tham quan</div>
-            <input type="range" min="0" max="4" value="4" class="time-slider" id="time-slider">
-            <div class="time-labels">
-              <span>Dưới 1h</span>
-              <span>1-2h</span>
-              <span>2-4h</span>
-              <span>Nửa ngày</span>
-              <span>Cả ngày</span>
-            </div>
-          </div>
         </div>
       </div>
       
@@ -356,7 +343,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
           age: ["child", "teen", "adult", "senior"],
-          time: 1 // 0: Dưới 1h, 1: 1-2h, 2: 2-4h, 3: Nửa ngày, 4: Cả ngày
         },
         // Thêm tips và lưu ý
         tips: [
@@ -391,11 +377,10 @@
         hours: "Mở cả ngày",
         price: "Miễn phí",
         filters: {
-          type: "baibien",
+          type: "damnuoc",
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 2
         },
         tips: [
           {
@@ -438,7 +423,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 3
         },
         tips: [
           {
@@ -481,7 +465,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 3
         },
         tips: [
           {
@@ -519,13 +502,12 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 4
         },
         tips: [
           {
             type: "tip",
             title: "Thời điểm đẹp nhất",
-            text: "Đi vào mùa hè (tháng 5-8) để thời tiết đẹp, nắng ấm, phù hợp tắm biển, chèo thuyền kayak và thưởng thức hải sản tươi như tôm hùm, hàu tại các nhà hàng ven biển."
+            text: "Đi vào mùa hè (tháng 5-8) để thời tiết đẹp, nắng ấm, phù hợp ngắm cảnh thưởng thức hải sản tươi như tôm hùm, hàu tại các nhà hàng ven biển."
           },
           {
             type: "info",
@@ -534,8 +516,8 @@
           },
           {
             type: "warning",
-            title: "Mùa cao điểm",
-            text: "Tránh đến vào cuối tuần và dịp lễ vì rất đông khách du lịch."
+            title: "Lưu ý",
+            text: "Tránh đến vào cuối tuần và dịp lễ vì rất đông khách du lịch; sóng mạnh"
           }
         ]
       },
@@ -554,10 +536,9 @@
         price: "Từ 5.724.000 VNĐ/đêm",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
+          suitability: ["family", "couple","solo"],
           budget: 4,
-          age: ["adult"],
-          time: 4
+          age: ["adult","senior", "child", "teen"],
         },
         tips: [
           {
@@ -595,7 +576,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -631,9 +611,8 @@
         filters: {
           type: "suoi",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -669,9 +648,8 @@
         filters: {
           type: "suoi",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -707,9 +685,8 @@
         filters: {
           type: "suoi",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -745,9 +722,8 @@
         filters: {
           type: "suoi",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -783,10 +759,9 @@
         // Thông tin lọc nâng cao
         filters: {
           type: "ditich",
-          suitability: ["family", "couple", "solo"],
+          suitability: ["couple", "solo"],
           budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
-          age: ["child", "teen", "adult", "senior"],
-          time: 1 // 0: Dưới 1h, 1: 1-2h, 2: 2-4h, 3: Nửa ngày, 4: Cả ngày
+          age: ["teen", "adult", "senior"],
         },
         // Thêm tips và lưu ý
         tips: [
@@ -826,7 +801,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
           age: ["child", "teen", "adult", "senior"],
-          time: 1 // 0: Dưới 1h, 1: 1-2h, 2: 2-4h, 3: Nửa ngày, 4: Cả ngày
         },
         // Thêm tips và lưu ý
         tips: [
@@ -865,7 +839,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -901,9 +874,8 @@
         filters: {
           type: "muasam",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -921,10 +893,9 @@
         price: "Miễn phí",
         filters: {
           type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          suitability: ["family", "couple","solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -942,10 +913,9 @@
         price: "",
         filters: {
           type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
+          suitability: ["family", "couple"],
+          budget: 3,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -963,15 +933,14 @@
         price: "",
         filters: {
           type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
+          suitability: ["family", "couple"],
+          budget: 3,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
         id: 19,
-        coords: [16.244057530669576, 108.07458949278866],
+        coords: [16.242264104875282, 108.07613686225034],
         title: "Nhà hàng hải sản Làng Chài",
         description: "Làng Chài là nhà hàng hải sản nổi trên đầm Lập An, Huế, view thoáng mát, món tươi ngon.",
         image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lw9rqhqqlot502",
@@ -984,10 +953,9 @@
         price: "",
         filters: {
           type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
+          suitability: ["family", "couple"],
+          budget: 3,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1005,10 +973,9 @@
         price: "",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
-          budget: 4,
-          age: ["adult"],
-          time: 4
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["all"],
         },
         tips: [
           {
@@ -1040,13 +1007,12 @@
         address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
         phone: "",
         hours: "05:00 - 19:00",
-        price: "Miễn phí",
+        price: "",
         filters: {
           type: "muasam",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -1061,13 +1027,12 @@
         address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
         phone: "",
         hours: "05:00 - 19:00",
-        price: "Miễn phí",
+        price: "",
         filters: {
           type: "muasam",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -1086,9 +1051,8 @@
         filters: {
           type: "nhahang",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 2,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1107,9 +1071,8 @@
         filters: {
           type: "nhahang",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 2,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1128,9 +1091,8 @@
         filters: {
           type: "nhahang",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 2,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1148,10 +1110,9 @@
         price: "Miễn phí",
         filters: {
           type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          suitability: ["family", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -1166,13 +1127,12 @@
         address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
         phone: "0828469977",
         hours: "06:00 - 17:30",
-        price: "Miễn phí",
+        price: "",
         filters: {
           type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-          time: 1
+          suitability: ["family", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
         }
       },
       {
@@ -1187,13 +1147,12 @@
         address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
         phone: "",
         hours: "08:00 - 19:00",
-        price: "Miễn phí",
+        price: "",
         filters: {
           type: "chua",
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         },
         tips: [
           {
@@ -1231,9 +1190,8 @@
         filters: {
           type: "nhahang",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1251,10 +1209,9 @@
         price: "Từ 425.000 VNĐ/đêm",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
-          budget: 4,
-          age: ["adult"],
-          time: 4
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
         },
         tips: [
           {
@@ -1289,10 +1246,9 @@
         price: "6.500.000 VND - 8.000.000 VND/phòng",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
+          suitability: ["family", "couple","solo"],
           budget: 4,
-          age: ["adult"],
-          time: 4
+          age: ["adult","child", "teen", "senior"],
         },
         tips: [
           {
@@ -1327,10 +1283,9 @@
         price: "2.000.000 VND - 2.500.000 VND/phòng",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
+          suitability: ["family", "couple","solo"],
           budget: 4,
-          age: ["adult"],
-          time: 4
+          age: ["adult","child", "teen", "senior"],
         },
         tips: [
           {
@@ -1365,10 +1320,9 @@
         price: "750.000đ – 850.000 VND/phòng/đêm",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
-          budget: 4,
-          age: ["adult"],
-          time: 4
+          suitability: ["family", "couple","solo"],
+          budget: 3,
+          age: ["adult","child", "teen", "senior"],
         },
         tips: [
           {
@@ -1403,10 +1357,9 @@
         price: "",
         filters: {
           type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
+          suitability: ["family", "couple"],
+          budget: 3,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1424,10 +1377,9 @@
         price: "679.000 VND/phòng/đêm",
         filters: {
           type: "nghiduong",
-          suitability: ["family", "couple"],
-          budget: 4,
-          age: ["adult"],
-          time: 4
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["adult","teen","child","senior"],
         },
         tips: [
           {
@@ -1465,7 +1417,6 @@
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1484,9 +1435,8 @@
         filters: {
           type: "nhahang",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 2,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1503,11 +1453,10 @@
         hours: "Mở cả ngày",
         price: "Miễn phí",
         filters: {
-          type: "baibien",
+          type: "damnuoc",
           suitability: ["family", "couple", "solo"],
           budget: 0,
           age: ["child", "teen", "adult", "senior"],
-          time: 2
         },
         tips: [
           {
@@ -1548,9 +1497,8 @@
         filters: {
           type: "muasam",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       {
@@ -1569,9 +1517,8 @@
         filters: {
           type: "muasam",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 1,
           age: ["child", "teen", "adult", "senior"],
-          time: 1
         }
       },
       // Các địa điểm khác có thể thêm tips tương tự
@@ -1817,11 +1764,6 @@ L.control.zoom({
           return false;
         }
         
-        // Lọc theo thời gian
-        if (marker.filters.time > activeFilters.time) {
-          return false;
-        }
-        
         return true;
       });
       
@@ -1924,10 +1866,6 @@ L.control.zoom({
       // Tag ngân sách
       const budgetLabels = ['💰 Miễn phí', '💰 Tiết kiệm', '💰 Trung bình', '💰 Cao cấp', '💰 Luxury'];
       tagsHTML += `<div class="location-tag">${budgetLabels[filters.budget]}</div>`;
-      
-      // Tag thời gian
-      const timeLabels = ['⏱️ Dưới 1h', '⏱️ 1-2h', '⏱️ 2-4h', '⏱️ Nửa ngày', '⏱️ Cả ngày'];
-      tagsHTML += `<div class="location-tag">${timeLabels[filters.time]}</div>`;
       
       return tagsHTML;
     }
@@ -2401,12 +2339,6 @@ L.control.zoom({
         });
       });
       
-      // Bộ lọc thời gian
-      const timeSlider = document.getElementById('time-slider');
-      timeSlider.addEventListener('input', function() {
-        activeFilters.time = parseInt(this.value);
-        filterAndDisplayMarkers();
-      });
       
       // Nút xóa tất cả bộ lọc
       document.getElementById('clear-filters').addEventListener('click', function() {
@@ -2416,14 +2348,12 @@ L.control.zoom({
           suitability: [],
           budget: 4,
           age: "all",
-          time: 4
         };
         
         // Reset UI
         typeFilterTags.forEach(tag => tag.classList.remove('active'));
         suitabilityTags.forEach(tag => tag.classList.remove('active'));
         budgetSlider.value = 4;
-        timeSlider.value = 4;
         ageButtons.forEach(btn => {
           if (btn.getAttribute('data-age') === 'all') {
             btn.classList.add('active');
