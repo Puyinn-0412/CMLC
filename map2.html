@@ -28,7 +28,6 @@
     <div class="loading-spinner"></div>
     <span>Đang tải bản đồ...</span>
   </div>
-  
   <!-- Info Panel -->
   <div class="info-panel" id="info-panel">
     <div class="info-header">
@@ -95,7 +94,7 @@
     </div>
   </div>
   
-  <!-- Map Controls -->
+  <!-- Map Controls - ĐÃ DI CHUYỂN LÊN TRÊN -->
   <div class="map-controls">
     <button class="map-control" id="locate-me" title="Vị trí của tôi">
       <i class="fas fa-location-arrow"></i>
@@ -181,7 +180,7 @@
         image: "https://live.staticflickr.com/573/31685434851_63ec23ccf6_b.jpg",
         category: "ditich",
         color: "#e74c3c",
-        link: "https://www.google.com/maps/place/H%E1%BA%A3i+V%C3%A2n+Quan/@16.1877377,108.1287193,836m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3142219e02bc568b:0xb04a3eba486386b5!8m2!3d16.1877377!4d108.1312942!16s%2Fg%2F11p5lgqrq9?hl=vi&entry=ttu&g_ep=EgoyMDI5MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+        link: "https://www.google.com/maps/place/H%E1%BA%A3i+V%C3%A2n+Quan/@16.1877377,108.1287193,836m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3142219e02bc568b:0xb04a3eba486386b5!8m2!3d16.1877377!4d108.1312942!16s%2Fg%2F11p5lgqrq9?hl=vi&entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
         address: " Đèo Hải Vân, giáp ranh Thành phố Huế và Đà Nẵng",
         phone: "",
         hours: " 07:00–17:30",
@@ -190,7 +189,7 @@
         filters: {
           type: "ditich",
           suitability: ["family", "couple", "solo"],
-          budget: 0,
+          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
           age: ["child", "teen", "adult", "senior"],
         },
         // Thêm tips và lưu ý
@@ -254,21 +253,1136 @@
           }
         ]
       },
-      // ... (giữ nguyên tất cả các marker khác)
-      // Lưu ý: Tôi đã cắt bớt phần data để làm mã ngắn gọn hơn
-      // Trong thực tế bạn nên giữ toàn bộ dữ liệu MARKERS_DATA
+      {
+        id: 3,
+        coords: [16.317200444705676, 107.97720958202058],
+        title: "Bãi biển Tân Cảnh Dương",
+        description: "Biển Cảnh Dương Huế là bãi biển hoang sơ dài 4km, cát trắng mịn, nước trong xanh, cách trung tâm Huế 50km về Nam, nổi tiếng check-in và cắm trại.",
+        image: "https://huesmiletravel.com.vn/images/tan_canh_duong_hue.jpg",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/tan-canh-duong",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí",
+        filters: {
+          type: "baibien",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Thời điểm đẹp nhất",
+            text: "Thăm vào tháng 4-7 để thời tiết nắng nóng, nước biển hiền hòa, phù hợp tắm biển và check-in bình minh/hoàng hôn lung linh."
+          },
+          {
+            type: "warning",
+            title: "An toàn bơi lội",
+            text: "Chú ý các dòng chảy xa bờ và chỉ bơi ở khu vực an toàn."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Chuẩn bị kem chống nắng, mũ nón, kính, thuốc thông dụng, pin dự phòng, dép xỏ ngón để thoải mái di chuyển và bảo vệ sức khỏe."
+          },
+          {
+            type: "info",
+            title: "Tiện ích",
+            text: "Thử cắm trại qua đêm (lều từ 100.000-600.000 VNĐ), teambuilding, tiệc BBQ, và thưởng thức hải sản tươi như tôm hùm, cua gạch tại làng chài."
+          }
+        ]
+      },
+      {
+        id: 4,
+        coords: [16.312964593861636, 108.00092593156766],
+        title: "Bãi biển Bình An",
+        description: "Bãi biển hoang sơ với cát trắng và nước trong xanh, lý tưởng cho những ai yêu thích sự yên tĩnh và thiên nhiên.",
+        image: "https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/490194292_2055671981509775_1096164760845721473_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFVVLv6bJ1dXbmRfd7F-Z9eoN5f-8lrAeCg3l_7yWsB4Kxsb8nYlC-4WNTsaejFa0cYAJoA6cpGvDrlnXDLXq3b&_nc_ohc=JRPCvqp1SVoQ7kNvwHsuUiQ&_nc_oc=Adm9qWNtymx49zQxdIDlkv9KCJzV_oR--Qsy3dklaRabzb4BSVS85j4J2-vO6NTVqrxShD7nvejuefGc5FaByWz5&_nc_zt=23&_nc_ht=scontent.fdad1-4.fna&_nc_gid=GrGqcm4OfT1nJcOALMq4Jw&oh=00_Afio9UsZaU_hYaTNDG29QpjsVtA-syfVo714oe8qKt7Kwg&oe=692A5905",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/binh-an",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí",
+        filters: {
+          type: "baibien",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Bãi biển hoang sơ",
+            text: "Bãi biển nơi đây ít người lui tới, cực kỳ lý tưởng cho những ai mong tìm một góc bình yên. Mặt biển phẳng lặng, sóng êm dịu tạo nên cảm giác nhẹ nhàng, thoải mái."
+          },
+          {
+            type: "warning",
+            title: "An toàn bơi lội",
+            text: "Chú ý các dòng chảy xa bờ và chỉ bơi ở khu vực an toàn."
+          },
+          {
+            type: "info",
+            title: "Dịch vụ",
+            text: "Có các quán ăn ven biển, có thể chuẩn bị đồ ăn, nước uống để cắm trại."
+          }
+        ]
+      },
+      {
+        id: 5,
+        coords: [16.264331268498935, 108.06598731039664],
+        title: "Bãi biển Lăng Cô",
+        description: "Bãi biển Lăng Cô là bãi biển đẹp ở Huế, dài khoảng 8km, cát trắng mịn, nước xanh ngọc, nằm chân đèo Hải Vân, thuộc vịnh đẹp nhất thế giới, khí hậu ôn hòa.",
+        image: "https://live.staticflickr.com/6076/6085524345_d8efb0b2d5_b.jpg",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://example.com/lang-co",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "Mở cửa cả ngày",
+        price: "Miễn phí",
+        filters: {
+          type: "baibien",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Thời điểm đẹp nhất",
+            text: "Đi vào mùa hè (tháng 5-8) để thời tiết đẹp, nắng ấm, phù hợp ngắm cảnh thưởng thức hải sản tươi như tôm hùm, hàu tại các nhà hàng ven biển."
+          },
+          {
+            type: "info",
+            title: "Dịch vụ đa dạng",
+            text: "Có nhiều nhà hàng, khách sạn và dịch vụ du lịch xung quanh khu vực."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Tránh đến vào cuối tuần và dịp lễ vì rất đông khách du lịch; sóng mạnh"
+          }
+        ]
+      },
+      {
+        id: 6,
+        coords: [16.32695564023601, 107.95730352364052],
+        title: "Laguna Lăng Cô",
+        description: "Laguna Lăng Cô là khu nghỉ dưỡng phức hợp quốc tế tại Vịnh Lăng Cô, Huế, rộng 280ha, với bãi biển nguyên sơ, sân golf 18 lỗ, spa cao cấp và hoạt động giải trí.",
+        image: "https://www.lagunalangco.com/wp-content/uploads/2024/09/Laguna-Parkside-Residences-Lang-Co-Overview-3.webp",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.lagunalangco.com/vi/",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234 3695 800",
+        hours: "Mở cửa cả ngày",
+        price: "Từ 5.724.000 VNĐ/đêm",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 4,
+          age: ["adult","senior", "child", "teen"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 7,
+        coords: [16.257271584088375, 107.98798287598476],
+        title: "Chùa Diệu Ngộ",
+        description: "Chùa Diệu Ngộ là ngôi chùa tại thôn Trung Kiền, xã Chân Mây Lăng Cô, Thành Phố Huế, xây dựng từ năm 1900, di dời và khánh thành năm 2014 sau 4 năm thi công khang trang.",
+        image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwb0dl1qhhw90a",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "07:00 - 20:00",
+        price: "Miễn phí",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Tham quan sáng sớm để chiêm ngưỡng kiến trúc hiện đại khang trang và không gian tu học yên bình."
+          },
+          {
+            type: "info",
+            title: "View đẹp",
+            text: "Phù hợp để ngắm cảnh."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: " Ăn mặc kín đáo, giữ yên lặng, không chụp ảnh flash trong khu vực chính điện để tôn trọng không gian tu hành"
+          }
+        ]
+      },
+            {
+        id: 8,
+        coords: [16.243899388773706, 107.98942563783974],
+        title: "Suối Voi",
+        description: "Suối Voi Huế là khu du lịch sinh thái với suối nước trong xanh, thác Voi hùng vĩ, cách Huế 60km về Nam..",
+        image: "https://static.vinwonders.com/production/suoi-voi-2.jpg",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "Tạm thời đóng cửa",
+        price: "Giá vé 15.000 VNĐ/người, thuê chòi 200.000-250.000 VNĐ",
+        filters: {
+          type: "suoi",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Chuẩn bị đồ bơi hoặc quần áo ngắn dễ vận động; thuê phao cho trẻ nhỏ và chơi gần bờ suối để tận hưởng an toàn."
+          },
+          {
+            type: "info",
+            title: "View đẹp",
+            text: "Khu du lịch sinh thái với suối nước trong xanh, thác Voi hùng vĩ, lý tưởng cho tắm suối và picnic.."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: " Cẩn thận di chuyển dưới suối vì nhiều sỏi đá; thời điểm tốt nhất là mùa hè để tránh nóng, nhưng kiểm tra thời tiết."
+          }
+        ]
+      },
+                  {
+        id: 9,
+        coords: [16.253101585149473, 107.99084780900398],
+        title: "Suối Bồ Ghè",
+        description: "Thác Bò Ghè là khu du lịch sinh thái hoang sơ ở xã Chân Mây Lăng Cô, Thành phố Huế, với thác nước trong xanh, mát lạnh, rừng cây xanh mướt, lý tưởng để tránh nóng mùa hè.",
+        image: "https://cdn.tcdulichtphcm.vn/upload/2-2022/images/2022-06-11/1654949335-z3484609264105_c1a549115f0eb0747f0d666bef285dae-1654948863-805-width1344height1008.jpg",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "7:00-17:30",
+        price: "",
+        filters: {
+          type: "suoi",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Chuẩn bị đồ bơi hoặc quần áo ngắn dễ vận động; thuê phao cho trẻ nhỏ và chơi gần bờ suối để tận hưởng an toàn."
+          },
+          {
+            type: "info",
+            title: "View đẹp",
+            text: "Khu du lịch sinh thái hoang sơ với thác nước trong xanh như ngọc bích, rừng xanh mát, không khí yên bình"
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Đường vào suối hiểm trở, cần cẩn thận di chuyển; tránh xa khu vực đá rêu phong để phòng trượt ngã."
+          }
+        ]
+      },
+      {
+        id: 10,
+        coords: [16.24044182378489, 107.93186693424506],
+        title: "Suối Tiên",
+        description: "Suối Tiên Huế là khu du lịch sinh thái nổi tiếng với vẻ đẹp hoang sơ, hùng vĩ, thác nước mát lạnh, dòng suối trong vắt và hệ sinh thái đa dạng, như viên ngọc xanh giữa phố núi, mang đến trải nghiệm tiên cảnh.",
+        image: "https://scontent.fdad1-3.fna.fbcdn.net/v/t1.6435-9/201973325_337935897927286_1849833474018789433_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=TiRT51BVPskQ7kNvwFo66Wr&_nc_oc=Admhk7orSXej8EwxO-qSfvAL51iOL0FF_ttflaV2ylMStvUUXQvnKypRU4pzQFyEAdbaj0CARSs4lkPdhIJVbVyk&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=LI3nSXlw8z29gcU-KjdiGA&oh=00_AfhR7NdO9tcORvM_9w9sVNCojUhxI4KkFCeWBMZ2oGbQbg&oe=694D3576",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "8:00-17:00",
+        price: "",
+        filters: {
+          type: "suoi",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Đi vào mùa hè để giải nhiệt, mang theo đồ bơi, quần áo thay, kem chống nắng, mũ nón, thuốc chống côn trùng. Thuê áo phao nếu không biết bơi."
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Tắm suối, bắt cá và ốc suối (mang theo vợt hoặc dụng cụ tự chế), đu dây mạo hiểm tại Vũng Đu, check-in chụp ảnh, thư giãn giữa thiên nhiên hoang sơ."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Giữ gìn vệ sinh, không xả rác để bảo vệ môi trường. Kiểm tra thời tiết trước khi đi vì đường có thể trơn trượt."
+          }
+        ]
+      },
+      {
+        id: 11,
+        coords: [16.218228833008503, 108.03684995181099],
+        title: "Suối Mơ",
+        description: "Suối Mơ Huế là địa điểm hoang sơ, hùng vĩ với thác nước đổ từ 20m, cảnh quan thiên nhiên tươi đẹp, bao quanh bởi cây cối phong phú, không khí trong lành, lý tưởng thư giãn mùa hè.",
+        image: "https://scontent.fdad1-3.fna.fbcdn.net/v/t39.30808-6/484652084_1160898799192087_5012724578015487141_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_ohc=L11g8atoUQkQ7kNvwHdKHRp&_nc_oc=AdmSLuilIAjww0lWgE_EyO3QPWC80Le6Bo2nJT4YflUTmfx7A-iRqyOq03TuwfLuIktxlYdYMBtFPGyLyejGDIIL&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=6PfEUBv17dt85uWfIHd8mA&oh=00_AfgHiEZkLM3kvATXs6R_k1WbbXNvVzjMobpQLPgrYRsL9Q&oe=692B966F",
+        category: "suoi",
+        color: "#27ae60",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "07:00 - 18:00",
+        price: "",
+        filters: {
+          type: "suoi",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Đi mùa khô (tháng 5-9), đến sáng hoặc chiều muộn; kiểm tra thời tiết; chuẩn bị áo khoác nếu cắm trại"
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Tắm suối và bơi lội ở 4 hồ nước tự nhiên; chiêm ngưỡng thác nước, rừng nguyên sơ; check-in sống ảo; teambuilding, trò chơi ngoài trời; cắm trại qua đêm; spa thảo dược; nướng BBQ; thưởng thức đặc sản Huế tại nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Không mang đồ ăn ngoài vào; chuẩn bị áo khoác nếu cắm trại; không dùng hóa chất tắm; mặc áo phao an toàn; trông trẻ em; tuân thủ quy định bảo vệ môi trường (không hái hoa, xả rác, dùng nhựa). Kiểm tra thời tiết trước khi đi vì đường có thể trơn trượt."
+          }
+        ]
+      },
+      {
+        id: 12,
+        coords: [16.200287981097787, 108.13320418271458],
+        title: "Đèo Hải Vân",
+        description: "Cung đường trên núi với khung cảnh tuyệt đẹp, nổi tiếng trong giới phượt thủ, cùng các tàn tích trên đỉnh núi.",
+        image: "https://cdn.pixabay.com/photo/2022/10/10/12/22/motorcycle-7511707_1280.jpg",
+        category: "ditich",
+        color: "#e74c3c",
+        link: "https://www.google.com/maps/place/H%E1%BA%A3i+V%C3%A2n+Quan/@16.1877377,108.1287193,836m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3142219e02bc568b:0xb04a3eba486386b5!8m2!3d16.1877377!4d108.1312942!16s%2Fg%2F11p5lgqrq9?hl=vi&entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+        address: " Đèo Hải Vân, giáp ranh Thành phố Huế và Đà Nẵng",
+        phone: "",
+        hours: " Cả ngày",
+        price: " Miễn phí",
+        // Thông tin lọc nâng cao
+        filters: {
+          type: "ditich",
+          suitability: ["couple", "solo"],
+          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
+          age: ["teen", "adult", "senior"],
+        },
+        // Thêm tips và lưu ý
+        tips: [
+          {
+            type: "tip",
+            title: "Thời điểm tốt nhất",
+            text: "Đi vào mùa xuân (tháng 2-4) hoặc mùa thu (tháng 9-11) để thời tiết dễ chịu, tránh mưa lũ từ tháng 10-12 hoặc nắng nóng hè."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý an toàn",
+            text: "Đường đèo hiểm trở, uốn lượn, chú ý an toàn khi chụp ảnh tại cây cô đơn, góc cua chữ U, ga Bắc Hải Vân (xe lửa chạy qua); mặc đồ ấm vì se lạnh, sương mù; quan sát thú dữ; mang đồ ăn, dụng cụ cắm trại nếu picnic; tránh đi đêm hoặc thời tiết xấu."
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Chinh phục cung đường đèo, ngắm cảnh núi biển từ đỉnh, tham quan Hải Vân Quan, ga Bắc Hải Vân, cầu vòm Đồn Cả, cây cô đơn, mỏm đá Cụ Rùa, góc cua chữ U; picnic, cắm trại tại làng Vân; chụp ảnh sống ảo; thưởng thức cà phê tại quán hòn đá Cụ Rùa."
+          }
+        ]
+      },
+      {
+        id: 13,
+        coords: [16.213457192476167, 108.14161398180221],
+        title: "Bãi Chuối",
+        description: "Bãi Chuối là bãi biển hoang sơ tại chân đèo Hải Vân, nối Đà Nẵng - Huế, với cát trắng mịn, nước trong xanh, cảnh quan thiên nhiên kỳ vĩ, lý tưởng thư giãn, tắm biển, cắm trại.",
+        image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwg471zf7i6xe3@resize_ss576x330",
+        category: "baibien",
+        color: "#3498db",
+        link: "https://www.google.com/maps/place/H%E1%BA%A3i+V%C3%A2n+Quan/@16.1877377,108.1287193,836m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3142219e02bc568b:0xb04a3eba486386b5!8m2!3d16.1877377!4d108.1312942!16s%2Fg%2F11p5lgqrq9?hl=vi&entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D",
+        address: "Chân Mây - Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: " Cả ngày",
+        price: " Miễn phí",
+        // Thông tin lọc nâng cao
+        filters: {
+          type: "baibien",
+          suitability: ["family", "couple", "solo"],
+          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
+          age: ["child", "teen", "adult", "senior"],
+        },
+        // Thêm tips và lưu ý
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Đi mùa hè (tháng 5-9) để thời tiết đẹp, tránh mưa lũ; chuẩn bị trang phục thoải mái, 3-5 bộ đồ thay, kem chống nắng, thuốc chống côn trùng, đồ ăn nước uống đầy đủ"
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Đường đi bộ khó khăn nên đi nhóm, mang giày dép chắc chắn, đảm bảo an toàn; giữ vệ sinh, không xả rác bảo vệ môi trường hoang sơ."
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Tắm biển, ngắm bình minh/hoàng hôn, dã ngoại picnic, cắm trại qua đêm, chụp ảnh check-in tại bãi cát trắng, khám phá thiên nhiên hoang sơ, rừng núi bao quanh."
+          }
+        ]
+      },
+      {
+        id: 14,
+        coords: [16.270643366391454, 107.98303358016861],
+        title: "Nhà thờ Thừa Lưu",
+        description: "Nhà Thờ Thừa Lưu là nhà thờ Công giáo cổ kính tại thôn Thủy Tụ, xã Chân Mây Lăng Cô, Thành phố Huế, thành lập năm 1894, từng gọi là Họ Nước Mặn, với kiến trúc tái thiết, địa điểm tôn giáo yên bình.",
+        image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwfz14d0jx0ba3@resize_ss576x330",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "08:00 - 19:00",
+        price: "Miễn phí",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Không thu vé vào cửa; chi phí di chuyển và ăn uống tự túc, khoảng 50.000-100.000 VND cho bữa ăn nhẹ gần khu vực nếu ghé quán địa phương."
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Tham quan kiến trúc nhà thờ, tham dự thánh lễ (nếu trùng lịch), khám phá lịch sử giáo xứ 130 năm, tham gia sự kiện cộng đồng như giao lưu giới trẻ hoặc lễ tạ ơn; lý tưởng cho du lịch tâm linh, chụp ảnh."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: " mặc trang phục lịch sự, tôn trọng không gian tôn giáo, tránh làm ồn; đi nhóm để an toàn đường nông thôn; giữ vệ sinh, không xả rác."
+          }
+        ]
+      },
+      {
+        id: 15,
+        coords: [16.271998874316434, 107.98813034483754],
+        title: "Chợ Thừa Lưu",
+        description: "Khu mua sắm tại xã Chân Mây Lăng Cô, Thành phố Huế.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:00 - 19:00",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 16,
+        coords: [16.27352438037544, 107.9407804378404],
+        title: "Chợ Nước Ngọt",
+        description: "Khu mua sắm tại xã Chân Mây Lăng Cô, Thành phố Huế.",
+        image: "https://images2.thanhnien.vn/zoom/686_429/Uploaded/toanmd/covidsaigon/nn_HPPS.jpg",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:00 - 19:00",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple","solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 17,
+        coords: [16.243875568890687, 108.07462495530189],
+        title: "Nhà hàng Bé Thân",
+        description: "Nhà hàng Bể Thần Lăng Cô quyến rũ bên đầm Lập An, chuyên hải sản tươi sống từ biển, không gian thoáng đãng view vịnh đẹp mê hồn. Giá hợp lý, lý tưởng thưởng thức hoàng hôn lãng mạn.",
+        image: "https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/326239620_3338614499688471_825401039273602748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFBCKwnZ8pBTA9V56T3JLyP6xqvOzWJK73rGq87NYkrvR5Yt0AkOYTQbEDvaXM5juHbg9Y2q-t7ewZZx4Tv4Fw5&_nc_ohc=hIQagW7TSMQQ7kNvwEanZBe&_nc_oc=AdkjDCsVDPcG_FOoXM5IQfOGLvNn1bF1wMBJ32Ju374jQ66yrb1u8Z6tZLZ944ivUlaO8dgdteINE2P6yjIIjeE_&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=DnsQ11nJI32f3aEJJbqHtw&oh=00_Afgmc8MttKCtM7LZZux7QlMOm4zIn-mSFluw2rjzMtBfHQ&oe=692BAB92",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "036 677 0000",
+        hours: "16:00 - 22:30",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple"],
+          budget: 3,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 18,
+        coords: [16.246240083201616, 108.07381302339843],
+        title: "Nhà hàng Việt Long",
+        description: "Nhà Hàng Nổi Việt Long là nhà hàng nổi trên vịnh Lăng Cô, Huế, chuyên hải sản tươi sống, view biển thoáng đãng, không khí yên bình.",
+        image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lw9rqhqqlot502",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "08:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple"],
+          budget: 3,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 19,
+        coords: [16.242264104875282, 108.07613686225034],
+        title: "Nhà hàng hải sản Làng Chài",
+        description: "Làng Chài là nhà hàng hải sản nổi trên đầm Lập An, Huế, view thoáng mát, món tươi ngon.",
+        image: "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lw9rqhqqlot502",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple"],
+          budget: 3,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 20,
+        coords: [16.27162696893242, 108.0523206108554],
+        title: "Vườn sinh thái Lối Xưa",
+        description: "Vườn Sinh Thái Lối Xưa là khu du lịch sinh thái tại Lăng Cô, Huế, với vườn cây ăn trái, không gian xanh mát, kỷ vật chiến tranh, lý tưởng khám phá thiên nhiên.",
+        image: "https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/539407075_691556640571263_1380904971911571829_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE4fQl2EVvL4Mc48TwMTwz-ZiLprcmxm85mIumtybGbztFHu5fFKPNPFLm-LqYdq4Eeucfow70B-yoDcOaDMMix&_nc_ohc=RyWgsaFT3HsQ7kNvwEb-T_h&_nc_oc=Adnms5AR1qGK4qkptefDlJZ9UbWx7ha6Gxi8m-ExYIewUJlqBQ6bU-xRDRNWNDn75PcDOXeNnJtwtG4NoeSnyd1m&_nc_zt=23&_nc_ht=scontent.fdad1-1.fna&_nc_gid=dhEgHdqV1VEKDOIw8CydtQ&oh=00_AfhktDU3aIzU_Z_gFeOcJ-L1al_q9oCanmnvdf_77hjmUg&oe=692CA371",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.lagunalangco.com/vi/",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "090 255 55 56",
+        hours: "Mở cửa cả ngày",
+        price: "",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["all"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Chuẩn bị kem chống nắng, thuốc chống côn trùng; đặt chỗ trước cho nhóm lớn."
+          },
+          {
+            type: "info",
+            title: "Hoạt động",
+            text: "Sinh hoạt lửa trại, thả diều, câu cá, đạp xe khám phá vườn cây ăn trái, tập làm nông dân, thưởng thức hải sản tươi từ đầm phá Lăng Cô, tự nướng BBQ."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Giữ vệ sinh, không xả rác để bảo vệ môi trường;"
+          }
+        ]
+      },
+      {
+        id: 21,
+        coords: [16.30762531607771, 108.00451420274388],
+        title: "Chợ Bình An",
+        description: "Khu mua sắm tại xã Chân Mây Lăng Cô, Thành phố Huế.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:00 - 19:00",
+        price: "",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 22,
+        coords: [16.22933028891723, 108.08553206925679],
+        title: "Chợ Lăng Cô",
+        description: "Khu mua sắm tại xã Chân Mây Lăng Cô, Thành phố Huế.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:00 - 19:00",
+        price: "",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 23,
+        coords: [16.28433141780202, 108.00429869002477],
+        title: "Quán Vườn Tràm",
+        description: "Vườn Tràm là quán ăn bình dân tại Huế, không gian đơn giản, món ăn đậm đà, giá cả phải chăng.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple", "solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 24,
+        coords: [16.28206528431169, 108.00453660335171],
+        title: "Quán Bàu Ngang",
+        description: "Bàu Ngang là quán ăn bình dân tại Huế, không gian đơn giản, món ăn đậm đà, giá cả phải chăng.",
+        image: "https://scontent.fdad1-3.fna.fbcdn.net/v/t39.30808-6/500311523_3943601882557565_1032186359673999146_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGuL1P768Otdc7vRzYK68hUyqfkN-qbqprKp-Q36puqmj3nqBuHQCZ882k6YWyfeEx_PZ-F6QujXw5dcvYWx5zL&_nc_ohc=6cveDPGJMA4Q7kNvwE1yWoM&_nc_oc=Adk4zX__xS1M3XbeFcVZkhCzsvcTyZYB_hKLfx9NjlbmdfTP30MfNgabicD--o9D1v7qC0_b-ipobLcgiZGYFAUC&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=F3AMXRkWZWdSM-I9J0Cfpg&oh=00_AfiH8a8JAlOUOGx_d-fT56MIEDISEKFNnoej_D9B9xNTrQ&oe=692CEB4B",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple", "solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 25,
+        coords: [16.27254046429951, 107.96150243598932],
+        title: "Quán Vườn Xoài",
+        description: "Vườn Xoài là quán ăn bình dân tại Huế, không gian đơn giản, món ăn đậm đà, giá cả phải chăng.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple", "solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 26,
+        coords: [16.272634028920162, 107.96566239142605],
+        title: "Tinh dầu Thái Hà",
+        description: "Cửa hàng bán dầu tràm tại Huế, sản phẩm thiên nhiên, chất lượng tốt, giá cả hợp lý.",
+        image: "https://scontent.fdad1-3.fna.fbcdn.net/v/t1.6435-9/43155457_531697123908925_3051711148710690816_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHZ2i8A-DXwxz3Ftg-ByOe7dzpecQKIWzJ3Ol5xAohbMu5qjL2hnVsGfR-XHuuCrBCoHlB2RcErlbOxPBE6MLAC&_nc_ohc=kC_CN09-2tAQ7kNvwHM_w8S&_nc_oc=AdkFHJvxRAajjT59SQaSy_6O2tNwjgiyylpmv0fyvjoUnpubJ7d_th8nUMnairqLDlBO9zlV5HsOPoPkWKKlRuRD&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=JyXNiMZ2nsjFwtCElzh5Yw&oh=00_Afi7SxKBxjuP-VwPlf-Xwb5fai290gHNM_yDM_Rt02tk3A&oe=694E8902",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0984285998",
+        hours: "06:00 - 17:30",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 27,
+        coords: [16.27227454371081, 107.96863891836327],
+        title: "Tinh dầu Thái Việt",
+        description: "Cửa hàng bán dầu tràm tại Huế, sản phẩm thiên nhiên, chất lượng tốt, giá cả hợp lý.",
+        image: "https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/165092171_461605274987996_5062184228328966020_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHoRdF8VnI9tjpBwBBkVDVWpHUZoBk2GZGkdRmgGTYZkT71xoG99XROcaGFwIMh6LoJmqW8POBUPguxlTpWiK8M&_nc_ohc=eJwk8t-S66MQ7kNvwEuCyl3&_nc_oc=AdlUycORbnXrpufr6w-3x-zZ1GasdaN8PN0DyFfNeIO4libkA89qlEF9PhyNoNR-zMRW1vKY9_v0nNYk7bBx8LFF&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=dNe4QocmsZ6AlxEPPtewAA&oh=00_AfjIPJ474e9qTZ920lQtgOwQZoUm-fokHowQoIF05ElpNw&oe=694E854E",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0828469977",
+        hours: "06:00 - 17:30",
+        price: "",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "solo"],
+          budget: 1,
+          age: ["teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 28,
+        coords: [16.271702378006474, 107.99026086667608],
+        title: "Chùa Thừa Lưu",
+        description: "Một ngôi chùa bình yên tại xã Chân Mây Lăng Cô, thành phố Huế.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "chua",
+        color: "#9b59b6",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "08:00 - 19:00",
+        price: "",
+        filters: {
+          type: "chua",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Tip",
+            text: "Tham quan sáng sớm để chiêm ngưỡng kiến trúc hiện đại khang trang và không gian tu học yên bình."
+          },
+          {
+            type: "info",
+            title: "View đẹp",
+            text: "Phù hợp để ngắm cảnh."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: " Ăn mặc kín đáo, giữ yên lặng, không chụp ảnh flash trong khu vực chính điện để tôn trọng không gian tu hành"
+          }
+        ]
+
+      },
+
+      {
+        id: 29,
+        coords: [16.271071391151832, 108.05790804101092],
+        title: "Cà phê Lộc Vừng",
+        description: "Quán cà phê gần biển Bình An, không gian đơn giản, giá cả phải chăng.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "05:30 - 22:00",
+        price: "0397700512",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 30,
+        coords: [16.27182746279249, 107.98356767467678],
+        title: "Nhà nghỉ Nắng Vàng",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.lagunalangco.com/vi/",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0988520852",
+        hours: "Mở cửa cả ngày",
+        price: "Từ 425.000 VNĐ/đêm",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 31,
+        coords: [16.338879964269992, 107.9538108254587],
+        title: "Banyan Tree Lăng Cô",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.lagunalangco.com/vi/",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0234369588",
+        hours: "Mở cửa cả ngày",
+        price: "6.500.000 VND - 8.000.000 VND/phòng",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 4,
+          age: ["adult","child", "teen", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 32,
+        coords: [16.334339604634167, 107.95578423485391],
+        title: "Resort Angsana Lăng Cô",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.angsana.com/vietnam/lang-co",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "02343695800",
+        hours: "Mở cửa cả ngày",
+        price: "2.000.000 VND - 2.500.000 VND/phòng",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 4,
+          age: ["adult","child", "teen", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 33,
+        coords: [16.246843773610024, 108.0757415829087],
+        title: "Langco Beach Resort",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "https://www.angsana.com/vietnam/lang-co",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "02343873555",
+        hours: "Mở cửa cả ngày",
+        price: "750.000đ – 850.000 VND/phòng/đêm",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 3,
+          age: ["adult","child", "teen", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 34,
+        coords: [16.23960825174464, 108.07708948299785],
+        title: "Nhà hàng hải sản Lăng Cô",
+        description: "Nhà hàng hải sản nổi trên đầm Lập An, Huế, view thoáng mát, món tươi ngon.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://www.facebook.com/ANLagoon",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0938601666",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple"],
+          budget: 3,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 35,
+        coords: [16.2381542022547, 108.07817026720295],
+        title: "Hà Phương Homestay ",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nghiduong",
+        color: "#f39c12",
+        link: "http://facebook.com/HaPhuongHomestay",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0366666198",
+        hours: "Mở cửa cả ngày",
+        price: "679.000 VND/phòng/đêm",
+        filters: {
+          type: "nghiduong",
+          suitability: ["family", "couple","solo"],
+          budget: 2,
+          age: ["adult","teen","child","senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Đặt trước",
+            text: "Nên đặt phòng trước, đặc biệt vào mùa cao điểm từ tháng 6 đến tháng 8."
+          },
+          {
+            type: "info",
+            title: "Tiện nghi",
+            text: "Khu nghỉ dưỡng có đầy đủ tiện nghi: hồ bơi, spa, sân golf và nhà hàng."
+          },
+          {
+            type: "warning",
+            title: "Chi phí",
+            text: "Các dịch vụ trong khu nghỉ dưỡng có giá cao, nên chuẩn bị ngân sách phù hợp."
+          }
+        ]
+      },
+      {
+        id: 36,
+        coords: [16.235065204564663, 108.0813105801752],
+        title: "Phố đi bộ Lăng Cô",
+        description: "",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 37,
+        coords: [16.264592133767078, 108.04967939287332],
+        title: "Quán Vườn Xoài",
+        description: "Vườn Xoài là quán ăn bình dân tại Huế, không gian đơn giản, món ăn đậm đà, giá cả phải chăng.",
+        image: "https://img.amiami.com/images/product/review/093/CGD-3991_01.jpg",
+        category: "nhahang",
+        color: "#1abc9c",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "09:00 - 22:00",
+        price: "",
+        filters: {
+          type: "nhahang",
+          suitability: ["family", "couple", "solo"],
+          budget: 2,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 38,
+        coords: [16.26383350279997, 108.05483814993185],
+        title: "Đầm Lăng Cô",
+        description: "Đầm Lăng Cô hay đầm Lập An là đầm nước lợ lớn nhất Huế, nằm bên vịnh Lăng Cô, nổi tiếng với vẻ đẹp yên bình, huyền ảo như Tuyệt tình cốc giữa núi non hùng vĩ.",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Laguna_Lap_An%2C_Provincia_de_Thua_Thien-Hue%2C_Vietnam.jpg",
+        category: "damnuoc",
+        color: "#3498db",
+        link: "https://example.com/dam-lap-an",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "",
+        hours: "Mở cả ngày",
+        price: "Miễn phí",
+        filters: {
+          type: "damnuoc",
+          suitability: ["family", "couple", "solo"],
+          budget: 0,
+          age: ["child", "teen", "adult", "senior"],
+        },
+        tips: [
+          {
+            type: "tip",
+            title: "Thời điểm đẹp nhất",
+            text: "Đi vào mùa khô (tháng 3-8) để thời tiết đẹp, dễ di chuyển; nên đến sáng sớm hoặc chiều muộn để ngắm bình minh/hoàng hôn tuyệt đẹp và chụp ảnh check-in trên con đường giữa đầm."
+          },
+          {
+            type: "tip",
+            title: "Ẩm thực",
+            text: "Thử các món hải sản tươi như hàu nướng, tôm hùm tại các nhà hàng ven đầm để trải nghiệm ẩm thực địa phương."
+          },
+          {
+            type: "info",
+            title: "Trải nghiệm",
+            text: "Có thể tham quan các bè nuôi hàu và thưởng thức hải sản tươi sống tại địa phương."
+          },
+          {
+            type: "warning",
+            title: "Lưu ý",
+            text: "Mang theo kem chống nắng, mũ nón, nước uống vì nắng nóng; tránh đi mùa mưa (tháng 9-12) do đường trơn trượt và lũ lụt."
+          }
+        ]
+      },
+      {
+        id: 39,
+        coords: [16.272240640907526, 107.97457146879977],
+        title: "Mini mart Vui Lê",
+        description: "Cửa hàng bán dầu tràm tại Huế, sản phẩm chất lượng tốt, giá cả hợp lý.",
+        image: "https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/165092171_461605274987996_5062184228328966020_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHoRdF8VnI9tjpBwBBkVDVWpHUZoBk2GZGkdRmgGTYZkT71xoG99XROcaGFwIMh6LoJmqW8POBUPguxlTpWiK8M&_nc_ohc=eJwk8t-S66MQ7kNvwEuCyl3&_nc_oc=AdlUycORbnXrpufr6w-3x-zZ1GasdaN8PN0DyFfNeIO4libkA89qlEF9PhyNoNR-zMRW1vKY9_v0nNYk7bBx8LFF&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=dNe4QocmsZ6AlxEPPtewAA&oh=00_AfjIPJ474e9qTZ920lQtgOwQZoUm-fokHowQoIF05ElpNw&oe=694E854E",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0905260375",
+        hours: "07:30 - 21:30",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      {
+        id: 40,
+        coords: [16.27232754177606, 107.97007851672343],
+        title: "Siêu Thị Tiện Lợi Family Mart",
+        description: "Cửa hàng bán dầu tràm tại Huế, sản phẩm chất lượng tốt, giá cả hợp lý.",
+        image: "https://scontent.fdad2-1.fna.fbcdn.net/v/t1.6435-9/165092171_461605274987996_5062184228328966020_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHoRdF8VnI9tjpBwBBkVDVWpHUZoBk2GZGkdRmgGTYZkT71xoG99XROcaGFwIMh6LoJmqW8POBUPguxlTpWiK8M&_nc_ohc=eJwk8t-S66MQ7kNvwEuCyl3&_nc_oc=AdlUycORbnXrpufr6w-3x-zZ1GasdaN8PN0DyFfNeIO4libkA89qlEF9PhyNoNR-zMRW1vKY9_v0nNYk7bBx8LFF&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=dNe4QocmsZ6AlxEPPtewAA&oh=00_AfjIPJ474e9qTZ920lQtgOwQZoUm-fokHowQoIF05ElpNw&oe=694E854E",
+        category: "muasam",
+        color: "#e67e22",
+        link: "https://example.com/chua-linh-ung",
+        address: "Xã Chân Mây Lăng Cô, Thành phố Huế",
+        phone: "0905260375",
+        hours: "07:30 - 21:30",
+        price: "Miễn phí",
+        filters: {
+          type: "muasam",
+          suitability: ["family", "couple", "solo"],
+          budget: 1,
+          age: ["child", "teen", "adult", "senior"],
+        }
+      },
+      // Các địa điểm khác có thể thêm tips tương tự
     ];
 
     // ========== KHỞI TẠO ỨNG DỤNG ==========
-    // Tắt zoom control mặc định
-    const map = L.map("map", {
-      zoomControl: false
-    }).setView(APP_CONFIG.mapCenter, APP_CONFIG.defaultZoom);
+    // Tắt zoom control mặc định và thêm lại ở vị trí mong muốn
+const map = L.map("map", {
+  zoomControl: false
+}).setView(APP_CONFIG.mapCenter, APP_CONFIG.defaultZoom);
 
-    // Thêm zoom control ở vị trí mới
-    L.control.zoom({
-      position: 'topright'
-    }).addTo(map);
+// Thêm zoom control ở vị trí mới
+L.control.zoom({
+  position: 'topright' // hoặc 'topleft', 'topright', 'bottomleft'
+}).addTo(map);
+    
 
     // Thêm lớp bản đồ
     const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -288,7 +1402,17 @@
     let isSatellite = false;
     let markerObjects = [];
     let currentMarkerIndex = -1;
+    let isDarkMode = false;
     let legendVisible = true;
+    
+    // Biến lưu trạng thái bộ lọc
+    let activeFilters = {
+      type: null,
+      suitability: [],
+      budget: 4, // Mặc định: tất cả các mức giá
+      age: "all", // Mặc định: tất cả độ tuổi
+      time: 4 // Mặc định: tất cả thời gian
+    };
 
     // ========== HÀM TIỆN ÍCH ==========
     
@@ -443,7 +1567,7 @@
       }
     }
 
-    // ========== QUẢN LÝ MARKER ==========
+    // ========== QUẢN LÝ MARKER VÀ BỘ LỌC ==========
     
     // Hàm thêm marker vào bản đồ
     function addMarkersToMap() {
@@ -455,10 +1579,117 @@
           .on('click', function() {
             showLocationDetails(index);
             map.setView(marker.coords, 14);
+            highlightLocationItem(index);
           });
           
         markerObjects.push(markerObj);
       });
+    }
+
+    // Hàm lọc và hiển thị marker
+    function filterAndDisplayMarkers() {
+      const filteredMarkers = MARKERS_DATA.filter(marker => {
+        // Lọc theo loại hình
+        if (activeFilters.type && marker.filters.type !== activeFilters.type) {
+          return false;
+        }
+        
+        // Lọc theo phù hợp
+        if (activeFilters.suitability.length > 0) {
+          const hasMatchingSuitability = activeFilters.suitability.some(suit => 
+            marker.filters.suitability.includes(suit)
+          );
+          if (!hasMatchingSuitability) return false;
+        }
+        
+        // Lọc theo ngân sách
+        if (marker.filters.budget > activeFilters.budget) {
+          return false;
+        }
+        
+        // Lọc theo độ tuổi
+        if (activeFilters.age !== "all" && !marker.filters.age.includes(activeFilters.age)) {
+          return false;
+        }
+        
+        return true;
+      });
+      
+      // Ẩn tất cả marker
+      markerObjects.forEach(marker => {
+        map.removeLayer(marker);
+      });
+      
+      // Hiển thị marker đã lọc
+      filteredMarkers.forEach(markerData => {
+        const index = MARKERS_DATA.findIndex(m => m.id === markerData.id);
+        if (index !== -1) {
+          map.addLayer(markerObjects[index]);
+        }
+      });
+      
+      // Cập nhật danh sách địa điểm
+      updateLocationList(filteredMarkers);
+    }
+
+    // Hàm cập nhật danh sách địa điểm
+    function updateLocationList(filteredMarkers) {
+      const locationList = document.getElementById('location-list');
+      locationList.innerHTML = '';
+      
+      filteredMarkers.forEach(function(markerData) {
+        const index = MARKERS_DATA.findIndex(m => m.id === markerData.id);
+        if (index === -1) return;
+        
+        const listItem = document.createElement('li');
+        listItem.className = 'location-item fade-in';
+        listItem.setAttribute('data-id', markerData.id);
+        
+        // Tạo tags hiển thị
+        const tagsHTML = createTagsHTML(markerData.filters);
+        
+        listItem.innerHTML = `
+          <div class="location-icon" style="background-color: ${markerData.color}">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="location-content">
+            <div class="location-title">${markerData.title}</div>
+            <div class="location-desc">${markerData.description.substring(0, 80)}...</div>
+            <div class="location-tags">
+              ${tagsHTML}
+            </div>
+          </div>
+        `;
+        
+        listItem.addEventListener('click', function() {
+          // Di chuyển bản đồ đến vị trí marker
+          map.setView(markerData.coords, 14);
+          // Hiển thị thông tin chi tiết
+          showLocationDetails(index);
+          // Đánh dấu item được chọn
+          highlightLocationItem(index);
+          
+          // Tự động đóng sidebar trên di động
+          if (window.innerWidth <= 768) {
+            sidebar.classList.add('collapsed');
+            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          }
+        });
+        
+        locationList.appendChild(listItem);
+      });
+      
+      // Hiển thị thông báo nếu không có kết quả
+      if (filteredMarkers.length === 0) {
+        const noResults = document.createElement('li');
+        noResults.innerHTML = `
+          <div style="text-align: center; padding: 20px; color: #718096;">
+            <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px;"></i>
+            <div>Không tìm thấy địa điểm phù hợp</div>
+          </div>
+        `;
+        locationList.appendChild(noResults);
+      }
     }
 
     // Hàm tạo HTML cho tags
@@ -473,9 +1704,7 @@
         'ditich': '🏛️ Di tích',
         'giaitri': '🎯 Giải trí',
         'muasam': '🛍️ Mua sắm',
-        'chua': '🛕 Chùa chiền',
-        'damnuoc': '🌊 Đầm nước',
-        'suoi': '💧 Suối & Thác nước'
+        'chua': '🛕 Chùa chiền'
       };
       
       if (typeLabels[filters.type]) {
@@ -484,11 +1713,27 @@
       
       // Tag ngân sách
       const budgetLabels = ['💰 Miễn phí', '💰 Tiết kiệm', '💰 Trung bình', '💰 Cao cấp', '💰 Luxury'];
-      if (budgetLabels[filters.budget]) {
-        tagsHTML += `<div class="location-tag">${budgetLabels[filters.budget]}</div>`;
-      }
+      tagsHTML += `<div class="location-tag">${budgetLabels[filters.budget]}</div>`;
       
       return tagsHTML;
+    }
+
+    // Hàm tạo danh sách địa điểm trong sidebar
+    function createLocationList() {
+      updateLocationList(MARKERS_DATA);
+    }
+
+    // Hàm đánh dấu item trong danh sách
+    function highlightLocationItem(index) {
+      const items = document.querySelectorAll('.location-item');
+      items.forEach(function(item, i) {
+        if (i === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      currentMarkerIndex = index;
     }
 
     // Hàm hiển thị chi tiết địa điểm
@@ -582,8 +1827,416 @@
       }
     }
 
-    // ========== XỬ LÝ SỰ KIỆN ==========
+    // ========== CHỨC NĂNG TÌM KIẾM THÔNG MINH ==========
     
+    // Hàm tìm kiếm thông minh với gợi ý
+    function setupSmartSearch() {
+      const searchInput = document.getElementById('search-input');
+      const searchSuggestions = document.getElementById('search-suggestions');
+      let currentSuggestionIndex = -1;
+      let suggestions = [];
+
+      // Hàm tìm kiếm địa điểm
+      function searchLocations(query) {
+        if (!query.trim()) {
+          return [];
+        }
+
+        const searchTerm = query.toLowerCase();
+        const results = [];
+
+        MARKERS_DATA.forEach(marker => {
+          const title = marker.title.toLowerCase();
+          const address = marker.address.toLowerCase();
+          const description = marker.description.toLowerCase();
+          const category = getCategoryLabel(marker.filters.type);
+
+          // Tính điểm phù hợp
+          let score = 0;
+
+          // Tìm trong tiêu đề (quan trọng nhất)
+          if (title.includes(searchTerm)) {
+            score += 100;
+            // Nếu khớp chính xác từ đầu
+            if (title.startsWith(searchTerm)) {
+              score += 50;
+            }
+          }
+
+          // Tìm trong địa chỉ
+          if (address.includes(searchTerm)) {
+            score += 30;
+          }
+
+          // Tìm trong mô tả
+          if (description.includes(searchTerm)) {
+            score += 20;
+          }
+
+          // Tìm trong loại hình
+          if (category.toLowerCase().includes(searchTerm)) {
+            score += 15;
+          }
+
+          if (score > 0) {
+            results.push({
+              marker: marker,
+              score: score,
+              matchedIn: {
+                title: title.includes(searchTerm),
+                address: address.includes(searchTerm),
+                description: description.includes(searchTerm),
+                category: category.toLowerCase().includes(searchTerm)
+              }
+            });
+          }
+        });
+
+        // Sắp xếp theo điểm
+        return results.sort((a, b) => b.score - a.score).slice(0, 8);
+      }
+
+      // Hàm lấy nhãn loại hình
+      function getCategoryLabel(type) {
+        const labels = {
+          'baibien': 'Bãi biển',
+          'nghiduong': 'Resort & Khách sạn',
+          'nhahang': 'Nhà hàng & Ẩm thực',
+          'ditich': 'Di tích lịch sử',
+          'giaitri': 'Giải trí',
+          'muasam': 'Mua sắm',
+          'chua': 'Chùa chiền',
+          'damnuoc': 'Đầm nước',
+          'suoi': 'Suối & Thác nước'
+        };
+        return labels[type] || 'Địa điểm';
+      }
+
+      // Hàm lấy icon cho loại hình
+      function getCategoryIcon(type) {
+        const icons = {
+          'baibien': '🏖️',
+          'nghiduong': '🏨',
+          'nhahang': '🍽️',
+          'ditich': '🏛️',
+          'giaitri': '🎯',
+          'muasam': '🛍️',
+          'chua': '🛕',
+          'damnuoc': '🌊',
+          'suoi': '💧'
+        };
+        return icons[type] || '📍';
+      }
+
+      // Hàm hiển thị gợi ý
+      function showSuggestions(results) {
+        suggestions = results;
+        currentSuggestionIndex = -1;
+
+        if (results.length === 0) {
+          searchSuggestions.innerHTML = `
+            <div class="no-results">
+              <i class="fas fa-search" style="margin-bottom: 8px; font-size: 20px;"></i>
+              <div>Không tìm thấy địa điểm phù hợp</div>
+              <small>Thử tìm kiếm với từ khóa khác</small>
+            </div>
+          `;
+        } else {
+          searchSuggestions.innerHTML = results.map((result, index) => {
+            const marker = result.marker;
+            const icon = getCategoryIcon(marker.filters.type);
+            const category = getCategoryLabel(marker.filters.type);
+            
+            // Highlight từ khóa tìm kiếm
+            const searchTerm = searchInput.value.toLowerCase();
+            const highlightedTitle = highlightText(marker.title, searchTerm);
+            const highlightedAddress = highlightText(marker.address, searchTerm);
+
+            return `
+              <div class="search-suggestion" data-index="${index}">
+                <div class="suggestion-icon" style="background-color: ${marker.color}">
+                  ${icon}
+                </div>
+                <div class="suggestion-content">
+                  <div class="suggestion-title">${highlightedTitle}</div>
+                  <div class="suggestion-address">${highlightedAddress}</div>
+                </div>
+                <div class="suggestion-category">${category}</div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        searchSuggestions.classList.add('show');
+      }
+
+      // Hàm highlight từ khóa trong văn bản
+      function highlightText(text, searchTerm) {
+        if (!searchTerm.trim()) return text;
+        
+        const regex = new RegExp(`(${searchTerm})`, 'gi');
+        return text.replace(regex, '<mark>$1</mark>');
+      }
+
+      // Hàm chọn gợi ý
+      function selectSuggestion(index) {
+        if (index >= 0 && index < suggestions.length) {
+          const marker = suggestions[index].marker;
+          const markerIndex = MARKERS_DATA.findIndex(m => m.id === marker.id);
+          
+          if (markerIndex !== -1) {
+            // Di chuyển bản đồ đến vị trí
+            map.setView(marker.coords, 14);
+            
+            // Hiển thị thông tin chi tiết
+            showLocationDetails(markerIndex);
+            
+            // Đánh dấu item trong danh sách
+            highlightLocationItem(markerIndex);
+            
+            // Đóng gợi ý tìm kiếm
+            hideSuggestions();
+            
+            // Xóa nội dung tìm kiếm
+            searchInput.value = '';
+            
+            // Tự động đóng sidebar trên di động
+            if (window.innerWidth <= 768) {
+              sidebar.classList.add('collapsed');
+              sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+          }
+        }
+      }
+
+      // Hàm ẩn gợi ý
+      function hideSuggestions() {
+        searchSuggestions.classList.remove('show');
+        currentSuggestionIndex = -1;
+      }
+
+      // Sự kiện nhập liệu
+      searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        
+        if (query.length >= 2) {
+          const results = searchLocations(query);
+          showSuggestions(results);
+        } else {
+          hideSuggestions();
+        }
+      });
+
+      // Sự kiện focus
+      searchInput.addEventListener('focus', function() {
+        const query = this.value.trim();
+        if (query.length >= 2) {
+          const results = searchLocations(query);
+          showSuggestions(results);
+        }
+      });
+
+      // Sự kiện click ra ngoài để đóng gợi ý
+      document.addEventListener('click', function(e) {
+        if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+          hideSuggestions();
+        }
+      });
+
+      // Sự kiện click vào gợi ý
+      searchSuggestions.addEventListener('click', function(e) {
+        const suggestion = e.target.closest('.search-suggestion');
+        if (suggestion) {
+          const index = parseInt(suggestion.getAttribute('data-index'));
+          selectSuggestion(index);
+        }
+      });
+
+      // Sự kiện bàn phím
+      searchInput.addEventListener('keydown', function(e) {
+        if (!searchSuggestions.classList.contains('show')) return;
+
+        switch(e.key) {
+          case 'ArrowDown':
+            e.preventDefault();
+            currentSuggestionIndex = Math.min(currentSuggestionIndex + 1, suggestions.length - 1);
+            updateSuggestionSelection();
+            break;
+
+          case 'ArrowUp':
+            e.preventDefault();
+            currentSuggestionIndex = Math.max(currentSuggestionIndex - 1, -1);
+            updateSuggestionSelection();
+            break;
+
+          case 'Enter':
+            e.preventDefault();
+            if (currentSuggestionIndex >= 0) {
+              selectSuggestion(currentSuggestionIndex);
+            } else if (suggestions.length > 0) {
+              selectSuggestion(0);
+            }
+            break;
+
+          case 'Escape':
+            hideSuggestions();
+            break;
+        }
+      });
+
+      // Hàm cập nhật lựa chọn gợi ý
+      function updateSuggestionSelection() {
+        const allSuggestions = searchSuggestions.querySelectorAll('.search-suggestion');
+        
+        allSuggestions.forEach((suggestion, index) => {
+          if (index === currentSuggestionIndex) {
+            suggestion.classList.add('active');
+            // Cuộn đến phần tử được chọn
+            suggestion.scrollIntoView({ block: 'nearest' });
+          } else {
+            suggestion.classList.remove('active');
+          }
+        });
+
+        // Nếu không có gợi ý nào được chọn, focus vào input
+        if (currentSuggestionIndex === -1) {
+          searchInput.focus();
+        }
+      }
+
+      // Tự động focus vào ô tìm kiếm khi mở sidebar
+      const sidebar = document.getElementById('sidebar');
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'class') {
+            if (!sidebar.classList.contains('collapsed')) {
+              setTimeout(() => {
+                searchInput.focus();
+              }, 300);
+            }
+          }
+        });
+      });
+
+      observer.observe(sidebar, { attributes: true });
+    }
+
+    // ========== XỬ LÝ SỰ KIỆN BỘ LỌC ==========
+    
+    // Hàm thiết lập bộ lọc
+    function setupFilters() {
+      // Bộ lọc loại hình
+      const typeFilterTags = document.querySelectorAll('.filter-tag[data-type]');
+      typeFilterTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          const type = this.getAttribute('data-type');
+          
+          // Toggle active state
+          if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            activeFilters.type = null;
+          } else {
+            // Remove active from all type filters
+            typeFilterTags.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            activeFilters.type = type;
+          }
+          
+          filterAndDisplayMarkers();
+        });
+      });
+      
+      // Bộ lọc phù hợp
+      const suitabilityTags = document.querySelectorAll('.filter-tag[data-criteria]');
+      suitabilityTags.forEach(tag => {
+        tag.addEventListener('click', function() {
+          const criteria = this.getAttribute('data-criteria');
+          
+          // Toggle active state
+          if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            activeFilters.suitability = activeFilters.suitability.filter(c => c !== criteria);
+          } else {
+            this.classList.add('active');
+            activeFilters.suitability.push(criteria);
+          }
+          
+          filterAndDisplayMarkers();
+        });
+      });
+      
+      // Bộ lọc ngân sách
+      const budgetSlider = document.getElementById('budget-slider');
+      budgetSlider.addEventListener('input', function() {
+        activeFilters.budget = parseInt(this.value);
+        filterAndDisplayMarkers();
+      });
+      
+      // Bộ lọc độ tuổi
+      const ageButtons = document.querySelectorAll('.age-btn');
+      ageButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const age = this.getAttribute('data-age');
+          
+          // Remove active from all age buttons
+          ageButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          activeFilters.age = age;
+          filterAndDisplayMarkers();
+        });
+      });
+      
+      
+      // Nút xóa tất cả bộ lọc
+      document.getElementById('clear-filters').addEventListener('click', function() {
+        // Reset all filters
+        activeFilters = {
+          type: null,
+          suitability: [],
+          budget: 4,
+          age: "all",
+        };
+        
+        // Reset UI
+        typeFilterTags.forEach(tag => tag.classList.remove('active'));
+        suitabilityTags.forEach(tag => tag.classList.remove('active'));
+        budgetSlider.value = 4;
+        ageButtons.forEach(btn => {
+          if (btn.getAttribute('data-age') === 'all') {
+            btn.classList.add('active');
+          } else {
+            btn.classList.remove('active');
+          }
+        });
+        
+        filterAndDisplayMarkers();
+      });
+    }
+
+    // Hàm thiết lập toggle cho bộ lọc
+    function setupFilterToggles() {
+      const typeFilterHeader = document.getElementById('type-filter-header');
+      const typeFilterContent = document.getElementById('type-filter-content');
+      const typeFilterToggle = document.getElementById('type-filter-toggle');
+      
+      const criteriaFilterHeader = document.getElementById('criteria-filter-header');
+      const criteriaFilterContent = document.getElementById('criteria-filter-content');
+      const criteriaFilterToggle = document.getElementById('criteria-filter-toggle');
+      
+      // Toggle bộ lọc loại hình
+      typeFilterHeader.addEventListener('click', function() {
+        typeFilterContent.classList.toggle('collapsed');
+        typeFilterToggle.classList.toggle('rotated');
+      });
+      
+      // Toggle bộ lọc tiêu chí
+      criteriaFilterHeader.addEventListener('click', function() {
+        criteriaFilterContent.classList.toggle('collapsed');
+        criteriaFilterToggle.classList.toggle('rotated');
+      });
+    }
+
     // Hàm thiết lập toggle cho tips section
     function setupTipsToggle() {
       const tipsHeader = document.getElementById('tips-header');
@@ -593,6 +2246,25 @@
       tipsHeader.addEventListener('click', function() {
         tipsContent.classList.toggle('collapsed');
         tipsToggle.classList.toggle('rotated');
+      });
+    }
+
+    // ========== XỬ LÝ SỰ KIỆN KHÁC ==========
+    
+    // Xử lý sự kiện sidebar
+    function setupSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const sidebarClose = document.getElementById('sidebar-close');
+      const sidebarOpen = document.getElementById('sidebar-open');
+      
+      // Nút đóng bên trong sidebar
+      sidebarClose.addEventListener('click', function() {
+        sidebar.classList.add('collapsed');
+      });
+      
+      // Nút mở sidebar (luôn hiển thị)
+      sidebarOpen.addEventListener('click', function() {
+        sidebar.classList.remove('collapsed');
       });
     }
 
@@ -661,6 +2333,68 @@
       });
     }
 
+    // Thiết lập chế độ tối/sáng
+    function setupThemeToggle() {
+      const themeToggle = document.getElementById('theme-toggle');
+      
+      // Kiểm tra xem người dùng có sở thích chế độ tối không
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        isDarkMode = true;
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      }
+      
+      themeToggle.addEventListener('click', function() {
+        isDarkMode = !isDarkMode;
+        document.body.classList.toggle('dark-mode');
+        
+        if (isDarkMode) {
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+          themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+        
+        // Lưu tùy chọn vào localStorage
+        localStorage.setItem('darkMode', isDarkMode);
+      });
+      
+      // Kiểm tra localStorage
+      const savedDarkMode = localStorage.getItem('darkMode');
+      if (savedDarkMode !== null) {
+        isDarkMode = savedDarkMode === 'true';
+        if (isDarkMode) {
+          document.body.classList.add('dark-mode');
+          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+      }
+    }
+
+    // Thiết lập UX cho thiết bị di động
+    function setupMobileUX() {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Đóng sidebar khi chọn địa điểm
+        const locationItems = document.querySelectorAll('.location-item');
+        locationItems.forEach(item => {
+          item.addEventListener('click', () => {
+            sidebar.classList.add('collapsed');
+          });
+        });
+        
+        // Đóng info panel khi nhấn ra ngoài (trên di động)
+        document.addEventListener('click', (e) => {
+          const infoPanel = document.getElementById('info-panel');
+          if (infoPanel.classList.contains('active') && 
+              !e.target.closest('.info-panel') && 
+              !e.target.closest('.location-item') &&
+              !e.target.closest('.simple-marker')) {
+            infoPanel.classList.remove('active');
+          }
+        });
+      }
+    }
+
     // Thiết lập nút ẩn/hiện chú thích
     function setupLegendToggle() {
       const legendToggle = document.getElementById('legend-toggle');
@@ -723,11 +2457,20 @@
       // Thêm marker vào bản đồ
       addMarkersToMap();
       
+      // Tạo danh sách địa điểm
+      createLocationList();
+      
       // Thiết lập các sự kiện
+      setupSmartSearch();
+      setupFilters();
+      setupFilterToggles();
       setupTipsToggle();
+      setupSidebar();
       setupInfoPanel();
       setupMapControls();
+      setupThemeToggle();
       setupLegendToggle();
+      setupMobileUX();
       
       // Ẩn loading sau khi tải xong
       setTimeout(hideLoading, 1000);
@@ -735,6 +2478,9 @@
 
     // Khởi chạy ứng dụng khi DOM đã sẵn sàng
     document.addEventListener('DOMContentLoaded', initApp);
+    
+    // Thiết lập lại UX khi thay đổi kích thước cửa sổ
+    window.addEventListener('resize', setupMobileUX);
   </script>
 </body>
 </html>
