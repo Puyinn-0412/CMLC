@@ -3,907 +3,362 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cẩm Nang Du Lịch Chân Mây - Lăng Cô</title>
+    <title>LangTrek | Cẩm Nang Du Lịch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
-        :root {
-            --primary-color: #f0f8ff;
-            --text-dark: #2c2724;
-            --white: #ffffff;
-            --max-width: 1200px;
-            --accent-color: #4682b4;
-            --light-blue: #e6f2ff;
-        }
-
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .btn {
-            outline: none;
-            border: none;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        img {
-            display: flex;
-            width: 100%;
-        }
-
-        a {
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            background-color: #f9f9f9;
-        }
-
-        nav {
-            position: fixed;
-            isolation: isolate;
-            width: 100%;
-            z-index: 9;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav__header {
-            padding: 1rem;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: var(--text-dark);
-        }
-
-        .nav__logo a {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .nav__logo span {
-            color: var(--accent-color);
-        }
-
-        .nav__menu__btn {
-            font-size: 1.5rem;
-            color: var(--white);
-            cursor: pointer;
-        }
-
-        .nav__links {
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            list-style: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 2rem;
-            background-color: var(--text-dark);
-            transition: 0.5s;
-            z-index: -1;
-            transform: translateY(-100%);
-        }
-
-        .nav__links.open {
-            transform: translateY(0);
-        }
-
-        .nav__links a {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .nav__links a:hover {
-            color: var(--accent-color);
-        }
-
-        .nav__btns {
-            display: none;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1528123778681-01e39bdfeae6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            padding: 8rem 1rem 4rem;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.6;
-        }
-
-        .btn-primary {
-            padding: 1rem 2rem;
-            background-color: var(--accent-color);
-            color: var(--white);
-            border-radius: 5rem;
-            font-weight: 600;
-            font-size: 1rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary:hover {
-            background-color: #3a6d9c;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .main-container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .section-title i {
-            color: var(--accent-color);
-        }
-
-        .section-subtitle {
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        /* Bài viết nổi bật */
-        .featured-posts {
-            margin-bottom: 3rem;
-        }
-
-        .post-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .post-card {
-            background: var(--white);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .post-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .post-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .post-image img {
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .post-card:hover .post-image img {
-            transform: scale(1.05);
-        }
-
-        .post-content {
-            padding: 1.5rem;
-        }
-
-        .post-category {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            background-color: var(--light-blue);
-            color: var(--accent-color);
-            border-radius: 2rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .post-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
-
-        .post-excerpt {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .post-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .post-author {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .author-avatar {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        /* Form đăng bài */
-        .post-form-section {
-            background-color: var(--light-blue);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .post-form {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 0.5rem;
-            font-family: "Montserrat", sans-serif;
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .btn-submit {
-            padding: 1rem 2rem;
-            background-color: var(--accent-color);
-            color: var(--white);
-            border-radius: 0.5rem;
-            font-weight: 600;
-            font-size: 1.1rem;
-            justify-self: start;
-        }
-
-        .btn-submit:hover {
-            background-color: #3a6d9c;
-        }
-
-        /* Phân loại */
-        .categories {
-            margin-bottom: 3rem;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .category-card {
-            background: var(--white);
-            border-radius: 1rem;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .category-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-5px);
-        }
-
-        .category-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .category-card h3 {
-            font-size: 1.2rem;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .category-count {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        /* Địa điểm nổi bật */
-        .locations {
-            margin-bottom: 3rem;
-        }
-
-        .location-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .location-card {
-            background: var(--white);
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .location-info {
-            padding: 1.5rem;
-        }
-
-        .location-rating {
-            color: #ffd700;
-            margin-bottom: 0.5rem;
-        }
-
-        .location-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .btn-small {
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .btn-outline:hover {
-            background: var(--accent-color);
-            color: var(--white);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--text-dark);
-            color: var(--white);
-            margin-top: 4rem;
-        }
-
-        .footer__container {
-            max-width: var(--max-width);
-            margin: auto;
-            padding: 5rem 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer__logo a {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--white);
-        }
-
-        .footer__logo span {
-            color: var(--accent-color);
-        }
-
-        .footer__col .section__description {
-            color: var(--primary-color);
-            margin-top: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer__col h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .footer__socials {
-            display: flex;
-            gap: 1rem;
-            list-style: none;
-        }
-
-        .footer__socials a {
-            font-size: 1.25rem;
-            color: var(--primary-color);
-            transition: color 0.3s;
-        }
-
-        .footer__socials a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer__col h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-
-        .footer__links {
-            list-style: none;
-            display: grid;
-            gap: 0.75rem;
-        }
-
-        .footer__links a {
-            color: var(--primary-color);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            transition: color 0.3s;
-        }
-
-        .footer__links a:hover {
-            color: var(--accent-color);
-        }
-
-        .footer__links a span {
-            margin-right: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        .footer__bar {
-            padding: 1rem;
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.2);
-            color: var(--primary-color);
-            font-size: 0.9rem;
-        }
-
-        @media (width > 768px) {
-            nav {
-                position: static;
-                padding: 1rem;
-                max-width: var(--max-width);
-                margin-inline: auto;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 2rem;
-                background-color: transparent;
-                box-shadow: none;
-            }
-
-            .nav__header {
-                flex: 1;
-                padding: 0;
-                background-color: transparent;
-            }
-
-            .nav__logo a {
-                color: var(--text-dark);
-            }
-
-            .nav__menu__btn {
-                display: none;
-            }
-
-            .nav__links {
-                position: static;
-                padding: 0;
-                flex-direction: row;
-                background-color: transparent;
-                transform: none;
-            }
-
-            .nav__links a,
-            .nav__links a:hover {
-                color: var(--text-dark);
-            }
-
-            .nav__btns {
-                flex: 1;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .nav__btns .btn {
-                font-size: 1.5rem;
-                color: var(--text-dark);
-                background-color: transparent;
-            }
-
-            .hero {
-                padding: 10rem 1rem 5rem;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
-            .post-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            }
-
-            .form-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (width > 1024px) {
-            .hero h1 {
-                font-size: 4rem;
-            }
-            
-            .post-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .category-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/camnang.css" />
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav__header">
-            <div class="nav__logo">
-                <a href="#"><i class="fas fa-mountain"></i> Chân Mây <span>Lăng Cô</span></a>
-            </div>
-            <div class="nav__menu__btn" id="menu-btn">
-                <i class="fas fa-bars"></i>
+    <!-- Header Y HỆT CHATBOT -->
+    <div class="app-header">
+        <div class="logo">
+            <div class="logo-icon">LT</div>
+            <span>LangTrek | Cẩm Nang</span>
+        </div>
+        
+        <div class="header-controls">
+            <div class="user-info">
+                <i class="fas fa-user-graduate"></i>
+                <span>THPT Thừa Lưu</span>
             </div>
         </div>
-        <ul class="nav__links" id="nav-links">
-            <li><a href="#"><i class="fas fa-home"></i> Trang chủ</a></li>
-            <li><a href="#featured"><i class="fas fa-star"></i> Bài viết nổi bật</a></li>
-            <li><a href="#categories"><i class="fas fa-list"></i> Danh mục</a></li>
-            <li><a href="#locations"><i class="fas fa-map-marker-alt"></i> Địa điểm</a></li>
-            <li><a href="#post-form"><i class="fas fa-pen"></i> Đăng bài</a></li>
-        </ul>
-        <div class="nav__btns">
-            <button class="btn">
-                <i class="fas fa-search"></i>
-            </button>
-            <button class="btn">
-                <i class="fas fa-user"></i>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Cẩm Nang Du Lịch Chân Mây - Lăng Cô</h1>
-        <p>Chia sẻ kinh nghiệm, khám phá vẻ đẹp và trải nghiệm đáng nhớ tại vùng đất di sản miền Trung Việt Nam</p>
-        <a href="#post-form" class="btn btn-primary">
-            <i class="fas fa-pen"></i> Đăng bài ngay
-        </a>
-    </section>
-
-    <!-- Main Content -->
-    <main class="main-container">
-        <!-- Featured Posts -->
-        <section id="featured" class="featured-posts">
-            <h2 class="section-title"><i class="fas fa-star"></i> Bài viết nổi bật</h2>
-            <p class="section-subtitle">Những chia sẻ hữu ích nhất từ cộng đồng du lịch</p>
-            
-            <div class="post-grid">
-                <!-- Các bài viết sẽ xuất hiện ở đây sau khi người dùng đăng bài -->
+    </div>
+    
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-name">
+                    Lang<span style="color: #4682b4;">Trek</span>
+                </div>
+                <div class="brand-subtitle">Du Lịch Chân Mây - Lăng Cô</div>
             </div>
             
-            <div style="text-align: center; padding: 2rem; color: #888; font-style: italic;">
-                <i class="fas fa-inbox" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                <h3>Chưa có bài viết nào</h3>
-                <p>Hãy là người đầu tiên chia sẻ kinh nghiệm du lịch của bạn!</p>
-            </div>
-        </section>
-
-        <!-- Post Form -->
-        <section id="post-form" class="post-form-section">
-            <h2 class="section-title"><i class="fas fa-pen"></i> Chia sẻ kinh nghiệm của bạn</h2>
-            <p class="section-subtitle">Đóng góp bài viết để giúp cộng đồng du lịch phát triển</p>
-            
-            <form class="post-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="post-title"><i class="fas fa-heading"></i> Tiêu đề bài viết</label>
-                        <input type="text" id="post-title" placeholder="Nhập tiêu đề bài viết...">
-                    </div>
-                    <div class="form-group">
-                        <label for="post-category"><i class="fas fa-tag"></i> Danh mục</label>
-                        <select id="post-category">
-                            <option value="">Chọn danh mục</option>
-                            <option value="experience">Kinh nghiệm du lịch</option>
-                            <option value="food">Ẩm thực địa phương</option>
-                            <option value="checkin">Địa điểm check-in</option>
-                            <option value="hotel">Khách sạn & homestay</option>
-                            <option value="transport">Di chuyển & phương tiện</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="post-content"><i class="fas fa-edit"></i> Nội dung bài viết</label>
-                    <textarea id="post-content" placeholder="Chia sẻ kinh nghiệm, địa điểm, lời khuyên của bạn..."></textarea>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="post-location"><i class="fas fa-map-marker-alt"></i> Địa điểm</label>
-                        <input type="text" id="post-location" placeholder="Ví dụ: Bãi biển Lăng Cô, Đầm Lập An...">
-                    </div>
-                    <div class="form-group">
-                        <label for="post-image"><i class="fas fa-image"></i> URL hình ảnh (tùy chọn)</label>
-                        <input type="text" id="post-image" placeholder="Dán link ảnh từ internet...">
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="author-name"><i class="fas fa-user"></i> Tên của bạn</label>
-                        <input type="text" id="author-name" placeholder="Nhập tên hoặc bí danh...">
-                    </div>
-                    <div class="form-group">
-                        <label for="author-email"><i class="fas fa-envelope"></i> Email (tùy chọn)</label>
-                        <input type="email" id="author-email" placeholder="Email của bạn...">
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn btn-submit">
-                    <i class="fas fa-paper-plane"></i> Đăng bài viết
-                </button>
-            </form>
-        </section>
-
-        <!-- Categories -->
-        <section id="categories" class="categories">
-            <h2 class="section-title"><i class="fas fa-list"></i> Danh mục bài viết</h2>
-            <p class="section-subtitle">Khám phá theo chủ đề bạn quan tâm</p>
-            
-            <div class="category-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-route"></i>
-                    </div>
-                    <h3>Kinh nghiệm</h3>
-                    <p class="category-count">0 bài viết</p>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-utensils"></i>
-                    </div>
-                    <h3>Ẩm thực</h3>
-                    <p class="category-count">0 bài viết</p>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h3>Check-in</h3>
-                    <p class="category-count">0 bài viết</p>
-                </div>
-                
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-bed"></i>
-                    </div>
-                    <h3>Lưu trú</h3>
-                    <p class="category-count">0 bài viết</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Locations -->
-        <section id="locations" class="locations">
-            <h2 class="section-title"><i class="fas fa-map-marker-alt"></i> Địa điểm nổi bật</h2>
-            <p class="section-subtitle">Những điểm đến không thể bỏ qua tại Chân Mây - Lăng Cô</p>
-            
-            <div class="location-grid">
-                <div class="location-card">
-                    <div class="post-image">
-                        <img src="https://images.unsplash.com/photo-1528123778681-01e39bdfeae6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bãi biển Lăng Cô">
-                    </div>
-                    <div class="location-info">
-                        <h3 class="post-title">Bãi biển Lăng Cô</h3>
-                        <div class="location-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(4.5/5)</span>
-                        </div>
-                        <p class="post-excerpt">Một trong những bãi biển đẹp nhất Việt Nam với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
-                        <div class="location-actions">
-                            <button class="btn btn-small btn-outline"><i class="fas fa-info-circle"></i> Chi tiết</button>
-                            <button class="btn btn-small btn-primary"><i class="fas fa-directions"></i> Chỉ đường</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="location-card">
-                    <div class="post-image">
-                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Đầm Lập An">
-                    </div>
-                    <div class="location-info">
-                        <h3 class="post-title">Đầm Lập An</h3>
-                        <div class="location-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(4.0/5)</span>
-                        </div>
-                        <p class="post-excerpt">Đầm nước lợ lớn nhất miền Trung, nơi lý tưởng để ngắm hoàng hôn và thưởng thức hải sản tươi ngon.</p>
-                        <div class="location-actions">
-                            <button class="btn btn-small btn-outline"><i class="fas fa-info-circle"></i> Chi tiết</button>
-                            <button class="btn btn-small btn-primary"><i class="fas fa-directions"></i> Chỉ đường</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer__container">
-            <div class="footer__col">
-                <div class="footer__logo">
-                    <a href="#"><i class="fas fa-mountain"></i> Chân Mây <span>Lăng Cô</span></a>
-                </div>
-                <p class="section__description">
-                    Cộng đồng chia sẻ kinh nghiệm du lịch tại vùng đất di sản Chân Mây - Lăng Cô. 
-                    Nơi kết nối những trái tim yêu du lịch.
-                </p>
-                <ul class="footer__socials">
-                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                    <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+            <div class="nav-section">
+                <div class="nav-title">Điều hướng</div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Trang Chủ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Chatbot.html">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Chat Du Lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./map.html">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span>Bản đồ du lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./camnang.html">
+                            <i class="fas fa-book-open"></i>
+                            <span>Cẩm nang du lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./gallery.html">
+                            <i class="fas fa-cube"></i>
+                            <span>Triển lãm 3D</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./itinerary.html">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Lịch trình gợi ý</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             
-            <div class="footer__col">
-                <h4>Liên kết nhanh</h4>
-                <ul class="footer__links">
-                    <li><a href="#"><span><i class="fas fa-chevron-right"></i></span> Trang chủ</a></li>
-                    <li><a href="#featured"><span><i class="fas fa-chevron-right"></i></span> Bài viết nổi bật</a></li>
-                    <li><a href="#categories"><span><i class="fas fa-chevron-right"></i></span> Danh mục</a></li>
-                    <li><a href="#locations"><span><i class="fas fa-chevron-right"></i></span> Địa điểm</a></li>
-                    <li><a href="#post-form"><span><i class="fas fa-chevron-right"></i></span> Đăng bài</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer__col">
-                <h4>Thông tin liên hệ</h4>
-                <ul class="footer__links">
-                    <li><a href="#"><span><i class="fas fa-map-marker-alt"></i></span> Lăng Cô, Phú Lộc, Thừa Thiên Huế</a></li>
-                    <li><a href="mailto:info@chanmaylangco.vn"><span><i class="fas fa-envelope"></i></span> info@chanmaylangco.vn</a></li>
-                    <li><a href="tel:+84234567890"><span><i class="fas fa-phone"></i></span> +84 234 567 890</a></li>
-                </ul>
+            <div class="sidebar-footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Trợ giúp</a>
+                    <a href="#" class="footer-link">Điều khoản</a>
+                    <a href="#" class="footer-link">Quyền riêng tư</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2025 THPT Thừa Lưu</p>
+                </div>
             </div>
         </div>
         
-        <div class="footer__bar">
-            <p>© 2024 Cẩm Nang Du Lịch Chân Mây - Lăng Cô. Tất cả quyền được bảo lưu.</p>
+        <!-- Content Area -->
+        <div class="content-area" id="contentArea">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>Cẩm Nang Du Lịch</h1>
+                <p>Khám phá những bài viết hữu ích, kinh nghiệm du lịch và hướng dẫn chi tiết về vùng đất Chân Mây - Lăng Cô.</p>
+                <div class="guide-categories">
+                    <button class="category-btn active">Tất cả</button>
+                    <button class="category-btn">Điểm đến</button>
+                    <button class="category-btn">Ẩm thực</button>
+                    <button class="category-btn">Kinh nghiệm</button>
+                    <button class="category-btn">Văn hóa</button>
+                </div>
+            </section>
+
+            <!-- Main Content -->
+            <main class="container">
+                <!-- Featured Guide -->
+                <section class="featured-guide">
+                    <div class="featured-guide-image">
+                        <img src="img/lang-co-4768124.jpg" alt="Thác Bồ Ghè">
+                    </div>
+                    <div class="featured-guide-content">
+                        <span class="featured-badge">Bài viết nổi bật</span>
+                        <span class="guide-category">Điểm đến</span>
+                        <h2>Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</h2>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">Khám phá vẻ đẹp hoang sơ của bãi biển Lăng Cô với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
+                        <a href="post/langcobeach.html" target="_blank" class="read-more">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </section>
+
+                <!-- Guides Container -->
+                <div class="guides-container">
+                    <!-- Guides Grid -->
+                    <div>
+                        <div class="guides-grid">
+                            <!-- Guide 1 -->
+                            <article class="guide-card">
+                                <div class="guide-image">
+                                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bãi biển Lăng Cô">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</h3>
+                                    <p class="guide-excerpt">Khám phá vẻ đẹp hoang sơ của bãi biển Lăng Cô với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
+                                    <a href="https://example.com/bai-bien-lang-co" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+
+                            <!-- Guide 2 -->
+                            <article class="guide-card">
+                                <div class="guide-image">
+                                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Đầm Lập An">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Đầm Lập An: "Tuyệt Tình Cốc" Mộng Mơ Của Xứ Huế</h3>
+                                    <p class="guide-excerpt">Trải nghiệm vẻ đẹp lãng mạn của đầm Lập An với những cánh đồng muối trắng và cảnh hoàng hôn tuyệt đẹp.</p>
+                                    <a href="https://example.com/dam-lap-an" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+
+                            <!-- Guide 3 -->
+                            <article class="guide-card">
+                                <div class="guide-image">
+                                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ẩm thực Huế">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Ẩm thực</span>
+                                    <h3 class="guide-title">Ẩm Thực Chân Mây - Lăng Cô: Hương Vị Biển Đặc Trưng</h3>
+                                    <p class="guide-excerpt">Khám phá những món ăn đặc sản từ biển và những quán ăn ngon nhất ở vùng Chân Mây - Lăng Cô.</p>
+                                    <a href="https://example.com/am-thuc-cham-may" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar -->
+                    <aside>
+                        <!-- Popular Guides -->
+                        <div class="popular-guides">
+                            <h3>Bài viết phổ biến</h3>
+                            <div class="popular-guide-item">
+                                <div class="popular-guide-image">
+                                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Bãi biển Lăng Cô">
+                                </div>
+                                <div class="popular-guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h4>Bãi Biển Lăng Cô</h4>
+                                </div>
+                            </div>
+                            <div class="popular-guide-item">
+                                <div class="popular-guide-image">
+                                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ẩm thực Huế">
+                                </div>
+                                <div class="popular-guide-content">
+                                    <span class="guide-category">Ẩm thực</span>
+                                    <h4>Ẩm Thực Đặc Sản</h4>
+                                </div>
+                            </div>
+                            <div class="popular-guide-item">
+                                <div class="popular-guide-image">
+                                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Đầm Lập An">
+                                </div>
+                                <div class="popular-guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h4>Đầm Lập An</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter -->
+                        <div class="newsletter-box">
+                            <h3>Nhận cẩm nang mới</h3>
+                            <p>Đăng ký để nhận bài viết mới và thông tin du lịch về Chân Mây - Lăng Cô.</p>
+                            <input type="email" placeholder="Email của bạn">
+                            <button type="submit">Đăng ký ngay</button>
+                        </div>
+                    </aside>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer>
+                <div class="footer__container">
+                    <div class="footer__col">
+                        <div class="footer__logo">
+                            <a href="#">Lang<span>Trek</span></a>
+                        </div>
+                        <p class="section__description">Chia sẻ đam mê du lịch, khám phá vẻ đẹp Chân Mây - Lăng Cô qua những bài viết chân thực và hữu ích.</p>
+                        <ul class="footer__socials">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-tiktok"></i></a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__col">
+                        <h4>Danh mục</h4>
+                        <ul class="footer__links">
+                            <li><a href="#">Điểm đến du lịch</a></li>
+                            <li><a href="#">Ẩm thực đặc sản</a></li>
+                            <li><a href="#">Kinh nghiệm du lịch</a></li>
+                            <li><a href="#">Văn hóa địa phương</a></li>
+                            <li><a href="#">Lịch trình gợi ý</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__col">
+                        <h4>Liên kết nhanh</h4>
+                        <ul class="footer__links">
+                            <li><a href="./index.html">Trang chủ</a></li>
+                            <li><a href="./camnang.html">Cẩm nang du lịch</a></li>
+                            <li><a href="./map.html">Bản đồ du lịch</a></li>
+                            <li><a href="./Chatbot.html">Chatbot hỗ trợ</a></li>
+                            <li><a href="./gallery.html">Triển lãm 3D</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer__bar">
+                    <p>© 2025 LangTrek - THPT Thừa Lưu. Tất cả các bài viết thuộc bản quyền của tác giả.</p>
+                </div>
+            </footer>
         </div>
-    </footer>
+    </div>
 
     <script>
-        // Mobile menu toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const navLinks = document.getElementById('nav-links');
+        // Sidebar Toggle Functionality
+        const sidebar = document.getElementById('sidebar');
+        const contentArea = document.getElementById('contentArea');
+        const sidebarToggle = document.getElementById('sidebarToggle');
         
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('open');
-            menuBtn.innerHTML = navLinks.classList.contains('open') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
+        let isSidebarVisible = window.innerWidth > 1024;
+        
+        // Toggle sidebar on button click
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isSidebarVisible = !isSidebarVisible;
+            toggleSidebar();
         });
         
-        // Form submission
-        const postForm = document.querySelector('.post-form');
-        postForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const title = document.getElementById('post-title').value;
-            const category = document.getElementById('post-category').value;
-            
-            if (!title || !category) {
-                alert('Vui lòng điền đầy đủ tiêu đề và chọn danh mục!');
-                return;
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 1024 && isSidebarVisible) {
+                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                    isSidebarVisible = false;
+                    toggleSidebar();
+                }
             }
-            
-            // Simulate form submission
-            alert('Bài viết của bạn đã được gửi thành công! Chúng tôi sẽ kiểm duyệt và đăng tải trong thời gian sớm nhất.');
-            postForm.reset();
-            
-            // Scroll to featured posts
-            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
         });
         
-        // Add smooth scrolling to all links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        function toggleSidebar() {
+            if (window.innerWidth > 1024) {
+                // Desktop behavior
+                if (isSidebarVisible) {
+                    sidebar.classList.remove('collapsed');
+                    contentArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    sidebarToggle.style.left = '280px';
+                } else {
+                    sidebar.classList.add('collapsed');
+                    contentArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    sidebarToggle.style.left = '0';
+                }
+            } else {
+                // Mobile/Tablet behavior
+                if (isSidebarVisible) {
+                    sidebar.classList.add('active');
+                    contentArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    sidebarToggle.style.top = 'calc(50% + 30px)';
+                } else {
+                    sidebar.classList.remove('active');
+                    contentArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    sidebarToggle.style.top = 'calc(50% + 30px)';
+                }
+            }
+        }
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                // Switch to desktop
+                isSidebarVisible = true;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                contentArea.classList.remove('expanded');
+                sidebarToggle.style.top = '50%';
+            } else {
+                // Switch to mobile
+                isSidebarVisible = false;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                contentArea.classList.add('expanded');
+                sidebarToggle.style.top = 'calc(50% + 30px)';
+            }
+            toggleSidebar();
+        });
+        
+        // Initialize sidebar state
+        toggleSidebar();
+        
+        // Category Filter
+        const categoryBtns = document.querySelectorAll(".category-btn");
+        categoryBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (navLinks.classList.contains('open')) {
-                        navLinks.classList.remove('open');
-                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
+                categoryBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+            });
+        });
+        
+        // Update active nav link based on current page
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `./${currentPage}`) {
+                    link.classList.add('active');
                 }
             });
         });

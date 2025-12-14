@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="chatbot.css" />
+    <link rel="stylesheet" href="style/chatbot.css" />
 </head>
 <body>
     <!-- Loading Screen -->
@@ -20,7 +20,7 @@
     <!-- Header -->
     <div class="app-header">
         <div class="logo">
-            <div class="logo-icon">TL</div>
+            <div class="logo-icon">LT</div>
             <span>LangTrek | Chatbot Du Lịch Chân Mây - Lăng Cô</span>
         </div>
         
@@ -29,11 +29,6 @@
                 <i class="fas fa-user-graduate"></i>
                 <span>THPT Thừa Lưu</span>
             </div>
-            
-            <label class="theme-switch">
-                <input type="checkbox" id="themeToggle">
-                <span class="slider"></span>
-            </label>
         </div>
     </div>
     
@@ -47,7 +42,9 @@
         <!-- Sidebar mới -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="brand-name">LangTrek</div>
+                <div class="brand-name">
+                    <a href="./index.html">Lang<span style="color: #4682b4;">Trek</span></a>
+                </div>
                 <div class="brand-subtitle">Chatbot Du Lịch Chân Mây - Lăng Cô</div>
             </div>
             
@@ -55,39 +52,39 @@
                 <div class="nav-title">Điều hướng</div>
                 <ul class="nav-menu">
                     <li class="nav-item">
+                        <a class="nav-link" href="./index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Trang Chủ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" id="navChat">
                             <i class="fas fa-comment-dots"></i>
                             <span>Chat Du Lịch</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="bando.html">
+                        <a class="nav-link" href="./map.html">
                             <i class="fas fa-map-marked-alt"></i>
                             <span>Bản đồ du lịch</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="camnang.html">
+                        <a class="nav-link" href="./camnang.html">
                             <i class="fas fa-book-open"></i>
                             <span>Cẩm nang du lịch</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="trienlam.html">
+                        <a class="nav-link" href="./gallery.html">
                             <i class="fas fa-cube"></i>
-                            <span>Triển lãm ảnh</span>
+                            <span>Triển lãm 3D</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lichtrinh.html">
+                        <a class="nav-link" href="./itinerary.html">
                             <i class="fas fa-calendar-alt"></i>
                             <span>Lịch trình gợi ý</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="amsamthuc.html">
-                            <i class="fas fa-utensils"></i>
-                            <span>Ẩm thực địa phương</span>
                         </a>
                     </li>
                 </ul>
@@ -111,7 +108,7 @@
         </div>
         
         <!-- Chat Area -->
-        <div class="chat-area">
+        <div class="chat-area" id="chatArea">
             <div id="empty-state" class="empty-state">
                 <div class="empty-state-icon">
                     <i class="fas fa-umbrella-beach"></i>
@@ -136,9 +133,6 @@
                         <div class="input-actions">
                             <button type="button" class="input-action-btn" id="clear-input" title="Xóa">
                                 <i class="fas fa-times"></i>
-                            </button>
-                            <button type="button" class="input-action-btn" id="voice-input" title="Nhập giọng nói">
-                                <i class="fas fa-microphone"></i>
                             </button>
                         </div>
                     </div>
@@ -165,7 +159,7 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = "AIzaSyCZR893A8KQZnFmCvgFD_ChIc4yJUWDsZs";
+        const API_KEY = "AIzaSyBxjqPzi5rkOueAxWcO3M1RVUD_I836sEk";
         const genAI = new GoogleGenerativeAI(API_KEY);
         
         // System instruction gọn
@@ -179,7 +173,7 @@
 - Diện tích: ~261 km², dưới chân đèo Hải Vân, giáp Đà Nẵng
 - Vịnh Lăng Cô: Top vịnh đẹp thế giới (2009), bãi biển >10km
 - Đầm Lập An: ~800ha, nuôi hàu nổi tiếng
-- Suối thác: Suối Voi, Suối Mơ, Thác Bồ Ghè, Suối Thác Đổ
+- Suối thác: Suối Voi, Suối Mơ, Thác Bồ Ghè, Suối Mơ
 - Bãi biển: Tân Cảnh Dương, Bình An
 - Giao thông: QL1A, đường sắt Bắc-Nam, ga Lăng Cô, gần hầm Hải Vân
 == ẨM THỰC ==
@@ -219,41 +213,16 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
         const sidebarToggle = document.getElementById('sidebarToggle');
         const emptyState = document.getElementById('empty-state');
         const clearInputBtn = document.getElementById('clear-input');
-        const voiceInputBtn = document.getElementById('voice-input');
+        const chatArea = document.getElementById('chatArea');
 
         let currentMessages = [];
         let isSending = false;
         let isStopped = false;
-        let isSidebarVisible = false;
+        let isSidebarVisible = window.innerWidth > 1024;
 
-        // Theme Toggle
-        const themeToggle = document.getElementById('themeToggle');
-        const favicon = document.getElementById('favicon');
-        
-        // Kiểm tra theme đã lưu trong localStorage
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeToggle.checked = true;
-            favicon.href = 'icon-dark.png';
-        } else {
-            favicon.href = 'icon-light.png';
-        }
-        
-        themeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                document.body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                favicon.href = 'icon-dark.png';
-            } else {
-                document.body.classList.remove('dark-mode');
-                localStorage.setItem('theme', 'light');
-                favicon.href = 'icon-light.png';
-            }
-        });
-
-        // Sidebar toggle
-        sidebarToggle.addEventListener('click', function() {
+        // SỬA LẠI PHẦN TOGGLE SIDEBAR
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             isSidebarVisible = !isSidebarVisible;
             toggleSidebar();
         });
@@ -269,36 +238,55 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
         });
 
         function toggleSidebar() {
-            if (isSidebarVisible) {
-                sidebar.classList.add('active');
-                sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
-                sidebarToggle.style.left = '280px';
-            } else {
-                sidebar.classList.remove('active');
-                sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-                sidebarToggle.style.left = '0';
-            }
-        }
-
-        // Toggle sidebar on desktop by default
-        if (window.innerWidth > 1024) {
-            isSidebarVisible = true;
-            toggleSidebar();
-        }
-
-        // Window resize handler
-        window.addEventListener('resize', function() {
             if (window.innerWidth > 1024) {
-                sidebar.style.transform = 'translateX(0)';
-                sidebarToggle.classList.add('hidden');
-            } else {
-                sidebar.style.transform = 'translateX(-100%)';
-                sidebarToggle.classList.remove('hidden');
+                // Desktop behavior
                 if (isSidebarVisible) {
-                    toggleSidebar();
+                    sidebar.classList.remove('collapsed');
+                    chatArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    sidebarToggle.style.left = '280px';
+                } else {
+                    sidebar.classList.add('collapsed');
+                    chatArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    sidebarToggle.style.left = '0';
+                }
+            } else {
+                // Mobile/Tablet behavior
+                if (isSidebarVisible) {
+                    sidebar.classList.add('active');
+                    chatArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                } else {
+                    sidebar.classList.remove('active');
+                    chatArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
                 }
             }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                // Switch to desktop
+                isSidebarVisible = true;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                chatArea.classList.remove('expanded');
+                sidebarToggle.style.top = '50%';
+            } else {
+                // Switch to mobile
+                isSidebarVisible = false;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                chatArea.classList.add('expanded');
+                sidebarToggle.style.top = 'calc(50% + 30px)';
+            }
+            toggleSidebar();
         });
+
+        // Initialize sidebar state
+        toggleSidebar();
 
         function initApp() {
             setupEventListeners();
@@ -321,11 +309,6 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
                 messageInput.value = '';
                 autoResizeTextarea();
                 messageInput.focus();
-            });
-            
-            // Voice input placeholder (for future implementation)
-            voiceInputBtn.addEventListener('click', () => {
-                alert("Tính năng nhập giọng nói sẽ được phát triển trong tương lai.");
             });
         }
 

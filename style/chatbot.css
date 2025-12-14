@@ -28,27 +28,6 @@
             --danger-color: #ef4444;
         }
         
-        .dark-mode {
-            --primary-color: #111827;
-            --text-dark: #f9fafb;
-            --accent-color: #5a9bd3;
-            --white: #1f2937;
-            --text-light: #d1d5db;
-            --card-bg: #1f2937;
-            --sidebar-bg: #1f2937;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
-            --gradient: linear-gradient(135deg, #5a9bd3 0%, #4682b4 100%);
-            --hover-color: #374151;
-            --border-color: #374151;
-            --input-bg: #374151;
-            --message-user: #4682b4;
-            --message-bot: #ffffff;
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-        }
-        
         body {
             line-height: 1.6;
             color: var(--text-dark);
@@ -145,52 +124,6 @@
             gap: 16px;
         }
         
-        .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 48px;
-            height: 24px;
-        }
-        
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #d1d5db;
-            transition: .3s;
-            border-radius: 24px;
-        }
-        
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 18px;
-            width: 18px;
-            left: 3px;
-            bottom: 3px;
-            background-color: white;
-            transition: .3s;
-            border-radius: 50%;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        input:checked + .slider {
-            background: var(--gradient);
-        }
-        
-        input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-        
         .user-info {
             display: flex;
             align-items: center;
@@ -235,7 +168,7 @@
         .brand-name {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--accent-color);
+            color: var(--text-dark);
             margin-bottom: 5px;
             letter-spacing: -0.5px;
         }
@@ -941,12 +874,6 @@
             border-radius: 3px;
         }
         
-        .dark-mode .sidebar::-webkit-scrollbar-thumb,
-        .dark-mode .chat-messages::-webkit-scrollbar-thumb,
-        .dark-mode .modal-body::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
         /* Responsive Design */
         @media (max-width: 1024px) {
             .sidebar {
@@ -1041,5 +968,47 @@
             
             .modal-chat-preview {
                 max-width: 150px;
+            }
+        }
+        .brand-name a {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+    pointer-events: none; /* Ngăn không cho click */
+}
+
+.brand-name a:hover {
+    text-decoration: none;
+    color: inherit;
+}
+        /* Thêm các CSS cần thiết để fix sidebar */
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+            width: 0;
+            opacity: 0;
+            visibility: hidden;
+            border-right: none;
+        }
+        
+        .sidebar {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .chat-area {
+            transition: margin-left 0.3s ease, width 0.3s ease;
+        }
+        
+        .chat-area.expanded {
+            width: 100%;
+            margin-left: 0;
+        }
+        
+        @media (max-width: 1024px) {
+            .sidebar.active {
+                transform: translateX(0);
+                width: 280px;
+                opacity: 1;
+                visibility: visible;
             }
         }

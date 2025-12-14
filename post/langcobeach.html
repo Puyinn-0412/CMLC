@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+        :root {
+            --primary-color: #f0f8ff;
+            --text-dark: #2c2724;
+            --white: #ffffff;
+            --max-width: 1200px;
+            --accent-color: #4682b4;
+            --gold-color: #ffb347;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Header & Navigation */
+        .article-header {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .current-page {
+            color: var(--accent-color) !important;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--white);
+            width: 90%;
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: var(--max-width);
+            margin: 2rem auto;
+            padding: 0 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .article-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .article-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Article Content */
+        .article-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .article-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .article-text {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            background-color: var(--primary-color);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .article-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .article-image:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            padding: 0.8rem;
+            background-color: #f5f5f5;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #ddd;
+        }
+
+        .info-box h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .widget-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Related Articles */
+        .related-article {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .related-article:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .related-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .related-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+        }
+
+        .related-content a:hover h4 {
+            color: var(--accent-color);
+        }
+
+        /* Quick Facts */
+        .fact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .fact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .fact-text h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .fact-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Map */
+        .map-container {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #e9f5ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Author & Meta */
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 4rem 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-logo span {
+            color: #4682b4;
+        }
+
+        .footer-col p {
+            color: #ccc;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .footer-socials a {
+            font-size: 1.2rem;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bar {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .article-content {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="article-header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#">Lang<span>Trek</span></a>
+            </div>
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#">Trang Chủ</a></li>
+                <li><a href="#" class="current-page">Cẩm nang</a></li>
+                <li><a href="#">Điểm Đến</a></li>
+                <li><a href="#">Chatbot</a></li>
+                <li><a href="#">Lịch trình</a></li>
+                <li><a href="#">Triển lãm</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="https://images.unsplash.com/photo-1592382348658-3c9d6c0b6c0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Bãi biển Lăng Cô" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">Bãi Biển Lăng Cô</h1>
+            <p class="hero-subtitle">Viên Ngọc Biển Của Xứ Huế</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#">Trang chủ</a> / <a href="#">Bài viết</a> / <a href="#">Điểm đến</a> / <span>Bãi biển Lăng Cô</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="article-container">
+        <!-- Article Content -->
+        <article class="article-content">
+            <!-- Introduction -->
+            <section class="article-section">
+                <h2 class="section-title">Giới thiệu về bãi biển Lăng Cô</h2>
+                <p class="article-text">Bãi biển Lăng Cô được xem là một trong những bãi biển đẹp nhất miền Trung Việt Nam, nằm tại xã Chân Mây - Lăng Cô, thành phố Huế. Với vẻ đẹp hoang sơ, thơ mộng và yên bình, Lăng Cô đã được nhiều tạp chí du lịch quốc tế vinh danh là một trong những vịnh biển đẹp nhất thế giới.</p>
+                
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://statics.vinpearl.com/Lang-co-beach-1_1643475017.jpg" alt="Toàn cảnh bãi biển Lăng Cô">
+                        <div class="image-caption">Toàn cảnh bãi biển Lăng Cô nhìn từ trên cao</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://booking.muongthanh.com/upload_images/images/H%60/bai-bien-lang-co-hue.jpg" alt="Bờ biển Lăng Cô">
+                        <div class="image-caption">Bờ biển Lăng Cô với cát trắng mịn</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location -->
+            <section class="article-section">
+                <h2 class="section-title">Vị trí địa lý thuận lợi</h2>
+                <p class="article-text">Lăng Cô nằm ở vị trí địa lý đặc biệt, cách thành phố Huế khoảng 70km về phía nam và cách Đà Nẵng khoảng 60km về phía bắc. Điểm đặc biệt của Lăng Cô là nơi đây có cả núi lẫn biển, tạo nên một khung cảnh thiên nhiên hài hòa và tuyệt đẹp.</p>
+                
+                <div class="highlight-text">
+                    Để đến Lăng Cô, du khách có thể di chuyển từ Huế hoặc Đà Nẵng bằng ô tô cá nhân, xe máy hoặc xe khách. Tuyến đường ven biển Quốc lộ 1A đi qua đây mang đến những trải nghiệm thú vị với cảnh quan thiên nhiên hùng vĩ.
+                </div>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Bản đồ vị trí bãi biển Lăng Cô</p>
+                        <p>(Huế: 70km | Đà Nẵng: 60km)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Natural Beauty -->
+            <section class="article-section">
+                <h2 class="section-title">Vẻ đẹp thiên nhiên ban tặng</h2>
+                
+                <h3 class="section-subtitle">Bãi cát trắng mịn màng</h3>
+                <p class="article-text">Bãi biển Lăng Cô sở hữu dải cát trắng mịn trải dài gần 15km, uốn lượn theo hình vòng cung. Cát biển ở đây trắng tinh, mềm mại dưới chân, tạo cảm giác vô cùng dễ chịu khi bước chân.</p>
+                
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Cát trắng bãi biển Lăng Cô">
+                    <div class="image-caption">Dải cát trắng mịn trải dài tại Lăng Cô</div>
+                </div>
+                
+                <h3 class="section-subtitle">Nước biển trong xanh</h3>
+                <p class="article-text">Nước biển tại Lăng Cô có màu xanh ngọc bích đặc trưng, trong vắt đến mức có thể nhìn thấy đáy. Sóng biển êm đềm, không quá mạnh, rất phù hợp để tắm biển và vui chơi dưới nước.</p>
+                
+                <h3 class="section-subtitle">Phong cảnh núi non hùng vĩ</h3>
+                <p class="article-text">Phía sau bãi biển là dãy núi Bạch Mã cao vút, tạo nên một bức tranh thiên nhiên hoàn hảo với sự kết hợp giữa biển xanh, cát trắng và núi non. Vào những ngày trời đẹp, du khách có thể ngắm nhìn toàn cảnh vịnh biển từ đèo Hải Vân - một trong những cung đường ven biển đẹp nhất Việt Nam.</p>
+            </section>
+
+            <!-- Activities -->
+            <section class="article-section">
+                <h2 class="section-title">Hoạt động trải nghiệm tại Lăng Cô</h2>
+                
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tắm biển Lăng Cô">
+                        <div class="image-caption">Tắm biển tại Lăng Cô</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hải sản Lăng Cô">
+                        <div class="image-caption">Hải sản tươi ngon tại Lăng Cô</div>
+                    </div>
+                </div>
+                
+                <ul class="feature-list">
+                    <li><strong>Tắm biển và vui chơi:</strong> Với nước biển trong xanh và sóng nhẹ, Lăng Cô là địa điểm lý tưởng để tắm biển. Bãi biển có độ dốc thoai thoải, rất an toàn cho cả gia đình, kể cả trẻ em.</li>
+                    <li><strong>Thưởng thức hải sản tươi ngon:</strong> Lăng Cô nổi tiếng với các món hải sản tươi ngon, đa dạng và giá cả phải chăng. Du khách có thể thưởng thức các món như tôm hùm, cua, ghẹ, ốc, sò... được chế biến theo nhiều cách khác nhau tại các nhà hàng ven biển.</li>
+                    <li><strong>Khám phá đầm Lăng Cô:</strong> Ngoài bãi biển, Lăng Cô còn có đầm Lăng Cô - một đầm phá nước lợ rộng lớn với hệ sinh thái phong phú. Du khách có thể thuê thuyền để khám phá đầm, ngắm cảnh hoàng hôn hoặc trải nghiệm câu cá.</li>
+                    <li><strong>Tham quan các điểm du lịch lân cận:</strong> Từ Lăng Cô, du khách có thể dễ dàng di chuyển đến các điểm du lịch nổi tiếng như đèo Hải Vân, vườn quốc gia Bạch Mã, hoặc thành phố Huế với những di tích lịch sử văn hóa độc đáo.</li>
+                </ul>
+            </section>
+
+            <!-- Travel Tips -->
+            <section class="article-section">
+                <h2 class="section-title">Thông tin du lịch hữu ích</h2>
+                
+                <div class="info-box">
+                    <h4>Thời điểm lý tưởng để đến</h4>
+                    <p>Lăng Cô đẹp quanh năm, nhưng thời gian lý tưởng nhất để đến đây là từ tháng 3 đến tháng 8, khi thời tiết nắng đẹp, biển lặng và thuận lợi cho các hoạt động du lịch. Tránh khoảng thời gian từ tháng 9 đến tháng 12 vì đây là mùa mưa bão tại miền Trung.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h4>Lựa chọn chỗ ở</h4>
+                    <p>Lăng Cô có nhiều lựa chọn về chỗ ở từ resort cao cấp đến nhà nghỉ, khách sạn bình dân. Một số resort nổi tiếng tại đây là Banyan Tree Lang Co, Angsana Lang Co... với dịch vụ đẳng cấp quốc tế. Ngoài ra, du khách cũng có thể lựa chọn các homestay hoặc khách sạn nhỏ với giá cả phải chăng hơn.</p>
+                </div>
+                
+                <h3 class="section-subtitle">Lưu ý khi du lịch Lăng Cô</h3>
+                <ul class="feature-list">
+                    <li>Mang theo kem chống nắng và đồ bảo vệ da vì ánh nắng ở đây khá gay gắt</li>
+                    <li>Nên đi theo nhóm và tuân thủ các quy định về an toàn khi tắm biển</li>
+                    <li>Giữ gìn vệ sinh môi trường, không vứt rác bừa bãi</li>
+                    <li>Tôn trọng văn hóa và phong tục địa phương</li>
+                    <li>Nên đặt chỗ trước nếu đi vào mùa cao điểm (hè và các dịp lễ)</li>
+                </ul>
+                
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1573843989-c9d4a65b6c1c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Resort tại Lăng Cô">
+                    <div class="image-caption">Một resort cao cấp tại Lăng Cô</div>
+                </div>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="article-section">
+                <h2 class="section-title">Kết luận</h2>
+                <p class="article-text">Bãi biển Lăng Cô thực sự là một viên ngọc quý của xứ Huế, với vẻ đẹp hoang sơ, thơ mộng và yên bình. Đây là điểm đến lý tưởng cho những ai muốn tìm kiếm sự thư giãn, nghỉ dưỡng và khám phá vẻ đẹp thiên nhiên tuyệt vời của miền Trung Việt Nam. Hãy đặt chân đến Lăng Cô để trải nghiệm và cảm nhận sự kỳ diệu của nơi đây!</p>
+                
+                <div class="highlight-text">
+                    "Lăng Cô không chỉ là một bãi biển, mà còn là một kiệt tác của thiên nhiên, nơi núi và biển hòa quyện tạo nên một bức tranh tuyệt mỹ."
+                </div>
+            </section>
+
+            <!-- Article Meta -->
+            <div class="article-meta">
+                <div class="author-info">
+                    <div class="author-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Tác giả">
+                    </div>
+                    <div>
+                        <p><strong>Nguyễn Văn A</strong></p>
+                        <p>Chuyên gia du lịch | Đăng ngày: 15/04/2023</p>
+                    </div>
+                </div>
+                <div class="article-stats">
+                    <p><i class="far fa-eye"></i> 2.5k lượt xem | <i class="far fa-clock"></i> 8 phút đọc</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Quick Facts -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Thông tin nhanh</h3>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Vị trí</h4>
+                        <p>Xã Chân Mây - Lăng Cô, thành phố Huế</p>
+                    </div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Thời tiết</h4>
+                        <p>Nắng đẹp từ tháng 3-8</p>
+                    </div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Chiều dài bãi biển</h4>
+                        <p>Khoảng 10km</p>
+                    </div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Đặc điểm nước biển</h4>
+                        <p>Trong xanh</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Articles -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Bài viết liên quan</h3>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://cdn.tcdulichtphcm.vn/upload/2-2022/images/2022-06-11/1654949335-z3484742699434_e238f1dd2631c1a233566e6a2f5825e3-1654948863-57-width1342height878.jpg" alt="Phượt Tây Bắc">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Thác Bồ Ghè: Suối Nước Mát Lạnh Ẩn Mình Giữa Núi Rừng Huế</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">08/12/2025</p>
+                    </div>
+                </div>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Ẩm thực Hà Nội">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Bản đồ ẩm thực đường phố Hà Nội: 20 món ăn không thể bỏ qua</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">10/03/2023</p>
+                    </div>
+                </div>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://images.unsplash.com/photo-1534008897995-27a23e859048?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Du lịch Phú Quốc">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Du lịch Phú Quốc: Cẩm nang từ A đến Z cho chuyến đi hoàn hảo</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">05/03/2023</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Nhận tin mới</h3>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem;">Đăng ký để nhận bài viết mới về du lịch và ưu đãi đặc biệt.</p>
+                <form style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <input type="email" placeholder="Email của bạn" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">
+                    <button type="submit" class="btn" style="padding: 0.8rem; background-color: var(--accent-color); color: white; border-radius: 5px; font-weight: 600; border: none; cursor: pointer;">Đăng ký ngay</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <a href="#">Travel<span>Hub</span></a>
+                </div>
+                <p>Chia sẻ đam mê du lịch, khám phá vẻ đẹp Việt Nam và thế giới qua những bài viết chân thực và hữu ích.</p>
+                <ul class="footer-socials">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Danh mục</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Kinh nghiệm du lịch</a></li>
+                    <li><a href="#">Điểm đến hấp dẫn</a></li>
+                    <li><a href="#">Ẩm thực đường phố</a></li>
+                    <li><a href="#">Du lịch tiết kiệm</a></li>
+                    <li><a href="#">Phượt & khám phá</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Liên kết nhanh</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Bài viết mới</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bar">
+            <p>© 2023 TravelHub. Tất cả các bài viết thuộc bản quyền của tác giả.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Add active class to current section while scrolling
+        const sections = document.querySelectorAll('.article-section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('current-page');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('current-page');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

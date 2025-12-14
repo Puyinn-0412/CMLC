@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triển Lãm Ảo | Chân Mây - Lăng Cô</title>
+    <link rel="icon" href="icon-light.png" type="image/png" id="favicon">
+    <link rel="stylesheet" href="style/gallery.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+        <div class="loading-text">Đang tải Triển Lãm Ảo...</div>
+    </div>
+    
+    <!-- Header Y HỆT CHATBOT -->
+    <div class="app-header">
+        <div class="logo">
+            <div class="logo-icon">LT</div>
+            <span>LangTrek | Triển Lãm Ảo</span>
+        </div>
+        
+        <div class="header-controls">
+            <div class="user-info">
+                <i class="fas fa-user-graduate"></i>
+                <span>THPT Thừa Lưu</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Toggle Button Y HỆT CHATBOT -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+    
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Sidebar Y HỆT CHATBOT -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-name">
+                    <a href="./index.html">Lang<span style="color: #4682b4;">Trek</span></a>
+                </div>
+                <div class="brand-subtitle">Du Lịch Chân Mây - Lăng Cô</div>
+            </div>
+            
+            <div class="nav-section">
+                <div class="nav-title">Điều hướng</div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">
+                            <i class="fas fa-home"></i>
+                            <span>Trang Chủ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Chatbot.html">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Chat Du Lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./map.html">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span>Bản đồ du lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./camnang.html">
+                            <i class="fas fa-book-open"></i>
+                            <span>Cẩm nang du lịch</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="./gallery.html">
+                            <i class="fas fa-cube"></i>
+                            <span>Triển lãm 3D</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./itinerary.html">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Lịch trình gợi ý</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Trợ giúp</a>
+                    <a href="#" class="footer-link">Điều khoản</a>
+                    <a href="#" class="footer-link">Quyền riêng tư</a>
+                </div>
+                <div class="footer-copyright">
+                    <p>© 2025 THPT Thừa Lưu</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Content Area -->
+        <div class="content-area" id="contentArea">
+            <div class="content-header">
+                <h1 class="content-title">
+                    <i class="fas fa-cube"></i>
+                    Triển Lãm Ảo Chân Mây - Lăng Cô
+                </h1>
+                <p class="content-subtitle">
+                    Khám phá không gian triển lãm 3D tương tác với những hình ảnh, thông tin và trải nghiệm độc đáo 
+                    về vùng đất Chân Mây - Lăng Cô. Di chuyển tự do trong không gian ảo để khám phá mọi góc nhìn.
+                </p>
+            </div>
+            
+            <div class="artsteps-container">
+                <div class="iframe-wrapper">
+                    <div class="iframe-controls">
+                        <div class="controls-left">
+                            <span class="view-label">Chế độ xem:</span>
+                            <span class="view-badge">
+                                <i class="fas fa-vr-cardboard"></i>
+                                Triển lãm 3D
+                            </span>
+                        </div>
+                        <div class="controls-right">
+                            <button class="control-btn" onclick="enterFullscreen()">
+                                <i class="fas fa-expand"></i>
+                                Toàn màn hình
+                            </button>
+                            <button class="control-btn primary" onclick="reloadExhibition()">
+                                <i class="fas fa-sync-alt"></i>
+                                Tải lại
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <iframe 
+                        class="artsteps-iframe" 
+                        src="https://www.artsteps.com/embed/693abf1bada1a4bb5762c1d7/1280/720" 
+                        frameborder="0" 
+                        allowfullscreen
+                        id="artstepsFrame"
+                        title="Triển lãm ảo Chân Mây - Lăng Cô"
+                    ></iframe>
+                </div>
+                
+                <div class="instructions">
+                    <h3 class="instructions-title">
+                        <i class="fas fa-info-circle"></i>
+                        Hướng dẫn tham quan triển lãm ảo
+                    </h3>
+                    <div class="instructions-list">
+                        <div class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-mouse-pointer"></i>
+                            </div>
+                            <div class="instruction-text">
+                                <strong>Di chuyển:</strong> Sử dụng chuột để nhìn xung quanh, click và kéo để xoay góc nhìn
+                            </div>
+                        </div>
+                        <div class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-arrows-alt"></i>
+                            </div>
+                            <div class="instruction-text">
+                                <strong>Đi bộ:</strong> Sử dụng phím W/A/S/D hoặc các phím mũi tên để di chuyển trong không gian
+                            </div>
+                        </div>
+                        <div class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="instruction-text">
+                                <strong>Phóng to:</strong> Cuộn chuột để phóng to/thu nhỏ, nhấp đúp vào vật thể để xem chi tiết
+                            </div>
+                        </div>
+                        <div class="instruction-item">
+                            <div class="instruction-icon">
+                                <i class="fas fa-expand-arrows-alt"></i>
+                            </div>
+                            <div class="instruction-text">
+                                <strong>Toàn màn hình:</strong> Nhấn nút "Toàn màn hình" để trải nghiệm tốt nhất
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- JavaScript - Phần sidebar y hệt chatbot -->
+    <script>
+        // Sidebar Toggle Functionality - Y HỆT CHATBOT
+        const sidebar = document.getElementById('sidebar');
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const artstepsFrame = document.getElementById('artstepsFrame');
+        const contentArea = document.getElementById('contentArea');
+        
+        let isSidebarVisible = window.innerWidth > 1024;
+        
+        // Toggle sidebar on button click - Y HỆT CHATBOT
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isSidebarVisible = !isSidebarVisible;
+            toggleSidebar();
+        });
+        
+        // Close sidebar when clicking outside on mobile - Y HỆT CHATBOT
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth <= 1024 && isSidebarVisible) {
+                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
+                    isSidebarVisible = false;
+                    toggleSidebar();
+                }
+            }
+        });
+        
+        function toggleSidebar() {
+            if (window.innerWidth > 1024) {
+                // Desktop behavior - Y HỆT CHATBOT
+                if (isSidebarVisible) {
+                    sidebar.classList.remove('collapsed');
+                    contentArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    sidebarToggle.style.left = '280px';
+                } else {
+                    sidebar.classList.add('collapsed');
+                    contentArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    sidebarToggle.style.left = '0';
+                }
+            } else {
+                // Mobile/Tablet behavior - Y HỆT CHATBOT
+                if (isSidebarVisible) {
+                    sidebar.classList.add('active');
+                    contentArea.classList.remove('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                } else {
+                    sidebar.classList.remove('active');
+                    contentArea.classList.add('expanded');
+                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                }
+            }
+        }
+        
+        // Handle window resize - Y HỆT CHATBOT
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 1024) {
+                // Switch to desktop
+                isSidebarVisible = true;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                contentArea.classList.remove('expanded');
+                sidebarToggle.style.top = '50%';
+            } else {
+                // Switch to mobile
+                isSidebarVisible = false;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                contentArea.classList.add('expanded');
+                sidebarToggle.style.top = 'calc(50% + 30px)';
+            }
+            toggleSidebar();
+        });
+        
+        // Initialize sidebar state - Y HỆT CHATBOT
+        toggleSidebar();
+        
+        // Fullscreen function
+        function enterFullscreen() {
+            const iframeWrapper = document.querySelector('.iframe-wrapper');
+            
+            if (iframeWrapper.requestFullscreen) {
+                iframeWrapper.requestFullscreen();
+            } else if (iframeWrapper.webkitRequestFullscreen) {
+                iframeWrapper.webkitRequestFullscreen();
+            } else if (iframeWrapper.msRequestFullscreen) {
+                iframeWrapper.msRequestFullscreen();
+            }
+            
+            // Update button text
+            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
+            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Thoát toàn màn hình';
+            fullscreenBtn.onclick = exitFullscreen;
+        }
+        
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+            
+            // Update button text
+            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Toàn màn hình';
+            fullscreenBtn.onclick = enterFullscreen;
+        }
+        
+        // Handle fullscreen change events
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+        
+        function handleFullscreenChange() {
+            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
+            const isFullscreen = document.fullscreenElement || 
+                                document.webkitFullscreenElement || 
+                                document.msFullscreenElement;
+            
+            if (isFullscreen) {
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Thoát toàn màn hình';
+                fullscreenBtn.onclick = exitFullscreen;
+            } else {
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Toàn màn hình';
+                fullscreenBtn.onclick = enterFullscreen;
+            }
+        }
+        
+        // Reload exhibition
+        function reloadExhibition() {
+            artstepsFrame.src = artstepsFrame.src;
+            showNotification('Đang tải lại triển lãm...');
+        }
+        
+        // Show notification - Tương tự chatbot
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background-color: var(--accent-color);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: var(--shadow-lg);
+                z-index: 1000;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+        
+        // Hide loading screen when page is loaded
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                loadingScreen.classList.add('hidden');
+                showNotification('Triển lãm ảo đã sẵn sàng!');
+            }, 1500);
+        });
+        
+        // Iframe load event
+        artstepsFrame.addEventListener('load', function() {
+            console.log('Artsteps iframe loaded successfully');
+        });
+        
+        // Iframe error handling
+        artstepsFrame.addEventListener('error', function() {
+            console.error('Failed to load Artsteps iframe');
+            showNotification('Không thể tải triển lãm. Vui lòng thử lại!');
+        });
+    </script>
+</body>
+</html>
