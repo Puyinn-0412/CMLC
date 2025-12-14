@@ -1,9 +1,0 @@
-{
-  "name": "langtrek-chatbot",
-  "version": "1.0.0",
-  "description": "Chatbot Du Lịch Chân Mây - Lăng Cô",
-  "type": "module",
-  "dependencies": {
-    "@google/generative-ai": "^0.21.0"
-  }
-}
