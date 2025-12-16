@@ -219,6 +219,83 @@
     font-weight: bold;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
+/* CSS cho marker highlight */
+.map-marker-highlight {
+    background-color: #ffff00;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
+    animation: pulse 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* CSS cho nút action trong popup */
+.marker-popup-actions {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.marker-action-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.marker-action-btn:hover {
+    background-color: #5a9bd3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(70, 130, 180, 0.3);
+}
+/* CSS cho nút hiển thị trên bản đồ */
+.map-action-container {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.show-on-map-btn {
+    padding: 10px 16px;
+    background-color: rgba(70, 130, 180, 0.1);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.show-on-map-btn:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(70, 130, 180, 0.3);
+}
     </style>
 </head>
 <body>
@@ -364,17 +441,6 @@
         
         <!-- Phần phải: Bản đồ -->
         <div class="map-section">
-            <div class="map-header">
-                <h3><i class="fas fa-map-marked-alt"></i> Bản đồ Chân Mây - Lăng Cô</h3>
-                <div class="map-controls">
-                    <button class="map-control-btn" id="locateMeBtn" title="Vị trí của tôi">
-                        <i class="fas fa-location-crosshairs"></i>
-                    </button>
-                    <button class="map-control-btn" id="resetViewBtn" title="Đặt lại bản đồ">
-                        <i class="fas fa-sync-alt"></i>
-                    </button>
-                </div>
-            </div>
             <div id="map" class="map-container"></div>
         </div>
     </div>
@@ -391,7 +457,7 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = "AIzaSyDzKSJtm2rk4DB5pUdzbBfWb78XiQkyEHU";
+        const API_KEY = "AIzaSyALEfwnqBXqevl_SItEm_DqcTxCW13sCgw";
         const genAI = new GoogleGenerativeAI(API_KEY);
         
         // System instruction gọn
@@ -692,59 +758,8 @@ function getTouristLocations() {
 }
 function addTouristLocations() {
     // Danh sách địa điểm du lịch Chân Mây - Lăng Cô
-    const locations = [
-        {
-            name: "Vịnh Lăng Cô",
-            coords: [16.1800, 108.1167],
-            type: "beach",
-            description: "Một trong những vịnh đẹp nhất thế giới, bãi biển dài hơn 10km với cát trắng mịn và nước trong xanh.",
-            features: ["Biển", "Bãi tắm", "Chụp ảnh"]
-        },
-        {
-            name: "Đầm Lập An",
-            coords: [16.2333, 108.0833],
-            type: "lagoon",
-            description: "Đầm nước mặn rộng khoảng 800ha, nổi tiếng với nghề nuôi hàu và cảnh quan thiên nhiên tuyệt đẹp.",
-            features: ["Đầm nước", "Hàu", "Hoàng hôn"]
-        },
-        {
-            name: "Suối Voi",
-            coords: [16.2833, 108.0500],
-            type: "waterfall",
-            description: "Suối nước mát lạnh quanh năm với nhiều tầng thác đẹp, phù hợp cho các hoạt động dã ngoại.",
-            features: ["Suối", "Thác", "Dã ngoại"]
-        },
-        {
-            name: "Bãi biển Tân Cảnh Dương",
-            coords: [16.1917, 108.1250],
-            type: "beach",
-            description: "Bãi biển hoang sơ với cảnh quan tự nhiên được bảo tồn tốt, lý tưởng cho các hoạt động nghỉ dưỡng.",
-            features: ["Biển", "Hoang sơ", "Nghỉ dưỡng"]
-        },
-        {
-            name: "Chợ Hải Sản Lăng Cô",
-            coords: [16.1867, 108.1083],
-            type: "market",
-            description: "Chợ hải sản tươi sống nổi tiếng, nơi bạn có thể mua và thưởng thức hải sản mới đánh bắt.",
-            features: ["Hải sản", "Ẩm thực", "Mua sắm"]
-        },
-        {
-            name: "Núi Hải Vân",
-            coords: [16.2000, 108.0333],
-            type: "mountain",
-            description: "Đèo Hải Vân với cảnh quan núi rừng hùng vĩ, điểm check-in lý tưởng để ngắm toàn cảnh vùng biển.",
-            features: ["Núi", "Viewpoint", "Chụp ảnh"]
-        },
-        {
-            name: "Khu Du Lịch Chân Mây",
-            coords: [16.1667, 108.1333],
-            type: "resort",
-            description: "Khu du lịch nghỉ dưỡng cao cấp với các resort, sân golf và dịch vụ giải trí đầy đủ.",
-            features: ["Resort", "Golf", "Giải trí"]
-        }
-    ];
+    const locations = getTouristLocations();
     
-    // Định nghĩa icon cho từng loại địa điểm
     const iconTypes = {
         beach: { color: '#4682b4', icon: 'fa-umbrella-beach' },
         lagoon: { color: '#2e8b57', icon: 'fa-water' },
@@ -756,7 +771,7 @@ function addTouristLocations() {
     };
     
     // Thêm markers cho từng địa điểm
-    locations.forEach((location, index) => {
+    locations.forEach((location) => {
         const iconType = iconTypes[location.type] || iconTypes.default;
         
         // Tạo custom marker
@@ -770,8 +785,10 @@ function addTouristLocations() {
         });
         
         // Tạo marker
-        const marker = L.marker(location.coords, { icon: markerIcon })
-            .addTo(markersLayer);
+        const marker = L.marker(location.coords, { 
+            icon: markerIcon,
+            id: location.id
+        }).addTo(markersLayer);
         
         // Tạo popup content
         const popupContent = `
@@ -789,6 +806,11 @@ function addTouristLocations() {
                             `<span class="marker-feature-tag">${feature}</span>`
                         ).join('')}
                     </div>
+                    <div class="marker-popup-actions">
+                        <button class="marker-action-btn" onclick="focusOnLocation('${location.id}')">
+                            <i class="fas fa-search-location"></i> Xem chi tiết
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
@@ -798,9 +820,85 @@ function addTouristLocations() {
             className: 'marker-popup',
             maxWidth: 300
         });
+        
+        // Lưu marker vào đối tượng để dễ truy cập sau này
+        location.marker = marker;
+        touristLocations[location.id] = location;
     });
 }
+// Hàm để focus vào một địa điểm cụ thể
+window.focusOnLocation = function(locationId) {
+    console.log('Focusing on:', locationId);
+    const location = touristLocations[locationId];
+    
+    if (!location) {
+        console.error('Location not found:', locationId);
+        return;
+    }
+    
+    map.setView(location.coords, 15);
+    
+    if (location.marker) {
+        location.marker.openPopup();
+    }
+    
+    highlightMarker(location.marker);
+};
 
+// Hàm highlight marker
+function highlightMarker(marker) {
+    // Tạo hiệu ứng nhấp nháy
+    let flashCount = 0;
+    const flashInterval = setInterval(() => {
+        const icon = marker.getIcon();
+        const currentColor = icon.options.html.includes('#ffff00') ? '#4682b4' : '#ffff00';
+        
+        const newIcon = L.divIcon({
+            className: 'map-marker-highlight',
+            html: `<div style="background-color: ${currentColor}; border: 2px solid white;">
+                    <i class="fas fa-map-pin" style="font-size: 12px; color: ${currentColor === '#ffff00' ? '#000' : '#fff'}"></i>
+                  </div>`,
+            iconSize: [28, 28],
+            iconAnchor: [14, 14]
+        });
+        
+        marker.setIcon(newIcon);
+        
+        flashCount++;
+        if (flashCount >= 6) {
+            clearInterval(flashInterval);
+            // Trở về icon ban đầu
+            const iconType = getIconType(marker.options.id);
+            const originalIcon = L.divIcon({
+                className: 'map-marker',
+                html: `<div style="background-color: ${iconType.color};">
+                        <i class="fas ${iconType.icon}" style="font-size: 12px;"></i>
+                      </div>`,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12]
+            });
+            marker.setIcon(originalIcon);
+        }
+    }, 300);
+}
+
+// Hàm helper để lấy icon type
+function getIconType(locationId) {
+    const location = touristLocations[locationId];
+    if (!location) return { color: '#4682b4', icon: 'fa-map-marker-alt' };
+    
+    const iconTypes = {
+        beach: { color: '#4682b4', icon: 'fa-umbrella-beach' },
+        lagoon: { color: '#2e8b57', icon: 'fa-water' },
+        waterfall: { color: '#1e90ff', icon: 'fa-water' },
+        market: { color: '#ff8c00', icon: 'fa-shopping-cart' },
+        mountain: { color: '#8b4513', icon: 'fa-mountain' },
+        resort: { color: '#dc143c', icon: 'fa-hotel' },
+        default: { color: '#4682b4', icon: 'fa-map-marker-alt' }
+    };
+    
+    return iconTypes[location.type] || iconTypes.default;
+}
 function setupMapControls() {
     // Nút định vị vị trí hiện tại
     document.getElementById('locateMeBtn').addEventListener('click', function() {
@@ -881,77 +979,134 @@ document.addEventListener('DOMContentLoaded', function() {
             messageInput.style.height = `${newHeight}px`;
         }
 
-        async function handleSubmit(e) {
-            e.preventDefault();
-            const userMessage = messageInput.value.trim();
-            if (!userMessage || isSending) return;
+async function handleSubmit(e) {
+    e.preventDefault();
+    const userMessage = messageInput.value.trim();
+    if (!userMessage || isSending) return;
 
-            // Hide empty state on first message
-            if (emptyState.style.display !== 'none') {
-                emptyState.style.display = 'none';
-                chatMessages.style.display = 'flex';
+    // Hide empty state on first message
+    if (emptyState.style.display !== 'none') {
+        emptyState.style.display = 'none';
+        chatMessages.style.display = 'flex';
+    }
+
+    isSending = true;
+    addMessageToUI("user", userMessage);
+    
+    // Change send button to loading state
+    sendButton.innerHTML = '<div class="loading-spinner"></div>';
+    sendButton.disabled = true;
+
+    // Add to current messages array
+    currentMessages.push({ 
+        role: "user", 
+        content: userMessage,
+        timestamp: new Date().toISOString()
+    });
+
+    messageInput.value = "";
+    autoResizeTextarea();
+    isStopped = false;
+
+    try {
+        // Chuẩn bị history cho Gemini
+        const history = currentMessages.map(msg => ({
+            role: msg.role === "user" ? "user" : "model",
+            parts: [{ text: msg.content }]
+        }));
+
+        const chatSession = model.startChat({
+            history: history,
+            generationConfig: {
+                maxOutputTokens: 2000,
+                temperature: 0.9,
+                topP: 0.1,
+                topK: 16,
             }
+        });
 
-            isSending = true;
-            addMessageToUI("user", userMessage);
+        const result = await chatSession.sendMessage(userMessage);
+        const response = await result.response;
+        let botReply = response.text();
+
+        // Phân tích câu hỏi và tìm địa điểm liên quan
+        const locationMatch = findLocationInQuery(userMessage);
+        
+        if (locationMatch) {
+            // Thêm thông tin bản đồ vào câu trả lời
+            botReply += `\n\n📍 **Tôi đã đánh dấu ${locationMatch.name} trên bản đồ cho bạn!**`;
             
-            // Change send button to loading state
-            sendButton.innerHTML = '<div class="loading-spinner"></div>';
-            sendButton.disabled = true;
+            // Focus vào địa điểm trên bản đồ
+            setTimeout(() => {
+                focusOnLocation(locationMatch.id);
+            }, 500);
+        }
 
-            // Add to current messages array
-            currentMessages.push({ 
-                role: "user", 
-                content: userMessage,
-                timestamp: new Date().toISOString()
-            });
-
-            messageInput.value = "";
-            autoResizeTextarea();
-            isStopped = false;
-
-            try {
-                // Chuẩn bị history cho Gemini
-                const history = currentMessages.map(msg => ({
-                    role: msg.role === "user" ? "user" : "model",
-                    parts: [{ text: msg.content }]
-                }));
-
-                const chatSession = model.startChat({
-                    history: history,
-                    generationConfig: {
-                        maxOutputTokens: 2000,
-                        temperature: 0.9,
-                        topP: 0.1,
-                        topK: 16,
-                    }
+        // Giới hạn câu trả lời tối đa 300 từ
+        const limitedReply = limitWords(botReply, 300);
+        
+        displayTypingMessage(limitedReply, () => {
+            if (!isStopped) {
+                currentMessages.push({ 
+                    role: "assistant", 
+                    content: limitedReply,
+                    timestamp: new Date().toISOString()
                 });
-
-                const result = await chatSession.sendMessage(userMessage);
-                const response = await result.response;
-                const botReply = response.text();
-
-                // Giới hạn câu trả lời tối đa 300 từ
-                const limitedReply = limitWords(botReply, 300);
-                
-                displayTypingMessage(limitedReply, () => {
-                    if (!isStopped) {
-                        currentMessages.push({ 
-                            role: "assistant", 
-                            content: limitedReply,
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-                });
-            } catch (error) {
-                console.error("Lỗi: ", error);
-                addMessageToUI("assistant", "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.");
-            } finally {
-                isSending = false;
-                resetSendButton();
-                scrollToBottom();
+            }
+        });
+    } catch (error) {
+        console.error("Lỗi: ", error);
+        addMessageToUI("assistant", "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.");
+    } finally {
+        isSending = false;
+        resetSendButton();
+        scrollToBottom();
+    }
+}
+// Hàm tìm địa điểm trong câu hỏi
+function findLocationInQuery(query) {
+    const queryLower = query.toLowerCase();
+    const locations = getTouristLocations();
+    
+    // Từ khóa tìm kiếm cho từng địa điểm
+    const locationKeywords = {
+        'vinh-lang-co': ['vịnh lăng cô', 'lang cô', 'bãi biển lăng cô', 'vinh lang co'],
+        'dam-lap-an': ['đầm lập an', 'lập an', 'đầm nước', 'nuôi hàu', 'hàu lập an'],
+        'suoi-voi': ['suối voi', 'thác voi', 'suoi voi'],
+        'bai-bien-tan-canh-duong': ['tân cảnh dương', 'bãi tân cảnh dương', 'tan canh duong'],
+        'cho-hai-san-lang-co': ['chợ hải sản', 'chợ lăng cô', 'hải sản tươi', 'cho hai san'],
+        'nui-hai-van': ['hải vân', 'đèo hải vân', 'núi hải vân', 'đèo', 'hai van'],
+        'khu-du-lich-chan-may': ['chân mây', 'khu du lịch chân mây', 'resort chân mây', 'chan may'],
+        'thac-bo-ghe': ['thác bồ ghè', 'bồ ghè', 'thac bo ghe'],
+        'suoi-mo': ['suối mơ', 'suoi mo'],
+        'bai-bien-binh-an': ['bình an', 'bãi bình an', 'bai bien binh an']
+    };
+    
+    // Tìm địa điểm phù hợp
+    for (const [locationId, keywords] of Object.entries(locationKeywords)) {
+        for (const keyword of keywords) {
+            if (queryLower.includes(keyword)) {
+                return touristLocations[locationId];
             }
         }
+    }
+    
+    // Tìm bằng tên gần đúng
+    for (const location of locations) {
+        if (queryLower.includes(location.name.toLowerCase())) {
+            return location;
+        }
+        
+        // Tìm trong mô tả
+        if (queryLower.split(' ').some(word => 
+            word.length > 3 && location.description.toLowerCase().includes(word)
+        )) {
+            return location;
+        }
+    }
+    
+    return null;
+}
 
         function limitWords(text, maxWords) {
             if (!text) return "";
@@ -990,35 +1145,49 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 1500);
         }
 
-        function addMessageToUI(role, content) {
-            const messageContainer = document.createElement('div');
-            messageContainer.className = `message-container ${role}`;
-            
-            const avatar = document.createElement('div');
-            avatar.className = `message-avatar ${role}`;
-            
-            if (role === 'user') {
-                avatar.innerHTML = '<i class="fas fa-user"></i>';
-            } else {
-                avatar.innerHTML = '<i class="fas fa-robot"></i>';
-            }
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message-content';
-            
-            const messageBubble = document.createElement('div');
-            messageBubble.className = role === 'user' ? 'user-message' : 'bot-message';
-            
-            const formattedContent = formatMessage(content);
-            messageBubble.innerHTML = `<div class="markdown">${formattedContent}</div>`;
-            
-            messageDiv.appendChild(messageBubble);
-            messageContainer.appendChild(avatar);
-            messageContainer.appendChild(messageDiv);
-            
-            chatMessages.appendChild(messageContainer);
-            scrollToBottom();
-        }
+function addMessageToUI(role, content) {
+    const messageContainer = document.createElement('div');
+    messageContainer.className = `message-container ${role}`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = `message-avatar ${role}`;
+    
+    if (role === 'user') {
+        avatar.innerHTML = '<i class="fas fa-user"></i>';
+    } else {
+        avatar.innerHTML = '<i class="fas fa-robot"></i>';
+    }
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'message-content';
+    
+    const messageBubble = document.createElement('div');
+    messageBubble.className = role === 'user' ? 'user-message' : 'bot-message';
+    
+    // Kiểm tra xem có location trong tin nhắn không
+    const locationMatch = findLocationInQuery(content);
+    let formattedContent = formatMessage(content);
+    
+    // Nếu là tin nhắn từ bot và có địa điểm
+    if (role === 'assistant' && locationMatch) {
+        formattedContent += `
+            <div class="map-action-container">
+                <button class="show-on-map-btn" onclick="focusOnLocation('${locationMatch.id}')">
+                    <i class="fas fa-map-marked-alt"></i> Hiển thị ${locationMatch.name} trên bản đồ
+                </button>
+            </div>
+        `;
+    }
+    
+    messageBubble.innerHTML = `<div class="markdown">${formattedContent}</div>`;
+    
+    messageDiv.appendChild(messageBubble);
+    messageContainer.appendChild(avatar);
+    messageContainer.appendChild(messageDiv);
+    
+    chatMessages.appendChild(messageContainer);
+    scrollToBottom();
+}
 
         function formatMessage(content) {
             if (!content) return '';
