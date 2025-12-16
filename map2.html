@@ -12,786 +12,7 @@
   />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <!-- Turf.js để tính diện tích polygon -->
-  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
-      :root {
-        --primary-color: #f0f8ff;
-        --text-dark: #2c2724;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
-
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      .btn {
-        outline: none;
-        border: none;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-
-      img {
-        display: flex;
-        width: 100%;
-      }
-
-      a {
-        text-decoration: none;
-        transition: 0.3s;
-      }
-
-      body {
-        font-family: "Montserrat", sans-serif;
-      }
-
-      nav {
-        position: fixed;
-        isolation: isolate;
-        width: 100%;
-        z-index: 9;
-      }
-
-      .nav__header {
-        padding: 1rem;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: var(--text-dark);
-      }
-
-      .nav__logo a {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--white);
-      }
-
-      .nav__menu__btn {
-        font-size: 1.5rem;
-        color: var(--white);
-        cursor: pointer;
-      }
-
-      .nav__links {
-        position: absolute;
-        top: 60px;
-        left: 0;
-        width: 100%;
-        padding: 2rem;
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 2rem;
-        background-color: var(--text-dark);
-        transition: 0.5s;
-        z-index: -1;
-        transform: translateY(-100%);
-      }
-
-      .nav__links.open {
-        transform: translateY(0);
-      }
-
-      .nav__links a {
-        font-weight: 600;
-        color: var(--primary-color);
-      }
-
-      .nav__links a:hover {
-        color: var(--white);
-      }
-
-      .nav__btns {
-        display: none;
-      }
-
-      .container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 0;
-        position: relative;
-        isolation: isolate;
-        display: grid;
-        gap: 2rem;
-        overflow: hidden;
-      }
-
-      .container__left {
-        padding-inline: 1rem;
-        text-align: center;
-      }
-
-      .container__left h1 {
-        margin-bottom: 2rem;
-        font-size: 3.5rem;
-        font-weight: 700;
-        line-height: 4.5rem;
-        color: var(--text-dark);
-      }
-
-      .container__left .btn {
-        padding: 1rem 2rem;
-        letter-spacing: 2px;
-        color: var(--white);
-        background-color: var(--text-dark);
-        border-radius: 5rem;
-      }
-
-      .container__left .btn:hover {
-        color: var(--text-dark);
-        background-color: var(--primary-color);
-      }
-
-      .container__right {
-        position: relative;
-        isolation: isolate;
-        display: grid;
-        gap: 2rem;
-      }
-
-      .container__right::before {
-        position: absolute;
-        content: "";
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        transform-origin: left;
-        height: 80%;
-        background-color: var(--primary-color);
-        border-radius: 1rem;
-        z-index: -1;
-        animation: show 0.75s 1.25s ease-in-out forwards;
-      }
-
-      @keyframes show {
-        0% {
-          width: 0;
-        }
-        100% {
-          width: calc(100% - 2rem);
-        }
-      }
-
-      .images {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .tent-1 {
-        max-width: 300px;
-        transform: translateX(1rem);
-        border-radius: 1rem;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .tent-2 {
-        max-width: 180px;
-        transform: translateX(-1rem);
-        border-radius: 1rem;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-
-      .content {
-        padding-block: 0 5rem;
-        padding-inline: 2rem;
-        text-align: center;
-      }
-
-      .content h4 {
-        margin-bottom: 1rem;
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--text-dark);
-      }
-
-      .content h2 {
-        margin-bottom: 0.5rem;
-        font-size: 2rem;
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: #4682b4;
-      }
-
-      .content h3 {
-        margin-bottom: 1rem;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-
-      .content p {
-        line-height: 1.75rem;
-        color: var(--text-dark);
-      }
-
-      .location {
-        position: absolute;
-        left: 1rem;
-        bottom: 1rem;
-        padding: 1rem 2rem 1rem 1rem;
-        border-radius: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        background-color: var(--primary-color);
-        border: 10px solid var(--white);
-        border-bottom: none;
-      }
-
-      .location span {
-        padding: 5px 10px;
-        font-size: 1.5rem;
-        color: var(--text-dark);
-        background-color: var(--white);
-        border-radius: 10px;
-      }
-
-      .socials {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .socials a {
-        font-size: 1.25rem;
-        color: var(--text-dark);
-      }
-
-      .section__container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-
-      .section__header {
-        margin-bottom: 2rem;
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-align: center;
-        color: var(--text-dark);
-      }
-
-      .section__description {
-        line-height: 1.75rem;
-        color: var(--text-dark);
-      }
-
-      .service__container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .service__grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-        width: 100%;
-      }
-
-      .service__card {
-        padding: 2rem;
-        text-align: center;
-        background-color: var(--white);
-        border-radius: 1rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
-      }
-
-      .service__card:hover {
-        transform: translateY(-5px);
-      }
-
-      .service__card div {
-        font-size: 2.5rem;
-        color: var(--text-dark);
-        margin-bottom: 1rem;
-      }
-
-      .service__card h4 {
-        margin-bottom: 0.5rem;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-
-      .service__btn {
-        margin-top: 2rem;
-      }
-
-      .btn {
-        padding: 1rem 2rem;
-        background-color: var(--text-dark);
-        color: var(--white);
-        border-radius: 5rem;
-        font-weight: 600;
-        transition: background-color 0.3s;
-      }
-
-      .btn:hover {
-        background-color: #4682b4;
-      }
-
-      .about__container {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      @media (width > 768px) {
-        .about__container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      .about__image img {
-        border-radius: 1rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .about__content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      .about__list {
-        list-style: none;
-        display: grid;
-        gap: 1rem;
-      }
-
-      .about__list li {
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-      }
-
-      .about__list span {
-        font-size: 2rem;
-        color: #4682b4;
-        flex-shrink: 0;
-      }
-
-      .about__list h4 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 0.25rem;
-      }
-
-      .portfolio__container {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-      }
-
-      .portfolio__header {
-        text-align: center;
-      }
-
-      .portfolio__header .section__description {
-        max-width: 800px;
-        margin: auto;
-        text-align: center;
-      }
-
-      .portfolio__content {
-        display: grid;
-        gap: 2rem;
-      }
-
-      @media (width > 768px) {
-        .portfolio__content {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      .portfolio__image {
-        position: relative;
-        overflow: hidden;
-        border-radius: 1rem;
-      }
-
-      .portfolio__image img {
-        border-radius: 1rem;
-        transition: transform 0.3s;
-      }
-
-      .portfolio__image:hover img {
-        transform: scale(1.05);
-      }
-
-      .portfolio__image__content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: flex;
-        gap: 1rem;
-      }
-
-      .portfolio__image__content div {
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 1.5rem;
-        border: 1px solid #000;
-        border-radius: 1rem;
-        text-align: center;
-        min-width: 150px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      .portfolio__image__content h4 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-        color: #000;
-      }
-
-      .portfolio__image__content p {
-        font-size: 0.8rem;
-        color: #333;
-        line-height: 1.2;
-      }
-
-      .portfolio__list {
-        list-style: none;
-        display: grid;
-        gap: 1.5rem;
-      }
-
-      .portfolio__list li {
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-      }
-
-      .portfolio__list span {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #4682b4;
-        flex-shrink: 0;
-      }
-
-      .portfolio__list h4 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 0.25rem;
-      }
-
-      .feedback__container {
-        padding: 5rem 1rem;
-        text-align: center;
-      }
-
-      .swiper {
-        width: 100%;
-        max-width: 800px;
-        margin: auto;
-      }
-
-      .feedback__card {
-        padding: 2rem;
-        background-color: var(--white);
-        border-radius: 1rem;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        text-align: left;
-      }
-
-      .feedback__card .section__description {
-        margin-bottom: 1rem;
-      }
-
-      .feedback__details {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .feedback__user {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-
-      .feedback__user img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        object-fit: cover;
-      }
-
-      .feedback__user h4 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-
-      .feedback__user h5 {
-        font-size: 0.8rem;
-        font-weight: 400;
-        color: var(--text-dark);
-      }
-
-      .feedback__rating span {
-        color: #ffd700;
-        font-size: 1.25rem;
-      }
-
-      .subscribe__container {
-        background-color: var(--primary-color);
-        border-radius: 1rem;
-        overflow: hidden;
-        text-align: center;
-      }
-
-      .subscribe__content {
-        padding: 3rem 1rem;
-      }
-
-      .subscribe__content form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 600px;
-        margin: auto;
-      }
-
-      @media (width > 768px) {
-        .subscribe__content form {
-          flex-direction: row;
-        }
-      }
-
-      .subscribe__content input {
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 5rem;
-        flex: 1;
-        font-size: 1rem;
-      }
-
-      .subscribe__content button {
-        padding: 1rem 2rem;
-        background-color: var(--text-dark);
-        color: var(--white);
-        border-radius: 5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 600;
-      }
-
-      .subscribe__content button:hover {
-        background-color: #4682b4;
-      }
-
-      footer {
-        background-color: var(--text-dark);
-        color: var(--white);
-      }
-
-      .footer__container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-      }
-
-      .footer__logo a {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--white);
-      }
-
-      .footer__logo span {
-        color: #4682b4;
-      }
-
-      .footer__col .section__description {
-        color: var(--primary-color);
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .footer__col h3 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-      }
-
-      .footer__socials {
-        display: flex;
-        gap: 1rem;
-        list-style: none;
-      }
-
-      .footer__socials a {
-        font-size: 1.25rem;
-        color: var(--primary-color);
-        transition: color 0.3s;
-      }
-
-      .footer__socials a:hover {
-        color: var(--white);
-      }
-
-      .footer__col h4 {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: var(--white);
-        margin-bottom: 1rem;
-      }
-
-      .footer__links {
-        list-style: none;
-        display: grid;
-        gap: 0.75rem;
-      }
-
-      .footer__links a {
-        color: var(--primary-color);
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        transition: color 0.3s;
-      }
-
-      .footer__links a:hover {
-        color: var(--white);
-      }
-
-      .footer__links a span {
-        margin-right: 0.5rem;
-        font-size: 1.25rem;
-      }
-
-      .footer__bar {
-        padding: 1rem;
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.2);
-        color: var(--primary-color);
-        font-size: 0.9rem;
-      }
-
-      @media (width > 768px) {
-        nav {
-          position: static;
-          padding: 2rem 1rem;
-          max-width: var(--max-width);
-          margin-inline: auto;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 2rem;
-        }
-
-        .nav__header {
-          flex: 1;
-          padding: 0;
-          background-color: transparent;
-        }
-
-        .nav__logo a {
-          color: var(--text-dark);
-        }
-
-        .nav__menu__btn {
-          display: none;
-        }
-
-        .nav__links {
-          position: static;
-          padding: 0;
-          flex-direction: row;
-          background-color: transparent;
-          transform: none;
-        }
-
-        .nav__links a,
-        .nav__links a:hover {
-          color: var(--text-dark);
-        }
-
-        .nav__btns {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .nav__btns .btn {
-          font-size: 1.5rem;
-          color: var(--text-dark);
-          background-color: transparent;
-        }
-
-        .container {
-          grid-template-columns: 2fr 3fr;
-          align-items: center;
-          padding: 2rem 0;
-        }
-
-        .container__left {
-          text-align: left;
-        }
-      }
-
-      @media (width > 1024px) {
-        .container__right {
-          grid-template-columns: 1fr 2fr;
-          align-items: center;
-        }
-
-        .container__right::before {
-          bottom: unset;
-          top: 0;
-          height: 90%;
-        }
-
-        .images {
-          flex-direction: column;
-        }
-
-        .tent-1 {
-          width: calc(100% + 10rem);
-          max-width: 325px;
-          transform: translate(-2rem, 2rem);
-        }
-
-        .tent-2 {
-          max-width: 200px;
-          transform: translate(4rem, -1rem);
-        }
-
-        .content {
-          padding-block: 5rem;
-          text-align: left;
-          max-width: 400px;
-          margin-inline-start: unset;
-        }
-      }
-  </style>
-
+  <link rel="stylesheet" href="style/stylemap.css" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -804,157 +25,6 @@
   <div class="loading" id="loading">
     <div class="loading-spinner"></div>
     <span>Đang tải bản đồ...</span>
-  </div>
-  
-  <!-- Nút mở sidebar (luôn hiển thị) -->
-  <button class="sidebar-open" id="sidebar-open" title="Mở sidebar">
-    <i class="fas fa-bars"></i>
-  </button>
-  
-  <!-- Sidebar -->
-  <div class="sidebar" id="sidebar">
-    <!-- ĐÃ XÓA NÚT TOGGLE BÊN TRONG SIDEBAR -->
-    
-    <button class="theme-toggle" id="theme-toggle" title="Chế độ tối/sáng">
-      <i class="fas fa-moon"></i>
-    </button>
-    
-    <div class="sidebar-content">
-      <div class="sidebar-header">
-        <div class="sidebar-title">
-          <h1>🌊 Chân Mây - Lăng Cô</h1>
-          <p>Khám phá các điểm du lịch tuyệt vời</p>
-        </div>
-        <button class="sidebar-close" id="sidebar-close" title="Đóng sidebar">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      
-      <!-- Search Box với gợi ý thông minh -->
-      <div class="search-container">
-        <div class="search-box">
-          <input type="text" id="search-input" placeholder="Tìm kiếm địa điểm, địa chỉ...">
-          <i class="fas fa-search"></i>
-        </div>
-        <div class="search-suggestions" id="search-suggestions">
-          <!-- Gợi ý tìm kiếm sẽ được thêm bằng JavaScript -->
-        </div>
-      </div>
-      
-      <!-- Bộ lọc loại hình -->
-      <div class="filter-section">
-        <div class="filter-header" id="type-filter-header">
-          <div class="filter-title">
-            <i class="fas fa-filter"></i>
-            <span>Loại hình</span>
-          </div>
-          <button class="filter-toggle" id="type-filter-toggle">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div class="filter-content" id="type-filter-content">
-          <div class="filter-tags">
-            <div class="filter-tag" data-type="baibien">
-              <i class="fas fa-umbrella-beach"></i>
-              <span>Bãi biển</span>
-            </div>
-            <div class="filter-tag" data-type="nghiduong">
-              <i class="fas fa-hotel"></i>
-              <span>Resort & Khách sạn</span>
-            </div>
-            <div class="filter-tag" data-type="nhahang">
-              <i class="fas fa-utensils"></i>
-              <span>Nhà hàng & Ẩm thực</span>
-            </div>
-            <div class="filter-tag" data-type="ditich">
-              <i class="fas fa-landmark"></i>
-              <span>Di tích lịch sử</span>
-            </div>
-            <div class="filter-tag" data-type="giaitri">
-              <i class="fas fa-gamepad"></i>
-              <span>Giải trí</span>
-            </div>
-            <div class="filter-tag" data-type="muasam">
-              <i class="fas fa-shopping-bag"></i>
-              <span>Mua sắm</span>
-            </div>
-            <div class="filter-tag" data-type="chua">
-              <i class="fas fa-place-of-worship"></i>
-              <span>Chùa chiền</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Bộ lọc tiêu chí -->
-      <div class="filter-section">
-        <div class="filter-header" id="criteria-filter-header">
-          <div class="filter-title">
-            <i class="fas fa-star"></i>
-            <span>Tiêu chí</span>
-          </div>
-          <button class="filter-toggle" id="criteria-filter-toggle">
-            <i class="fas fa-chevron-down"></i>
-          </button>
-        </div>
-        <div class="filter-content" id="criteria-filter-content">
-          <!-- Phù hợp gia đình -->
-          <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Phù hợp</div>
-            <div class="filter-tags">
-              <div class="filter-tag" data-criteria="family">
-                <i class="fas fa-users"></i>
-                <span>Gia đình</span>
-              </div>
-              <div class="filter-tag" data-criteria="couple">
-                <i class="fas fa-heart"></i>
-                <span>Lãng mạn</span>
-              </div>
-              <div class="filter-tag" data-criteria="solo">
-                <i class="fas fa-user"></i>
-                <span>Đi một mình</span>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Ngân sách -->
-          <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Ngân sách</div>
-            <input type="range" min="0" max="4" value="4" class="budget-slider" id="budget-slider">
-            <div class="budget-labels">
-              <span>Miễn phí</span>
-              <span>Tiết kiệm</span>
-              <span>Trung bình</span>
-              <span>Cao cấp</span>
-              <span>Luxury</span>
-            </div>
-          </div>
-          
-          <!-- Độ tuổi -->
-          <div style="margin-bottom: 15px;">
-            <div style="font-weight: 600; margin-bottom: 8px; color: #2d3748;" class="filter-subtitle">Độ tuổi</div>
-            <div class="age-buttons">
-              <button class="age-btn active" data-age="all">Tất cả</button>
-              <button class="age-btn" data-age="child">Trẻ em</button>
-              <button class="age-btn" data-age="teen">Thanh thiếu niên</button>
-              <button class="age-btn" data-age="adult">Người lớn</button>
-              <button class="age-btn" data-age="senior">Người cao tuổi</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Nút xóa bộ lọc -->
-      <button class="clear-filters" id="clear-filters">
-        <i class="fas fa-times"></i>
-        Xóa tất cả bộ lọc
-      </button>
-      
-      <h3 style="margin: 20px 0 15px; color: #2d3748;" class="section-title">Địa điểm nổi bật</h3>
-      <ul class="location-list" id="location-list">
-        <!-- Danh sách địa điểm sẽ được thêm bằng JavaScript -->
-      </ul>
-    </div>
   </div>
   
   <!-- Info Panel -->
@@ -1023,68 +93,15 @@
     </div>
   </div>
   
-  <!-- Map Controls - ĐÃ DI CHUYỂN LÊN TRÊN -->
+  <!-- Map Controls đơn giản -->
   <div class="map-controls">
     <button class="map-control" id="locate-me" title="Vị trí của tôi">
       <i class="fas fa-location-arrow"></i>
-    </button>
-    <button class="map-control" id="toggle-boundary" title="Ranh giới">
-      <i class="fas fa-draw-polygon"></i>
-    </button>
-    <button class="map-control" id="toggle-satellite" title="Chế độ vệ tinh">
-      <i class="fas fa-satellite"></i>
     </button>
     <button class="map-control" id="fullscreen" title="Toàn màn hình">
       <i class="fas fa-expand"></i>
     </button>
   </div>
-  
-  <!-- Legend -->
-  <div class="legend" id="legend">
-    <h4>
-      <span>Chú thích</span>
-      <button class="legend-toggle" id="legend-toggle" title="Ẩn/hiện chú thích">
-        <i class="fas fa-eye-slash"></i>
-      </button>
-    </h4>
-    <div class="legend-item">
-      <div class="legend-color boundary-color"></div>
-      <span>Ranh giới khu vực</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #e74c3c; border-color: #c0392b;"></div>
-      <span>Di tích lịch sử</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #3498db; border-color: #2980b9;"></div>
-      <span>Bãi biển & Đầm nước</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #27ae60; border-color: #219a52;"></div>
-      <span>Suối & Thác nước</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #f39c12; border-color: #e67e22;"></div>
-      <span>Khu nghỉ dưỡng</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #9b59b6; border-color: #8e44ad;"></div>
-      <span>Chùa & Nhà thờ</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #e67e22; border-color: #d35400;"></div>
-      <span>Khu mua sắm</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background: #1abc9c; border-color: #16a085;"></div>
-      <span>Nhà hàng & Ẩm thực</span>
-    </div>
-  </div>
-
-  <!-- Nút hiện chú thích khi đã ẩn -->
-  <button class="legend-show" id="legend-show" title="Hiện chú thích">
-    <i class="fas fa-map"></i>
-  </button>
 
   <script>
     // ========== CẤU TRÚC DỮ LIỆU VÀ CẤU HÌNH ==========
@@ -1092,13 +109,11 @@
     // Cấu hình ứng dụng
     const APP_CONFIG = {
       mapCenter: [16.27, 108.06],
-      defaultZoom: 12,
-      osmRelationId: 19325212,
-      boundaryColor: "#3498db",
-      boundaryOpacity: 0.15,
-      boundaryWeight: 3
+      defaultZoom: 12
     };
 
+    // Dữ liệu các điểm đánh dấu
+    
     // Dữ liệu các điểm đánh dấu với thông tin lọc nâng cao
     const MARKERS_DATA = [
       {
@@ -1114,13 +129,6 @@
         phone: "",
         hours: " 07:00–17:30",
         price: " Miễn phí",
-        // Thông tin lọc nâng cao
-        filters: {
-          type: "ditich",
-          suitability: ["family", "couple", "solo"],
-          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
-          age: ["child", "teen", "adult", "senior"],
-        },
         // Thêm tips và lưu ý
         tips: [
           {
@@ -1153,12 +161,6 @@
         phone: "",
         hours: "Mở cả ngày",
         price: "Miễn phí",
-        filters: {
-          type: "damnuoc",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1195,12 +197,6 @@
         phone: "",
         hours: "Mở cửa cả ngày",
         price: "Miễn phí",
-        filters: {
-          type: "baibien",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1237,12 +233,6 @@
         phone: "",
         hours: "Mở cửa cả ngày",
         price: "Miễn phí",
-        filters: {
-          type: "baibien",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1274,12 +264,6 @@
         phone: "",
         hours: "Mở cửa cả ngày",
         price: "Miễn phí",
-        filters: {
-          type: "baibien",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1311,12 +295,6 @@
         phone: "0234 3695 800",
         hours: "Mở cửa cả ngày",
         price: "Từ 5.724.000 VNĐ/đêm",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 4,
-          age: ["adult","senior", "child", "teen"],
-        },
         tips: [
           {
             type: "tip",
@@ -1348,12 +326,6 @@
         phone: "",
         hours: "07:00 - 20:00",
         price: "Miễn phí",
-        filters: {
-          type: "chua",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1385,12 +357,6 @@
         phone: "",
         hours: "Tạm thời đóng cửa",
         price: "Giá vé 15.000 VNĐ/người, thuê chòi 200.000-250.000 VNĐ",
-        filters: {
-          type: "suoi",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1422,12 +388,6 @@
         phone: "",
         hours: "7:00-17:30",
         price: "",
-        filters: {
-          type: "suoi",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1459,12 +419,6 @@
         phone: "",
         hours: "8:00-17:00",
         price: "",
-        filters: {
-          type: "suoi",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1496,12 +450,6 @@
         phone: "",
         hours: "07:00 - 18:00",
         price: "",
-        filters: {
-          type: "suoi",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1533,13 +481,6 @@
         phone: "",
         hours: " Cả ngày",
         price: " Miễn phí",
-        // Thông tin lọc nâng cao
-        filters: {
-          type: "ditich",
-          suitability: ["couple", "solo"],
-          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
-          age: ["teen", "adult", "senior"],
-        },
         // Thêm tips và lưu ý
         tips: [
           {
@@ -1572,13 +513,6 @@
         phone: "",
         hours: " Cả ngày",
         price: " Miễn phí",
-        // Thông tin lọc nâng cao
-        filters: {
-          type: "baibien",
-          suitability: ["family", "couple", "solo"],
-          budget: 0, // 0: Miễn phí, 1: Tiết kiệm, 2: Trung bình, 3: Cao cấp, 4: Luxury
-          age: ["child", "teen", "adult", "senior"],
-        },
         // Thêm tips và lưu ý
         tips: [
           {
@@ -1611,12 +545,6 @@
         phone: "",
         hours: "08:00 - 19:00",
         price: "Miễn phí",
-        filters: {
-          type: "chua",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1648,12 +576,6 @@
         phone: "",
         hours: "05:00 - 19:00",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 16,
@@ -1668,12 +590,6 @@
         phone: "",
         hours: "05:00 - 19:00",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple","solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 17,
@@ -1688,12 +604,6 @@
         phone: "036 677 0000",
         hours: "16:00 - 22:30",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple"],
-          budget: 3,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 18,
@@ -1708,12 +618,6 @@
         phone: "",
         hours: "08:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple"],
-          budget: 3,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 19,
@@ -1728,12 +632,6 @@
         phone: "",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple"],
-          budget: 3,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 20,
@@ -1748,12 +646,6 @@
         phone: "090 255 55 56",
         hours: "Mở cửa cả ngày",
         price: "",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 2,
-          age: ["all"],
-        },
         tips: [
           {
             type: "tip",
@@ -1785,12 +677,6 @@
         phone: "",
         hours: "05:00 - 19:00",
         price: "",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 22,
@@ -1805,12 +691,6 @@
         phone: "",
         hours: "05:00 - 19:00",
         price: "",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 23,
@@ -1825,12 +705,6 @@
         phone: "",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 2,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 24,
@@ -1845,12 +719,6 @@
         phone: "",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 2,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 25,
@@ -1865,12 +733,6 @@
         phone: "",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 2,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 26,
@@ -1885,12 +747,6 @@
         phone: "0984285998",
         hours: "06:00 - 17:30",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 27,
@@ -1905,12 +761,6 @@
         phone: "0828469977",
         hours: "06:00 - 17:30",
         price: "",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "solo"],
-          budget: 1,
-          age: ["teen", "adult", "senior"],
-        }
       },
       {
         id: 28,
@@ -1925,12 +775,6 @@
         phone: "",
         hours: "08:00 - 19:00",
         price: "",
-        filters: {
-          type: "chua",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -1964,12 +808,6 @@
         phone: "",
         hours: "05:30 - 22:00",
         price: "0397700512",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 30,
@@ -1984,12 +822,6 @@
         phone: "0988520852",
         hours: "Mở cửa cả ngày",
         price: "Từ 425.000 VNĐ/đêm",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 2,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2021,12 +853,6 @@
         phone: "0234369588",
         hours: "Mở cửa cả ngày",
         price: "6.500.000 VND - 8.000.000 VND/phòng",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 4,
-          age: ["adult","child", "teen", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2058,12 +884,6 @@
         phone: "02343695800",
         hours: "Mở cửa cả ngày",
         price: "2.000.000 VND - 2.500.000 VND/phòng",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 4,
-          age: ["adult","child", "teen", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2095,12 +915,6 @@
         phone: "02343873555",
         hours: "Mở cửa cả ngày",
         price: "750.000đ – 850.000 VND/phòng/đêm",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 3,
-          age: ["adult","child", "teen", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2132,12 +946,6 @@
         phone: "0938601666",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple"],
-          budget: 3,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 35,
@@ -2152,12 +960,6 @@
         phone: "0366666198",
         hours: "Mở cửa cả ngày",
         price: "679.000 VND/phòng/đêm",
-        filters: {
-          type: "nghiduong",
-          suitability: ["family", "couple","solo"],
-          budget: 2,
-          age: ["adult","teen","child","senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2189,12 +991,6 @@
         phone: "",
         hours: "",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 37,
@@ -2209,12 +1005,6 @@
         phone: "",
         hours: "09:00 - 22:00",
         price: "",
-        filters: {
-          type: "nhahang",
-          suitability: ["family", "couple", "solo"],
-          budget: 2,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 38,
@@ -2229,12 +1019,6 @@
         phone: "",
         hours: "Mở cả ngày",
         price: "Miễn phí",
-        filters: {
-          type: "damnuoc",
-          suitability: ["family", "couple", "solo"],
-          budget: 0,
-          age: ["child", "teen", "adult", "senior"],
-        },
         tips: [
           {
             type: "tip",
@@ -2271,12 +1055,6 @@
         phone: "0905260375",
         hours: "07:30 - 21:30",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
       {
         id: 40,
@@ -2291,27 +1069,18 @@
         phone: "0905260375",
         hours: "07:30 - 21:30",
         price: "Miễn phí",
-        filters: {
-          type: "muasam",
-          suitability: ["family", "couple", "solo"],
-          budget: 1,
-          age: ["child", "teen", "adult", "senior"],
-        }
       },
-      // Các địa điểm khác có thể thêm tips tương tự
     ];
-
     // ========== KHỞI TẠO ỨNG DỤNG ==========
     // Tắt zoom control mặc định và thêm lại ở vị trí mong muốn
-const map = L.map("map", {
-  zoomControl: false
-}).setView(APP_CONFIG.mapCenter, APP_CONFIG.defaultZoom);
+    const map = L.map("map", {
+      zoomControl: false
+    }).setView(APP_CONFIG.mapCenter, APP_CONFIG.defaultZoom);
 
-// Thêm zoom control ở vị trí mới
-L.control.zoom({
-  position: 'topright' // hoặc 'topleft', 'topright', 'bottomleft'
-}).addTo(map);
-    
+    // Thêm zoom control
+    L.control.zoom({
+      position: 'topright'
+    }).addTo(map);
 
     // Thêm lớp bản đồ
     const osmLayer = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -2319,30 +1088,10 @@ L.control.zoom({
       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    // Thêm lớp bản đồ vệ tinh
-    const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
-      maxZoom: 18
-    });
-
     // Biến toàn cục
-    let boundaryLayer;
-    let boundaryVisible = true;
-    let isSatellite = false;
     let markerObjects = [];
     let currentMarkerIndex = -1;
-    let isDarkMode = false;
-    let legendVisible = true;
     
-    // Biến lưu trạng thái bộ lọc
-    let activeFilters = {
-      type: null,
-      suitability: [],
-      budget: 4, // Mặc định: tất cả các mức giá
-      age: "all", // Mặc định: tất cả độ tuổi
-      time: 4 // Mặc định: tất cả thời gian
-    };
-
     // ========== HÀM TIỆN ÍCH ==========
     
     // Hàm tạo icon marker
@@ -2361,142 +1110,7 @@ L.control.zoom({
       loading.style.display = 'none';
     }
 
-    // Hàm xử lý lỗi
-    function handleError(error, context) {
-      console.error(`Lỗi trong ${context}:`, error);
-    }
-
-    // ========== QUẢN LÝ RANH GIỚI ==========
-    
-    // Hàm tạo ranh giới ước lượng
-    function createEstimatedBoundary() {
-      const coords = [
-        [16.26, 108.00],
-        [16.25, 108.10],
-        [16.20, 108.12],
-        [16.18, 108.06],
-        [16.21, 108.00],
-      ];
-      
-      boundaryLayer = L.polygon(coords, {
-        color: APP_CONFIG.boundaryColor,
-        weight: APP_CONFIG.boundaryWeight,
-        fillColor: APP_CONFIG.boundaryColor,
-        fillOpacity: APP_CONFIG.boundaryOpacity,
-      }).addTo(map);
-
-      boundaryLayer.bindPopup(`
-        <div class="popup-title">Chân Mây - Lăng Cô</div>
-        <div class="popup-description">Vùng du lịch ven biển</div>
-      `);
-      
-      hideLoading();
-    }
-
-    // Hàm tạo ranh giới từ dữ liệu OSM
-    function createBoundaryFromOSMData(data) {
-      try {
-        const relation = data.elements.find((el) => el.type === "relation");
-        if (!relation) {
-          throw new Error("Không tìm thấy relation trong dữ liệu OSM");
-        }
-
-        const nodes = new Map();
-        data.elements
-          .filter((el) => el.type === "node")
-          .forEach((node) => nodes.set(node.id, [node.lat, node.lon]));
-
-        const memberWays = relation.members
-          .filter((m) => m.type === "way")
-          .map((m) =>
-            data.elements.find((el) => el.type === "way" && el.id === m.ref)
-          )
-          .filter(Boolean);
-
-        const wayChains = memberWays.map((way) =>
-          way.nodes.map((id) => nodes.get(id)).filter(Boolean)
-        );
-
-        const polygons = [];
-        while (wayChains.length > 0) {
-          let chain = wayChains.shift();
-          let extended = true;
-
-          while (extended) {
-            extended = false;
-            for (let i = 0; i < wayChains.length; i++) {
-              const next = wayChains[i];
-              const start1 = chain[0], end1 = chain[chain.length - 1];
-              const start2 = next[0], end2 = next[next.length - 1];
-
-              const same = (a, b) =>
-                Math.abs(a[0] - b[0]) < 0.0001 &&
-                Math.abs(a[1] - b[1]) < 0.0001;
-
-              if (same(end1, start2)) {
-                chain = [...chain, ...next.slice(1)];
-                wayChains.splice(i, 1);
-                extended = true;
-                break;
-              } else if (same(end1, end2)) {
-                chain = [...chain, ...next.slice(0, -1).reverse()];
-                wayChains.splice(i, 1);
-                extended = true;
-                break;
-              } else if (same(start1, end2)) {
-                chain = [...next.slice(0, -1), ...chain];
-                wayChains.splice(i, 1);
-                extended = true;
-                break;
-              } else if (same(start1, start2)) {
-                chain = [...next.slice(1).reverse(), ...chain];
-                wayChains.splice(i, 1);
-                extended = true;
-                break;
-              }
-            }
-          }
-
-          const first = chain[0];
-          const last = chain[chain.length - 1];
-          if (
-            !(
-              Math.abs(first[0] - last[0]) < 0.0001 &&
-              Math.abs(first[1] - last[1]) < 0.0001
-            )
-          ) {
-            chain.push(first);
-          }
-
-          polygons.push(chain);
-        }
-
-        const areas = polygons.map((poly) =>
-          turf.area(turf.polygon([poly.map((p) => [p[1], p[0]])]))
-        );
-        const maxIndex = areas.indexOf(Math.max(...areas));
-        const mainPolygon = polygons[maxIndex];
-
-        if (!mainPolygon || mainPolygon.length < 3) {
-          throw new Error("Không thể tái tạo ranh giới chính xác");
-        }
-
-        boundaryLayer = L.polygon(mainPolygon, {
-          color: APP_CONFIG.boundaryColor,
-          weight: APP_CONFIG.boundaryWeight,
-          fillColor: APP_CONFIG.boundaryColor,
-          fillOpacity: APP_CONFIG.boundaryOpacity,
-        }).addTo(map);
-
-        map.fitBounds(boundaryLayer.getBounds());
-        hideLoading();
-      } catch (error) {
-        handleError(error, "createBoundaryFromOSMData");
-        createEstimatedBoundary();
-      }
-    }
-
-    // ========== QUẢN LÝ MARKER VÀ BỘ LỌC ==========
+    // ========== QUẢN LÝ MARKER ==========
     
     // Hàm thêm marker vào bản đồ
     function addMarkersToMap() {
@@ -2508,121 +1122,14 @@ L.control.zoom({
           .on('click', function() {
             showLocationDetails(index);
             map.setView(marker.coords, 14);
-            highlightLocationItem(index);
           });
           
         markerObjects.push(markerObj);
       });
     }
 
-    // Hàm lọc và hiển thị marker
-    function filterAndDisplayMarkers() {
-      const filteredMarkers = MARKERS_DATA.filter(marker => {
-        // Lọc theo loại hình
-        if (activeFilters.type && marker.filters.type !== activeFilters.type) {
-          return false;
-        }
-        
-        // Lọc theo phù hợp
-        if (activeFilters.suitability.length > 0) {
-          const hasMatchingSuitability = activeFilters.suitability.some(suit => 
-            marker.filters.suitability.includes(suit)
-          );
-          if (!hasMatchingSuitability) return false;
-        }
-        
-        // Lọc theo ngân sách
-        if (marker.filters.budget > activeFilters.budget) {
-          return false;
-        }
-        
-        // Lọc theo độ tuổi
-        if (activeFilters.age !== "all" && !marker.filters.age.includes(activeFilters.age)) {
-          return false;
-        }
-        
-        return true;
-      });
-      
-      // Ẩn tất cả marker
-      markerObjects.forEach(marker => {
-        map.removeLayer(marker);
-      });
-      
-      // Hiển thị marker đã lọc
-      filteredMarkers.forEach(markerData => {
-        const index = MARKERS_DATA.findIndex(m => m.id === markerData.id);
-        if (index !== -1) {
-          map.addLayer(markerObjects[index]);
-        }
-      });
-      
-      // Cập nhật danh sách địa điểm
-      updateLocationList(filteredMarkers);
-    }
-
-    // Hàm cập nhật danh sách địa điểm
-    function updateLocationList(filteredMarkers) {
-      const locationList = document.getElementById('location-list');
-      locationList.innerHTML = '';
-      
-      filteredMarkers.forEach(function(markerData) {
-        const index = MARKERS_DATA.findIndex(m => m.id === markerData.id);
-        if (index === -1) return;
-        
-        const listItem = document.createElement('li');
-        listItem.className = 'location-item fade-in';
-        listItem.setAttribute('data-id', markerData.id);
-        
-        // Tạo tags hiển thị
-        const tagsHTML = createTagsHTML(markerData.filters);
-        
-        listItem.innerHTML = `
-          <div class="location-icon" style="background-color: ${markerData.color}">
-            <i class="fas fa-map-marker-alt"></i>
-          </div>
-          <div class="location-content">
-            <div class="location-title">${markerData.title}</div>
-            <div class="location-desc">${markerData.description.substring(0, 80)}...</div>
-            <div class="location-tags">
-              ${tagsHTML}
-            </div>
-          </div>
-        `;
-        
-        listItem.addEventListener('click', function() {
-          // Di chuyển bản đồ đến vị trí marker
-          map.setView(markerData.coords, 14);
-          // Hiển thị thông tin chi tiết
-          showLocationDetails(index);
-          // Đánh dấu item được chọn
-          highlightLocationItem(index);
-          
-          // Tự động đóng sidebar trên di động
-          if (window.innerWidth <= 768) {
-            sidebar.classList.add('collapsed');
-            sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
-          }
-        });
-        
-        locationList.appendChild(listItem);
-      });
-      
-      // Hiển thị thông báo nếu không có kết quả
-      if (filteredMarkers.length === 0) {
-        const noResults = document.createElement('li');
-        noResults.innerHTML = `
-          <div style="text-align: center; padding: 20px; color: #718096;">
-            <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px;"></i>
-            <div>Không tìm thấy địa điểm phù hợp</div>
-          </div>
-        `;
-        locationList.appendChild(noResults);
-      }
-    }
-
     // Hàm tạo HTML cho tags
-    function createTagsHTML(filters) {
+    function createTagsHTML(marker) {
       let tagsHTML = '';
       
       // Tag loại hình
@@ -2633,36 +1140,16 @@ L.control.zoom({
         'ditich': '🏛️ Di tích',
         'giaitri': '🎯 Giải trí',
         'muasam': '🛍️ Mua sắm',
-        'chua': '🛕 Chùa chiền'
+        'chua': '🛕 Chùa chiền',
+        'damnuoc': '🌊 Đầm nước',
+        'suoi': '💧 Suối & Thác nước'
       };
       
-      if (typeLabels[filters.type]) {
-        tagsHTML += `<div class="location-tag">${typeLabels[filters.type]}</div>`;
+      if (typeLabels[marker.category]) {
+        tagsHTML += `<div class="location-tag">${typeLabels[marker.category]}</div>`;
       }
       
-      // Tag ngân sách
-      const budgetLabels = ['💰 Miễn phí', '💰 Tiết kiệm', '💰 Trung bình', '💰 Cao cấp', '💰 Luxury'];
-      tagsHTML += `<div class="location-tag">${budgetLabels[filters.budget]}</div>`;
-      
       return tagsHTML;
-    }
-
-    // Hàm tạo danh sách địa điểm trong sidebar
-    function createLocationList() {
-      updateLocationList(MARKERS_DATA);
-    }
-
-    // Hàm đánh dấu item trong danh sách
-    function highlightLocationItem(index) {
-      const items = document.querySelectorAll('.location-item');
-      items.forEach(function(item, i) {
-        if (i === index) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
-        }
-      });
-      currentMarkerIndex = index;
     }
 
     // Hàm hiển thị chi tiết địa điểm
@@ -2681,7 +1168,7 @@ L.control.zoom({
       
       // Cập nhật tags trong info panel
       const infoTags = document.getElementById('info-tags');
-      infoTags.innerHTML = createTagsHTML(marker.filters);
+      infoTags.innerHTML = createTagsHTML(marker);
       
       // Cập nhật tips và lưu ý
       updateTipsSection(marker);
@@ -2756,447 +1243,8 @@ L.control.zoom({
       }
     }
 
-    // ========== CHỨC NĂNG TÌM KIẾM THÔNG MINH ==========
+    // ========== XỬ LÝ SỰ KIỆN ==========
     
-    // Hàm tìm kiếm thông minh với gợi ý
-    function setupSmartSearch() {
-      const searchInput = document.getElementById('search-input');
-      const searchSuggestions = document.getElementById('search-suggestions');
-      let currentSuggestionIndex = -1;
-      let suggestions = [];
-
-      // Hàm tìm kiếm địa điểm
-      function searchLocations(query) {
-        if (!query.trim()) {
-          return [];
-        }
-
-        const searchTerm = query.toLowerCase();
-        const results = [];
-
-        MARKERS_DATA.forEach(marker => {
-          const title = marker.title.toLowerCase();
-          const address = marker.address.toLowerCase();
-          const description = marker.description.toLowerCase();
-          const category = getCategoryLabel(marker.filters.type);
-
-          // Tính điểm phù hợp
-          let score = 0;
-
-          // Tìm trong tiêu đề (quan trọng nhất)
-          if (title.includes(searchTerm)) {
-            score += 100;
-            // Nếu khớp chính xác từ đầu
-            if (title.startsWith(searchTerm)) {
-              score += 50;
-            }
-          }
-
-          // Tìm trong địa chỉ
-          if (address.includes(searchTerm)) {
-            score += 30;
-          }
-
-          // Tìm trong mô tả
-          if (description.includes(searchTerm)) {
-            score += 20;
-          }
-
-          // Tìm trong loại hình
-          if (category.toLowerCase().includes(searchTerm)) {
-            score += 15;
-          }
-
-          if (score > 0) {
-            results.push({
-              marker: marker,
-              score: score,
-              matchedIn: {
-                title: title.includes(searchTerm),
-                address: address.includes(searchTerm),
-                description: description.includes(searchTerm),
-                category: category.toLowerCase().includes(searchTerm)
-              }
-            });
-          }
-        });
-
-        // Sắp xếp theo điểm
-        return results.sort((a, b) => b.score - a.score).slice(0, 8);
-      }
-
-      // Hàm lấy nhãn loại hình
-      function getCategoryLabel(type) {
-        const labels = {
-          'baibien': 'Bãi biển',
-          'nghiduong': 'Resort & Khách sạn',
-          'nhahang': 'Nhà hàng & Ẩm thực',
-          'ditich': 'Di tích lịch sử',
-          'giaitri': 'Giải trí',
-          'muasam': 'Mua sắm',
-          'chua': 'Chùa chiền',
-          'damnuoc': 'Đầm nước',
-          'suoi': 'Suối & Thác nước'
-        };
-        return labels[type] || 'Địa điểm';
-      }
-
-      // Hàm lấy icon cho loại hình
-      function getCategoryIcon(type) {
-        const icons = {
-          'baibien': '🏖️',
-          'nghiduong': '🏨',
-          'nhahang': '🍽️',
-          'ditich': '🏛️',
-          'giaitri': '🎯',
-          'muasam': '🛍️',
-          'chua': '🛕',
-          'damnuoc': '🌊',
-          'suoi': '💧'
-        };
-        return icons[type] || '📍';
-      }
-
-      // Hàm hiển thị gợi ý
-      function showSuggestions(results) {
-        suggestions = results;
-        currentSuggestionIndex = -1;
-
-        if (results.length === 0) {
-          searchSuggestions.innerHTML = `
-            <div class="no-results">
-              <i class="fas fa-search" style="margin-bottom: 8px; font-size: 20px;"></i>
-              <div>Không tìm thấy địa điểm phù hợp</div>
-              <small>Thử tìm kiếm với từ khóa khác</small>
-            </div>
-          `;
-        } else {
-          searchSuggestions.innerHTML = results.map((result, index) => {
-            const marker = result.marker;
-            const icon = getCategoryIcon(marker.filters.type);
-            const category = getCategoryLabel(marker.filters.type);
-            
-            // Highlight từ khóa tìm kiếm
-            const searchTerm = searchInput.value.toLowerCase();
-            const highlightedTitle = highlightText(marker.title, searchTerm);
-            const highlightedAddress = highlightText(marker.address, searchTerm);
-
-            return `
-              <div class="search-suggestion" data-index="${index}">
-                <div class="suggestion-icon" style="background-color: ${marker.color}">
-                  ${icon}
-                </div>
-                <div class="suggestion-content">
-                  <div class="suggestion-title">${highlightedTitle}</div>
-                  <div class="suggestion-address">${highlightedAddress}</div>
-                </div>
-                <div class="suggestion-category">${category}</div>
-              </div>
-            `;
-          }).join('');
-        }
-
-        searchSuggestions.classList.add('show');
-      }
-
-      // Hàm highlight từ khóa trong văn bản
-      function highlightText(text, searchTerm) {
-        if (!searchTerm.trim()) return text;
-        
-        const regex = new RegExp(`(${searchTerm})`, 'gi');
-        return text.replace(regex, '<mark>$1</mark>');
-      }
-
-      // Hàm chọn gợi ý
-      function selectSuggestion(index) {
-        if (index >= 0 && index < suggestions.length) {
-          const marker = suggestions[index].marker;
-          const markerIndex = MARKERS_DATA.findIndex(m => m.id === marker.id);
-          
-          if (markerIndex !== -1) {
-            // Di chuyển bản đồ đến vị trí
-            map.setView(marker.coords, 14);
-            
-            // Hiển thị thông tin chi tiết
-            showLocationDetails(markerIndex);
-            
-            // Đánh dấu item trong danh sách
-            highlightLocationItem(markerIndex);
-            
-            // Đóng gợi ý tìm kiếm
-            hideSuggestions();
-            
-            // Xóa nội dung tìm kiếm
-            searchInput.value = '';
-            
-            // Tự động đóng sidebar trên di động
-            if (window.innerWidth <= 768) {
-              sidebar.classList.add('collapsed');
-              sidebarToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
-          }
-        }
-      }
-
-      // Hàm ẩn gợi ý
-      function hideSuggestions() {
-        searchSuggestions.classList.remove('show');
-        currentSuggestionIndex = -1;
-      }
-
-      // Sự kiện nhập liệu
-      searchInput.addEventListener('input', function() {
-        const query = this.value.trim();
-        
-        if (query.length >= 2) {
-          const results = searchLocations(query);
-          showSuggestions(results);
-        } else {
-          hideSuggestions();
-        }
-      });
-
-      // Sự kiện focus
-      searchInput.addEventListener('focus', function() {
-        const query = this.value.trim();
-        if (query.length >= 2) {
-          const results = searchLocations(query);
-          showSuggestions(results);
-        }
-      });
-
-      // Sự kiện click ra ngoài để đóng gợi ý
-      document.addEventListener('click', function(e) {
-        if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
-          hideSuggestions();
-        }
-      });
-
-      // Sự kiện click vào gợi ý
-      searchSuggestions.addEventListener('click', function(e) {
-        const suggestion = e.target.closest('.search-suggestion');
-        if (suggestion) {
-          const index = parseInt(suggestion.getAttribute('data-index'));
-          selectSuggestion(index);
-        }
-      });
-
-      // Sự kiện bàn phím
-      searchInput.addEventListener('keydown', function(e) {
-        if (!searchSuggestions.classList.contains('show')) return;
-
-        switch(e.key) {
-          case 'ArrowDown':
-            e.preventDefault();
-            currentSuggestionIndex = Math.min(currentSuggestionIndex + 1, suggestions.length - 1);
-            updateSuggestionSelection();
-            break;
-
-          case 'ArrowUp':
-            e.preventDefault();
-            currentSuggestionIndex = Math.max(currentSuggestionIndex - 1, -1);
-            updateSuggestionSelection();
-            break;
-
-          case 'Enter':
-            e.preventDefault();
-            if (currentSuggestionIndex >= 0) {
-              selectSuggestion(currentSuggestionIndex);
-            } else if (suggestions.length > 0) {
-              selectSuggestion(0);
-            }
-            break;
-
-          case 'Escape':
-            hideSuggestions();
-            break;
-        }
-      });
-
-      // Hàm cập nhật lựa chọn gợi ý
-      function updateSuggestionSelection() {
-        const allSuggestions = searchSuggestions.querySelectorAll('.search-suggestion');
-        
-        allSuggestions.forEach((suggestion, index) => {
-          if (index === currentSuggestionIndex) {
-            suggestion.classList.add('active');
-            // Cuộn đến phần tử được chọn
-            suggestion.scrollIntoView({ block: 'nearest' });
-          } else {
-            suggestion.classList.remove('active');
-          }
-        });
-
-        // Nếu không có gợi ý nào được chọn, focus vào input
-        if (currentSuggestionIndex === -1) {
-          searchInput.focus();
-        }
-      }
-
-      // Tự động focus vào ô tìm kiếm khi mở sidebar
-      const sidebar = document.getElementById('sidebar');
-      const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-          if (mutation.attributeName === 'class') {
-            if (!sidebar.classList.contains('collapsed')) {
-              setTimeout(() => {
-                searchInput.focus();
-              }, 300);
-            }
-          }
-        });
-      });
-
-      observer.observe(sidebar, { attributes: true });
-    }
-
-    // ========== XỬ LÝ SỰ KIỆN BỘ LỌC ==========
-    
-    // Hàm thiết lập bộ lọc
-    function setupFilters() {
-      // Bộ lọc loại hình
-      const typeFilterTags = document.querySelectorAll('.filter-tag[data-type]');
-      typeFilterTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-          const type = this.getAttribute('data-type');
-          
-          // Toggle active state
-          if (this.classList.contains('active')) {
-            this.classList.remove('active');
-            activeFilters.type = null;
-          } else {
-            // Remove active from all type filters
-            typeFilterTags.forEach(t => t.classList.remove('active'));
-            this.classList.add('active');
-            activeFilters.type = type;
-          }
-          
-          filterAndDisplayMarkers();
-        });
-      });
-      
-      // Bộ lọc phù hợp
-      const suitabilityTags = document.querySelectorAll('.filter-tag[data-criteria]');
-      suitabilityTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-          const criteria = this.getAttribute('data-criteria');
-          
-          // Toggle active state
-          if (this.classList.contains('active')) {
-            this.classList.remove('active');
-            activeFilters.suitability = activeFilters.suitability.filter(c => c !== criteria);
-          } else {
-            this.classList.add('active');
-            activeFilters.suitability.push(criteria);
-          }
-          
-          filterAndDisplayMarkers();
-        });
-      });
-      
-      // Bộ lọc ngân sách
-      const budgetSlider = document.getElementById('budget-slider');
-      budgetSlider.addEventListener('input', function() {
-        activeFilters.budget = parseInt(this.value);
-        filterAndDisplayMarkers();
-      });
-      
-      // Bộ lọc độ tuổi
-      const ageButtons = document.querySelectorAll('.age-btn');
-      ageButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const age = this.getAttribute('data-age');
-          
-          // Remove active from all age buttons
-          ageButtons.forEach(btn => btn.classList.remove('active'));
-          this.classList.add('active');
-          
-          activeFilters.age = age;
-          filterAndDisplayMarkers();
-        });
-      });
-      
-      
-      // Nút xóa tất cả bộ lọc
-      document.getElementById('clear-filters').addEventListener('click', function() {
-        // Reset all filters
-        activeFilters = {
-          type: null,
-          suitability: [],
-          budget: 4,
-          age: "all",
-        };
-        
-        // Reset UI
-        typeFilterTags.forEach(tag => tag.classList.remove('active'));
-        suitabilityTags.forEach(tag => tag.classList.remove('active'));
-        budgetSlider.value = 4;
-        ageButtons.forEach(btn => {
-          if (btn.getAttribute('data-age') === 'all') {
-            btn.classList.add('active');
-          } else {
-            btn.classList.remove('active');
-          }
-        });
-        
-        filterAndDisplayMarkers();
-      });
-    }
-
-    // Hàm thiết lập toggle cho bộ lọc
-    function setupFilterToggles() {
-      const typeFilterHeader = document.getElementById('type-filter-header');
-      const typeFilterContent = document.getElementById('type-filter-content');
-      const typeFilterToggle = document.getElementById('type-filter-toggle');
-      
-      const criteriaFilterHeader = document.getElementById('criteria-filter-header');
-      const criteriaFilterContent = document.getElementById('criteria-filter-content');
-      const criteriaFilterToggle = document.getElementById('criteria-filter-toggle');
-      
-      // Toggle bộ lọc loại hình
-      typeFilterHeader.addEventListener('click', function() {
-        typeFilterContent.classList.toggle('collapsed');
-        typeFilterToggle.classList.toggle('rotated');
-      });
-      
-      // Toggle bộ lọc tiêu chí
-      criteriaFilterHeader.addEventListener('click', function() {
-        criteriaFilterContent.classList.toggle('collapsed');
-        criteriaFilterToggle.classList.toggle('rotated');
-      });
-    }
-
-    // Hàm thiết lập toggle cho tips section
-    function setupTipsToggle() {
-      const tipsHeader = document.getElementById('tips-header');
-      const tipsContent = document.getElementById('tips-content');
-      const tipsToggle = document.getElementById('tips-toggle');
-      
-      tipsHeader.addEventListener('click', function() {
-        tipsContent.classList.toggle('collapsed');
-        tipsToggle.classList.toggle('rotated');
-      });
-    }
-
-    // ========== XỬ LÝ SỰ KIỆN KHÁC ==========
-    
-    // Xử lý sự kiện sidebar
-    function setupSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      const sidebarClose = document.getElementById('sidebar-close');
-      const sidebarOpen = document.getElementById('sidebar-open');
-      
-      // Nút đóng bên trong sidebar
-      sidebarClose.addEventListener('click', function() {
-        sidebar.classList.add('collapsed');
-      });
-      
-      // Nút mở sidebar (luôn hiển thị)
-      sidebarOpen.addEventListener('click', function() {
-        sidebar.classList.remove('collapsed');
-      });
-    }
-
     // Xử lý sự kiện đóng info panel
     function setupInfoPanel() {
       document.getElementById('info-close').addEventListener('click', function() {
@@ -3224,30 +1272,6 @@ L.control.zoom({
         }
       });
 
-      // Nút toggle boundary
-      document.getElementById('toggle-boundary').addEventListener('click', function() {
-        if (boundaryLayer) {
-          if (boundaryVisible) {
-            map.removeLayer(boundaryLayer);
-          } else {
-            map.addLayer(boundaryLayer);
-          }
-          boundaryVisible = !boundaryVisible;
-        }
-      });
-
-      // Nút toggle satellite
-      document.getElementById('toggle-satellite').addEventListener('click', function() {
-        if (isSatellite) {
-          map.removeLayer(satelliteLayer);
-          map.addLayer(osmLayer);
-        } else {
-          map.removeLayer(osmLayer);
-          map.addLayer(satelliteLayer);
-        }
-        isSatellite = !isSatellite;
-      });
-
       // Nút fullscreen
       document.getElementById('fullscreen').addEventListener('click', function() {
         if (!document.fullscreenElement) {
@@ -3262,144 +1286,105 @@ L.control.zoom({
       });
     }
 
-    // Thiết lập chế độ tối/sáng
-    function setupThemeToggle() {
-      const themeToggle = document.getElementById('theme-toggle');
+    // Hàm thiết lập toggle cho tips section
+    function setupTipsToggle() {
+      const tipsHeader = document.getElementById('tips-header');
+      const tipsContent = document.getElementById('tips-content');
+      const tipsToggle = document.getElementById('tips-toggle');
       
-      // Kiểm tra xem người dùng có sở thích chế độ tối không
-      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        isDarkMode = true;
-        document.body.classList.add('dark-mode');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      }
-      
-      themeToggle.addEventListener('click', function() {
-        isDarkMode = !isDarkMode;
-        document.body.classList.toggle('dark-mode');
-        
-        if (isDarkMode) {
-          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
-          themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-        }
-        
-        // Lưu tùy chọn vào localStorage
-        localStorage.setItem('darkMode', isDarkMode);
+      tipsHeader.addEventListener('click', function() {
+        tipsContent.classList.toggle('collapsed');
+        tipsToggle.classList.toggle('rotated');
       });
-      
-      // Kiểm tra localStorage
-      const savedDarkMode = localStorage.getItem('darkMode');
-      if (savedDarkMode !== null) {
-        isDarkMode = savedDarkMode === 'true';
-        if (isDarkMode) {
-          document.body.classList.add('dark-mode');
-          themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-      }
     }
 
-    // Thiết lập UX cho thiết bị di động
-    function setupMobileUX() {
-      const isMobile = window.innerWidth <= 768;
+    // ========== CÁC HÀM CHO CHATBOT ==========
+    
+    // Hàm tìm kiếm địa điểm theo tên (cho chatbot gọi)
+    window.searchLocation = function(name) {
+      const normalizedName = name.toLowerCase().trim();
+      const marker = MARKERS_DATA.find(m => 
+        m.title.toLowerCase().includes(normalizedName) || 
+        normalizedName.includes(m.title.toLowerCase())
+      );
       
-      if (isMobile) {
-        // Đóng sidebar khi chọn địa điểm
-        const locationItems = document.querySelectorAll('.location-item');
-        locationItems.forEach(item => {
-          item.addEventListener('click', () => {
-            sidebar.classList.add('collapsed');
-          });
-        });
-        
-        // Đóng info panel khi nhấn ra ngoài (trên di động)
-        document.addEventListener('click', (e) => {
-          const infoPanel = document.getElementById('info-panel');
-          if (infoPanel.classList.contains('active') && 
-              !e.target.closest('.info-panel') && 
-              !e.target.closest('.location-item') &&
-              !e.target.closest('.simple-marker')) {
-            infoPanel.classList.remove('active');
-          }
-        });
+      if (marker) {
+        const index = MARKERS_DATA.indexOf(marker);
+        map.setView(marker.coords, 14);
+        showLocationDetails(index);
+        return { success: true, title: marker.title };
       }
-    }
-
-    // Thiết lập nút ẩn/hiện chú thích
-    function setupLegendToggle() {
-      const legendToggle = document.getElementById('legend-toggle');
-      const legendShow = document.getElementById('legend-show');
-      const legend = document.getElementById('legend');
       
-      legendToggle.addEventListener('click', function() {
-        legendVisible = !legendVisible;
+      return { success: false, message: "Không tìm thấy địa điểm" };
+    };
+    
+    // Hàm lấy tất cả địa điểm (cho chatbot gọi)
+    window.getAllLocations = function() {
+      return MARKERS_DATA.map(m => ({
+        id: m.id,
+        title: m.title,
+        category: m.category,
+        coords: m.coords
+      }));
+    };
+    
+    // Hàm hiển thị địa điểm theo tọa độ (cho chatbot gọi)
+    window.showLocationByCoords = function(lat, lng) {
+      const latNum = parseFloat(lat);
+      const lngNum = parseFloat(lng);
+      
+      // Tìm marker gần nhất với tọa độ
+      let closestMarker = null;
+      let minDistance = Infinity;
+      
+      MARKERS_DATA.forEach((marker, index) => {
+        const distance = Math.sqrt(
+          Math.pow(marker.coords[0] - latNum, 2) + 
+          Math.pow(marker.coords[1] - lngNum, 2)
+        );
         
-        if (legendVisible) {
-          legend.classList.remove('hidden');
-          legendShow.classList.remove('visible');
-          legendToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        } else {
-          legend.classList.add('hidden');
-          legendShow.classList.add('visible');
-          legendToggle.innerHTML = '<i class="fas fa-eye"></i>';
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestMarker = { marker, index };
         }
-        
-        // Lưu tùy chọn vào localStorage
-        localStorage.setItem('legendVisible', legendVisible);
       });
       
-      // Nút hiện chú thích
-      legendShow.addEventListener('click', function() {
-        legendVisible = true;
-        legend.classList.remove('hidden');
-        legendShow.classList.remove('visible');
-        legendToggle.innerHTML = '<i class="fas fa-eye-slash"></i>';
-        
-        // Lưu tùy chọn vào localStorage
-        localStorage.setItem('legendVisible', legendVisible);
-      });
-      
-      // Kiểm tra localStorage
-      const savedLegendVisible = localStorage.getItem('legendVisible');
-      if (savedLegendVisible !== null) {
-        legendVisible = savedLegendVisible === 'true';
-        if (!legendVisible) {
-          legend.classList.add('hidden');
-          legendShow.classList.add('visible');
-          legendToggle.innerHTML = '<i class="fas fa-eye"></i>';
-        }
+      if (closestMarker && minDistance < 0.01) { // Trong phạm vi ~1km
+        map.setView(closestMarker.marker.coords, 14);
+        showLocationDetails(closestMarker.index);
+        return { 
+          success: true, 
+          title: closestMarker.marker.title,
+          distance: minDistance 
+        };
       }
-    }
+      
+      // Nếu không tìm thấy marker gần, vẫn di chuyển đến vị trí
+      map.setView([latNum, lngNum], 14);
+      return { 
+        success: true, 
+        message: "Đã di chuyển đến vị trí",
+        customLocation: true 
+      };
+    };
+    
+    // Hàm ẩn info panel (cho chatbot gọi)
+    window.hideInfoPanel = function() {
+      document.getElementById('info-panel').classList.remove('active');
+      return { success: true };
+    };
 
     // ========== KHỞI TẠO ỨNG DỤNG ==========
     
     // Hàm khởi tạo ứng dụng
     function initApp() {
-      // Gọi dữ liệu OSM để tạo ranh giới
-      fetch(`https://overpass-api.de/api/interpreter?data=[out:json];relation(${APP_CONFIG.osmRelationId});(._;>;);out;`)
-        .then((res) => res.json())
-        .then(createBoundaryFromOSMData)
-        .catch((err) => {
-          handleError(err, "fetch OSM data");
-          createEstimatedBoundary();
-        });
-
       // Thêm marker vào bản đồ
       addMarkersToMap();
       
-      // Tạo danh sách địa điểm
-      createLocationList();
-      
       // Thiết lập các sự kiện
-      setupSmartSearch();
-      setupFilters();
-      setupFilterToggles();
-      setupTipsToggle();
-      setupSidebar();
       setupInfoPanel();
       setupMapControls();
-      setupThemeToggle();
-      setupLegendToggle();
-      setupMobileUX();
+      setupTipsToggle();
       
       // Ẩn loading sau khi tải xong
       setTimeout(hideLoading, 1000);
@@ -3407,9 +1392,6 @@ L.control.zoom({
 
     // Khởi chạy ứng dụng khi DOM đã sẵn sàng
     document.addEventListener('DOMContentLoaded', initApp);
-    
-    // Thiết lập lại UX khi thay đổi kích thước cửa sổ
-    window.addEventListener('resize', setupMobileUX);
   </script>
 </body>
 </html>

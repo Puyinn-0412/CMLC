@@ -391,7 +391,7 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = "AIzaSyDzKSJtm2rk4DB5pUdzbBfWb78XiQkyEHU";
+        const API_KEY = "xxx";
         const genAI = new GoogleGenerativeAI(API_KEY);
         
         // System instruction gọn
@@ -552,144 +552,7 @@ function initMap() {
     // Xử lý các nút điều khiển
     setupMapControls();
 }
-// Thêm biến global để lưu dữ liệu địa điểm
-let touristLocations = {};
 
-// Cập nhật hàm addTouristLocations() để trả về dữ liệu
-function getTouristLocations() {
-    return [
-        {
-            id: "vinh-lang-co",
-            name: "Vịnh Lăng Cô",
-            coords: [16.1800, 108.1167],
-            type: "beach",
-            description: "Một trong những vịnh đẹp nhất thế giới, được công nhận là thành viên của Câu lạc bộ các vịnh đẹp nhất thế giới năm 2009. Bãi biển dài hơn 10km với cát trắng mịn và nước trong xanh quanh năm.",
-            features: ["Biển", "Bãi tắm", "Chụp ảnh", "Lặn biển", "Thuyền kayak"],
-            activities: ["Tắm biển", "Chụp ảnh", "Lặn ngắm san hô", "Chèo thuyền kayak", "Xem hoàng hôn"],
-            restaurants: ["Nhà hàng Hải Sản Lăng Cô", "Quán Ăn Biển Xanh", "Nhà hàng Vịnh Xanh"],
-            bestTime: "Tháng 3-9",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "dam-lap-an",
-            name: "Đầm Lập An",
-            coords: [16.2333, 108.0833],
-            type: "lagoon",
-            description: "Đầm nước mặn rộng khoảng 800ha, nổi tiếng với nghề nuôi hàu. Cảnh quan thiên nhiên tuyệt đẹp với mặt nước phẳng lặng, phản chiếu núi non và bầu trời.",
-            features: ["Đầm nước", "Hàu", "Hoàng hôn", "Chụp ảnh", "Tham quan làng nghề"],
-            activities: ["Tham quan làng nghề nuôi hàu", "Chụp ảnh phản chiếu", "Xem hoàng hôn", "Thưởng thức hàu tươi"],
-            restaurants: ["Quán Hàu Lập An", "Nhà hàng Đầm Nước", "Quán Ăn Bình Dân"],
-            bestTime: "Tháng 4-8 (mùa thu hoạch hàu)",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "suoi-voi",
-            name: "Suối Voi",
-            coords: [16.2833, 108.0500],
-            type: "waterfall",
-            description: "Suối nước mát lạnh quanh năm với nhiều tầng thác đẹp, phù hợp cho các hoạt động dã ngoại và tắm suối. Cảnh quan rừng núi nguyên sinh bao quanh.",
-            features: ["Suối", "Thác", "Dã ngoại", "Tắm suối", "Cắm trại"],
-            activities: ["Tắm suối", "Dã ngoại", "Cắm trại", "Chụp ảnh thiên nhiên", "Đi bộ khám phá"],
-            restaurants: ["Quán Ăn Suối Voi", "Nhà hàng Rừng Xanh"],
-            bestTime: "Tháng 3-10 (tránh mùa mưa lớn)",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "20.000 VNĐ"
-        },
-        {
-            id: "bai-bien-tan-canh-duong",
-            name: "Bãi biển Tân Cảnh Dương",
-            coords: [16.1917, 108.1250],
-            type: "beach",
-            description: "Bãi biển hoang sơ với cảnh quan tự nhiên được bảo tồn tốt, ít khách du lịch. Lý tưởng cho các hoạt động nghỉ dưỡng yên tĩnh.",
-            features: ["Biển", "Hoang sơ", "Nghỉ dưỡng", "Yên tĩnh", "Chụp ảnh"],
-            activities: ["Tắm biển", "Thư giãn", "Chụp ảnh", "Đi dạo", "Picnic"],
-            restaurants: ["Quán Ăn Tân Cảnh Dương", "Nhà hàng Biển Hoang Sơ"],
-            bestTime: "Cả năm",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "cho-hai-san-lang-co",
-            name: "Chợ Hải Sản Lăng Cô",
-            coords: [16.1867, 108.1083],
-            type: "market",
-            description: "Chợ hải sản tươi sống nổi tiếng, nơi bạn có thể mua và thưởng thức hải sản mới đánh bắt. Đặc biệt nổi tiếng với hàu, tôm, mực, cá biển tươi ngon.",
-            features: ["Hải sản", "Ẩm thực", "Mua sắm", "Trải nghiệm địa phương", "Giá cả phải chăng"],
-            activities: ["Mua sắm hải sản", "Thưởng thức hải sản tươi", "Trải nghiệm văn hóa địa phương", "Chụp ảnh chợ"],
-            restaurants: ["Các quán ăn trong chợ", "Nhà hàng Hải Sản Tươi Sống"],
-            bestTime: "Sáng sớm (5:00-8:00)",
-            openingHours: "4:00 - 18:00",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "nui-hai-van",
-            name: "Núi Hải Vân",
-            coords: [16.2000, 108.0333],
-            type: "mountain",
-            description: "Đèo Hải Vân với cảnh quan núi rừng hùng vĩ, điểm check-in lý tưởng để ngắm toàn cảnh vùng biển. Có nhiều điểm chụp ảnh đẹp dọc theo đèo.",
-            features: ["Núi", "Viewpoint", "Chụp ảnh", "Đường đèo", "Cảnh quan"],
-            activities: ["Chụp ảnh panorama", "Đi bộ ngắm cảnh", "Check-in điểm sống ảo", "Xem mây", "Tham quan hầm Hải Vân"],
-            restaurants: ["Quán Cà phê Đèo Hải Vân", "Nhà hàng Viewpoint"],
-            bestTime: "Sáng sớm hoặc chiều tối (tránh sương mù)",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "khu-du-lich-chan-may",
-            name: "Khu Du Lịch Chân Mây",
-            coords: [16.1667, 108.1333],
-            type: "resort",
-            description: "Khu du lịch nghỉ dưỡng cao cấp với các resort 5 sao, sân golf và dịch vụ giải trí đầy đủ. Phù hợp cho du lịch nghỉ dưỡng và hội nghị.",
-            features: ["Resort", "Golf", "Giải trí", "Spa", "Hồ bơi"],
-            activities: ["Chơi golf", "Thư giãn spa", "Bơi lội", "Thể thao biển", "Ăn uống cao cấp"],
-            restaurants: ["Nhà hàng tại các resort", "Quầy bar bãi biển"],
-            bestTime: "Cả năm",
-            openingHours: "Tùy resort",
-            entranceFee: "Tùy dịch vụ"
-        },
-        {
-            id: "thac-bo-ghe",
-            name: "Thác Bồ Ghè",
-            coords: [16.2500, 108.0667],
-            type: "waterfall",
-            description: "Thác nước đẹp với dòng chảy mạnh qua các tảng đá granite, xung quanh là rừng cây xanh mát. Địa điểm lý tưởng để tránh nóng mùa hè.",
-            features: ["Thác", "Rừng", "Mát mẻ", "Tắm thác", "Chụp ảnh"],
-            activities: ["Tắm thác", "Picnic", "Chụp ảnh", "Đi bộ trong rừng", "Nghe tiếng thác"],
-            restaurants: ["Quán Ăn Gần Thác"],
-            bestTime: "Mùa hè (tháng 5-8)",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "15.000 VNĐ"
-        },
-        {
-            id: "suoi-mo",
-            name: "Suối Mơ",
-            coords: [16.2667, 108.0583],
-            type: "waterfall",
-            description: "Suối với nhiều ghềnh đá và hồ nước trong xanh, tạo cảm giác như trong mơ. Phù hợp cho các gia đình có trẻ nhỏ vì dòng chảy nhẹ.",
-            features: ["Suối", "Ghềnh đá", "Hồ nước", "Gia đình", "Mát mẻ"],
-            activities: ["Tắm suối", "Chơi đùa với nước", "Picnic", "Chụp ảnh", "Thư giãn"],
-            restaurants: ["Quán Ăn Suối Mơ"],
-            bestTime: "Tháng 4-9",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "10.000 VNĐ"
-        },
-        {
-            id: "bai-bien-binh-an",
-            name: "Bãi biển Bình An",
-            coords: [16.1750, 108.1200],
-            type: "beach",
-            description: "Bãi biển nhỏ yên tĩnh, phù hợp cho những ai muốn tránh xa đám đông. Có nhiều tảng đá tự nhiên tạo khung cảnh độc đáo.",
-            features: ["Biển", "Yên tĩnh", "Đá tự nhiên", "Hoàng hôn", "Lãng mạn"],
-            activities: ["Tắm biển", "Ngắm hoàng hôn", "Chụp ảnh", "Đọc sách", "Thư giãn"],
-            restaurants: ["Quán Ăn Bình An", "Quán Nước Ven Biển"],
-            bestTime: "Cả năm",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        }
-    ];
-}
 function addTouristLocations() {
     // Danh sách địa điểm du lịch Chân Mây - Lăng Cô
     const locations = [
