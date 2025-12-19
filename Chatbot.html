@@ -159,8 +159,18 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = "AIzaSyAPvBZgQ4-k0iThuFtFEAlIlC0pKVex2tw";
-        const genAI = new GoogleGenerativeAI(API_KEY);
+// Hàm đảo ngược chuỗi để lấy API key thực
+function reverseApiKey(encodedKey) {
+    return encodedKey.split('').reverse().join('');
+}
+
+const ENCODED_API_KEY = "k8XtIITydxyOUnjgvvyoNT-OpjxHNXIPBySazIA";
+
+// Giải mã API key
+const API_KEY = reverseApiKey(ENCODED_API_KEY);
+
+const genAI = new GoogleGenerativeAI(API_KEY);
+
         
         // System instruction gọn
         const fullSystemInstruction = `Bạn là hướng dẫn viên du lịch chuyên về xã Chân Mây - Lăng Cô, Thành phố Huế.

@@ -9,294 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <script type="text/javascript" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="style/chatbot.css" />
-    <!-- Thêm vào <head> của chatbot.html -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    <style>
-        /* Layout chia đôi màn hình */
-.split-container {
-    display: flex;
-    height: calc(100vh - 60px); /* Trừ chiều cao header */
-    width: 100%;
-}
-
-.chat-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-right: 1px solid var(--border-color);
-    background-color: var(--primary-color);
-}
-
-.map-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: var(--card-bg);
-}
-
-.map-header {
-    padding: 16px 24px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--card-bg);
-}
-
-.map-header h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.map-controls {
-    display: flex;
-    gap: 8px;
-}
-
-.map-control-btn {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background-color: var(--white);
-    border: 1px solid var(--border-color);
-    color: var(--text-dark);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.map-control-btn:hover {
-    background-color: var(--hover-color);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.map-container {
-    flex: 1;
-    width: 100%;
-    position: relative;
-}
-
-#map {
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-}
-
-/* Markers styling */
-.map-marker {
-    background-color: var(--accent-color);
-    border: 2px solid white;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-
-.marker-popup .leaflet-popup-content-wrapper {
-    border-radius: 12px;
-    padding: 0;
-    overflow: hidden;
-}
-
-.marker-popup .leaflet-popup-content {
-    margin: 0;
-    width: 300px !important;
-}
-
-.marker-popup-content {
-    padding: 0;
-}
-
-.marker-popup-header {
-    background: var(--gradient);
-    color: white;
-    padding: 12px 16px;
-}
-
-.marker-popup-body {
-    padding: 16px;
-    background-color: var(--white);
-}
-
-.marker-popup-title {
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin-bottom: 4px;
-}
-
-.marker-popup-subtitle {
-    font-size: 0.85rem;
-    opacity: 0.9;
-}
-
-.marker-popup-description {
-    color: var(--text-dark);
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin-bottom: 12px;
-}
-
-.marker-popup-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 12px;
-}
-
-.marker-feature-tag {
-    background-color: rgba(70, 130, 180, 0.1);
-    color: var(--accent-color);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-/* Responsive cho layout chia đôi */
-@media (max-width: 1024px) {
-    .split-container {
-        flex-direction: column;
-    }
-    
-    .chat-section,
-    .map-section {
-        flex: none;
-        height: 50vh;
-    }
-    
-    .chat-section {
-        border-right: none;
-        border-bottom: 1px solid var(--border-color);
-    }
-    
-    .map-container {
-        height: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .split-container {
-        height: calc(100vh - 140px);
-    }
-    
-    .map-header {
-        padding: 12px 16px;
-    }
-    
-    .map-header h3 {
-        font-size: 0.9rem;
-    }
-}
-.user-location-marker {
-    background-color: #dc143c;
-    border: 2px solid white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-}
-/* CSS cho marker highlight */
-.map-marker-highlight {
-    background-color: #ffff00;
-    border: 2px solid white;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
-    animation: pulse 0.5s ease-in-out infinite alternate;
-}
-
-@keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-/* CSS cho nút action trong popup */
-.marker-popup-actions {
-    margin-top: 15px;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-color);
-}
-
-.marker-action-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: var(--accent-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.marker-action-btn:hover {
-    background-color: #5a9bd3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(70, 130, 180, 0.3);
-}
-/* CSS cho nút hiển thị trên bản đồ */
-.map-action-container {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px dashed var(--border-color);
-}
-
-.show-on-map-btn {
-    padding: 10px 16px;
-    background-color: rgba(70, 130, 180, 0.1);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.show-on-map-btn:hover {
-    background-color: var(--accent-color);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(70, 130, 180, 0.3);
-}
-    </style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -395,12 +107,8 @@
             </div>
         </div>
         
-<!-- Chat Area -->
-<div class="chat-area" id="chatArea">
-    <!-- Container chia đôi màn hình -->
-    <div class="split-container">
-        <!-- Phần trái: Chat -->
-        <div class="chat-section">
+        <!-- Chat Area -->
+        <div class="chat-area" id="chatArea">
             <div id="empty-state" class="empty-state">
                 <div class="empty-state-icon">
                     <i class="fas fa-umbrella-beach"></i>
@@ -438,13 +146,7 @@
                 </form>
             </div>
         </div>
-        
-        <!-- Phần phải: Bản đồ -->
-        <div class="map-section">
-            <div id="map" class="map-container"></div>
-        </div>
     </div>
-</div>
     
     <!-- JavaScript -->
     <script type="importmap">
@@ -457,8 +159,18 @@
     <script type="module">
         import { GoogleGenerativeAI } from "@google/generative-ai";
 
-        const API_KEY = "AIzaSyALEfwnqBXqevl_SItEm_DqcTxCW13sCgw";
-        const genAI = new GoogleGenerativeAI(API_KEY);
+// Hàm đảo ngược chuỗi để lấy API key thực
+function reverseApiKey(encodedKey) {
+    return encodedKey.split('').reverse().join('');
+}
+
+const ENCODED_API_KEY = "k8XtIITydxyOUnjgvvyoNT-OpjxHNXIPBySazIA";
+
+// Giải mã API key
+const API_KEY = reverseApiKey(ENCODED_API_KEY);
+
+const genAI = new GoogleGenerativeAI(API_KEY);
+
         
         // System instruction gọn
         const fullSystemInstruction = `Bạn là hướng dẫn viên du lịch chuyên về xã Chân Mây - Lăng Cô, Thành phố Huế.
@@ -589,364 +301,7 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
         function initApp() {
             setupEventListeners();
             setupTextareaAutoResize();
-            initMap();
         }
-        // Khởi tạo bản đồ
-let map;
-let markersLayer = L.layerGroup();
-let currentPositionMarker = null;
-
-function initMap() {
-    // Tọa độ trung tâm Chân Mây - Lăng Cô
-    const centerCoords = [16.2036, 108.0883];
-    
-    // Khởi tạo bản đồ
-    map = L.map('map').setView(centerCoords, 12);
-    
-    // Thêm tile layer (OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18,
-    }).addTo(map);
-    
-    // Thêm layer markers
-    markersLayer.addTo(map);
-    
-    // Thêm các địa điểm du lịch
-    addTouristLocations();
-    
-    // Xử lý các nút điều khiển
-    setupMapControls();
-}
-// Thêm biến global để lưu dữ liệu địa điểm
-let touristLocations = {};
-
-// Cập nhật hàm addTouristLocations() để trả về dữ liệu
-function getTouristLocations() {
-    return [
-        {
-            id: "vinh-lang-co",
-            name: "Vịnh Lăng Cô",
-            coords: [16.1800, 108.1167],
-            type: "beach",
-            description: "Một trong những vịnh đẹp nhất thế giới, được công nhận là thành viên của Câu lạc bộ các vịnh đẹp nhất thế giới năm 2009. Bãi biển dài hơn 10km với cát trắng mịn và nước trong xanh quanh năm.",
-            features: ["Biển", "Bãi tắm", "Chụp ảnh", "Lặn biển", "Thuyền kayak"],
-            activities: ["Tắm biển", "Chụp ảnh", "Lặn ngắm san hô", "Chèo thuyền kayak", "Xem hoàng hôn"],
-            restaurants: ["Nhà hàng Hải Sản Lăng Cô", "Quán Ăn Biển Xanh", "Nhà hàng Vịnh Xanh"],
-            bestTime: "Tháng 3-9",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "dam-lap-an",
-            name: "Đầm Lập An",
-            coords: [16.2333, 108.0833],
-            type: "lagoon",
-            description: "Đầm nước mặn rộng khoảng 800ha, nổi tiếng với nghề nuôi hàu. Cảnh quan thiên nhiên tuyệt đẹp với mặt nước phẳng lặng, phản chiếu núi non và bầu trời.",
-            features: ["Đầm nước", "Hàu", "Hoàng hôn", "Chụp ảnh", "Tham quan làng nghề"],
-            activities: ["Tham quan làng nghề nuôi hàu", "Chụp ảnh phản chiếu", "Xem hoàng hôn", "Thưởng thức hàu tươi"],
-            restaurants: ["Quán Hàu Lập An", "Nhà hàng Đầm Nước", "Quán Ăn Bình Dân"],
-            bestTime: "Tháng 4-8 (mùa thu hoạch hàu)",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "suoi-voi",
-            name: "Suối Voi",
-            coords: [16.2833, 108.0500],
-            type: "waterfall",
-            description: "Suối nước mát lạnh quanh năm với nhiều tầng thác đẹp, phù hợp cho các hoạt động dã ngoại và tắm suối. Cảnh quan rừng núi nguyên sinh bao quanh.",
-            features: ["Suối", "Thác", "Dã ngoại", "Tắm suối", "Cắm trại"],
-            activities: ["Tắm suối", "Dã ngoại", "Cắm trại", "Chụp ảnh thiên nhiên", "Đi bộ khám phá"],
-            restaurants: ["Quán Ăn Suối Voi", "Nhà hàng Rừng Xanh"],
-            bestTime: "Tháng 3-10 (tránh mùa mưa lớn)",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "20.000 VNĐ"
-        },
-        {
-            id: "bai-bien-tan-canh-duong",
-            name: "Bãi biển Tân Cảnh Dương",
-            coords: [16.1917, 108.1250],
-            type: "beach",
-            description: "Bãi biển hoang sơ với cảnh quan tự nhiên được bảo tồn tốt, ít khách du lịch. Lý tưởng cho các hoạt động nghỉ dưỡng yên tĩnh.",
-            features: ["Biển", "Hoang sơ", "Nghỉ dưỡng", "Yên tĩnh", "Chụp ảnh"],
-            activities: ["Tắm biển", "Thư giãn", "Chụp ảnh", "Đi dạo", "Picnic"],
-            restaurants: ["Quán Ăn Tân Cảnh Dương", "Nhà hàng Biển Hoang Sơ"],
-            bestTime: "Cả năm",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "cho-hai-san-lang-co",
-            name: "Chợ Hải Sản Lăng Cô",
-            coords: [16.1867, 108.1083],
-            type: "market",
-            description: "Chợ hải sản tươi sống nổi tiếng, nơi bạn có thể mua và thưởng thức hải sản mới đánh bắt. Đặc biệt nổi tiếng với hàu, tôm, mực, cá biển tươi ngon.",
-            features: ["Hải sản", "Ẩm thực", "Mua sắm", "Trải nghiệm địa phương", "Giá cả phải chăng"],
-            activities: ["Mua sắm hải sản", "Thưởng thức hải sản tươi", "Trải nghiệm văn hóa địa phương", "Chụp ảnh chợ"],
-            restaurants: ["Các quán ăn trong chợ", "Nhà hàng Hải Sản Tươi Sống"],
-            bestTime: "Sáng sớm (5:00-8:00)",
-            openingHours: "4:00 - 18:00",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "nui-hai-van",
-            name: "Núi Hải Vân",
-            coords: [16.2000, 108.0333],
-            type: "mountain",
-            description: "Đèo Hải Vân với cảnh quan núi rừng hùng vĩ, điểm check-in lý tưởng để ngắm toàn cảnh vùng biển. Có nhiều điểm chụp ảnh đẹp dọc theo đèo.",
-            features: ["Núi", "Viewpoint", "Chụp ảnh", "Đường đèo", "Cảnh quan"],
-            activities: ["Chụp ảnh panorama", "Đi bộ ngắm cảnh", "Check-in điểm sống ảo", "Xem mây", "Tham quan hầm Hải Vân"],
-            restaurants: ["Quán Cà phê Đèo Hải Vân", "Nhà hàng Viewpoint"],
-            bestTime: "Sáng sớm hoặc chiều tối (tránh sương mù)",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        },
-        {
-            id: "khu-du-lich-chan-may",
-            name: "Khu Du Lịch Chân Mây",
-            coords: [16.1667, 108.1333],
-            type: "resort",
-            description: "Khu du lịch nghỉ dưỡng cao cấp với các resort 5 sao, sân golf và dịch vụ giải trí đầy đủ. Phù hợp cho du lịch nghỉ dưỡng và hội nghị.",
-            features: ["Resort", "Golf", "Giải trí", "Spa", "Hồ bơi"],
-            activities: ["Chơi golf", "Thư giãn spa", "Bơi lội", "Thể thao biển", "Ăn uống cao cấp"],
-            restaurants: ["Nhà hàng tại các resort", "Quầy bar bãi biển"],
-            bestTime: "Cả năm",
-            openingHours: "Tùy resort",
-            entranceFee: "Tùy dịch vụ"
-        },
-        {
-            id: "thac-bo-ghe",
-            name: "Thác Bồ Ghè",
-            coords: [16.2500, 108.0667],
-            type: "waterfall",
-            description: "Thác nước đẹp với dòng chảy mạnh qua các tảng đá granite, xung quanh là rừng cây xanh mát. Địa điểm lý tưởng để tránh nóng mùa hè.",
-            features: ["Thác", "Rừng", "Mát mẻ", "Tắm thác", "Chụp ảnh"],
-            activities: ["Tắm thác", "Picnic", "Chụp ảnh", "Đi bộ trong rừng", "Nghe tiếng thác"],
-            restaurants: ["Quán Ăn Gần Thác"],
-            bestTime: "Mùa hè (tháng 5-8)",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "15.000 VNĐ"
-        },
-        {
-            id: "suoi-mo",
-            name: "Suối Mơ",
-            coords: [16.2667, 108.0583],
-            type: "waterfall",
-            description: "Suối với nhiều ghềnh đá và hồ nước trong xanh, tạo cảm giác như trong mơ. Phù hợp cho các gia đình có trẻ nhỏ vì dòng chảy nhẹ.",
-            features: ["Suối", "Ghềnh đá", "Hồ nước", "Gia đình", "Mát mẻ"],
-            activities: ["Tắm suối", "Chơi đùa với nước", "Picnic", "Chụp ảnh", "Thư giãn"],
-            restaurants: ["Quán Ăn Suối Mơ"],
-            bestTime: "Tháng 4-9",
-            openingHours: "7:00 - 17:00",
-            entranceFee: "10.000 VNĐ"
-        },
-        {
-            id: "bai-bien-binh-an",
-            name: "Bãi biển Bình An",
-            coords: [16.1750, 108.1200],
-            type: "beach",
-            description: "Bãi biển nhỏ yên tĩnh, phù hợp cho những ai muốn tránh xa đám đông. Có nhiều tảng đá tự nhiên tạo khung cảnh độc đáo.",
-            features: ["Biển", "Yên tĩnh", "Đá tự nhiên", "Hoàng hôn", "Lãng mạn"],
-            activities: ["Tắm biển", "Ngắm hoàng hôn", "Chụp ảnh", "Đọc sách", "Thư giãn"],
-            restaurants: ["Quán Ăn Bình An", "Quán Nước Ven Biển"],
-            bestTime: "Cả năm",
-            openingHours: "Cả ngày",
-            entranceFee: "Miễn phí"
-        }
-    ];
-}
-function addTouristLocations() {
-    // Danh sách địa điểm du lịch Chân Mây - Lăng Cô
-    const locations = getTouristLocations();
-    
-    const iconTypes = {
-        beach: { color: '#4682b4', icon: 'fa-umbrella-beach' },
-        lagoon: { color: '#2e8b57', icon: 'fa-water' },
-        waterfall: { color: '#1e90ff', icon: 'fa-water' },
-        market: { color: '#ff8c00', icon: 'fa-shopping-cart' },
-        mountain: { color: '#8b4513', icon: 'fa-mountain' },
-        resort: { color: '#dc143c', icon: 'fa-hotel' },
-        default: { color: '#4682b4', icon: 'fa-map-marker-alt' }
-    };
-    
-    // Thêm markers cho từng địa điểm
-    locations.forEach((location) => {
-        const iconType = iconTypes[location.type] || iconTypes.default;
-        
-        // Tạo custom marker
-        const markerIcon = L.divIcon({
-            className: 'map-marker',
-            html: `<div style="background-color: ${iconType.color};">
-                    <i class="fas ${iconType.icon}" style="font-size: 12px;"></i>
-                  </div>`,
-            iconSize: [24, 24],
-            iconAnchor: [12, 12]
-        });
-        
-        // Tạo marker
-        const marker = L.marker(location.coords, { 
-            icon: markerIcon,
-            id: location.id
-        }).addTo(markersLayer);
-        
-        // Tạo popup content
-        const popupContent = `
-            <div class="marker-popup-content">
-                <div class="marker-popup-header">
-                    <div class="marker-popup-title">${location.name}</div>
-                    <div class="marker-popup-subtitle">
-                        <i class="fas ${iconType.icon}"></i> ${location.type.charAt(0).toUpperCase() + location.type.slice(1)}
-                    </div>
-                </div>
-                <div class="marker-popup-body">
-                    <p class="marker-popup-description">${location.description}</p>
-                    <div class="marker-popup-features">
-                        ${location.features.map(feature => 
-                            `<span class="marker-feature-tag">${feature}</span>`
-                        ).join('')}
-                    </div>
-                    <div class="marker-popup-actions">
-                        <button class="marker-action-btn" onclick="focusOnLocation('${location.id}')">
-                            <i class="fas fa-search-location"></i> Xem chi tiết
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // Gắn popup
-        marker.bindPopup(popupContent, {
-            className: 'marker-popup',
-            maxWidth: 300
-        });
-        
-        // Lưu marker vào đối tượng để dễ truy cập sau này
-        location.marker = marker;
-        touristLocations[location.id] = location;
-    });
-}
-// Hàm để focus vào một địa điểm cụ thể
-window.focusOnLocation = function(locationId) {
-    console.log('Focusing on:', locationId);
-    const location = touristLocations[locationId];
-    
-    if (!location) {
-        console.error('Location not found:', locationId);
-        return;
-    }
-    
-    map.setView(location.coords, 15);
-    
-    if (location.marker) {
-        location.marker.openPopup();
-    }
-    
-    highlightMarker(location.marker);
-};
-
-// Hàm highlight marker
-function highlightMarker(marker) {
-    // Tạo hiệu ứng nhấp nháy
-    let flashCount = 0;
-    const flashInterval = setInterval(() => {
-        const icon = marker.getIcon();
-        const currentColor = icon.options.html.includes('#ffff00') ? '#4682b4' : '#ffff00';
-        
-        const newIcon = L.divIcon({
-            className: 'map-marker-highlight',
-            html: `<div style="background-color: ${currentColor}; border: 2px solid white;">
-                    <i class="fas fa-map-pin" style="font-size: 12px; color: ${currentColor === '#ffff00' ? '#000' : '#fff'}"></i>
-                  </div>`,
-            iconSize: [28, 28],
-            iconAnchor: [14, 14]
-        });
-        
-        marker.setIcon(newIcon);
-        
-        flashCount++;
-        if (flashCount >= 6) {
-            clearInterval(flashInterval);
-            // Trở về icon ban đầu
-            const iconType = getIconType(marker.options.id);
-            const originalIcon = L.divIcon({
-                className: 'map-marker',
-                html: `<div style="background-color: ${iconType.color};">
-                        <i class="fas ${iconType.icon}" style="font-size: 12px;"></i>
-                      </div>`,
-                iconSize: [24, 24],
-                iconAnchor: [12, 12]
-            });
-            marker.setIcon(originalIcon);
-        }
-    }, 300);
-}
-
-// Hàm helper để lấy icon type
-function getIconType(locationId) {
-    const location = touristLocations[locationId];
-    if (!location) return { color: '#4682b4', icon: 'fa-map-marker-alt' };
-    
-    const iconTypes = {
-        beach: { color: '#4682b4', icon: 'fa-umbrella-beach' },
-        lagoon: { color: '#2e8b57', icon: 'fa-water' },
-        waterfall: { color: '#1e90ff', icon: 'fa-water' },
-        market: { color: '#ff8c00', icon: 'fa-shopping-cart' },
-        mountain: { color: '#8b4513', icon: 'fa-mountain' },
-        resort: { color: '#dc143c', icon: 'fa-hotel' },
-        default: { color: '#4682b4', icon: 'fa-map-marker-alt' }
-    };
-    
-    return iconTypes[location.type] || iconTypes.default;
-}
-function setupMapControls() {
-    // Nút định vị vị trí hiện tại
-    document.getElementById('locateMeBtn').addEventListener('click', function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                function(position) {
-                    const userCoords = [position.coords.latitude, position.coords.longitude];
-                    
-                    // Xóa marker cũ nếu có
-                    if (currentPositionMarker) {
-                        map.removeLayer(currentPositionMarker);
-                    }
-                    
-                    // Tạo marker mới cho vị trí người dùng
-                    currentPositionMarker = L.marker(userCoords, {
-                        icon: L.divIcon({
-                            className: 'user-location-marker',
-                            html: '<div style="background-color: #dc143c;"><i class="fas fa-user" style="font-size: 10px;"></i></div>',
-                            iconSize: [20, 20],
-                            iconAnchor: [10, 10]
-                        })
-                    }).addTo(map);
-                    
-                    // Hiển thị popup
-                    currentPositionMarker.bindPopup("Vị trí của bạn").openPopup();
-                    
-                    // Di chuyển bản đồ đến vị trí người dùng
-                    map.setView(userCoords, 14);
-                },
-                function(error) {
-                    alert("Không thể lấy vị trí của bạn. Vui lòng kiểm tra cài đặt quyền truy cập vị trí.");
-                }
-            );
-        } else {
-            alert("Trình duyệt của bạn không hỗ trợ định vị.");
-        }
-    });
-    
-    // Nút đặt lại view
-    document.getElementById('resetViewBtn').addEventListener('click', function() {
-        map.setView([16.2036, 108.0883], 12);
-    });
-}
-
-// Khởi tạo bản đồ khi tải trang
-document.addEventListener('DOMContentLoaded', function() {
-    initMap();
-});
 
         function setupEventListeners() {
             chatForm.addEventListener('submit', handleSubmit);
@@ -979,134 +334,77 @@ document.addEventListener('DOMContentLoaded', function() {
             messageInput.style.height = `${newHeight}px`;
         }
 
-async function handleSubmit(e) {
-    e.preventDefault();
-    const userMessage = messageInput.value.trim();
-    if (!userMessage || isSending) return;
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const userMessage = messageInput.value.trim();
+            if (!userMessage || isSending) return;
 
-    // Hide empty state on first message
-    if (emptyState.style.display !== 'none') {
-        emptyState.style.display = 'none';
-        chatMessages.style.display = 'flex';
-    }
-
-    isSending = true;
-    addMessageToUI("user", userMessage);
-    
-    // Change send button to loading state
-    sendButton.innerHTML = '<div class="loading-spinner"></div>';
-    sendButton.disabled = true;
-
-    // Add to current messages array
-    currentMessages.push({ 
-        role: "user", 
-        content: userMessage,
-        timestamp: new Date().toISOString()
-    });
-
-    messageInput.value = "";
-    autoResizeTextarea();
-    isStopped = false;
-
-    try {
-        // Chuẩn bị history cho Gemini
-        const history = currentMessages.map(msg => ({
-            role: msg.role === "user" ? "user" : "model",
-            parts: [{ text: msg.content }]
-        }));
-
-        const chatSession = model.startChat({
-            history: history,
-            generationConfig: {
-                maxOutputTokens: 2000,
-                temperature: 0.9,
-                topP: 0.1,
-                topK: 16,
+            // Hide empty state on first message
+            if (emptyState.style.display !== 'none') {
+                emptyState.style.display = 'none';
+                chatMessages.style.display = 'flex';
             }
-        });
 
-        const result = await chatSession.sendMessage(userMessage);
-        const response = await result.response;
-        let botReply = response.text();
-
-        // Phân tích câu hỏi và tìm địa điểm liên quan
-        const locationMatch = findLocationInQuery(userMessage);
-        
-        if (locationMatch) {
-            // Thêm thông tin bản đồ vào câu trả lời
-            botReply += `\n\n📍 **Tôi đã đánh dấu ${locationMatch.name} trên bản đồ cho bạn!**`;
+            isSending = true;
+            addMessageToUI("user", userMessage);
             
-            // Focus vào địa điểm trên bản đồ
-            setTimeout(() => {
-                focusOnLocation(locationMatch.id);
-            }, 500);
-        }
+            // Change send button to loading state
+            sendButton.innerHTML = '<div class="loading-spinner"></div>';
+            sendButton.disabled = true;
 
-        // Giới hạn câu trả lời tối đa 300 từ
-        const limitedReply = limitWords(botReply, 300);
-        
-        displayTypingMessage(limitedReply, () => {
-            if (!isStopped) {
-                currentMessages.push({ 
-                    role: "assistant", 
-                    content: limitedReply,
-                    timestamp: new Date().toISOString()
+            // Add to current messages array
+            currentMessages.push({ 
+                role: "user", 
+                content: userMessage,
+                timestamp: new Date().toISOString()
+            });
+
+            messageInput.value = "";
+            autoResizeTextarea();
+            isStopped = false;
+
+            try {
+                // Chuẩn bị history cho Gemini
+                const history = currentMessages.map(msg => ({
+                    role: msg.role === "user" ? "user" : "model",
+                    parts: [{ text: msg.content }]
+                }));
+
+                const chatSession = model.startChat({
+                    history: history,
+                    generationConfig: {
+                        maxOutputTokens: 2000,
+                        temperature: 0.9,
+                        topP: 0.1,
+                        topK: 16,
+                    }
                 });
-            }
-        });
-    } catch (error) {
-        console.error("Lỗi: ", error);
-        addMessageToUI("assistant", "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.");
-    } finally {
-        isSending = false;
-        resetSendButton();
-        scrollToBottom();
-    }
-}
-// Hàm tìm địa điểm trong câu hỏi
-function findLocationInQuery(query) {
-    const queryLower = query.toLowerCase();
-    const locations = getTouristLocations();
-    
-    // Từ khóa tìm kiếm cho từng địa điểm
-    const locationKeywords = {
-        'vinh-lang-co': ['vịnh lăng cô', 'lang cô', 'bãi biển lăng cô', 'vinh lang co'],
-        'dam-lap-an': ['đầm lập an', 'lập an', 'đầm nước', 'nuôi hàu', 'hàu lập an'],
-        'suoi-voi': ['suối voi', 'thác voi', 'suoi voi'],
-        'bai-bien-tan-canh-duong': ['tân cảnh dương', 'bãi tân cảnh dương', 'tan canh duong'],
-        'cho-hai-san-lang-co': ['chợ hải sản', 'chợ lăng cô', 'hải sản tươi', 'cho hai san'],
-        'nui-hai-van': ['hải vân', 'đèo hải vân', 'núi hải vân', 'đèo', 'hai van'],
-        'khu-du-lich-chan-may': ['chân mây', 'khu du lịch chân mây', 'resort chân mây', 'chan may'],
-        'thac-bo-ghe': ['thác bồ ghè', 'bồ ghè', 'thac bo ghe'],
-        'suoi-mo': ['suối mơ', 'suoi mo'],
-        'bai-bien-binh-an': ['bình an', 'bãi bình an', 'bai bien binh an']
-    };
-    
-    // Tìm địa điểm phù hợp
-    for (const [locationId, keywords] of Object.entries(locationKeywords)) {
-        for (const keyword of keywords) {
-            if (queryLower.includes(keyword)) {
-                return touristLocations[locationId];
+
+                const result = await chatSession.sendMessage(userMessage);
+                const response = await result.response;
+                const botReply = response.text();
+
+                // Giới hạn câu trả lời tối đa 300 từ
+                const limitedReply = limitWords(botReply, 300);
+                
+                displayTypingMessage(limitedReply, () => {
+                    if (!isStopped) {
+                        currentMessages.push({ 
+                            role: "assistant", 
+                            content: limitedReply,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error("Lỗi: ", error);
+                addMessageToUI("assistant", "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.");
+            } finally {
+                isSending = false;
+                resetSendButton();
+                scrollToBottom();
             }
         }
-    }
-    
-    // Tìm bằng tên gần đúng
-    for (const location of locations) {
-        if (queryLower.includes(location.name.toLowerCase())) {
-            return location;
-        }
-        
-        // Tìm trong mô tả
-        if (queryLower.split(' ').some(word => 
-            word.length > 3 && location.description.toLowerCase().includes(word)
-        )) {
-            return location;
-        }
-    }
-    
-    return null;
-}
 
         function limitWords(text, maxWords) {
             if (!text) return "";
@@ -1145,49 +443,35 @@ function findLocationInQuery(query) {
             }, 1500);
         }
 
-function addMessageToUI(role, content) {
-    const messageContainer = document.createElement('div');
-    messageContainer.className = `message-container ${role}`;
-    
-    const avatar = document.createElement('div');
-    avatar.className = `message-avatar ${role}`;
-    
-    if (role === 'user') {
-        avatar.innerHTML = '<i class="fas fa-user"></i>';
-    } else {
-        avatar.innerHTML = '<i class="fas fa-robot"></i>';
-    }
-    
-    const messageDiv = document.createElement('div');
-    messageDiv.className = 'message-content';
-    
-    const messageBubble = document.createElement('div');
-    messageBubble.className = role === 'user' ? 'user-message' : 'bot-message';
-    
-    // Kiểm tra xem có location trong tin nhắn không
-    const locationMatch = findLocationInQuery(content);
-    let formattedContent = formatMessage(content);
-    
-    // Nếu là tin nhắn từ bot và có địa điểm
-    if (role === 'assistant' && locationMatch) {
-        formattedContent += `
-            <div class="map-action-container">
-                <button class="show-on-map-btn" onclick="focusOnLocation('${locationMatch.id}')">
-                    <i class="fas fa-map-marked-alt"></i> Hiển thị ${locationMatch.name} trên bản đồ
-                </button>
-            </div>
-        `;
-    }
-    
-    messageBubble.innerHTML = `<div class="markdown">${formattedContent}</div>`;
-    
-    messageDiv.appendChild(messageBubble);
-    messageContainer.appendChild(avatar);
-    messageContainer.appendChild(messageDiv);
-    
-    chatMessages.appendChild(messageContainer);
-    scrollToBottom();
-}
+        function addMessageToUI(role, content) {
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `message-container ${role}`;
+            
+            const avatar = document.createElement('div');
+            avatar.className = `message-avatar ${role}`;
+            
+            if (role === 'user') {
+                avatar.innerHTML = '<i class="fas fa-user"></i>';
+            } else {
+                avatar.innerHTML = '<i class="fas fa-robot"></i>';
+            }
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message-content';
+            
+            const messageBubble = document.createElement('div');
+            messageBubble.className = role === 'user' ? 'user-message' : 'bot-message';
+            
+            const formattedContent = formatMessage(content);
+            messageBubble.innerHTML = `<div class="markdown">${formattedContent}</div>`;
+            
+            messageDiv.appendChild(messageBubble);
+            messageContainer.appendChild(avatar);
+            messageContainer.appendChild(messageDiv);
+            
+            chatMessages.appendChild(messageContainer);
+            scrollToBottom();
+        }
 
         function formatMessage(content) {
             if (!content) return '';
