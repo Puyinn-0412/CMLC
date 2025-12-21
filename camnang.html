@@ -6,7 +6,811 @@
     <title>LangTrek | Cẩm Nang Du Lịch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/camnang.css" />
+    <style>
+        :root {
+            --primary-color: #f0f8ff;
+            --text-dark: #2c2724;
+            --accent-color: #4682b4;
+            --white: #ffffff;
+            --text-light: #6b7280;
+            --sidebar-bg: #ffffff;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient: linear-gradient(135deg, #4682b4 0%, #5a9bd3 100%);
+            --hover-color: #e6f2ff;
+            --border-color: #e5e7eb;
+            --max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .btn {
+            outline: none;
+            border: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        img {
+            display: flex;
+            width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        /* Header - Y hệt chatbot */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--text-dark);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 50;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--white);
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 12px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: var(--primary-color);
+        }
+        
+        .user-info i {
+            color: var(--accent-color);
+        }
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            z-index: 45;
+            background-color: var(--accent-color);
+            color: white;
+            width: 32px;
+            height: 56px;
+            border-radius: 0 10px 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .sidebar-toggle:hover {
+            background-color: #5a9bd3;
+            width: 36px;
+        }
+        
+        .sidebar-toggle.hidden {
+            left: -40px;
+        }
+
+        /* Main Container */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            padding-top: 60px; /* Space for header */
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease; /* Đổi từ transform sang all */
+            z-index: 40;
+            box-shadow: var(--shadow);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        /* Khi sidebar đóng - SỬA LẠI */
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+            width: 0;
+            opacity: 0;
+            visibility: hidden; /* Thêm để ẩn hoàn toàn */
+            border-right: none; /* Ẩn border khi đóng */
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-name a {
+            text-decoration: none;
+            color: inherit;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .brand-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        .nav-section {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .nav-title {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .nav-link:hover {
+            background-color: var(--hover-color);
+        }
+
+        .nav-link.active {
+            background-color: rgba(70, 130, 180, 0.1);
+            color: var(--accent-color);
+        }
+
+        .nav-link i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            margin-top: auto;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            border-top: 1px solid var(--border-color);
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-copyright {
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Khi sidebar đóng - content chiếm toàn bộ */
+        .content-area.expanded {
+            margin-left: 0;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Filter Categories */
+        .guide-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.5rem;
+            background-color: #f1f1f1;
+            color: var(--text-dark);
+            border-radius: 2rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .category-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .category-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(70, 130, 180, 0.3);
+        }
+
+        /* Featured Guide */
+        .featured-guide {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.4s ease;
+        }
+
+        @media (min-width: 768px) {
+            .featured-guide {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .featured-guide-image {
+            height: 100%;
+            min-height: 300px;
+        }
+
+        .featured-guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .featured-guide-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background-color: #ffd700;
+            color: var(--text-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .guide-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--primary-color);
+            color: var(--accent-color);
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .featured-guide-content h2 {
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        /* Guides Grid */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .guide-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .guide-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .guide-card:hover .guide-image img {
+            transform: scale(1.05);
+        }
+
+        .guide-content {
+            padding: 1.5rem;
+        }
+
+        .guide-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .guide-excerpt {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .read-more {
+            color: var(--accent-color);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .read-more:hover {
+            color: var(--text-dark);
+        }
+
+        /* Guides Container */
+        .guides-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .guides-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Popular Guides Sidebar */
+        .popular-guides {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .popular-guides h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .popular-guide-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .popular-guide-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .popular-guide-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .popular-guide-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popular-guide-content h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        /* Newsletter */
+        .newsletter-box {
+            background-color: var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .newsletter-box h3 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-box p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .newsletter-box input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .newsletter-box button {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .newsletter-box button:hover {
+            background-color: #5a9bd3;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            margin-top: 4rem;
+        }
+
+        .footer__container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 3rem 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer__logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer__logo span {
+            color: var(--accent-color);
+        }
+
+        .section__description {
+            color: var(--primary-color);
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .footer__col h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .footer__socials {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .footer__socials a {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            transition: color 0.3s;
+        }
+
+        .footer__socials a:hover {
+            color: var(--white);
+        }
+
+        .footer__links {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .footer__links a {
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer__links a:hover {
+            color: var(--white);
+        }
+
+        .footer__bar {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        /* Filter Animations */
+        .guide-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            height: 0;
+            margin: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .featured-guide.hidden {
+            opacity: 0;
+            height: 0;
+            margin: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Scrollbar styling */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: 60px; /* Below header */
+                height: calc(100vh - 60px);
+                transform: translateX(-100%);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.1);
+                z-index: 100;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+                width: 280px;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .sidebar-toggle {
+                display: flex;
+                top: calc(50% + 30px); /* Adjust for header */
+            }
+            
+            .content-area.expanded {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .app-header {
+                padding: 0 16px;
+            }
+            
+            .logo span {
+                font-size: 1rem;
+            }
+            
+            .user-info span {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .guides-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .brand-name {
+                font-size: 1.2rem;
+            }
+            
+            .nav-link {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .guide-categories {
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header Y HỆT CHATBOT -->
@@ -101,27 +905,30 @@
                 <h1>Cẩm Nang Du Lịch</h1>
                 <p>Khám phá những bài viết hữu ích, kinh nghiệm du lịch và hướng dẫn chi tiết về vùng đất Chân Mây - Lăng Cô.</p>
                 <div class="guide-categories">
-                    <button class="category-btn active">Tất cả</button>
-                    <button class="category-btn">Điểm đến</button>
-                    <button class="category-btn">Ẩm thực</button>
-                    <button class="category-btn">Kinh nghiệm</button>
-                    <button class="category-btn">Văn hóa</button>
+                    <button class="category-btn active" data-filter="all">Tất cả</button>
+                    <button class="category-btn" data-filter="diadiem">Điểm đến</button>
+                    <button class="category-btn" data-filter="amthuc">Ẩm thực</button>
+                    <button class="category-btn" data-filter="kinhnghiem">Kinh nghiệm</button>
+                    <button class="category-btn" data-filter="vanhoa">Văn hóa</button>
                 </div>
             </section>
 
             <!-- Main Content -->
             <main class="container">
                 <!-- Featured Guide -->
-                <section class="featured-guide">
+                <section class="featured-guide" data-category="diadiem">
                     <div class="featured-guide-image">
-                        <img src="img/lang-co-4768124.jpg" alt="Thác Bồ Ghè">
+                        <img src="https://cdn3.ivivu.com/2019/07/ve-dep-cua-dam-lap-an-ben-bo-vinh-lang-co-ivivu-1.jpg" alt="Chân Mây - Lăng Cô">
                     </div>
                     <div class="featured-guide-content">
                         <span class="featured-badge">Bài viết nổi bật</span>
-                        <span class="guide-category">Điểm đến</span>
-                        <h2>Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</h2>
+                        <div style="display: flex; gap: 20px;">
+                            <div class="guide-category">Điểm đến</div>
+                            <div class="guide-category">Kinh nghiệm</div>
+                        </div>
+                        <h2>Chân Mây - Lăng Cô: Viên Ngọc Ẩn Giấu Của Xứ Huế</h2>
                         <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">Khám phá vẻ đẹp hoang sơ của bãi biển Lăng Cô với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
-                        <a href="post/langcobeach.html" target="_blank" class="read-more">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
+                        <a href="post/book.html" target="_blank" class="read-more">Đọc bài viết <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </section>
 
@@ -131,7 +938,7 @@
                     <div>
                         <div class="guides-grid">
                             <!-- Guide 1 -->
-                            <article class="guide-card">
+                            <article class="guide-card" data-category="diadiem">
                                 <div class="guide-image">
                                     <img src="img/Plage de Lang Co 2.jpg" alt="Bãi biển Lăng Cô">
                                 </div>
@@ -139,14 +946,14 @@
                                     <span class="guide-category">Điểm đến</span>
                                     <h3 class="guide-title">Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</h3>
                                     <p class="guide-excerpt">Khám phá vẻ đẹp hoang sơ của bãi biển Lăng Cô với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
-                                    <a href="https://example.com/bai-bien-lang-co" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                    <a href="post/langcobeach.html" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </article>
 
                             <!-- Guide 2 -->
-                            <article class="guide-card">
+                            <article class="guide-card" data-category="diadiem">
                                 <div class="guide-image">
-                                    <img src="img/lang-co-4768125.jpg" alt="Đầm Lập An">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg/1200px-%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg" alt="Đầm Lập An">
                                 </div>
                                 <div class="guide-content">
                                     <span class="guide-category">Điểm đến</span>
@@ -157,7 +964,53 @@
                             </article>
 
                             <!-- Guide 3 -->
-                            <article class="guide-card">
+                            <article class="guide-card" data-category="diadiem">
+                                <div class="guide-image">
+                                    <img src="img/z7320777421749_d01faef19ca189a38f1a48e5b989ed8e.jpg" alt="Biển Bình An">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Bãi Biển Bình An: Khúc ru của sóng</h3>
+                                    <p class="guide-excerpt">Khám phá sự bình yên của bãi biển Bình An với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
+                                    <a href="post/binhanbeach.html" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                            <article class="guide-card" data-category="diadiem">
+                                <div class="guide-image">
+                                    <img src="https://statics.vinpearl.com/bien-canh-duong-6_1633187654.png" alt="Biển Cảnh Dương">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Bãi Biển Cảnh Dương: Điểm cắm trại lí tưởng</h3>
+                                    <p class="guide-excerpt">Trải nghiệm các hoạt động tại biển Cảnh Dương với cát trắng, nước trong xanh và cảnh quan thiên nhiên tuyệt đẹp.</p>
+                                    <a href="post/canhduongbeach.html" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                            <article class="guide-card" data-category="diadiem">
+                                <div class="guide-image">
+                                    <img src="https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/492448263_1057105036477633_2589427616246728057_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeH_Ieul-RHRh1oHvAtfxqMghErKm1WIxdCESsqbVYjF0CcmnUJ9-0O_BnPeyUwW_LaXFtxUrXdIMHjBJ9NRLFd_&_nc_ohc=YC4V_vXeSNkQ7kNvwFnSWGe&_nc_oc=Adm-leG19wNnLGf_J8M9usCoonY9K7Ks7nX6uljB2e32sYuKcH9nqnGE-57Cvl9FdbyXX1Wru5pH6xorM36JbIil&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=OP6yNr5s3ZtJe2M4NrpkAQ&oh=00_AflxjlYFTaZ6bO6Yp13DgJcnodMH5hEDqUGdOTVweOXULg&oe=694DE1C0" alt="Biển Cảnh Dương">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Suối Tiên: Thiên Đường Sinh Thái Giữa Núi Rừng Huế</h3>
+                                    <p class="guide-excerpt">Lorem ipsum dolor sit.</p>
+                                    <a href="post/suoitien.html" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                            <article class="guide-card" data-category="diadiem">
+                                <div class="guide-image">
+                                    <img src="https://static.vinwonders.com/production/suoi-voi-2.jpg" alt="Biển Cảnh Dương">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Điểm đến</span>
+                                    <h3 class="guide-title">Suối Voi: Kỳ Quan Thiên Nhiên Giữa Rừng Nguyên Sinh</h3>
+                                    <p class="guide-excerpt">Lorem ipsum dolor sit.</p>
+                                    <a href="post/suoivoi.html" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+
+                            <!-- Guide 4 -->
+                            <article class="guide-card" data-category="amthuc">
                                 <div class="guide-image">
                                     <img src="img/dam-lap-an-hue-6.jpg" alt="Ẩm thực Huế">
                                 </div>
@@ -166,6 +1019,32 @@
                                     <h3 class="guide-title">Ẩm Thực Chân Mây - Lăng Cô: Hương Vị Biển Đặc Trưng</h3>
                                     <p class="guide-excerpt">Khám phá những món ăn đặc sản từ biển và những quán ăn ngon nhất ở vùng Chân Mây - Lăng Cô.</p>
                                     <a href="https://example.com/am-thuc-cham-may" target="_blank" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+
+                            <!-- Guide 5 -->
+                            <article class="guide-card" data-category="kinhnghiem">
+                                <div class="guide-image">
+                                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kinh nghiệm du lịch">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Kinh nghiệm</span>
+                                    <h3 class="guide-title">10 Kinh Nghiệm Du Lịch Chân Mây Tiết Kiệm</h3>
+                                    <p class="guide-excerpt">Chia sẻ những mẹo hay để có chuyến du lịch Chân Mây - Lăng Cô tiết kiệm mà vẫn đầy trải nghiệm.</p>
+                                    <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+
+                            <!-- Guide 6 -->
+                            <article class="guide-card" data-category="vanhoa">
+                                <div class="guide-image">
+                                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w-800&q=80" alt="Văn hóa địa phương">
+                                </div>
+                                <div class="guide-content">
+                                    <span class="guide-category">Văn hóa</span>
+                                    <h3 class="guide-title">Văn Hóa Ngư Dân Vùng Biển Lăng Cô</h3>
+                                    <p class="guide-excerpt">Tìm hiểu về đời sống, phong tục và những nét văn hóa độc đáo của cộng đồng ngư dân vùng biển Lăng Cô.</p>
+                                    <a href="#" class="read-more">Đọc tiếp <i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </article>
                         </div>
@@ -196,7 +1075,7 @@
                             </div>
                             <div class="popular-guide-item">
                                 <div class="popular-guide-image">
-                                    <img src="img/lang-co-4768125.jpg" alt="Đầm Lập An">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg/1200px-%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg" alt="Đầm Lập An">
                                 </div>
                                 <div class="popular-guide-content">
                                     <span class="guide-category">Điểm đến</span>
@@ -340,15 +1219,98 @@
         // Initialize sidebar state
         toggleSidebar();
         
-        // Category Filter
+        // Category Filter Functionality
         const categoryBtns = document.querySelectorAll(".category-btn");
+        const guideCards = document.querySelectorAll(".guide-card");
+        const featuredGuide = document.querySelector(".featured-guide");
+        
         categoryBtns.forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
+                
+                // Remove active class from all buttons
                 categoryBtns.forEach(b => b.classList.remove("active"));
+                
+                // Add active class to clicked button
                 btn.classList.add("active");
+                
+                // Get filter value
+                const filterValue = btn.getAttribute("data-filter");
+                
+                // Show all cards if filter is "all"
+                if (filterValue === "all") {
+                    guideCards.forEach(card => {
+                        card.classList.remove("hidden");
+                        setTimeout(() => {
+                            card.style.display = "block";
+                        }, 50);
+                    });
+                    if (featuredGuide) {
+                        featuredGuide.classList.remove("hidden");
+                        setTimeout(() => {
+                            featuredGuide.style.display = "grid";
+                        }, 50);
+                    }
+                    return;
+                }
+                
+                // Filter cards
+                guideCards.forEach(card => {
+                    const cardCategory = card.getAttribute("data-category");
+                    
+                    if (cardCategory === filterValue) {
+                        card.classList.remove("hidden");
+                        setTimeout(() => {
+                            card.style.display = "block";
+                        }, 50);
+                    } else {
+                        card.classList.add("hidden");
+                        setTimeout(() => {
+                            card.style.display = "none";
+                        }, 400);
+                    }
+                });
+                
+                // Filter featured guide
+                if (featuredGuide) {
+                    const featuredCategory = featuredGuide.getAttribute("data-category");
+                    
+                    if (featuredCategory === filterValue) {
+                        featuredGuide.classList.remove("hidden");
+                        setTimeout(() => {
+                            featuredGuide.style.display = "grid";
+                        }, 50);
+                    } else {
+                        featuredGuide.classList.add("hidden");
+                        setTimeout(() => {
+                            featuredGuide.style.display = "none";
+                        }, 400);
+                    }
+                }
+                
+                // Scroll to top of guides section for better UX
+                document.querySelector('.guides-grid').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
             });
         });
+        
+        // Initialize filter display
+        function initializeFilterDisplay() {
+            // Show all cards initially
+            guideCards.forEach(card => {
+                card.classList.remove("hidden");
+                card.style.display = "block";
+            });
+            if (featuredGuide) {
+                featuredGuide.classList.remove("hidden");
+                featuredGuide.style.display = "grid";
+            }
+        }
+        
+        // Call initialization
+        initializeFilterDisplay();
         
         // Update active nav link based on current page
         document.addEventListener('DOMContentLoaded', function() {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</title>
+    <title>Cẩm nang du lịch Chân Mây - Lăng Cô</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
@@ -149,6 +149,42 @@
 
         .breadcrumb a:hover {
             color: var(--accent-color);
+        }
+
+        /* Flipbook Container */
+        .flipbook-container {
+            max-width: var(--max-width);
+            margin: 0 auto 3rem;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .flipbook-container h2 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .flipbook-wrapper {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 2rem;
+        }
+
+        .flipbook-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: block;
+        }
+
+        .flipbook-description {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 2rem;
         }
 
         /* Main Content */
@@ -432,26 +468,6 @@
             object-fit: cover;
         }
 
-        /* Image Sources */
-        .image-sources {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 0.8rem;
-            margin: 1rem 0;
-        }
-
-        .image-sources p {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-            font-size: 0.9rem;
-        }
-
-        .image-sources strong {
-            color: #555;
-            min-width: 120px;
-            display: inline-block;
-        }
-
         /* Footer */
         footer {
             background-color: var(--text-dark);
@@ -566,6 +582,10 @@
                 font-size: 1rem;
             }
 
+            .flipbook-iframe {
+                height: 400px;
+            }
+
             .article-content {
                 padding: 1.5rem;
             }
@@ -573,10 +593,35 @@
             .section-title {
                 font-size: 1.7rem;
             }
+        }
 
-            .image-sources {
-                grid-template-columns: 1fr;
+        @media (max-width: 480px) {
+            .flipbook-iframe {
+                height: 300px;
             }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+        }
+                /* Image Sources */
+        .image-sources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .image-sources p {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .image-sources strong {
+            color: #555;
+            min-width: 120px;
+            display: inline-block;
         }
     </style>
 </head>
@@ -593,7 +638,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="/index.html">Trang Chủ</a></li>
                 <li><a href="#" class="current-page">Cẩm nang</a></li>
-                <li><a href="">Bản đồ</a></li>
+                <li><a href="/map.html">Bản đồ</a></li>
                 <li><a href="/Chatbot.html">Chatbot</a></li>
                 <li><a href="/itinerary.html">Lịch trình</a></li>
                 <li><a href="/gallery.html">Triển lãm</a></li>
@@ -603,172 +648,170 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <img src="https://www.tonkinvoyage.com/upload/tonkin/Blog/866/Plage%20de%20Lang%20Co%202.jpg" alt="Bãi biển Lăng Cô" class="hero-image">
+        <img src="https://cdn3.ivivu.com/2019/07/ve-dep-cua-dam-lap-an-ben-bo-vinh-lang-co-ivivu-1.jpg" alt="Bãi biển Lăng Cô" class="hero-image">
         <div class="hero-content">
-            <h1 class="hero-title">Bãi Biển Lăng Cô</h1>
-            <p class="hero-subtitle">Viên Ngọc Biển Của Xứ Huế</p>
+            <h1 class="hero-title">Chân Mây - Lăng Cô</h1>
+            <p class="hero-subtitle">Viên Ngọc Ẩn Giấu Của Xứ Huế</p>            
         </div>
     </section>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="#">Trang chủ</a> / <a href="#">Bài viết</a> / <a href="#">Điểm đến</a> / <span>Bãi biển Lăng Cô</span>
+        <a href="/index.html">Trang chủ</a> / <a href="/camnang.html">Bài viết</a> / <span>Cẩm nang du lịch số</span>
     </div>
+
+    <!-- Flipbook Section -->
+    <section class="flipbook-container">
+        <h2>Cẩm Nang Du Lịch Số</h2>
+        <div class="flipbook-wrapper">
+            <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="flipbook-iframe" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" src="https://heyzine.com/flip-book/8976d2a408.html"></iframe>
+        </div>
+        <div class="flipbook-description">
+            <p><strong>Cẩm nang du lịch số Chân Mây - Lăng Cô</strong> là tài liệu hướng dẫn đầy đủ nhất về điểm đến này, cung cấp thông tin chi tiết về các địa điểm tham quan, ăn uống, lưu trú và kinh nghiệm du lịch hữu ích.</p>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <main class="article-container">
-        <!-- Article Content -->
+        <!-- Main Article Content -->
         <article class="article-content">
-            <!-- Introduction -->
-            <section class="article-section">
-                <h2 class="section-title">Giới thiệu về bãi biển Lăng Cô</h2>
-                <p class="article-text">Bãi biển Lăng Cô được xem là một trong những bãi biển đẹp nhất miền Trung Việt Nam, nằm tại xã Chân Mây - Lăng Cô, thành phố Huế. Với vẻ đẹp hoang sơ, thơ mộng và yên bình, Lăng Cô đã được nhiều tạp chí du lịch quốc tế vinh danh là một trong những vịnh biển đẹp nhất thế giới.</p>
+            <section id="gioi-thieu" class="article-section">
+                <h2 class="section-title">Chân Mây - Lăng Cô: Viên Ngọc Ẩn Giấu Của Xứ Huế</h2>
+                <p class="article-text">Khi nhắc đến Huế, người ta thường nghĩ ngay đến Đại Nội cổ kính hay dòng sông Hương thơ mộng. Nhưng ít ai biết rằng, chỉ cách trung tâm thành phố khoảng 60km về phía bắc, có một vùng đất đang âm thầm tỏa sáng với vẻ đẹp hoang sơ và tiềm năng phát triển vượt bậc - đó là Chân Mây - Lăng Cô.</p>             
+                <h2 class="section-title">Sự Ra Đời Của Một Điểm Đến Mới</h2>
+                <p class="article-text">Từ ngày 1/7/2025, Chân Mây - Lăng Cô chính thức được hình thành sau khi sáp nhập bốn xã Lộc Tiến, Lộc Vĩnh, Lộc Thủy và thị trấn Lăng Cô. Với diện tích rộng 261 km², vùng đất này không chỉ mang một cái tên đầy chất thơ mà còn là điểm giao thoa hoàn hảo giữa núi non hùng vĩ và biển cả bao la.</p>             
+
+            </section>
+
+            <section id="tham-quan" class="article-section">
+                <h2 class="section-title">Điểm Tham Quan Nổi Bật</h2>
+                
+                <h3 class="section-subtitle">1. Vịnh Lăng Cô - Kỳ Quan Được Thế Giới Công Nhận</h3>
+                <p class="article-text">Nằm khẽ dưới chân đèo Hải Vân huyền thoại, vịnh Lăng Cô được ví như một bức tranh thủy mặc sống động với bãi cát trắng mịn trải dài hơn 10km và làn nước xanh ngọc trong vắt. Không phải ngẫu nhiên mà năm 2009, vịnh Lăng Cô được gia nhập Câu lạc bộ những vịnh đẹp nhất thế giới, đứng vai với Vịnh Hạ Long của Việt Nam hay Vịnh Naples của Italy.</p>
                 
                 <div class="image-gallery">
                     <div class="article-image">
-                        <img src="https://statics.vinpearl.com/Lang-co-beach-1_1643475017.jpg" alt="Toàn cảnh bãi biển Lăng Cô">
+                        <img src="https://statics.vinpearl.com/Lang-co-beach-1_1643475017.jpg" alt="Bãi biển Lăng Cô">
                         <div class="image-caption">Toàn cảnh bãi biển Lăng Cô nhìn từ trên cao</div>
                     </div>
                     <div class="article-image">
-                        <img src="https://booking.muongthanh.com/upload_images/images/H%60/bai-bien-lang-co-hue.jpg" alt="Bờ biển Lăng Cô">
+                        <img src="https://booking.muongthanh.com/upload_images/images/H%60/bai-bien-lang-co-hue.jpg" alt="Hoàng hôn Lăng Cô">
                         <div class="image-caption">Bờ biển Lăng Cô với cát trắng mịn</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Location -->
-            <section class="article-section">
-                <h2 class="section-title">Vị trí địa lý thuận lợi</h2>
-                <p class="article-text">Lăng Cô nằm ở vị trí địa lý đặc biệt, cách thành phố Huế khoảng 70km về phía nam và cách Đà Nẵng khoảng 60km về phía bắc. Điểm đặc biệt của Lăng Cô là nơi đây có cả núi lẫn biển, tạo nên một khung cảnh thiên nhiên hài hòa và tuyệt đẹp.</p>
-                
-                <div class="highlight-text">
-                    Để đến Lăng Cô, du khách có thể di chuyển từ Huế hoặc Đà Nẵng bằng ô tô cá nhân, xe máy hoặc xe khách. Tuyến đường ven biển Quốc lộ 1A đi qua đây mang đến những trải nghiệm thú vị với cảnh quan thiên nhiên hùng vĩ.
-                </div>
-                
-            </section>
-
-            <!-- Natural Beauty -->
-            <section class="article-section">
-                <h2 class="section-title">Vẻ đẹp thiên nhiên ban tặng</h2>
-                
-                <h3 class="section-subtitle">Bãi cát trắng mịn màng</h3>
-                <p class="article-text">Bãi biển Lăng Cô sở hữu dải cát trắng mịn trải dài gần 15km, uốn lượn theo hình vòng cung. Cát biển ở đây trắng tinh, mềm mại dưới chân, tạo cảm giác vô cùng dễ chịu khi bước chân.</p>
-                
-                <div class="article-image">
-                    <img src="https://thuysanvietnam.com.vn/wp-content/uploads/2021/05/lang-co-4.jpg" alt="Cát trắng bãi biển Lăng Cô">
-                    <div class="image-caption">Dải cát trắng mịn trải dài tại Lăng Cô</div>
-                </div>
-                
-                <h3 class="section-subtitle">Nước biển trong xanh</h3>
-                <p class="article-text">Nước biển tại Lăng Cô có màu xanh ngọc bích đặc trưng, trong vắt đến mức có thể nhìn thấy đáy. Sóng biển êm đềm, không quá mạnh, rất phù hợp để tắm biển và vui chơi dưới nước.</p>
-                
-                <h3 class="section-subtitle">Phong cảnh núi non hùng vĩ</h3>
-                <p class="article-text">Phía sau bãi biển là dãy núi Bạch Mã cao vút, tạo nên một bức tranh thiên nhiên hoàn hảo với sự kết hợp giữa biển xanh, cát trắng và núi non. Vào những ngày trời đẹp, du khách có thể ngắm nhìn toàn cảnh vịnh biển từ đèo Hải Vân - một trong những cung đường ven biển đẹp nhất Việt Nam.</p>
-            </section>
-
-            <!-- Activities -->
-            <section class="article-section">
-                <h2 class="section-title">Hoạt động trải nghiệm tại Lăng Cô</h2>
-                
+                <p class="article-text">Điều đặc biệt của Lăng Cô là vị trí địa lý đắc địa. Nằm ngay trên con đường di sản miền Trung, nơi đây là cầu nối giữa các di sản văn hóa thế giới như Phong Nha - Kẻ Bàng, Cố đô Huế, Phố cổ Hội An và Thánh địa Mỹ Sơn. Du khách có thể dễ dàng kết hợp việc tắm biển thư giãn với hành trình khám phá di sản.</p>
+                <p class="article-text">Vào buổi bình minh, khi những tia nắng đầu tiên hôn lên mặt nước, bạn sẽ hiểu vì sao người dân địa phương tự hào gọi đây là "thiên đường bị bỏ quên". Những làng chài nhỏ nép mình dưới hàng dừa xanh mướt, thuyền bè lượn nhẹ trên mặt nước lặng như tờ - tất cả tạo nên một bức tranh Việt Nam đậm chất thơ.</p>                
+                <h3 class="section-subtitle">2. Đầm Lập An - "Vựa Hàu" Xứ Huế</h3>
+                <p class="article-text">Cách vịnh không xa, đầm Lập An (hay đầm An Cư) là một điểm đến không thể bỏ qua cho những ai yêu thích ẩm thực biển. Với diện tích lên đến 800 ha, đầm nước lợ lớn nhất Huế này được bao bọc bởi núi Bạch Mã uy nghi một bên và vịnh Lăng Cô thơ mộng một bên.</p>
+                <p class="article-text">Nơi đây nổi tiếng với nghề nuôi hàu truyền thống. Những bè hàu lớn nhỏ nổi trên mặt nước, tạo thành một khung cảnh sinh động và độc đáo. Dọc theo đầm là hàng loạt nhà hàng và quán ăn ven đường, nơi bạn có thể thưởng thức hàu tươi sống, hàu nướng mỡ hành, cùng vô vàn các món hải sản tươi ngon với giá cả rất phải chăng.</p>
                 <div class="image-gallery">
                     <div class="article-image">
-                        <img src="https://focusasiatravel.vn/wp-content/uploads/2018/09/B%C3%A3i-bi%E1%BB%83n-L%C4%83ng-C%C3%B4-1.png" alt="Tắm biển Lăng Cô">
-                        <div class="image-caption">Tắm biển tại Lăng Cô</div>
+                        <img src="https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/326239620_3338614499688471_825401039273602748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFBCKwnZ8pBTA9V56T3JLyP6xqvOzWJK73rGq87NYkrvR5Yt0AkOYTQbEDvaXM5juHbg9Y2q-t7ewZZx4Tv4Fw5&_nc_ohc=TFx5wft6FiUQ7kNvwEPxKyN&_nc_oc=AdlMLZGZozAKYExvdNw0Wra2lA5qVtG2PicRHRwymAdy2TXZ7HWyClmsezUSGyYiYaTHiq69Oyr873JYQVkM3Dbn&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=tgfVrPyLSRjQLaoAnzJ6pQ&oh=00_AflwDdKCDK3nPA4t5pK9UqyyXklIknb38RYx3WIinQcIzw&oe=694CD952" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Nhà hàng hải sản Bé Thân ven đầm Lập An</div>
                     </div>
                     <div class="article-image">
-                        <img src="https://hotel84.com/hotel84-images/news/photo/am-thuc-lang-co.jpg" alt="Hải sản Lăng Cô">
-                        <div class="image-caption">Hải sản tươi ngon tại Lăng Cô</div>
+                        <img src="https://static.vinwonders.com/production/dam-lap-an-hue-6.jpg" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Hàu biển đầm Lập An</div>
+                    </div>                    
+                </div>
+                <p class="article-text">Đặc biệt, vào buổi hoàng hôn, mặt nước đầm phản chiếu ánh vàng của bầu trời, núi non xa xa hiện lên như bóng ma, tạo nên một khung cảnh mê hoặc khiến bất cứ ai cũng muốn lưu lại mãi.</p>       
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://static.vinwonders.com/production/dam-lap-an-hue-4.jpg" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Con đường đi bộ ảo diệu giữa đầm Lập An Huế mỗi khi thủy triều rút</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://static.vinwonders.com/production/dam-lap-an-hue-5.jpeg" alt="Hoàng hôn Lăng Cô">
+                        <div class="image-caption">Bình minh và hoàng hôn là hai khoảnh khắc đáng chiêm ngưỡng nhất tại đầm Lập An</div>
                     </div>
                 </div>
-                
-                <ul class="feature-list">
-                    <li><strong>Tắm biển và vui chơi:</strong> Với nước biển trong xanh và sóng nhẹ, Lăng Cô là địa điểm lý tưởng để tắm biển. Bãi biển có độ dốc thoai thoải, rất an toàn cho cả gia đình, kể cả trẻ em.</li>
-                    <li><strong>Thưởng thức hải sản tươi ngon:</strong> Lăng Cô nổi tiếng với các món hải sản tươi ngon, đa dạng và giá cả phải chăng. Du khách có thể thưởng thức các món như tôm hùm, cua, ghẹ, ốc, sò... được chế biến theo nhiều cách khác nhau tại các nhà hàng ven biển.</li>
-                    <li><strong>Khám phá đầm Lăng Cô:</strong> Ngoài bãi biển, Lăng Cô còn có đầm Lăng Cô - một đầm phá nước lợ rộng lớn với hệ sinh thái phong phú. Du khách có thể thuê thuyền để khám phá đầm, ngắm cảnh hoàng hôn hoặc trải nghiệm câu cá.</li>
-                    <li><strong>Tham quan các điểm du lịch lân cận:</strong> Từ Lăng Cô, du khách có thể dễ dàng di chuyển đến các điểm du lịch nổi tiếng như đèo Hải Vân, vườn quốc gia Bạch Mã, hoặc thành phố Huế với những di tích lịch sử văn hóa độc đáo.</li>
-                </ul>
-            </section>
-
-            <!-- Travel Tips -->
-            <section class="article-section">
-                <h2 class="section-title">Thông tin du lịch hữu ích</h2>
-                
-                <div class="info-box">
-                    <h4>Thời điểm lý tưởng để đến</h4>
-                    <p>Lăng Cô đẹp quanh năm, nhưng thời gian lý tưởng nhất để đến đây là từ tháng 3 đến tháng 8, khi thời tiết nắng đẹp, biển lặng và thuận lợi cho các hoạt động du lịch. Tránh khoảng thời gian từ tháng 9 đến tháng 12 vì đây là mùa mưa bão tại miền Trung.</p>
-                </div>
-                
-                <div class="info-box">
-                    <h4>Lựa chọn chỗ ở</h4>
-                    <p>Lăng Cô có nhiều lựa chọn về chỗ ở từ resort cao cấp đến nhà nghỉ, khách sạn bình dân. Một số resort nổi tiếng tại đây là Banyan Tree Lang Co, Angsana Lang Co... với dịch vụ đẳng cấp quốc tế. Ngoài ra, du khách cũng có thể lựa chọn các homestay hoặc khách sạn nhỏ với giá cả phải chăng hơn.</p>
-                </div>
-                
-                <h3 class="section-subtitle">Lưu ý khi du lịch Lăng Cô</h3>
-                <ul class="feature-list">
-                    <li>Mang theo kem chống nắng và đồ bảo vệ da vì ánh nắng ở đây khá gay gắt</li>
-                    <li>Nên đi theo nhóm và tuân thủ các quy định về an toàn khi tắm biển</li>
-                    <li>Giữ gìn vệ sinh môi trường, không vứt rác bừa bãi</li>
-                    <li>Tôn trọng văn hóa và phong tục địa phương</li>
-                    <li>Nên đặt chỗ trước nếu đi vào mùa cao điểm (hè và các dịp lễ)</li>
-                </ul>
-                
+                <h3 class="section-subtitle">3. Cảng Chân Mây</h3>
+                <p class="article-text">Không chỉ là điểm đến du lịch, Chân Mây còn sở hữu một trong những cảng biển chiến lược nhất miền Trung. Cảng Chân Mây là một trong 46 cảng biển được Hiệp hội Du thuyền châu Á lựa chọn làm điểm dừng chân, có khả năng đón các du thuyền lớn nhất thế giới.</p>
+                <div class="image-gallery">
                 <div class="article-image">
-                    <img src="https://tse3.mm.bing.net/th/id/OIP.bXIMJuuIgpvWSm3sIYjyzwHaE7?pid=Api&P=0&h=180" alt="Resort tại Lăng Cô">
-                    <div class="image-caption">Một resort cao cấp tại Lăng Cô</div>
+                        <img src="https://media.baovanhoa.vn/zoom/1000/uploaded/hoangxuanhuong/2025_06_04/h_1_kudc.jpg" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Cảng Chân Mây nằm trong Khu Kinh tế Chân Mây – Lăng Cô</div>
+                    </div>
+                                <div class="article-image">
+                        <img src="https://file.huengaynay.vn/data/0/images/2023/12/07/upload_3836/co-hoi-moi.jpg" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Cảng Chân Mây vươn đón những tàu cỡ lớn.</div>
+                    </div>
+                </div>
+                <p class="article-text">Với vị trí là cửa ngõ ra biển Đông, cảng kết nối hành lang kinh tế Đông - Tây và các tuyến hàng hải quốc tế giữa Philippines, Singapore và Hong Kong. Hệ thống bến cảng hiện đại với độ dài từ 270m đến 480m có thể tiếp nhận tàu hàng lên đến 70.000 DWT, đảm bảo dịch vụ logistics hiệu quả.</p>                
+                <p class="article-text">Khi các du thuyền quốc tế cập cảng, hàng nghìn du khách có cơ hội khám phá không chỉ Huế mà cả Hội An và Đà Nẵng - tạo nên một hành trình du lịch trọn vẹn ở miền Trung.</p>                
+            </section>
+            <section id="am-thuc" class="article-section">
+                <h2 class="section-title">Ẩm Thực Đặc Sắc</h2>
+                <p class="article-text">Đến với Chân Mây - Lăng Cô, du khách không thể bỏ qua những món ngon đặc sản:</p>
+                
+                <ul class="feature-list">
+                    <li>Hàu sữa Lập An nướng mỡ hành</li>
+                    <li>Cá mú hấp</li>
+                    <li>Mắm sò thịt ba chỉ</li>
+                    <li>Bánh ép</li>
+                    <li>Gỏi sò huyết</li>
+                </ul>
+                
+                <div class="info-box">
+                    <h4>📌 Mẹo nhỏ:</h4>
+                    <p>Nên thưởng thức hải sản tại các nhà hàng ven biển vào buổi chiều để vừa ngắm hoàng hôn vừa thưởng thức đồ biển tươi ngon.</p>
                 </div>
             </section>
 
-            <!-- Conclusion -->
+            <section id="kinh-nghiem" class="article-section">
+                
+                <h3 class="section-subtitle">Thời điểm lý tưởng</h3>
+                <p class="article-text">Tháng 3 đến tháng 8 là thời điểm đẹp nhất để đến Lăng Cô, thời tiết nắng đẹp, biển êm, phù hợp cho các hoạt động ngoài trời.</p>
+                
+                <h3 class="section-subtitle">Di chuyển</h3>
+                <p class="article-text">Từ Đà Nẵng: 60km (khoảng 1.5 giờ đi xe)<br>
+                Từ Huế: 30km (khoảng 45 phút đi xe)</p>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <img src="https://scontent.fdad1-3.fna.fbcdn.net/v/t39.30808-6/602463315_122111284245102112_4509949243071196784_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=127cfc&_nc_ohc=fKJ724kKLm4Q7kNvwFZd07W&_nc_oc=AdlXOzPVWi7kXJHCCmzLCv3vZPP4ckwp5SeUUtgzF7N-pV62r2SwQYdPKTMqtmD6yJk&_nc_zt=23&_nc_ht=scontent.fdad1-3.fna&_nc_gid=gM-lbSI0ZvAScfbw6NiERQ&oh=00_AfmdQhwXQlPEsdlhjn9P3o0pgG2xBRPIV7PygvcV8zPUtw&oe=694CF94C" alt="">
+                        <p>Bản đồ khu vực Chân Mây - Lăng Cô</p>
+                    </div>
+                </div>
+            </section>   
             <section class="article-section">
                 <h2 class="section-title">Kết luận</h2>
-                <p class="article-text">Bãi biển Lăng Cô thực sự là một viên ngọc quý của xứ Huế, với vẻ đẹp hoang sơ, thơ mộng và yên bình. Đây là điểm đến lý tưởng cho những ai muốn tìm kiếm sự thư giãn, nghỉ dưỡng và khám phá vẻ đẹp thiên nhiên tuyệt vời của miền Trung Việt Nam. Hãy đặt chân đến Lăng Cô để trải nghiệm và cảm nhận sự kỳ diệu của nơi đây!</p>
+                <p class="article-text">Chân Mây - Lăng Cô không chỉ là một điểm đến du lịch đơn thuần. Đây là nơi hội tụ giữa vẻ đẹp thiên nhiên hoang sơ, di sản văn hóa phong phú và tầm nhìn phát triển hiện đại. Từ những bãi biển tuyệt đẹp được thế giới công nhận, đầm nước lợ với đặc sản hàu tươi, cho đến khu nghỉ dưỡng đẳng cấp quốc tế và cảng biển hiện đại - mọi yếu tố đều hòa quyện để tạo nên một điểm đến độc nhất vô nhị.</p>
+                <p class="article-text">Trong hành trình khám phá miền Trung, đừng quên dành thời gian cho Chân Mây - Lăng Cô. Đây không chỉ là viên ngọc ẩn giấu của xứ Huế mà còn là minh chứng cho sự phát triển bền vững, nơi con người biết trân trọng và phát huy những gì thiên nhiên ban tặng.</p>
                 
-                <div class="highlight-text">
-                    "Lăng Cô không chỉ là một bãi biển, mà còn là một kiệt tác của thiên nhiên, nơi núi và biển hòa quyện tạo nên một bức tranh tuyệt mỹ."
-                </div>
-            </section>
-
+            </section>              
             <!-- Image Sources -->
             <section class="article-section">
                 <h2 class="section-title" style="font-size: 1.3rem; color: #555;">Nguồn ảnh sử dụng trong bài</h2>
                 <div class="image-sources">
-                    <p><strong>Ảnh bìa:</strong> Tonkin Voyage</p>
-                    <p><strong>Ảnh toàn cảnh:</strong> Vinpearl</p>
-                    <p><strong>Ảnh bờ biển:</strong> Muong Thanh Hotel</p>
-                    <p><strong>Ảnh cát trắng:</strong> Thuysanvietnam.com.vn</p>
-                    <p><strong>Ảnh tắm biển:</strong> Focus Asia Travel</p>
-                    <p><strong>Ảnh hải sản:</strong> Hotel84</p>
-                    <p><strong>Ảnh resort:</strong> Bản quyền thuộc resort tương ứng</p>
-                    <p><strong>Ảnh bài liên quan:</strong> Tổng cục Du lịch TPHCM</p>
+                    <p><strong>Ảnh bìa:</strong> Sưu tầm</p>
+                    <p><strong>Ảnh toàn cảnh:</strong> Sưu tầm</p>
+                    <p><strong>Ảnh bờ biển:</strong> Sưu tầm</p>
+                    <p><strong>Ảnh Nhà hàng hải sản Bé Thân:</strong> Nhà hàng hải sản Bé Thân</p>
+                    <p><strong>Hàu biển đầm Lập An:</strong> Sưu tầm</p>
+                    <p><strong>Bình minh và hoàng hôn tại đầm Lập An:</strong> Thiết Nguyễn</p>
+                    <p><strong>Cảng Chân Mây nằm trong Khu Kinh tế Chân Mây – Lăng Cô:</strong> Cảng Chân Mây</p>
+                    <p><strong>Cảng Chân Mây vươn đón những tàu cỡ lớn:</strong> Nguyễn Phong - Huế Ngày Nay</p>
+                    <p><strong>Bản đồ khu vực xã Chân Mây - Lăng Cô:</strong> Nhóm tác giả</p>
                 </div>
                 <p style="font-size: 0.8rem; color: #999; margin-top: 1rem; font-style: italic;">
                     *Tất cả hình ảnh được sử dụng cho mục đích minh họa. Bản quyền thuộc về tác giả và nguồn tương ứng.
                 </p>
             </section>
-
         </article>
 
         <!-- Sidebar -->
         <aside class="sidebar">
             <!-- Quick Facts -->
             <div class="sidebar-widget">
-                <h3 class="widget-title">Thông tin nhanh</h3>
-                <div class="fact-item">
-                    <div class="fact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="fact-text">
-                        <h4>Vị trí</h4>
-                        <p>Xã Chân Mây - Lăng Cô, thành phố Huế</p>
-                    </div>
-                </div>
+                <h3 class="widget-title">Thông Tin Nhanh</h3>
                 <div class="fact-item">
                     <div class="fact-icon">
                         <i class="fas fa-sun"></i>
                     </div>
                     <div class="fact-text">
-                        <h4>Thời tiết</h4>
-                        <p>Nắng đẹp từ tháng 3-8</p>
+                        <h4>Khí hậu</h4>
+                        <p>Nhiệt đới gió mùa, nhiệt độ 25-32°C</p>
                     </div>
                 </div>
                 <div class="fact-item">
@@ -776,17 +819,17 @@
                         <i class="fas fa-umbrella-beach"></i>
                     </div>
                     <div class="fact-text">
-                        <h4>Chiều dài bãi biển</h4>
-                        <p>Khoảng 10km</p>
+                        <h4>Mùa du lịch</h4>
+                        <p>Tháng 3 - Tháng 8</p>
                     </div>
                 </div>
                 <div class="fact-item">
                     <div class="fact-icon">
-                        <i class="fas fa-water"></i>
+                        <i class="fas fa-clock"></i>
                     </div>
                     <div class="fact-text">
-                        <h4>Đặc điểm nước biển</h4>
-                        <p>Trong xanh</p>
+                        <h4>Thời gian tham quan</h4>
+                        <p>2-3 ngày là lý tưởng</p>
                     </div>
                 </div>
             </div>
@@ -796,7 +839,7 @@
                 <h3 class="widget-title">Bài viết liên quan</h3>
                 <div class="related-article">
                     <div class="related-image">
-                        <img src="https://cdn.tcdulichtphcm.vn/upload/2-2022/images/2022-06-11/1654949335-z3484742699434_e238f1dd2631c1a233566e6a2f5825e3-1654948863-57-width1342height878.jpg" alt="Phượt Tây Bắc">
+                        <img src="https://cdn.tcdulichtphcm.vn/upload/2-2022/images/2022-06-11/1654949335-z3484742699434_e238f1dd2631c1a233566e6a2f5825e3-1654948863-57-width1342height878.jpg" alt="Thác Bồ Ghè">
                     </div>
                     <div class="related-content">
                         <a href="#">
@@ -833,8 +876,8 @@
             <div class="sidebar-widget">
                 <h3 class="widget-title">Nhận tin mới</h3>
                 <p style="margin-bottom: 1rem; font-size: 0.9rem;">Đăng ký để nhận bài viết mới về du lịch và ưu đãi đặc biệt.</p>
-                <form style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <input type="email" placeholder="Email của bạn" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">
+                <form id="newsletterForm" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <input type="email" placeholder="Email của bạn" required style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">
                     <button type="submit" class="btn" style="padding: 0.8rem; background-color: var(--accent-color); color: white; border-radius: 5px; font-weight: 600; border: none; cursor: pointer;">Đăng ký ngay</button>
                 </form>
             </div>
@@ -846,7 +889,7 @@
         <div class="footer-container">
             <div class="footer-col">
                 <div class="footer-logo">
-                    <a href="#">Travel<span>Hub</span></a>
+                    <a href="#">Lang<span>Trek</span></a>
                 </div>
                 <p>Chia sẻ đam mê du lịch, khám phá vẻ đẹp Việt Nam và thế giới qua những bài viết chân thực và hữu ích.</p>
                 <ul class="footer-socials">
@@ -871,7 +914,7 @@
             <div class="footer-col">
                 <h4>Liên kết nhanh</h4>
                 <ul class="footer-links">
-                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="/index.html">Trang chủ</a></li>
                     <li><a href="#">Về chúng tôi</a></li>
                     <li><a href="#">Bài viết mới</a></li>
                     <li><a href="#">Liên hệ</a></li>
@@ -881,7 +924,7 @@
         </div>
         
         <div class="footer-bar">
-            <p>© 2023 LangTrek. Tất cả các bài viết thuộc bản quyền của tác giả.</p>
+            <p>© 2025 LangTrek. Tất cả các bài viết thuộc bản quyền của tác giả.</p>
         </div>
     </footer>
 
@@ -922,9 +965,16 @@
             });
         });
         
+        // Newsletter form submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`Cảm ơn bạn đã đăng ký nhận tin với email: ${email}`);
+            this.reset();
+        });
+        
         // Add active class to current section while scrolling
         const sections = document.querySelectorAll('.article-section');
-        const navItems = document.querySelectorAll('.nav-links a');
         
         window.addEventListener('scroll', () => {
             let current = '';
@@ -935,13 +985,6 @@
                 
                 if (pageYOffset >= (sectionTop - 100)) {
                     current = section.getAttribute('id');
-                }
-            });
-            
-            navItems.forEach(item => {
-                item.classList.remove('current-page');
-                if (item.getAttribute('href') === `#${current}`) {
-                    item.classList.add('current-page');
                 }
             });
         });

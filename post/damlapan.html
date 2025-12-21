@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bãi Biển Lăng Cô: Viên Ngọc Biển Của Xứ Huế</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+        :root {
+            --primary-color: #f0f8ff;
+            --text-dark: #2c2724;
+            --white: #ffffff;
+            --max-width: 1200px;
+            --accent-color: #4682b4;
+            --gold-color: #ffb347;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Montserrat", sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Header & Navigation */
+        .article-header {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .current-page {
+            color: var(--accent-color) !important;
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--white);
+            width: 90%;
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            max-width: var(--max-width);
+            margin: 2rem auto;
+            padding: 0 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .article-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .article-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Article Content */
+        .article-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .article-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .article-text {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .highlight-text {
+            background-color: var(--primary-color);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .article-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .article-image:hover {
+            transform: translateY(-5px);
+        }
+
+        .article-image img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            padding: 0.8rem;
+            background-color: #f5f5f5;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Info Box */
+        .info-box {
+            background-color: var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid #ddd;
+        }
+
+        .info-box h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .sidebar-widget {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .widget-title {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Related Articles */
+        .related-article {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .related-article:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .related-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .related-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .related-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+            line-height: 1.3;
+        }
+
+        .related-content a:hover h4 {
+            color: var(--accent-color);
+        }
+
+        /* Quick Facts */
+        .fact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .fact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .fact-text h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .fact-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Map */
+        .map-container {
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: #e9f5ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-color);
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Author & Meta */
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Image Sources */
+        .image-sources {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .image-sources p {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .image-sources strong {
+            color: #555;
+            min-width: 120px;
+            display: inline-block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: auto;
+            padding: 4rem 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .footer-logo span {
+            color: #4682b4;
+        }
+
+        .footer-col p {
+            color: #ccc;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            color: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .footer-socials a {
+            font-size: 1.2rem;
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bar {
+            padding: 1.5rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--text-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .article-content {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .image-sources {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header class="article-header">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#">Lang<span>Trek</span></a>
+            </div>
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="#" class="current-page">Cẩm nang</a></li>
+                <li><a href="/map.html">Bản đồ</a></li>
+                <li><a href="/Chatbot.html">Chatbot</a></li>
+                <li><a href="/itinerary.html">Lịch trình</a></li>
+                <li><a href="/gallery.html">Triển lãm</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg/1200px-%C4%90%E1%BA%A7m_L%E1%BA%ADp_An_-_NKS.jpg" alt="Bãi biển Lăng Cô" class="hero-image">
+        <div class="hero-content">
+            <h1 class="hero-title">Đầm Lập An</h1>
+            <p class="hero-subtitle">"Tuyệt Tình Cốc" Thơ Mộng Giữa Lòng Xứ Huế</p>
+        </div>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="/index.html">Trang chủ</a> / <a href="/camnang.html">Bài viết</a> / <a href="#">Điểm đến</a> / <span>Đầm Lập An</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="article-container">
+        <!-- Article Content -->
+        <article class="article-content">
+            <!-- Introduction -->
+            <section class="article-section">
+                <h2 class="section-title">Giới thiệu về Đầm Lập An</h2>
+                <p class="article-text">Nằm ở vị trí giao giữa Huế và Đà Nẵng, đầm Lập An mang trong mình nét đẹp hoang sơ, bí ẩn và đầy cuốn hút. Xa rời khỏi sự ồn ào thị thành, nơi đây như một ốc đảo yên bình giữa lòng miền Trung, thu hút những tâm hồn yêu thích khám phá và tìm kiếm sự thanh tịnh.</p>
+                
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://cdn.statically.io/img/www.lagunalangco.com/wp-content/uploads/2018/03/dam-lap-an-nhin-tu-deo-phu-gia-2048x857.jpg?f=auto" alt="Toàn cảnh bãi biển Lăng Cô">
+                        <div class="image-caption">Toàn cảnh Đầm Lập An</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://static.vinwonders.com/production/dam-lap-an-hue-1.jpg" alt="Bờ biển Lăng Cô">
+                        <div class="image-caption">Đầm Lập An Huế</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location -->
+            <section class="article-section">
+                <h2 class="section-title">Vị trí địa lý</h2>
+                <p class="article-text">Xã Chân Mây - Lăng Cô, TP Huế (cạnh Quốc lộ 1A).</p>
+                <p class="article-text">Để đến Đầm Lập An, du khách có thể di chuyển từ Huế hoặc Đà Nẵng bằng:</p>
+                <div class="highlight-text">
+                <ul class="feature-list">
+                    <li>Xe máy: Khoảng 1h 45 phút - lựa chọn lý tưởng cho dân phượt thứ thiệt</li>
+                    <li>Xe ô tô/Xe du lịch: Khoảng 1h 15 phút - thoải mái cho nhóm đông người</li>
+                    <li>Các lựa chọn khác: Taxi, xe giường nằm, xe tự lái</li>
+                </ul>      
+                </div>
+                
+            </section>
+
+            <!-- Natural Beauty -->
+            <section class="article-section">
+                <h2 class="section-title">Trải Nghiệm Kỳ Diệu Tại Đầm Lập An</h2>
+                
+                <h3 class="section-subtitle">Con đường rẽ nước thần thánh</h3>
+                <p class="article-text">Khi thủy triều xuống, giữa mênh mông sông nước, một con đường cát trắng bỗng nhiên hiện ra như phép màu của tạo hóa. Con đường này không chỉ đẹp mà còn tạo nên những trải nghiệm "ngôn tình" khiến giới trẻ đổ xô đến check-in và ghi lại khoảnh khắc độc đáo.</p>
+                
+                <div class="article-image">
+                    <img src="https://static.vinwonders.com/production/dam-lap-an-hue-4.jpg" alt="Cát trắng bãi biển Lăng Cô">
+                    <div class="image-caption">Con đường đi bộ ảo diệu giữa đầm Lập An Huế mỗi khi thủy triều rút</div>
+                </div>
+                <p class="article-text"><strong>Lưu ý:</strong> Nên tìm hiểu lịch thủy triều trước khi đến để không bỏ lỡ cảnh tượng kỳ diệu này.</p>
+                
+                <h3 class="section-subtitle">Bình minh và hoàng hôn huyền ảo</h3>
+                <p class="article-text">Đây chính là khoảnh khắc "vàng" mà bất kỳ du khách nào cũng phải trầm trồ, thốt lên những lời ca ngợi:</p>
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://cdn.statically.io/img/www.lagunalangco.com/wp-content/uploads/2018/03/dam-lap-an-thi-tran-lang-co-1024x576-1.jpg?f=auto" alt="Toàn cảnh bãi biển Bình An">
+                        <div class="image-caption">Bình minh tại Đầm Lập An</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://cdn.statically.io/img/www.lagunalangco.com/wp-content/uploads/2018/03/hoang-hon-tren-dam-lap-an-lang-co-1024x576-1.jpg?f=auto" alt="Bờ biển Bình An">
+                        <div class="image-caption">Hoàng hôn tại Đầm Lập An</div>
+                    </div>
+                </div>         
+                <p class="article-text"><strong>Bình minh:</strong> Ánh nắng đầu ngày óng ánh như tơ, hắt lên từ sau dãy núi Bạch Mã hùng vĩ, nhuộm cả mặt đầm bằng sắc vàng cam rực rỡ</p>
+                <p class="article-text"><strong>Hoàng hôn:</strong>Cả đầm nước tĩnh lặng được phủ màu đỏ cam, xanh thẫm huyền ảo, tạo nên một bức tranh thiên nhiên tuyệt mỹ</p>
+                <h3 class="section-subtitle">"Tuyệt Tình Cốc Huế" - Điểm cắm trại lý tưởng</h3>
+                <p class="article-text">Được ví như một "Tuyệt Tình Cốc" thu nhỏ với:</p>
+                <p class="article-text"><strong>Phía sau:</strong> Những con đường nhỏ uốn lượn</p>
+                <p class="article-text"><strong>Phía trước:</strong>Làn nước xanh rì, núi Bạch Mã hùng vĩ, mây trời biêng biếc</p>
+                <p class="article-text">Đây là background hoàn hảo để:</p>
+                <ul class="feature-list">
+                    <li>Cắm trại qua đêm</li>
+                    <li>Chụp ảnh sống ảo độc đáo "có một không hai"</li>
+                    <li>Ngắm sao đêm và nghe tiếng sóng vỗ nhẹ</li>
+                    <li>Thư giãn, tái tạo năng lượng</li>
+                </ul>
+            </section>
+            <section class="article-section">
+                <h2 class="section-title">Đầm Lập An - "Vựa Hàu" Xứ Huế</h2>
+                <p class="article-text">Nơi đây nổi tiếng với nghề nuôi hàu truyền thống. Những bè hàu lớn nhỏ nổi trên mặt nước, tạo thành một khung cảnh sinh động và độc đáo. Dọc theo đầm là hàng loạt nhà hàng và quán ăn ven đường, nơi bạn có thể thưởng thức hàu tươi sống, hàu nướng mỡ hành, cùng vô vàn các món hải sản tươi ngon với giá cả rất phải chăng.</p>
+                <div class="image-gallery">
+                    <div class="article-image">
+                        <img src="https://scontent.fdad1-2.fna.fbcdn.net/v/t39.30808-6/326239620_3338614499688471_825401039273602748_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFBCKwnZ8pBTA9V56T3JLyP6xqvOzWJK73rGq87NYkrvR5Yt0AkOYTQbEDvaXM5juHbg9Y2q-t7ewZZx4Tv4Fw5&_nc_ohc=TFx5wft6FiUQ7kNvwEPxKyN&_nc_oc=AdlMLZGZozAKYExvdNw0Wra2lA5qVtG2PicRHRwymAdy2TXZ7HWyClmsezUSGyYiYaTHiq69Oyr873JYQVkM3Dbn&_nc_zt=23&_nc_ht=scontent.fdad1-2.fna&_nc_gid=tgfVrPyLSRjQLaoAnzJ6pQ&oh=00_AflwDdKCDK3nPA4t5pK9UqyyXklIknb38RYx3WIinQcIzw&oe=694CD952" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Nhà hàng hải sản Bé Thân ven đầm Lập An</div>
+                    </div>
+                    <div class="article-image">
+                        <img src="https://static.vinwonders.com/production/dam-lap-an-hue-6.jpg" alt="Bãi biển Lăng Cô">
+                        <div class="image-caption">Hàu biển đầm Lập An</div>
+                    </div>                    
+                </div>
+            </section>
+
+
+            <!-- Travel Tips -->
+            <section class="article-section">
+                <h2 class="section-title">Thông tin du lịch hữu ích</h2>
+                
+                <div class="info-box">
+                    <h4>Thời điểm lý tưởng để đến</h4>
+                    <p>Thời gian lý tưởng nhất để đến đây là từ tháng 3 đến tháng 8, khi thời tiết nắng đẹp, thuận lợi cho các hoạt động du lịch. Tránh khoảng thời gian từ tháng 9 đến tháng 12 vì đây là mùa mưa bão tại miền Trung.</p>
+                </div>
+                
+                <div class="info-box">
+                    <h4>Lựa chọn chỗ ở</h4>
+                    <p>Nơi đây có nhiều lựa chọn về chỗ ở từ resort cao cấp đến nhà nghỉ, khách sạn bình dân. Một số resort nổi tiếng tại đây là Banyan Tree Lang Co, Angsana Lang Co... với dịch vụ đẳng cấp quốc tế. Ngoài ra, du khách cũng có thể lựa chọn các homestay hoặc khách sạn nhỏ với giá cả phải chăng hơn.</p>
+                </div>
+                
+                <h3 class="section-subtitle">Lưu ý khi du lịch đầm Lập An</h3>
+                <ul class="feature-list">
+                    <li>Mang theo kem chống nắng và đồ bảo vệ da vì ánh nắng ở đây khá gay gắt</li>
+                    <li>Giữ gìn vệ sinh môi trường, không vứt rác bừa bãi</li>
+                    <li>Tôn trọng văn hóa và phong tục địa phương</li>
+                    <li>Kiểm tra lịch thủy triều để ngắm con đường rẽ nước</li>
+                    <li>Nên đi theo nhóm để đảm bảo an toàn</li>
+                    <li>Chuẩn bị đồ ấm cho đêm nếu cắm trại</li>
+                </ul>
+            </section>
+
+            <!-- Conclusion -->
+            <section class="article-section">
+                <h2 class="section-title">Kết luận</h2>
+                <p class="article-text">Đầm Lập An không chỉ là một địa danh du lịch thông thường, mà là một trải nghiệm tâm hồn - nơi bạn có thể tạm quên đi những bộn bề cuộc sống, hòa mình vào thiên nhiên hùng vĩ và tìm lại sự bình yên trong tâm.</p>
+            </section>
+
+            <!-- Image Sources -->
+            <section class="article-section">
+                <h2 class="section-title" style="font-size: 1.3rem; color: #555;">Nguồn ảnh sử dụng trong bài</h2>
+                <div class="image-sources">
+                    <p><strong>Ảnh bìa:</strong> NKSTTSSHNVN - wikipedia</p>
+                    <p><strong>Ảnh toàn cảnh:</strong> Anh Dũng</p>
+                    <p><strong>Ảnh Đầm Lập An Huế:</strong> Sưu tầm</p>
+                    <p><strong>Ảnh con đường rẽ nhánh:</strong> Sưu tầm</p>
+                    <p><strong>Ảnh bình minh:</strong> Thiết Nguyễn</p>
+                    <p><strong>Ảnh nhà hàng hải sản:</strong> Nhà hàng hải sản Bé Thân</p>
+                    <p><strong>Ảnh hàu đầm Lập An:</strong> Sưu tầm</p>
+                </div>
+                <p style="font-size: 0.8rem; color: #999; margin-top: 1rem; font-style: italic;">
+                    *Tất cả hình ảnh được sử dụng cho mục đích minh họa. Bản quyền thuộc về tác giả và nguồn tương ứng.
+                </p>
+            </section>
+
+        </article>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Quick Facts -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Thông tin nhanh</h3>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Vị trí</h4>
+                        <p>Xã Chân Mây - Lăng Cô, thành phố Huế</p>
+                    </div>
+                </div>
+                <div class="fact-item">
+                    <div class="fact-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="fact-text">
+                        <h4>Thời tiết</h4>
+                        <p>Nắng đẹp từ tháng 3-8</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Articles -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Bài viết liên quan</h3>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://cdn.tcdulichtphcm.vn/upload/2-2022/images/2022-06-11/1654949335-z3484742699434_e238f1dd2631c1a233566e6a2f5825e3-1654948863-57-width1342height878.jpg" alt="Phượt Tây Bắc">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Thác Bồ Ghè: Suối Nước Mát Lạnh Ẩn Mình Giữa Núi Rừng Huế</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">08/12/2025</p>
+                    </div>
+                </div>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2017/08/hai-van-quan-1.jpg" alt="Đèo Hải Vân">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Đèo Hải Vân: Thiên Hạ Đệ Nhất Hùng Quan</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">05/12/2025</p>
+                    </div>
+                </div>
+                <div class="related-article">
+                    <div class="related-image">
+                        <img src="https://cdn.tgdd.vn/Files/2021/08/19/1377246/tong-hop-10-mon-dac-san-hue-du-khach-nhat-dinh-phai-thu-202108191041393189.jpg" alt="Ẩm thực Huế">
+                    </div>
+                    <div class="related-content">
+                        <a href="#">
+                            <h4>Khám Phá Ẩm Thực Cung Đình Huế</h4>
+                        </a>
+                        <p style="font-size: 0.8rem; color: #666;">01/12/2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="sidebar-widget">
+                <h3 class="widget-title">Nhận tin mới</h3>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem;">Đăng ký để nhận bài viết mới về du lịch và ưu đãi đặc biệt.</p>
+                <form style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <input type="email" placeholder="Email của bạn" style="padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">
+                    <button type="submit" class="btn" style="padding: 0.8rem; background-color: var(--accent-color); color: white; border-radius: 5px; font-weight: 600; border: none; cursor: pointer;">Đăng ký ngay</button>
+                </form>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">
+                    <a href="#">Lang<span>Trek</span></a>
+                </div>
+                <p>Chia sẻ đam mê du lịch, khám phá vẻ đẹp Việt Nam và thế giới qua những bài viết chân thực và hữu ích.</p>
+                <ul class="footer-socials">
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Danh mục</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Kinh nghiệm du lịch</a></li>
+                    <li><a href="#">Điểm đến hấp dẫn</a></li>
+                    <li><a href="#">Ẩm thực đường phố</a></li>
+                    <li><a href="#">Du lịch tiết kiệm</a></li>
+                    <li><a href="#">Phượt & khám phá</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Liên kết nhanh</h4>
+                <ul class="footer-links">
+                    <li><a href="/index.html">Trang chủ</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Bài viết mới</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bar">
+            <p>© 2025 LangTrek. Tất cả các bài viết thuộc bản quyền của tác giả.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-container')) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Add active class to current section while scrolling
+        const sections = document.querySelectorAll('.article-section');
+        const navItems = document.querySelectorAll('.nav-links a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('current-page');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('current-page');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
