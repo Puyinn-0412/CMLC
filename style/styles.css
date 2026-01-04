@@ -772,4 +772,352 @@
           max-width: 400px;
           margin-inline-start: unset;
         }
+
+@media (max-width: 480px) {
+  /* Typography responsive */
+  .container__left h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section__header {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+
+  .content h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Navigation improvements */
+  .nav__header {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav__logo a {
+    font-size: 1.25rem;
+  }
+
+  .nav__links {
+    top: 52px;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+
+  /* Hero section mobile */
+  .container {
+    padding: 4rem 0 3rem;
+    gap: 1.5rem;
+  }
+
+  .container__left {
+    padding-inline: 1rem;
+  }
+
+  .container__left .btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Images optimization */
+  .tent-1 {
+    max-width: 220px;
+  }
+
+  .tent-2 {
+    max-width: 140px;
+  }
+
+  /* Content section */
+  .content {
+    padding-inline: 1rem;
+    padding-block: 0 3rem;
+  }
+
+  .content h4 {
+    font-size: 0.9rem;
+  }
+
+  .content p {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+  }
+
+  /* Location badge */
+  .location {
+    left: 0.5rem;
+    bottom: 0.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 0.75rem;
+    font-size: 0.8rem;
+    border-width: 8px;
+  }
+
+  .location span {
+    padding: 4px 8px;
+    font-size: 1.25rem;
+  }
+
+  /* Socials */
+  .socials {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    gap: 8px;
+  }
+
+  .socials a {
+    font-size: 1.1rem;
+  }
+
+  /* Service section */
+  .section__container {
+    padding: 3rem 1rem;
+  }
+
+  .service__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .service__card {
+    padding: 1.5rem;
+  }
+
+  .service__card div {
+    font-size: 2rem;
+  }
+
+  .service__card h4 {
+    font-size: 1.1rem;
+  }
+
+  /* About section */
+  .about__container {
+    gap: 1.5rem;
+  }
+
+  .about__list {
+    gap: 1.25rem;
+  }
+
+  .about__list span {
+    font-size: 1.5rem;
+  }
+
+  .about__list h4 {
+    font-size: 1rem;
+  }
+
+  /* Portfolio section */
+  .portfolio__content {
+    gap: 1.5rem;
+  }
+
+  .portfolio__image__content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .portfolio__image__content div {
+    padding: 1rem;
+    min-width: 120px;
+  }
+
+  .portfolio__image__content h4 {
+    font-size: 1.5rem;
+  }
+
+  .portfolio__image__content p {
+    font-size: 0.75rem;
+  }
+
+  .portfolio__list span {
+    font-size: 1.5rem;
+  }
+
+  .portfolio__list h4 {
+    font-size: 1.1rem;
+  }
+
+  /* Feedback section */
+  .feedback__card {
+    padding: 1.5rem;
+  }
+
+  .feedback__user img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .feedback__user h4 {
+    font-size: 0.9rem;
+  }
+
+  .feedback__user h5 {
+    font-size: 0.75rem;
+  }
+
+  .feedback__rating span {
+    font-size: 1rem;
+  }
+
+  /* Subscribe section */
+  .subscribe__content {
+    padding: 2rem 1rem;
+  }
+
+  .subscribe__content input,
+  .subscribe__content button {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* Footer */
+  .footer__container {
+    padding: 3rem 1rem;
+    gap: 2rem;
+  }
+
+  .footer__logo a {
+    font-size: 1.25rem;
+  }
+
+  .footer__col h3,
+  .footer__col h4 {
+    font-size: 1.1rem;
+  }
+
+  .footer__links {
+    gap: 0.5rem;
+  }
+
+  .footer__bar {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Cải thiện touch targets cho mobile */
+@media (max-width: 768px) {
+  /* Tăng kích thước vùng chạm */
+  .btn,
+  .nav__links a,
+  .service__card,
+  .footer__links a,
+  .footer__socials a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cải thiện menu mobile */
+  .nav__menu__btn {
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Service cards dễ chạm hơn */
+  .service__card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .service__card:active {
+    transform: scale(0.98);
+  }
+
+  /* Image touch optimization */
+  .portfolio__image {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Landscape orientation cho điện thoại */
+@media (max-width: 768px) and (orientation: landscape) {
+  .container {
+    padding: 2rem 0;
+  }
+
+  .container__left h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .container__right {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .images {
+    flex-direction: row;
+  }
+
+  .content {
+    padding-block: 2rem;
+  }
+
+  .tent-1 {
+    max-width: 200px;
+  }
+
+  .tent-2 {
+    max-width: 120px;
+  }
+}
+
+/* Cải thiện hiệu suất scroll trên mobile */
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Tối ưu hóa render */
+  .container__right::before,
+  .service__card,
+  .portfolio__image img {
+    will-change: transform;
+  }
+}
+
+/* Fix cho các thiết bị có notch (iPhone X+) */
+@supports (padding: max(0px)) {
+  .nav__header,
+  .container,
+  .section__container,
+  .footer__container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Cải thiện cho tablet nhỏ (600-768px) */
+@media (min-width: 600px) and (max-width: 768px) {
+  .service__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .container__left h1 {
+    font-size: 3rem;
+    line-height: 3.75rem;
+  }
+
+  .section__header {
+    font-size: 2.25rem;
+  }
+}
       }
