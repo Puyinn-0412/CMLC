@@ -1682,4 +1682,38 @@
     color: var(--primary-color);
   }
 }
+
+@media (max-width: 767px) {
+  
+  /* Ẩn hoàn toàn hero section */
+  .container {
+    display: none !important;
+  }
+
+  .service {
+    padding-top: 60px; /* Khoảng cách cho fixed nav */
+  }
+
+  .service .section__container {
+    padding-top: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  
+  /* Đảm bảo hero section hiển thị bình thường */
+  .container {
+    display: grid !important;
+  }
+
+  /* Reset padding cho service section */
+  .service {
+    padding-top: 0;
+  }
+
+  .service .section__container {
+    padding-top: 5rem;
+  }
+}
+
       }
