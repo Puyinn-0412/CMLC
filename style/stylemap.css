@@ -1,4 +1,4 @@
-    * {
+* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -51,7 +51,7 @@
       100% { transform: rotate(360deg); }
     }
 
-    /* ========== STYLES CHO SIDEBAR ========== */
+    /* ========== STYLES CHO SIDEBAR (DESKTOP) ========== */
     .sidebar {
       position: absolute;
       top: 0;
@@ -501,7 +501,7 @@
       color: #4a5568;
     }
 
-    /* ========== STYLES CHO INFO PANEL ========== */
+    /* ========== STYLES CHO INFO PANEL (DESKTOP) ========== */
     .info-panel {
       position: absolute;
       top: 20px;
@@ -1070,18 +1070,313 @@
       }
     }
 
-    /* ========== RESPONSIVE DESIGN ========== */
+    /* ========================================
+       RESPONSIVE DESIGN - MOBILE OPTIMIZED
+       ======================================== */
+
     @media (max-width: 768px) {
+
+      /* ---- SIDEBAR: BOTTOM SHEET trên mobile ---- */
       .sidebar {
         width: 100%;
+        height: 75vh;           /* chiếm 75% chiều cao màn hình */
+        top: auto;
+        bottom: 0;
+        left: 0;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(0);
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+        /* Để bản đồ vẫn thấy ở trên */
+        z-index: 1100;
       }
-      
+
+      .sidebar.collapsed {
+        transform: translateY(100%);  /* trượt xuống thay vì sang trái */
+      }
+
+      /* Thanh kéo (drag handle) */
+      .sidebar-header::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: #cbd5e0;
+        border-radius: 2px;
+        margin: 0 auto 12px;
+      }
+
+      /* Tiêu đề nhỏ hơn trên mobile */
+      .sidebar-title h1 {
+        font-size: 18px;
+      }
+
+      .sidebar-title p {
+        font-size: 12px;
+      }
+
+      /* Nút mở sidebar: bottom-center, nổi bật hơn */
+      .sidebar-open {
+        bottom: 24px;
+        top: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        min-width: 160px;
+        height: 48px;
+        border-radius: 24px;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 0 20px;
+        gap: 8px;
+        background: #2d3748;
+        color: white;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        z-index: 1050;
+        white-space: nowrap;
+      }
+
+      /* Thêm label cho nút mở sidebar (qua JS hoặc pseudo) */
+      .sidebar-open::after {
+        content: 'Khám phá';
+        font-size: 14px;
+        font-weight: 600;
+        margin-left: 4px;
+      }
+
+      /* Theme toggle: góc trên phải, nhỏ gọn */
+      .theme-toggle {
+        top: 12px;
+        right: 12px;
+        width: 38px;
+        height: 38px;
+      }
+
+      /* ---- INFO PANEL: BOTTOM SHEET trên mobile ---- */
       .info-panel {
-        width: calc(100% - 40px);
-        right: 20px;
+        position: fixed;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 80vh;
+        border-radius: 20px 20px 0 0;
+        transform: translateY(100%);  /* ẩn xuống dưới */
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        z-index: 1200;
+        transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
       }
-      
+
+      .info-panel.active {
+        transform: translateY(0);
+      }
+
+      /* Drag handle cho info panel */
+      .info-header {
+        height: 180px;
+        border-radius: 20px 20px 0 0;
+        overflow: hidden;
+      }
+
+      /* Drag handle visual */
+      .info-content::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: #cbd5e0;
+        border-radius: 2px;
+        margin: -8px auto 16px;
+      }
+
+      /* Nút đóng info panel to hơn, dễ bấm */
+      .info-close {
+        width: 36px;
+        height: 36px;
+        top: 12px;
+        right: 12px;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(4px);
+      }
+
+      .info-title {
+        font-size: 18px;
+      }
+
+      /* Actions: 2 nút to rõ, dễ bấm */
+      .info-actions {
+        padding: 0 0 env(safe-area-inset-bottom, 16px);
+        gap: 8px;
+      }
+
+      .info-btn {
+        padding: 14px 10px;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 12px;
+      }
+
+      /* ---- MAP CONTROLS: dịch sang trái để tránh sidebar open ---- */
+      .map-controls {
+        bottom: 90px;   /* cao hơn để tránh nút "Khám phá" */
+        right: 12px;
+        gap: 8px;
+      }
+
+      .map-control {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+
+      /* ---- LEGEND: ẩn bớt trên mobile, chỉ hiện khi cần ---- */
       .legend {
-        max-width: calc(100% - 40px);
+        display: none; /* ẩn mặc định, người dùng có thể bật qua nút */
+      }
+
+      .legend-show {
+        bottom: 90px;
+        left: 12px;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+
+      /* ---- SEARCH BOX: full width, padding lớn hơn ---- */
+      .search-box input {
+        padding: 14px 45px 14px 15px;
+        font-size: 16px; /* tránh iOS auto-zoom */
+        border-radius: 12px;
+      }
+
+      .search-suggestions {
+        max-height: 200px;
+      }
+
+      /* ---- FILTER TAGS: scroll ngang thay vì wrap ---- */
+      .filter-tags {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        gap: 6px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .filter-tags::-webkit-scrollbar {
+        display: none;
+      }
+
+      .filter-tag {
+        flex-shrink: 0;
+        padding: 9px 14px;
+        font-size: 13px;
+      }
+
+      /* Age buttons: scroll ngang */
+      .age-buttons {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .age-buttons::-webkit-scrollbar {
+        display: none;
+      }
+
+      .age-btn {
+        flex-shrink: 0;
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+
+      /* Location items: padding lớn hơn, dễ tap */
+      .location-item {
+        padding: 14px;
+        margin-bottom: 8px;
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+      }
+
+      .location-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+      }
+
+      .location-title {
+        font-size: 14px;
+      }
+
+      /* Zoom controls Leaflet: di chuyển vào trong tầm tay */
+      .leaflet-top.leaflet-right {
+        top: 60px !important; /* tránh bị che bởi theme-toggle */
+        right: 12px !important;
+      }
+
+      .leaflet-control-zoom a {
+        width: 36px !important;
+        height: 36px !important;
+        line-height: 36px !important;
+        font-size: 18px !important;
+      }
+
+      /* Overlay khi sidebar mở */
+      .sidebar-overlay {
+        display: block;
+      }
+    }
+
+    /* Overlay mờ khi sidebar/info panel mở trên mobile */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1090;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Safe area cho iPhone có notch */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      @media (max-width: 768px) {
+        .sidebar-open {
+          bottom: calc(16px + env(safe-area-inset-bottom));
+        }
+        .info-actions {
+          padding-bottom: calc(12px + env(safe-area-inset-bottom));
+        }
+        .map-controls {
+          bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+      }
+    }
+
+    /* Dark mode cho mobile */
+    @media (max-width: 768px) {
+      .dark-mode .sidebar-open {
+        background: #4a5568;
+        color: white;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      }
+
+      .dark-mode .map-control {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      }
+
+      .dark-mode .sidebar-overlay {
+        background: rgba(0, 0, 0, 0.5);
       }
     }

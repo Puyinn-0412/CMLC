@@ -21,6 +21,7 @@
 
 </head>
 <body>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
   <div id="map"></div>
   
   <!-- Loading indicator -->
@@ -2631,6 +2632,164 @@ L.control.zoom({
     
     // Thiết lập lại UX khi thay đổi kích thước cửa sổ
     window.addEventListener('resize', setupMobileUX);
+    // ========== MOBILE PATCH ==========
+
+(function() {
+  const isMobile = () => window.innerWidth <= 768;
+
+  const sidebar      = document.getElementById('sidebar');
+  const sidebarOpen  = document.getElementById('sidebar-open');
+  const sidebarClose = document.getElementById('sidebar-close');
+  const infoPanel    = document.getElementById('info-panel');
+  const infoClose    = document.getElementById('info-close');
+
+  // Tạo overlay nếu chưa có
+  let overlay = document.getElementById('sidebar-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    overlay.id = 'sidebar-overlay';
+    document.body.insertBefore(overlay, document.body.firstChild);
+  }
+
+  function openSidebar() {
+    sidebar.classList.remove('collapsed');
+    if (isMobile()) {
+      overlay.classList.add('active');
+      sidebarOpen.style.opacity = '0';
+      sidebarOpen.style.pointerEvents = 'none';
+    }
+  }
+
+  function closeSidebar() {
+    sidebar.classList.add('collapsed');
+    if (isMobile()) {
+      overlay.classList.remove('active');
+      setTimeout(() => {
+        sidebarOpen.style.opacity = '1';
+        sidebarOpen.style.pointerEvents = 'auto';
+      }, 250);
+    }
+  }
+
+  function closeInfoPanel() {
+    infoPanel.classList.remove('active');
+    if (isMobile()) overlay.classList.remove('active');
+  }
+
+  // Ghi đè sự kiện cũ
+  const newOpen = sidebarOpen.cloneNode(true);
+  sidebarOpen.parentNode.replaceChild(newOpen, sidebarOpen);
+  newOpen.addEventListener('click', openSidebar);
+
+  const newClose = sidebarClose.cloneNode(true);
+  sidebarClose.parentNode.replaceChild(newClose, sidebarClose);
+  newClose.addEventListener('click', closeSidebar);
+
+  const newInfoClose = infoClose.cloneNode(true);
+  infoClose.parentNode.replaceChild(newInfoClose, infoClose);
+  newInfoClose.addEventListener('click', closeInfoPanel);
+
+  // Bấm overlay để đóng
+  overlay.addEventListener('click', function() {
+    if (infoPanel.classList.contains('active')) closeInfoPanel();
+    else closeSidebar();
+  });
+
+  // Theo dõi info panel mở -> hiện overlay + đóng sidebar
+  new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName !== 'class') return;
+      if (infoPanel.classList.contains('active') && isMobile()) {
+        closeSidebar();
+        overlay.classList.add('active');
+      } else if (!infoPanel.classList.contains('active')) {
+        overlay.classList.remove('active');
+      }
+    });
+  }).observe(infoPanel, { attributes: true });
+
+  // ---- SWIPE DOWN để đóng Sidebar ----
+  let sy = 0, dragging = false, currentY = 0;
+
+  sidebar.addEventListener('touchstart', function(e) {
+    if (!isMobile()) return;
+    sy = e.touches[0].clientY;
+    dragging = false;
+  }, { passive: true });
+
+  sidebar.addEventListener('touchmove', function(e) {
+    if (!isMobile()) return;
+    currentY = e.touches[0].clientY;
+    const delta = currentY - sy;
+    const sidebarContent = sidebar.querySelector('.sidebar-content');
+    const atTop = sidebarContent ? sidebarContent.scrollTop === 0 : true;
+
+    if (delta > 0 && atTop) {
+      dragging = true;
+      sidebar.style.transform = `translateY(${Math.min(delta * 0.65, 200)}px)`;
+      overlay.style.opacity = String(Math.max(0, 0.3 - delta / 600));
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  sidebar.addEventListener('touchend', function() {
+    if (!isMobile() || !dragging) return;
+    const delta = currentY - sy;
+    sidebar.style.transform = '';
+    overlay.style.opacity = '';
+    dragging = false;
+    if (delta > 80) closeSidebar();
+  }, { passive: true });
+
+  // ---- SWIPE DOWN để đóng Info Panel ----
+  let iy = 0, iPanelDragging = false, iCurrentY = 0;
+
+  infoPanel.addEventListener('touchstart', function(e) {
+    if (!isMobile()) return;
+    iy = e.touches[0].clientY;
+    iPanelDragging = false;
+  }, { passive: true });
+
+  infoPanel.addEventListener('touchmove', function(e) {
+    if (!isMobile()) return;
+    iCurrentY = e.touches[0].clientY;
+    const delta = iCurrentY - iy;
+    const content = infoPanel.querySelector('.info-content');
+    const atTop = content ? content.scrollTop === 0 : true;
+
+    if (delta > 0 && atTop) {
+      iPanelDragging = true;
+      infoPanel.style.transform = `translateY(${Math.min(delta * 0.65, 200)}px)`;
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  infoPanel.addEventListener('touchend', function() {
+    if (!isMobile() || !iPanelDragging) return;
+    const delta = iCurrentY - iy;
+    infoPanel.style.transform = '';
+    iPanelDragging = false;
+    if (delta > 70) closeInfoPanel();
+  }, { passive: true });
+
+  // Reset về desktop khi resize
+  window.addEventListener('resize', function() {
+    if (!isMobile()) {
+      overlay.classList.remove('active');
+      sidebar.style.transform = '';
+      infoPanel.style.transform = '';
+    }
+  });
+
+  // Mobile: sidebar đóng mặc định, desktop: mở mặc định
+  if (isMobile()) {
+    sidebar.classList.add('collapsed');
+  } else {
+    sidebar.classList.remove('collapsed');
+  }
+
+})();
   </script>
 </body>
 </html>
