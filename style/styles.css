@@ -773,3 +773,117 @@
           margin-inline-start: unset;
         }
       }
+      /* ============================================================
+   MOBILE PATCH 
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* ----------------------------------------------------------
+     1. HERO SECTION 
+  ---------------------------------------------------------- */
+
+  /* Giảm padding tổng container hero */
+  .container {
+    padding: 5rem 0 2rem;
+    gap: 1rem;
+  }
+
+  /* Tiêu đề nhỏ lại cho vừa màn hình */
+  .container__left h1 {
+    font-size: 2.2rem;
+    line-height: 3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Ẩn toàn bộ phần ảnh bên phải */
+  .container__right {
+    display: none;
+  }
+
+  /* Ẩn location & socials (chúng nằm trong .container__right về mặt trực quan) */
+  .location,
+  .socials {
+    display: none;
+  }
+
+  /* Căn giữa nút KHÁM PHÁ, tăng kích thước tap target */
+  .container__left {
+    padding-inline: 1.5rem;
+    text-align: center;
+  }
+
+  .container__left .btn {
+    padding: 0.9rem 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* ----------------------------------------------------------
+     2. SERVICE CARDS 
+  ---------------------------------------------------------- */
+
+  .service__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  /* Card nhỏ gọn hơn trên mobile */
+  .service__card {
+    padding: 1.25rem 1rem;
+  }
+
+  .service__card div {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .service__card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .service__card .section__description {
+    font-size: 0.8rem;
+    line-height: 1.4rem;
+  }
+
+  /* Card lẻ cuối (thứ 5) — căn giữa cho đẹp */
+  .service__card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    max-width: 50%;
+    margin-inline: auto;
+  }
+
+  /* ----------------------------------------------------------
+     3. SECTION HEADER 
+  ---------------------------------------------------------- */
+
+  .section__header {
+    font-size: 1.75rem;
+  }
+
+  /* ----------------------------------------------------------
+     4. ABOUT
+  ---------------------------------------------------------- */
+
+  .about__container {
+    gap: 1.5rem;
+  }
+
+  /* ----------------------------------------------------------
+     5. FEEDBACK 
+  ---------------------------------------------------------- */
+
+  .feedback__card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  /* ----------------------------------------------------------
+     6. FOOTER 
+  ---------------------------------------------------------- */
+
+  .footer__container {
+    padding: 3rem 1rem;
+    gap: 1.5rem;
+  }
+}
