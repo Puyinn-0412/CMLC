@@ -115,6 +115,14 @@
                 </div>
                 <h3>Chào mừng đến với Chatbot Du Lịch</h3>
                 <p>Hỏi tôi về lịch trình, ẩm thực, địa điểm du lịch tại Chân Mây - Lăng Cô.</p>
+                    <div class="suggestion-chips">
+        <button class="chip" onclick="sendSuggestion(this)">🦪 Hàu ăn ở đâu ngon?</button>
+        <button class="chip" onclick="sendSuggestion(this)">🏖️ Gợi ý lịch trình 1 ngày</button>
+        <button class="chip" onclick="sendSuggestion(this)">🛍️ Mua quà gì về làm quà?</button>
+        <button class="chip" onclick="sendSuggestion(this)">🚗 Đi từ Huế xuống mất bao lâu?</button>
+        <button class="chip" onclick="sendSuggestion(this)">🌊 Bãi biển nào đẹp nhất?</button>
+        <button class="chip" onclick="sendSuggestion(this)">🏨 Ở đâu qua đêm?</button>
+    </div>
             </div>
             
             <div class="chat-messages" id="chat-messages" style="display: none;">
@@ -578,6 +586,13 @@ for await (const chunk of result.stream) {
         });
 
         document.addEventListener('DOMContentLoaded', initApp);
+
+window.sendSuggestion = function(btn) {
+    const text = btn.textContent.trim().replace(/^[\p{Emoji}\s]+/u, '').trim();
+    messageInput.value = text;
+    messageInput.focus();
+    chatForm.dispatchEvent(new Event('submit'));
+}
         
         window.copyToClipboard = copyToClipboard;
     </script>
