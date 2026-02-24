@@ -143,6 +143,15 @@
                     >
                         <i class="fas fa-paper-plane"></i>
                     </button>
+                    <button 
+                       id="stop-button" 
+                       type="button" 
+                       class="send-button" 
+                       style="display:none; background:#e74c3c;"
+                       title="Dừng"
+                    >
+                        <i class="fas fa-stop"></i>
+                    </button>
                 </form>
             </div>
         </div>
@@ -231,6 +240,7 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
         let currentMessages = [];
         let isSending = false;
         let isStopped = false;
+        let streamController = null;
         let isSidebarVisible = window.innerWidth > 1024;
 
         // SỬA LẠI PHẦN TOGGLE SIDEBAR
@@ -323,6 +333,10 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
                 autoResizeTextarea();
                 messageInput.focus();
             });
+            document.getElementById('stop-button').addEventListener('click', () => {
+    isStopped = true;
+    if (streamController) streamController.abort();
+});
         }
 
         function setupTextareaAutoResize() {
@@ -350,100 +364,103 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
 
             isSending = true;
             addMessageToUI("user", userMessage);
-            
-            // Change send button to loading state
-            sendButton.innerHTML = '<div class="loading-spinner"></div>';
-            sendButton.disabled = true;
-
-            // Add to current messages array
-            currentMessages.push({ 
-                role: "user", 
-                content: userMessage,
-                timestamp: new Date().toISOString()
-            });
 
             messageInput.value = "";
             autoResizeTextarea();
-            isStopped = false;
+            
 
-            try {
-                // Chuẩn bị history cho Gemini
-                const history = currentMessages.map(msg => ({
-                    role: msg.role === "user" ? "user" : "model",
-                    parts: [{ text: msg.content }]
-                }));
+try {
+    // Push tin nhắn user vào history TRƯỚC khi build
+    currentMessages.push({ 
+        role: "user", 
+        content: userMessage,
+        timestamp: new Date().toISOString()
+    });
+
+    // Giới hạn chỉ giữ 20 tin nhắn gần nhất, bỏ tin nhắn cuối ra
+    const recentMessages = currentMessages.slice(-21, -1);
+    const history = recentMessages.map(msg => ({
+        role: msg.role === "user" ? "user" : "model",
+        parts: [{ text: msg.content }]
+    }));
+
 
                 const chatSession = model.startChat({
                     history: history,
                     generationConfig: {
-                        maxOutputTokens: 2000,
+                        maxOutputTokens: 800,
                         temperature: 0.7,
                         topP: 0.9,
                         topK: 40,
                     }
                 });
 
-                const result = await chatSession.sendMessage(userMessage);
-                const response = await result.response;
-                const botReply = response.text();
+// Hiện nút Stop, ẩn nút Send
+sendButton.style.display = 'none';
+document.getElementById('stop-button').style.display = '';
 
-                // Giới hạn câu trả lời tối đa 300 từ
-                const limitedReply = limitWords(botReply, 300);
-                
-                displayTypingMessage(limitedReply, () => {
-                    if (!isStopped) {
-                        currentMessages.push({ 
-                            role: "assistant", 
-                            content: limitedReply,
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-                });
+// Tạo bubble tin nhắn
+const messageContainer = document.createElement('div');
+messageContainer.className = 'message-container assistant';
+messageContainer.innerHTML = `
+    <div class="message-avatar assistant"><i class="fas fa-robot"></i></div>
+    <div class="message-content">
+        <div class="bot-message">
+            <div class="markdown" id="streaming-content">
+                    <div class="dot-typing">
+                         <span></span>
+                         <span></span>
+                         <span></span>
+                     </div>
+            </div>
+        </div>
+    </div>`;
+chatMessages.appendChild(messageContainer);
+const streamingEl = document.getElementById('streaming-content');
+
+streamController = new AbortController();
+isStopped = false;
+
+const result = await chatSession.sendMessageStream(userMessage); 
+
+let fullText = '';
+for await (const chunk of result.stream) {
+    if (isStopped) break;
+
+    fullText += chunk.text();
+    streamingEl.innerHTML = formatMessage(fullText);
+    scrollToBottom();
+}
+
+    streamingEl.removeAttribute('id');
+
+    if (isStopped && fullText) {
+        streamingEl.innerHTML += '<br><em style="opacity:0.5; font-size:0.85em">⏹ Đã dừng</em>';
+    }
+
+    if (fullText) {
+        currentMessages.push({
+            role: "assistant",
+            content: fullText,
+            timestamp: new Date().toISOString()
+        });
+    }
+
+
             } catch (error) {
                 console.error("Lỗi: ", error);
+                const emptyBubble = document.getElementById('streaming-content');
+                if (emptyBubble) emptyBubble.closest('.message-container').remove();
                 addMessageToUI("assistant", "Xin lỗi, đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.");
             } finally {
                 isSending = false;
-                resetSendButton();
+                document.getElementById('stop-button').style.display = 'none';
+                sendButton.style.display = '';
+                sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+                sendButton.disabled = false;
+                streamController = null;
                 scrollToBottom();
             }
-        }
-
-        function limitWords(text, maxWords) {
-            if (!text) return "";
-            const words = text.split(' ');
-            if (words.length <= maxWords) {
-                return text;
-            }
-            
-            const limitedWords = words.slice(0, maxWords);
-            return limitedWords.join(' ') + '...';
-        }
-
-        function resetSendButton() {
-            sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
-            sendButton.disabled = false;
-        }
-
-        function displayTypingMessage(content, callback) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'typing-indicator';
-            messageDiv.innerHTML = `
-                <div class="typing-dots">
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                    <div class="typing-dot"></div>
-                </div>
-                <span>AI đang suy nghĩ...</span>
-            `;
-            chatMessages.appendChild(messageDiv);
-            scrollToBottom();
-
-            setTimeout(() => {
-                messageDiv.remove();
-                addMessageToUI("assistant", content);
-                if (callback) callback();
-            }, 1500);
         }
 
         function addMessageToUI(role, content) {
@@ -526,6 +543,8 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
         }
 
         function clearChat() {
+            isStopped = true;
+            if (streamController) streamController.abort();
             // Clear current messages
             currentMessages = [];
             
