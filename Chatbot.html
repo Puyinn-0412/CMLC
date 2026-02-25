@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>LangTrek | Chatbot Du Lịch Chân Mây - Lăng Cô</title>
     <link rel="icon" href="icon-light.png" type="image/png" id="favicon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" id="navChat">
+                        <a class="nav-link active" id="navChat" style="cursor:pointer">
                             <i class="fas fa-comment-dots"></i>
                             <span>Chat Du Lịch</span>
                         </a>
@@ -105,6 +105,27 @@
                     <p>© 2025 THPT Thừa Lưu</p>
                 </div>
             </div>
+            <!-- Popup lịch sử chat -->
+<div class="chat-history-popup" id="chatHistoryPopup">
+    <div class="chat-history-modal">
+        <div class="modal-header">
+            <div class="modal-title">Lịch sử chat</div>
+            <button class="close-modal" id="closeHistoryPopup">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="chat-list" id="chatList">
+                <!-- Danh sách chat sẽ render ở đây -->
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="new-chat-modal-btn" id="newChatFromModal">
+                <i class="fas fa-plus"></i> Chat mới
+            </button>
+        </div>
+    </div>
+</div>
         </div>
         
         <!-- Chat Area -->
@@ -304,14 +325,12 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
                 sidebar.classList.remove('active');
                 sidebar.classList.remove('collapsed');
                 chatArea.classList.remove('expanded');
-                sidebarToggle.style.top = '50%';
             } else {
                 // Switch to mobile
                 isSidebarVisible = false;
                 sidebar.classList.remove('active');
                 sidebar.classList.remove('collapsed');
                 chatArea.classList.add('expanded');
-                sidebarToggle.style.top = 'calc(50% + 30px)';
             }
             toggleSidebar();
         });
@@ -593,6 +612,114 @@ window.sendSuggestion = function(btn) {
     messageInput.focus();
     chatForm.dispatchEvent(new Event('submit'));
 }
+// ===== CHAT HISTORY =====
+const HISTORY_KEY = 'langtrek_chat_history';
+const MAX_SAVED = 20;
+
+function saveCurrentChat() {
+    if (currentMessages.length === 0) return;
+    const history = getSavedHistory();
+    const title = currentMessages[0].content.slice(0, 40) + (currentMessages[0].content.length > 40 ? '...' : '');
+    const newSession = {
+        id: Date.now(),
+        title,
+        timestamp: new Date().toISOString(),
+        messages: [...currentMessages]
+    };
+    history.unshift(newSession);
+    if (history.length > MAX_SAVED) history.pop();
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+}
+
+function getSavedHistory() {
+    try {
+        return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+    } catch { return []; }
+}
+
+function formatDate(isoString) {
+    const d = new Date(isoString);
+    return d.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+
+function renderHistoryPopup() {
+    const history = getSavedHistory();
+    const chatList = document.getElementById('chatList');
+
+    if (history.length === 0) {
+        chatList.innerHTML = `
+            <div style="text-align:center; padding: 40px; color: var(--text-light);">
+                <i class="fas fa-comment-slash" style="font-size:2rem; margin-bottom:12px; display:block; opacity:0.4"></i>
+                Chưa có lịch sử chat nào
+            </div>`;
+        return;
+    }
+
+    chatList.innerHTML = history.map(session => `
+        <div class="modal-chat-item" onclick="loadSession(${session.id})">
+            <div>
+                <div class="modal-chat-title">${session.title}</div>
+                <div class="modal-chat-preview">${session.messages.length} tin nhắn</div>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px">
+                <div class="modal-chat-date">${formatDate(session.timestamp)}</div>
+                <button class="delete-session-btn" onclick="deleteSession(event, ${session.id})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+window.loadSession = function(id) {
+    const history = getSavedHistory();
+    const session = history.find(s => s.id === id);
+    if (!session) return;
+
+    // Lưu chat hiện tại trước
+    saveCurrentChat();
+
+    // Load session cũ
+    currentMessages = [...session.messages];
+    chatMessages.innerHTML = '';
+    emptyState.style.display = 'none';
+    chatMessages.style.display = 'flex';
+
+    currentMessages.forEach(msg => {
+        addMessageToUI(msg.role === 'user' ? 'user' : 'assistant', msg.content);
+    });
+
+    closePopup();
+}
+
+window.deleteSession = function(e, id) {
+    e.stopPropagation();
+    let history = getSavedHistory();
+    history = history.filter(s => s.id !== id);
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    renderHistoryPopup();
+}
+
+function openPopup() {
+    saveCurrentChat();
+    renderHistoryPopup();
+    document.getElementById('chatHistoryPopup').classList.add('active');
+}
+
+function closePopup() {
+    document.getElementById('chatHistoryPopup').classList.remove('active');
+}
+
+// Event listeners cho popup
+document.getElementById('navChat').addEventListener('click', openPopup);
+document.getElementById('closeHistoryPopup').addEventListener('click', closePopup);
+document.getElementById('chatHistoryPopup').addEventListener('click', function(e) {
+    if (e.target === this) closePopup();
+});
+document.getElementById('newChatFromModal').addEventListener('click', function() {
+    closePopup();
+    clearChat();
+});
         
         window.copyToClipboard = copyToClipboard;
     </script>
