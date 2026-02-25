@@ -37,9 +37,10 @@
         <i class="fas fa-chevron-right"></i>
     </button>
     
-    <!-- Chatbot App -->
+<!-- Chatbot App -->
     <div class="app-container">
-        <!-- Sidebar mới -->
+
+        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="brand-name">
@@ -88,13 +89,12 @@
                         </a>
                     </li>
                 </ul>
-                
                 <button class="create-btn" id="new-chat-btn">
                     <i class="fas fa-plus"></i>
                     <span>Bắt đầu chat mới</span>
                 </button>
             </div>
-            
+
             <div class="sidebar-footer">
                 <div class="footer-links">
                     <a href="#" class="footer-link">Trợ giúp</a>
@@ -105,29 +105,30 @@
                     <p>© 2025 THPT Thừa Lưu</p>
                 </div>
             </div>
-            <!-- Popup lịch sử chat -->
-<div class="chat-history-popup" id="chatHistoryPopup">
-    <div class="chat-history-modal">
-        <div class="modal-header">
-            <div class="modal-title">Lịch sử chat</div>
-            <button class="close-modal" id="closeHistoryPopup">
-                <i class="fas fa-times"></i>
-            </button>
         </div>
-        <div class="modal-body">
-            <div class="chat-list" id="chatList">
-                <!-- Danh sách chat sẽ render ở đây -->
+        <!-- KẾT THÚC SIDEBAR -->
+
+        <!-- Popup lịch sử chat — NẰM NGOÀI SIDEBAR -->
+        <div class="chat-history-popup" id="chatHistoryPopup">
+            <div class="chat-history-modal">
+                <div class="modal-header">
+                    <div class="modal-title">Lịch sử chat</div>
+                    <button class="close-modal" id="closeHistoryPopup">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="chat-list" id="chatList"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="new-chat-modal-btn" id="newChatFromModal">
+                        <i class="fas fa-plus"></i> Chat mới
+                    </button>
+                </div>
             </div>
         </div>
-        <div class="modal-footer">
-            <button class="new-chat-modal-btn" id="newChatFromModal">
-                <i class="fas fa-plus"></i> Chat mới
-            </button>
-        </div>
-    </div>
-</div>
-        </div>
-        
+        <!-- KẾT THÚC POPUP -->
+
         <!-- Chat Area -->
         <div class="chat-area" id="chatArea">
             <div id="empty-state" class="empty-state">
@@ -136,20 +137,18 @@
                 </div>
                 <h3>Chào mừng đến với Chatbot Du Lịch</h3>
                 <p>Hỏi tôi về lịch trình, ẩm thực, địa điểm du lịch tại Chân Mây - Lăng Cô.</p>
-                    <div class="suggestion-chips">
-        <button class="chip" onclick="sendSuggestion(this)">🦪 Hàu ăn ở đâu ngon?</button>
-        <button class="chip" onclick="sendSuggestion(this)">🏖️ Gợi ý lịch trình 1 ngày</button>
-        <button class="chip" onclick="sendSuggestion(this)">🛍️ Mua quà gì về làm quà?</button>
-        <button class="chip" onclick="sendSuggestion(this)">🚗 Đi từ Huế xuống mất bao lâu?</button>
-        <button class="chip" onclick="sendSuggestion(this)">🌊 Bãi biển nào đẹp nhất?</button>
-        <button class="chip" onclick="sendSuggestion(this)">🏨 Ở đâu qua đêm?</button>
-    </div>
+                <div class="suggestion-chips">
+                    <button class="chip" onclick="sendSuggestion(this)">🦪 Hàu ăn ở đâu ngon?</button>
+                    <button class="chip" onclick="sendSuggestion(this)">🏖️ Gợi ý lịch trình 1 ngày</button>
+                    <button class="chip" onclick="sendSuggestion(this)">🛍️ Mua quà gì về làm quà?</button>
+                    <button class="chip" onclick="sendSuggestion(this)">🚗 Đi từ Huế xuống mất bao lâu?</button>
+                    <button class="chip" onclick="sendSuggestion(this)">🌊 Bãi biển nào đẹp nhất?</button>
+                    <button class="chip" onclick="sendSuggestion(this)">🏨 Ở đâu qua đêm?</button>
+                </div>
             </div>
-            
-            <div class="chat-messages" id="chat-messages" style="display: none;">
-                <!-- Messages will appear here -->
-            </div>
-            
+
+            <div class="chat-messages" id="chat-messages" style="display: none;"></div>
+
             <div class="input-area">
                 <form id="chat-form" class="chat-form">
                     <div class="message-input-container">
@@ -165,26 +164,20 @@
                             </button>
                         </div>
                     </div>
-                    <button 
-                        id="send-button" 
-                        type="submit" 
-                        class="send-button"
-                    >
+                    <button id="send-button" type="submit" class="send-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                    <button 
-                       id="stop-button" 
-                       type="button" 
-                       class="send-button" 
-                       style="display:none; background:#e74c3c;"
-                       title="Dừng"
-                    >
+                    <button id="stop-button" type="button" class="send-button" 
+                            style="display:none; background:#e74c3c;" title="Dừng">
                         <i class="fas fa-stop"></i>
                     </button>
                 </form>
             </div>
         </div>
+        <!-- KẾT THÚC CHAT AREA -->
+
     </div>
+    <!-- KẾT THÚC APP CONTAINER -->
     
     <!-- JavaScript -->
     <script type="importmap">
