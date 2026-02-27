@@ -7,10 +7,21 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="style/styles.css" />
     <title>Chân Mây - Lăng Cô</title>
   </head>
   <body>
+
+    <!-- ===== NAV ===== -->
     <nav>
       <div class="nav__header">
         <div class="nav__logo">
@@ -23,46 +34,34 @@
       <ul class="nav__links" id="nav-links">
         <li><a href="#">TRANG CHỦ</a></li>
         <li><a href="#about">GIỚI THIỆU</a></li>
-        <li><a href="#contact">LIÊN HỆ</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61584599457363">LIÊN HỆ</a></li>
       </ul>
       <div class="nav__btns">
-        <button class="btn"><i class="ri-search-line"></i></button>
-        <button class="btn"><i class="ri-map-pin-line"></i></button>
+        <button class="btn nav__btn"><i class="ri-search-line"></i></button>
+        <button class="btn nav__btn"><i class="ri-map-pin-line"></i></button>
       </div>
     </nav>
 
-    <!-- GIỮ NGUYÊN HERO SECTION -->
-    <div class="container">
-      <div class="container__left">
-        <h1>Hành Trình Bắt Đầu</h1>
-        <div class="container__btn">
-          <a href="#service" class="btn">KHÁM PHÁ</a>
+    <!-- ===== HERO SECTION ===== -->
+    <header id="home">
+      <div class="header__container">
+        <div class="header__content">
+          <p style="color: aliceblue;">KHÁM PHÁ HÀNH TRÌNH CỦA BẠN</p>
+          <h1 style="color: aliceblue;">Trải Nghiệm Vẻ Đẹp Chân Mây – Lăng Cô!</h1>
+          <div class="header__btns">
+            <a href="#service" class="btn header__btn">Khám Phá Ngay</a>
+            <a href="img/Khởi nghiệp website Du Lịch Chân Mây - Lăng Cô (2).mp4" class="header__play">
+              <span><i class="ri-play-circle-fill"></i></span>
+            </a>
+          </div>
+        </div>
+                <div class="header__image">
+          <img src="img/plane.png" alt="header" />
         </div>
       </div>
-      <div class="container__right">
-        <div class="images">
-          <img src="img/bg11.jpg" alt="tent-1" class="tent-1" />
-          <img src="img/bg2.png" alt="tent-2" class="tent-2" />
-        </div>
-        <div class="content">
-          <h4>Thành Phố Huế</h4>
-          <h2>CHÂN MÂY - LĂNG CÔ</h2>
-          <p>
-            Nơi biển xanh ôm trọn núi non, từng con sóng vỗ về bờ cát trắng mịn, gió mang theo mùi muối và hương rừng. Ở đây, bình minh và hoàng hôn đều rực rỡ một cách dịu dàng, còn mỗi khoảnh khắc đều khiến tâm hồn muốn lặng nhìn và ghi nhớ mãi.
-          </p>
-        </div>
-      </div>
-      <div class="location">
-        <span><i class="ri-map-pin-2-fill"></i></span>
-        VỊ TRÍ
-      </div>
-      <div class="socials">
-        <span><a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a></span>
-        <span><a href="https://www.facebook.com/"><i class="ri-instagram-line"></i></a></span>
-        <span><a href="https://www.facebook.com/"><i class="ri-youtube-fill"></i></a></span>
-      </div>
-    </div>
-        <!-- DỊCH VỤ DU LỊCH -->
+    </header>
+
+    <!-- ===== DỊCH VỤ DU LỊCH ===== -->
     <section class="service" id="service">
       <div class="section__container service__container">
         <h2 class="section__header">
@@ -90,7 +89,7 @@
             <div><i class="ri-shape-line"></i></div>
             <h4>Triển Lãm 3D</h4>
             <p class="section__description">
-              Khám phá đầm các địa điểm du lịch qua bảo tàng 3D đẹp và sống động.
+              Khám phá các địa điểm du lịch qua bảo tàng 3D đẹp và sống động.
             </p>
           </a>
 
@@ -117,59 +116,41 @@
       </div>
     </section>
 
+    <!-- ===== GIỚI THIỆU ===== -->
+<!-- ===== GIỚI THIỆU ===== -->
+<section class="section__container about__container" id="about">
+  <div class="about__image">
+    <img src="img/showcase.jpg" alt="about" />
+  </div>
 
+  <div class="about__content">
+    <h2 class="about__title">KHÁM PHÁ VẺ ĐẸP CHÂN MÂY – LĂNG CÔ</h2>
 
-    <!-- GIỚI THIỆU -->
-    <section class="section__container about__container" id="about">
-      <div class="about__image">
-        <img src="img/hai-van-pass-2476008.jpg" alt="about" />
-      </div>
+    <p class="about__desc">
+      Chân Mây – Lăng Cô là viên ngọc xanh nằm dưới chân đèo Hải Vân hùng vĩ,
+      nơi biển xanh trong vắt hòa quyện cùng đầm Lập An thơ mộng và những rặng
+      núi trùng điệp. Đây là điểm đến lý tưởng cho những ai yêu thiên nhiên,
+      muốn thoát khỏi nhịp sống hối hả để tìm về bình yên đích thực.
+    </p>
 
-      <div class="about__content">
-        <h2 class="section__header">
-          Chân Mây Lăng Cô – Viên Ngọc Xanh Của Xứ Huế
-        </h2>
+    <p class="about__desc">
+      Với bờ biển dài, hải sản tươi ngon và không khí trong lành, Chân Mây –
+      Lăng Cô mang đến trải nghiệm du lịch trọn vẹn — từ tắm biển, kayak,
+      ngắm bình minh đến khám phá văn hóa làng chài địa phương đặc sắc.
+    </p>
 
-        <ul class="about__list">
-          <li>
-            <span><i class="ri-landscape-line"></i></span>
-            <div>
-              <h4>Vẻ Đẹp Thiên Nhiên</h4>
-              <p class="section__description">
-                Biển xanh trong vắt, đầm Lập An yên bình, đèo Hải Vân hùng vĩ tạo nên bức tranh thiên nhiên hoàn mỹ.
-              </p>
-            </div>
-          </li>
+    <a href="#service" class="about__cta">
+      Khám Phá Ngay →
+    </a>
+  </div>
+</section>
 
-          <li>
-            <span><i class="ri-restaurant-line"></i></span>
-            <div>
-              <h4>Ẩm Thực Đặc Sắc</h4>
-              <p class="section__description">
-                Hải sản tươi ngon, món địa phương như hàu Lăng Cô, bún hến, cơm niêu… nổi tiếng gần xa.
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <span><i class="ri-footprint-line"></i></span>
-            <div>
-              <h4>Hoạt Động Trải Nghiệm</h4>
-              <p class="section__description">
-                Kayak, chèo SUP, tham quan làng chài, ngắm bình minh trên biển.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ĐIỂM ĐẾN NỔI BẬT -->
+    <!-- ===== ĐIỂM ĐẾN NỔI BẬT ===== -->
     <section class="portfolio" id="portfolio">
       <div class="section__container portfolio__container">
         <div class="portfolio__header">
           <h2 class="section__header">
-            Vì Sao Chọn Website Du Lịch Chân Mây – Lăng Cô ?
+            Vì Sao Chọn Website Du Lịch Chân Mây – Lăng Cô?
           </h2>
           <p class="section__description">
             Website được xây dựng với nền tảng công nghệ hiện đại, cung cấp thông tin đầy đủ,
@@ -202,7 +183,6 @@
                 </p>
               </div>
             </li>
-
             <li>
               <span>02</span>
               <div>
@@ -213,7 +193,6 @@
                 </p>
               </div>
             </li>
-
             <li>
               <span>03</span>
               <div>
@@ -228,8 +207,42 @@
         </div>
       </div>
     </section>
+ <section class="stats" id="stats">
+    <p class="stats__subtitle">Được công nhận bởi</p>
+    <div class="stats__container" id="statsScroll">
 
-    <!-- REVIEW DU KHÁCH -->
+      <div class="stats__item" data-index="0">
+        <div class="stats__icon"><i class="ri-store-2-line"></i></div>
+        <h3 class="stats__number">HTX</h3>
+        <p class="stats__label">Hợp Tác Xã Lộc Thuỷ</p>
+      </div>
+
+      <div class="stats__divider"></div>
+
+      <div class="stats__item" data-index="1">
+        <div class="stats__icon"><i class="ri-restaurant-2-line"></i></div>
+        <h3 class="stats__number">NHÀ HÀNG</h3>
+        <p class="stats__label">Bé Thân</p>
+      </div>
+
+      <div class="stats__divider"></div>
+
+      <div class="stats__item" data-index="2">
+        <div class="stats__icon"><i class="ri-government-line"></i></div>
+        <h3 class="stats__number">UBND</h3>
+        <p class="stats__label">Xã Chân Mây – Lăng Cô</p>
+      </div>
+
+    </div>
+
+    <!-- Dot indicators (mobile only) -->
+    <div class="stats__dots" id="statsDots">
+      <div class="stats__dot active" data-dot="0"></div>
+      <div class="stats__dot" data-dot="1"></div>
+      <div class="stats__dot" data-dot="2"></div>
+    </div>
+  </section>
+    <!-- ===== REVIEW DU KHÁCH ===== -->
     <section class="section__container feedback__container" id="client">
       <h2 class="section__header">Cảm Nhận Từ Du Khách</h2>
       <div class="swiper">
@@ -237,7 +250,7 @@
           <div class="swiper-slide">
             <div class="feedback__card">
               <p class="section__description">
-                “Biển đẹp ngoài sức tưởng tượng. Đầm Lập An chiều xuống nhìn mê luôn!”
+                "Biển đẹp ngoài sức tưởng tượng. Đầm Lập An chiều xuống nhìn mê luôn!"
               </p>
               <div class="feedback__details">
                 <div class="feedback__user">
@@ -261,7 +274,7 @@
           <div class="swiper-slide">
             <div class="feedback__card">
               <p class="section__description">
-                “Hải sản ở đây tươi cực! Đặc biệt là hàu, ăn một lần nhớ cả đời.”
+                "Hải sản ở đây tươi cực! Đặc biệt là hàu, ăn một lần nhớ cả đời."
               </p>
               <div class="feedback__details">
                 <div class="feedback__user">
@@ -285,7 +298,7 @@
           <div class="swiper-slide">
             <div class="feedback__card">
               <p class="section__description">
-                “Trekking Bạch Mã xong về Lăng Cô tắm biển đúng combo hoàn hảo!”
+                "Trekking Bạch Mã xong về Lăng Cô tắm biển đúng combo hoàn hảo!"
               </p>
               <div class="feedback__details">
                 <div class="feedback__user">
@@ -306,10 +319,11 @@
             </div>
           </div>
         </div>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ===== FOOTER ===== -->
     <footer>
       <div class="section__container footer__container">
         <div class="footer__col">
@@ -321,9 +335,7 @@
           </p>
           <h3>Theo dõi chúng tôi</h3>
           <ul class="footer__socials">
-            <li><a href="https://www.facebook.com/"><i class="ri-facebook-fill"></i></a></li>
-            <li><a href="https://www.facebook.com/"><i class="ri-instagram-line"></i></a></li>
-            <li><a href="https://www.facebook.com/"><i class="ri-youtube-fill"></i></a></li>
+            <li><a href="https://www.facebook.com/profile.php?id=61584599457363"><i class="ri-facebook-fill"></i></a></li>
           </ul>
         </div>
 
@@ -333,8 +345,6 @@
             <li><a href="#about">Giới thiệu</a></li>
             <li><a href="#portfolio">Điểm đến</a></li>
             <li><a href="#client">Review du khách</a></li>
-            <li><a href="#">Ẩm thực</a></li>
-            <li><a href="#">Khách sạn</a></li>
           </ul>
         </div>
 
@@ -352,7 +362,7 @@
           <h4>Liên hệ</h4>
           <ul class="footer__links">
             <li>
-              <a href="#"><span><i class="ri-mail-fill"></i></span> dulichthongminhcmlc@gmail.com</a>
+              <a href="https://www.facebook.com/profile.php?id=61584599457363"><span><i class="ri-facebook-fill"></i> Du lịch thông minh cùng Chân Mây-Lăng Cô</span></a>
             </li>
             <li>
               <a href="#">
@@ -365,6 +375,7 @@
     </footer>
 
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="api/main.js"></script>
   </body>
 </html>
