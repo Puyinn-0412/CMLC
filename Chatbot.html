@@ -302,10 +302,12 @@ Trả lời NGAY, tự nhiên như nói chuyện bình thường.`;
                     sidebar.classList.add('active');
                     chatArea.classList.remove('expanded');
                     sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
+                    document.body.classList.add('sidebar-open');  
                 } else {
                     sidebar.classList.remove('active');
                     chatArea.classList.add('expanded');
                     sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
+                    document.body.classList.remove('sidebar-open'); 
                 }
             }
         }
