@@ -69,6 +69,17 @@ ScrollReveal().reveal(".about__list li", {
   interval: 200,
   delay: 400,
 });
+// --- CAM NANG SECTION ---
+ScrollReveal().reveal(".camnan__content", {
+  ...scrollRevealOption,
+  origin: "left",
+  delay: 200,
+});
+ScrollReveal().reveal(".camnan__image", {
+  ...scrollRevealOption,
+  origin: "right",
+  delay: 400,
+});
 
 // --- PORTFOLIO SECTION ---
 ScrollReveal().reveal(".portfolio__header", {

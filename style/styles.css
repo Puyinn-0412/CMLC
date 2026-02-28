@@ -235,6 +235,7 @@ header::before {
 /* ============================================================
    SHARED SECTION STYLES
    ============================================================ */
+   
 .section__container {
   max-width: var(--max-width);
   margin: auto;
@@ -1016,4 +1017,196 @@ footer {
     .header__image {
     display: none;
   }
+}
+/* ============================================================
+   CAM NANG SECTION
+   ============================================================ */
+.camnan {
+  background: var(--extra-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.camnan::before {
+  content: "";
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(70,130,180,0.12) 0%, transparent 70%);
+  top: -150px; left: -100px;
+  pointer-events: none;
+}
+
+.camnan::after {
+  content: "";
+  position: absolute;
+  width: 350px; height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40,135,255,0.08) 0%, transparent 70%);
+  bottom: -80px; right: 10%;
+  pointer-events: none;
+}
+
+.camnan__container {
+  max-width: var(--max-width);
+  margin: auto;
+  padding: 6rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.camnan__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.camnan__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(70,130,180,0.12);
+  border: 1px solid rgba(70,130,180,0.3);
+  color: #7ec8f5;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.4rem 0.9rem;
+  border-radius: 2rem;
+  width: fit-content;
+}
+
+.camnan__title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.camnan__title span { color: #7ec8f5; }
+
+.camnan__desc {
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: #444;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--steel-blue);
+}
+
+.camnan__btn--primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  background: var(--primary-color);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+  font-family: "Montserrat", sans-serif;
+}
+
+.camnan__btn--primary:hover {
+  background: #1a70e0;
+  transform: translateY(-2px);
+  color: var(--white);
+}
+
+.camnan__btn--secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.75rem;
+  background: transparent;
+  color: var(--text-dark);;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  text-decoration: none;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  font-family: "Montserrat", sans-serif;
+}
+
+.camnan__btn--secondary:hover {
+  border-color: #7ec8f5;
+  color: #7ec8f5;
+  transform: translateY(-2px);
+}
+
+.camnan__image { position: relative; }
+
+.camnan__image__wrap {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+}
+
+.camnan__image__wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.camnan__image__wrap:hover img { transform: scale(1.04); }
+
+.camnan__image__label {
+  position: absolute;
+  bottom: 1.25rem; left: 1.25rem;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-dark);
+  padding: 0.65rem 1rem;
+  border-radius: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.camnan__image__label i { font-size: 1.3rem; color: #7ec8f5; }
+.camnan__image__label span { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px; }
+.camnan__image__label small { display: block; font-size: 0.68rem; color: rgba(255,255,255,0.55); }
+
+.camnan__image::before {
+  content: "";
+  position: absolute;
+  width: 80px; height: 80px;
+  border-top: 3px solid var(--steel-blue);
+  border-left: 3px solid var(--steel-blue);
+  border-radius: 4px 0 0 0;
+  top: -12px; left: -12px;
+  z-index: 1; opacity: 0.6;
+}
+
+.camnan__image::after {
+  content: "";
+  position: absolute;
+  width: 80px; height: 80px;
+  border-bottom: 3px solid var(--steel-blue);
+  border-right: 3px solid var(--steel-blue);
+  border-radius: 0 0 4px 0;
+  bottom: -12px; right: -12px;
+  z-index: 1; opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .camnan__container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 4rem 1rem;
+  }
+  .camnan__image { order: -1; }
+  .camnan__image__wrap { max-width: 340px; margin: auto; }
+  .camnan__title { font-size: 1.6rem; }
 }
