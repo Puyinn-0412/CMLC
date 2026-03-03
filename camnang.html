@@ -827,6 +827,30 @@
                 font-size: 0.85rem;
             }
         }
+        /* Ẩn header */
+.app-header {
+    display: none !important;
+}
+.app-container {
+    padding-top: 0 !important;
+}
+.sidebar {
+    top: 0 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+}
+.sidebar-toggle {
+    top: 50% !important;
+}
+@media (max-width: 1024px) {
+    .sidebar {
+        top: 0 !important;
+        height: 100dvh !important;
+    }
+    .sidebar-toggle {
+        top: 50% !important;
+    }
+}
     </style>
 </head>
 <body>
@@ -1187,12 +1211,12 @@
                     sidebar.classList.add('active');
                     contentArea.classList.remove('expanded');
                     sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
-                    sidebarToggle.style.top = 'calc(50% + 30px)';
+                    sidebarToggle.style.top = '50%';
                 } else {
                     sidebar.classList.remove('active');
                     contentArea.classList.add('expanded');
                     sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-                    sidebarToggle.style.top = 'calc(50% + 30px)';
+                    sidebarToggle.style.top = '50%';
                 }
             }
         }
@@ -1212,7 +1236,7 @@
                 sidebar.classList.remove('active');
                 sidebar.classList.remove('collapsed');
                 contentArea.classList.add('expanded');
-                sidebarToggle.style.top = 'calc(50% + 30px)';
+                sidebarToggle.style.top = '50%';
             }
             toggleSidebar();
         });
