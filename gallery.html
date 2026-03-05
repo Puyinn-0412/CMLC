@@ -27,43 +27,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loader"></div>
         <div class="loading-text">Đang tải Triển Lãm Ảo...</div>
     </div>
-    
-    <!-- Header Y HỆT CHATBOT -->
-    <div class="app-header">
-        <div class="logo">
-            <div class="logo-icon">LT</div>
-            <span>LangTrek | Triển Lãm Ảo</span>
-        </div>
-        
-        <div class="header-controls">
-            <div class="user-info">
-                <i class="fas fa-user-graduate"></i>
-                <span>THPT Thừa Lưu</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Sidebar Toggle Button Y HỆT CHATBOT -->
-    <button class="sidebar-toggle" id="sidebarToggle">
-        <i class="fas fa-chevron-right"></i>
+
+    <!-- Overlay (mobile sidebar) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fas fa-chevron-right" id="toggleIcon"></i>
     </button>
-    
+
     <!-- Main Container -->
     <div class="app-container">
-        <!-- Sidebar Y HỆT CHATBOT -->
+
+        <!-- Sidebar -->
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="brand-name">
-                    <a href="./index.html">Lang<span style="color: #4682b4;">Trek</span></a>
+                    <a href="./index.html">Lang<span style="color:#4682b4;">Trek</span></a>
                 </div>
                 <div class="brand-subtitle">Du Lịch Chân Mây - Lăng Cô</div>
             </div>
-            
+
             <div class="nav-section">
                 <div class="nav-title">Điều hướng</div>
                 <ul class="nav-menu">
@@ -105,7 +95,7 @@
                     </li>
                 </ul>
             </div>
-            
+
             <div class="sidebar-footer">
                 <div class="footer-links">
                     <a href="#" class="footer-link">Trợ giúp</a>
@@ -117,9 +107,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Content Area -->
         <div class="content-area" id="contentArea">
+
             <div class="content-header">
                 <h1 class="content-title">
                     <i class="fas fa-cube"></i>
@@ -130,8 +121,9 @@
                     về vùng đất Chân Mây - Lăng Cô. Di chuyển tự do trong không gian ảo để khám phá mọi góc nhìn.
                 </p>
             </div>
-            
+
             <div class="artsteps-container">
+
                 <div class="iframe-wrapper">
                     <div class="iframe-controls">
                         <div class="controls-left">
@@ -142,27 +134,27 @@
                             </span>
                         </div>
                         <div class="controls-right">
-                            <button class="control-btn" onclick="enterFullscreen()">
+                            <button class="control-btn" id="fullscreenBtn" onclick="enterFullscreen()">
                                 <i class="fas fa-expand"></i>
-                                Toàn màn hình
+                                <span class="btn-text">Toàn màn hình</span>
                             </button>
                             <button class="control-btn primary" onclick="reloadExhibition()">
                                 <i class="fas fa-sync-alt"></i>
-                                Tải lại
+                                <span class="btn-text">Tải lại</span>
                             </button>
                         </div>
                     </div>
-                    
-                    <iframe 
-                        class="artsteps-iframe" 
-                        src="https://www.artsteps.com/embed/693abf1bada1a4bb5762c1d7/1280/720" 
-                        frameborder="0" 
+
+                    <iframe
+                        class="artsteps-iframe"
+                        src="https://www.artsteps.com/embed/693abf1bada1a4bb5762c1d7/1280/720"
+                        frameborder="0"
                         allowfullscreen
                         id="artstepsFrame"
                         title="Triển lãm ảo Chân Mây - Lăng Cô"
                     ></iframe>
                 </div>
-                
+
                 <div class="instructions">
                     <h3 class="instructions-title">
                         <i class="fas fa-info-circle"></i>
@@ -198,199 +190,169 @@
                                 <i class="fas fa-expand-arrows-alt"></i>
                             </div>
                             <div class="instruction-text">
-                                <strong>Toàn màn hình:</strong> Nhấn nút "Toàn màn hình" để trải nghiệm tốt nhất
+                                <strong>Toàn màn hình:</strong> Nhấn nút <i class="fas fa-expand" style="font-size:0.75em"></i> để trải nghiệm tốt nhất
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- JavaScript - Phần sidebar y hệt chatbot -->
+
+            </div><!-- end artsteps-container -->
+        </div><!-- end content-area -->
+    </div><!-- end app-container -->
+
     <script>
-        // Sidebar Toggle Functionality - Y HỆT CHATBOT
-        const sidebar = document.getElementById('sidebar');
+        const sidebar       = document.getElementById('sidebar');
         const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebarOverlay= document.getElementById('sidebarOverlay');
+        const toggleIcon    = document.getElementById('toggleIcon');
+        const contentArea   = document.getElementById('contentArea');
         const loadingScreen = document.getElementById('loadingScreen');
         const artstepsFrame = document.getElementById('artstepsFrame');
-        const contentArea = document.getElementById('contentArea');
-        
-        let isSidebarVisible = window.innerWidth > 1024;
-        
-        // Toggle sidebar on button click - Y HỆT CHATBOT
-        sidebarToggle.addEventListener('click', function(e) {
-            e.stopPropagation();
-            isSidebarVisible = !isSidebarVisible;
-            toggleSidebar();
-        });
-        
-        // Close sidebar when clicking outside on mobile - Y HỆT CHATBOT
-        document.addEventListener('click', function(event) {
-            if (window.innerWidth <= 1024 && isSidebarVisible) {
-                if (!sidebar.contains(event.target) && !sidebarToggle.contains(event.target)) {
-                    isSidebarVisible = false;
-                    toggleSidebar();
-                }
-            }
-        });
-        
-        function toggleSidebar() {
-            if (window.innerWidth > 1024) {
-                // Desktop behavior - Y HỆT CHATBOT
-                if (isSidebarVisible) {
-                    sidebar.classList.remove('collapsed');
-                    contentArea.classList.remove('expanded');
-                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
-                    sidebarToggle.style.left = '280px';
-                } else {
-                    sidebar.classList.add('collapsed');
-                    contentArea.classList.add('expanded');
-                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-                    sidebarToggle.style.left = '0';
-                }
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        const isMobile = () => window.innerWidth <= 1024;
+
+        // ── Sidebar State ─────────────────────────────────
+        let sidebarOpen = !isMobile();
+
+        function openSidebar() {
+            sidebarOpen = true;
+            if (isMobile()) {
+                sidebar.classList.add('active');
+                sidebar.classList.remove('collapsed');
+                sidebarOverlay.classList.add('active');
+                toggleIcon.className = 'fas fa-chevron-left';
             } else {
-                // Mobile/Tablet behavior - Y HỆT CHATBOT
-                if (isSidebarVisible) {
-                    sidebar.classList.add('active');
-                    contentArea.classList.remove('expanded');
-                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-left"></i>';
-                } else {
-                    sidebar.classList.remove('active');
-                    contentArea.classList.add('expanded');
-                    sidebarToggle.innerHTML = '<i class="fas fa-chevron-right"></i>';
-                }
-            }
-        }
-        
-        // Handle window resize - Y HỆT CHATBOT
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 1024) {
-                // Switch to desktop
-                isSidebarVisible = true;
-                sidebar.classList.remove('active');
                 sidebar.classList.remove('collapsed');
                 contentArea.classList.remove('expanded');
-                sidebarToggle.style.top = '50%';
-            } else {
-                // Switch to mobile
-                isSidebarVisible = false;
-                sidebar.classList.remove('active');
-                sidebar.classList.remove('collapsed');
-                contentArea.classList.add('expanded');
-                sidebarToggle.style.top = 'calc(50% + 30px)';
+                toggleIcon.className = 'fas fa-chevron-left';
+                sidebarToggle.style.left = '280px';
             }
+        }
+
+        function closeSidebar() {
+            sidebarOpen = false;
+            if (isMobile()) {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                toggleIcon.className = 'fas fa-chevron-right';
+            } else {
+                sidebar.classList.add('collapsed');
+                contentArea.classList.add('expanded');
+                toggleIcon.className = 'fas fa-chevron-right';
+                sidebarToggle.style.left = '0';
+            }
+        }
+
+        function toggleSidebar() {
+            sidebarOpen ? closeSidebar() : openSidebar();
+        }
+
+        sidebarToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             toggleSidebar();
         });
-        
-        // Initialize sidebar state - Y HỆT CHATBOT
-        toggleSidebar();
-        
-        // Fullscreen function
+
+        // Close on overlay click (mobile)
+        sidebarOverlay.addEventListener('click', closeSidebar);
+
+        // Handle resize
+        window.addEventListener('resize', function() {
+            if (!isMobile()) {
+                // Desktop: show sidebar, remove overlay
+                sidebarOpen = true;
+                sidebar.classList.remove('active');
+                sidebar.classList.remove('collapsed');
+                sidebarOverlay.classList.remove('active');
+                contentArea.classList.remove('expanded');
+                toggleIcon.className = 'fas fa-chevron-left';
+                sidebarToggle.style.left = '280px';
+                sidebarToggle.style.top = '50dvh';
+            } else {
+                // Mobile: hide sidebar by default on resize
+                sidebarOpen = false;
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                contentArea.classList.add('expanded');
+                toggleIcon.className = 'fas fa-chevron-right';
+                sidebarToggle.style.left = '0';
+                sidebarToggle.style.top = '50dvh';
+            }
+        });
+
+        // Init
+        if (isMobile()) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+
+        // ── Fullscreen ────────────────────────────────────
         function enterFullscreen() {
-            const iframeWrapper = document.querySelector('.iframe-wrapper');
-            
-            if (iframeWrapper.requestFullscreen) {
-                iframeWrapper.requestFullscreen();
-            } else if (iframeWrapper.webkitRequestFullscreen) {
-                iframeWrapper.webkitRequestFullscreen();
-            } else if (iframeWrapper.msRequestFullscreen) {
-                iframeWrapper.msRequestFullscreen();
-            }
-            
-            // Update button text
-            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
-            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Thoát toàn màn hình';
-            fullscreenBtn.onclick = exitFullscreen;
+            const wrapper = document.querySelector('.iframe-wrapper');
+            const req = wrapper.requestFullscreen || wrapper.webkitRequestFullscreen || wrapper.msRequestFullscreen;
+            if (req) req.call(wrapper);
         }
-        
+
         function exitFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            } else if (document.msExitFullscreen) {
-                document.msExitFullscreen();
-            }
-            
-            // Update button text
-            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
-            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Toàn màn hình';
-            fullscreenBtn.onclick = enterFullscreen;
+            const exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+            if (exit) exit.call(document);
         }
-        
-        // Handle fullscreen change events
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-        document.addEventListener('msfullscreenchange', handleFullscreenChange);
-        
+
         function handleFullscreenChange() {
-            const fullscreenBtn = document.querySelector('.control-btn:nth-child(1)');
-            const isFullscreen = document.fullscreenElement || 
-                                document.webkitFullscreenElement || 
-                                document.msFullscreenElement;
-            
-            if (isFullscreen) {
-                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i> Thoát toàn màn hình';
+            const isFs = document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+            if (isFs) {
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i><span class="btn-text"> Thoát</span>';
                 fullscreenBtn.onclick = exitFullscreen;
             } else {
-                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i> Toàn màn hình';
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i><span class="btn-text"> Toàn màn hình</span>';
                 fullscreenBtn.onclick = enterFullscreen;
             }
         }
-        
-        // Reload exhibition
+
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+        document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+        // ── Reload ────────────────────────────────────────
         function reloadExhibition() {
             artstepsFrame.src = artstepsFrame.src;
             showNotification('Đang tải lại triển lãm...');
         }
-        
-        // Show notification - Tương tự chatbot
+
+        // ── Notification ─────────────────────────────────
         function showNotification(message) {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 20px;
-                background-color: var(--accent-color);
-                color: white;
-                padding: 12px 20px;
-                border-radius: 8px;
-                box-shadow: var(--shadow-lg);
-                z-index: 1000;
-                font-weight: 600;
-                transition: all 0.3s ease;
+            const el = document.createElement('div');
+            el.style.cssText = `
+                position:fixed; top:16px; right:16px;
+                background:var(--accent-color); color:#fff;
+                padding:11px 18px; border-radius:10px;
+                box-shadow:var(--shadow-lg); z-index:9998;
+                font-weight:600; font-size:0.88rem;
+                transition:all 0.3s ease;
+                max-width: calc(100vw - 32px);
             `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            // Remove after 3 seconds
+            el.textContent = message;
+            document.body.appendChild(el);
             setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100%)';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(-8px)';
+                setTimeout(() => el.remove(), 300);
+            }, 2800);
         }
-        
-        // Hide loading screen when page is loaded
+
+        // ── Loading Screen ────────────────────────────────
         window.addEventListener('load', function() {
             setTimeout(function() {
                 loadingScreen.classList.add('hidden');
                 showNotification('Triển lãm ảo đã sẵn sàng!');
             }, 1500);
         });
-        
-        // Iframe load event
-        artstepsFrame.addEventListener('load', function() {
-            console.log('Artsteps iframe loaded successfully');
-        });
-        
-        // Iframe error handling
+
         artstepsFrame.addEventListener('error', function() {
-            console.error('Failed to load Artsteps iframe');
             showNotification('Không thể tải triển lãm. Vui lòng thử lại!');
         });
     </script>
+
 </body>
 </html>
